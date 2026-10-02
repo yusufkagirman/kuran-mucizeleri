@@ -2,20 +2,20 @@
 // Demir mucizesi, "Keşif" bölümü: kaydırmaya bağlı sinematik canvas sahnesi.
 // Yıldız → katmanlar → demir çekirdek → çöküş → süpernova → toz bulutu → Dünya'nın demir çekirdeği.
 const altyazilar = [
-  'Her yıldız hidrojen yakar.',
-  'Büyük yıldızların içi katman katman ağır elementlere dönüşür.',
-  'Demir, yıldızın son durağıdır.',
-  'Çekirdek çöker.',
-  'Süpernova: demir uzaya saçılır.',
-  'Bu toz yeni dünyaların hammaddesi olur.',
-  "Dünya'nın demiri gökten gelmiştir.",
+  'Yıldızlar, en hafif element olan hidrojeni birbirine kaynaştırarak ışık ve ısı üretir.',
+  'Büyük yıldızların içinde bu işlem sürdükçe helyum, karbon, oksijen ve silisyum oluşur; yıldız soğan gibi katman katman ağırlaşır.',
+  'En sonunda merkezde demir oluşur. Demirden enerji elde edilemez; bu yüzden demir, yıldızın son durağıdır.',
+  'Enerjisi kesilen yıldız kendi ağırlığını taşıyamaz ve merkezi saniyeler içinde çöker.',
+  'Ardından süpernova denen dev bir patlama gelir ve yıldızın içindeki demir uzaya saçılır.',
+  'Uzaya saçılan bu demir tozu, milyonlarca yıl sonra yeni yıldızların ve gezegenlerin hammaddesi olur.',
+  "Dünyamız da bu tozdan oluştu. Merkezindeki demir dahil, yeryüzündeki bütün demir yıldızlardan geldi.",
 ];
 ---
 <section class="demir-sahne" aria-label="Demirin yıldızlardan Dünya'ya yolculuğu">
   <div class="sahne">
     <canvas
       role="img"
-      aria-label="Animasyon: bir yıldız hidrojen yakar, içi katman katman ağır elementlere dönüşür, demir çekirdek çöker, süpernova demiri uzaya saçar, bu toz bir gezegen oluşturur ve Dünya'nın demir çekirdeği görünür."
+      aria-label="Animasyon: bir yıldız hidrojen yakar, içi katman katman helyum, karbon, oksijen ve silisyuma dönüşür, merkezde demir (Fe) oluşur, demir çekirdek çöker, süpernova demiri uzaya saçar, bu toz bir gezegen oluşturur ve Dünya'nın demir çekirdeği görünür."
     ></canvas>
     <p class="altyazi" aria-live="polite" data-altyazilar={JSON.stringify(altyazilar)}>{altyazilar[0]}</p>
     <ol class="ilerleme" aria-hidden="true">
@@ -111,11 +111,11 @@ const altyazilar = [
     }
     // Yıldız katmanları: dıştan içe. Renk soğuktan (gökyüzü) sıcağa (vurgu) akar.
     const KATMAN = [
-      { ad: 'H', r: 0.96, renk: () => C.gok },
-      { ad: 'He', r: 0.8, renk: () => mix(C.gok, C.vurgu2, 0.6) },
-      { ad: 'C', r: 0.65, renk: () => C.vurgu2 },
-      { ad: 'O', r: 0.5, renk: () => C.yer },
-      { ad: 'Si', r: 0.36, renk: () => mix(C.yer, C.vurgu, 0.55) },
+      { ad: 'Hidrojen', r: 0.96, renk: () => C.gok },
+      { ad: 'Helyum', r: 0.8, renk: () => mix(C.gok, C.vurgu2, 0.6) },
+      { ad: 'Karbon', r: 0.65, renk: () => C.vurgu2 },
+      { ad: 'Oksijen', r: 0.5, renk: () => C.yer },
+      { ad: 'Silisyum', r: 0.36, renk: () => mix(C.yer, C.vurgu, 0.55) },
     ];
     const FE_R = 0.22;
     // Dünya kıtaları (birim daire koordinatı, yalnız sol yarıda görünür)
@@ -278,7 +278,10 @@ const altyazilar = [
           fg.addColorStop(1, rgba(mix(mix(C.vurgu, C.ates, feB), C.murekkep, koyu ? 0 : 0.2), fi));
           ctx.fillStyle = fg;
           ctx.beginPath(); ctx.arc(cx, cy, feR, 0, TAU); ctx.fill();
-          etiket('Fe', cx, cy, Math.max(13, R * 0.12) * (1 + 0.25 * feB) * (1 - 0.7 * cok), koyu ? C.zemin : C.zemin, fi * (1 - seg(p, 0.44, 0.48)));
+          const feBoy = Math.max(13, R * 0.1) * (1 + 0.25 * feB) * (1 - 0.7 * cok);
+          const feA = fi * (1 - seg(p, 0.44, 0.48));
+          etiket('DEMİR', cx, cy - feBoy * 0.3, feBoy, C.zemin, feA);
+          etiket('(Fe)', cx, cy + feBoy * 0.75, feBoy * 0.6, C.zemin, feA * 0.85);
         }
         ctx.globalAlpha = 1;
       }
@@ -410,7 +413,8 @@ const altyazilar = [
           ekle();
           parilti(cx, cy, er * (0.75 + 0.08 * nabiz), C.kor, (koyu ? 0.55 : 0.4) * ac);
           normal();
-          etiket('Fe', cx + er * 0.37, cy, Math.max(13, R * 0.13), C.zemin, ac);
+          etiket('Demir', cx + er * 0.385, cy, Math.max(11, R * 0.085), C.zemin, ac);
+          etiket('çekirdek', cx + er * 0.385, cy + Math.max(11, R * 0.085) * 1.1, Math.max(10, R * 0.065), C.zemin, ac * 0.9);
         }
         ctx.restore();
         // kesim çizgisi ve kenar
@@ -518,12 +522,12 @@ const altyazilar = [
     bottom: 11svh;
     margin: 0 auto;
     padding: 0 16px;
-    max-width: 30ch;
+    max-width: 38ch;
     text-align: center;
     font-family: var(--font-baslik);
     font-weight: 600;
-    font-size: clamp(1.45rem, 1rem + 2.4vw, 2.75rem);
-    line-height: 1.25;
+    font-size: clamp(1.15rem, 0.9rem + 1.3vw, 1.75rem);
+    line-height: 1.35;
     color: var(--murekkep);
     text-shadow: 0 0 18px var(--zemin), 0 0 36px var(--zemin);
     transition: opacity 220ms ease, transform 220ms ease;
