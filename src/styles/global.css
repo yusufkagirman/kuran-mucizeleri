@@ -1,0 +1,59 @@
+@import './tokens.css';
+
+*, *::before, *::after { box-sizing: border-box; }
+[hidden] { display: none !important; }
+html { -webkit-text-size-adjust: 100%; }
+body {
+  margin: 0;
+  background: var(--zemin);
+  color: var(--murekkep);
+  font-family: var(--font-govde);
+  font-size: var(--fs-md);
+  line-height: 1.7;
+  transition: background var(--t-bolum) var(--ease-giris), color var(--t-bolum) var(--ease-giris);
+}
+h1, h2, h3 { font-family: var(--font-baslik); line-height: 1.2; font-weight: 600; margin: 0 0 var(--s3); }
+h1 { font-size: var(--fs-2xl); letter-spacing: -0.01em; }
+h2 { font-size: var(--fs-xl); margin-top: var(--s7); }
+h3 { font-size: var(--fs-lg); margin-top: var(--s5); }
+p { margin: 0 0 var(--s3); }
+a { color: var(--vurgu); text-underline-offset: 3px; }
+a:hover { text-decoration-thickness: 2px; }
+img, svg { max-width: 100%; }
+:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; border-radius: 4px; }
+
+.kap { width: min(1200px, 100% - 2 * var(--s3)); margin-inline: auto; }
+.okuma { max-width: var(--olcu); }
+.arayuz { font-family: var(--font-arayuz); }
+.soluk { color: var(--soluk); }
+.etiket {
+  font-family: var(--font-arayuz); font-size: var(--fs-xs); letter-spacing: 0.08em;
+  text-transform: uppercase; color: var(--soluk);
+}
+.arapca { font-family: var(--font-ayet); direction: rtl; }
+
+/* Rozet: konu rengi yalnız sol noktada, metin her zaman okunur */
+.rozet {
+  display: inline-flex; align-items: center; gap: var(--s2);
+  font-family: var(--font-arayuz); font-size: var(--fs-xs);
+  padding: 2px 10px; border: 1px solid var(--cizgi-renk); border-radius: 999px;
+  color: var(--murekkep); background: var(--yuzey); text-decoration: none; white-space: nowrap;
+}
+.rozet::before { content: ''; width: 8px; height: 8px; transform: rotate(45deg); background: var(--renk, var(--soluk)); }
+
+.kart {
+  background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius);
+  padding: var(--s4);
+}
+
+/* Kaydırınca bir kez belirme */
+.belir { opacity: 0; transform: translateY(12px); transition: opacity var(--t-bolum) var(--ease-giris), transform var(--t-bolum) var(--ease-giris); }
+.belir.gorundu { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) { .belir { opacity: 1; transform: none; } }
+
+/* Prototip uyarısı */
+.taslak-bant {
+  font-family: var(--font-arayuz); font-size: var(--fs-sm);
+  border: 1px dashed var(--uyari); color: var(--uyari); border-radius: var(--radius);
+  padding: var(--s2) var(--s3); margin-bottom: var(--s4);
+}

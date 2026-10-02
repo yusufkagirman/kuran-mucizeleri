@@ -1,0 +1,100 @@
+---
+import { getCollection } from 'astro:content';
+import Ana from '../layouts/Ana.astro';
+import Kapak from '../components/Kapak.astro';
+import { konular } from '../taksonomi';
+
+const hepsi = await getCollection('mucizeler');
+const oneCikan = hepsi[0];
+const raflar = Object.entries(konular)
+  .map(([k, v]) => ({ k, raf: v.raf, liste: hepsi.filter((m) => m.data.konu.includes(k)) }))
+  .filter((r) => r.liste.length);
+---
+<Ana baslik="Vitrin" aciklama="Konulara göre mucize rafları.">
+  {oneCikan && (
+    <section class="sahne kap">
+      <Kapak konu={oneCikan.data.konu[0]} tohum={oneCikan.id} class="sahne-kapak" />
+      <div class="sahne-yazi">
+        <h1>{oneCikan.data.baslik}</h1>
+        <p class="soru">{oneCikan.data.kart}</p>
+        <a class="dugme arayuz" href={`/mucize/${oneCikan.id}`}>Keşfet</a>
+      </div>
+    </section>
+  )}
+
+  {raflar.map((r) => (
+    <section class="raf kap belir" data-raf>
+      <div class="raf-ust">
+        <h2>{r.raf}</h2>
+        <div class="oklar arayuz">
+          <button type="button" data-yon="-1" aria-label="Sola kaydır">‹</button>
+          <button type="button" data-yon="1" aria-label="Sağa kaydır">›</button>
+        </div>
+      </div>
+      <ul class="serit">
+        {r.liste.map((m) => (
+          <li>
+            <a class="kartlik" href={`/mucize/${m.id}`}>
+              <Kapak konu={r.k} tohum={`${m.id}-${r.k}`} class="kartlik-kapak" />
+              <h3>{m.data.baslik}</h3>
+              <p class="soluk">{m.data.kart}</p>
+            </a>
+          </li>
+        ))}
+      </ul>
+    </section>
+  ))}
+</Ana>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-raf]').forEach((raf) => {
+    const serit = raf.querySelector<HTMLElement>('.serit')!;
+    raf.querySelectorAll<HTMLButtonElement>('[data-yon]').forEach((b) =>
+      b.addEventListener('click', () =>
+        serit.scrollBy({ left: Number(b.dataset.yon) * serit.clientWidth * 0.8, behavior: 'smooth' })
+      )
+    );
+  });
+</script>
+
+<style>
+  .sahne { position: relative; margin-top: var(--s4); min-height: 420px; border-radius: var(--radius); overflow: hidden; display: grid; }
+  .sahne :global(.sahne-kapak) { position: absolute; inset: 0; border-radius: 0; }
+  .sahne-yazi {
+    position: relative; align-self: end; padding: var(--s6) var(--s4) var(--s5);
+    background: linear-gradient(transparent, color-mix(in srgb, var(--zemin) 92%, transparent) 55%);
+  }
+  .sahne-yazi h1 { margin-bottom: var(--s2); }
+  .soru { max-width: 52ch; font-size: var(--fs-lg); margin-bottom: var(--s4); }
+  .dugme {
+    display: inline-block; background: var(--vurgu); color: var(--zemin); text-decoration: none;
+    padding: var(--s2) var(--s4); border-radius: 999px; font-weight: 600;
+    transition: transform var(--t-bilesen) var(--ease-giris);
+  }
+  .dugme:hover { transform: scale(1.05); }
+
+  .raf-ust { display: flex; align-items: end; justify-content: space-between; gap: var(--s3); }
+  .oklar { display: flex; gap: var(--s2); margin-bottom: var(--s3); }
+  .oklar button {
+    width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--cizgi-renk);
+    background: var(--yuzey); color: var(--murekkep); font-size: 1.25rem; cursor: pointer; line-height: 1;
+  }
+  .oklar button:hover { border-color: var(--vurgu); color: var(--vurgu); }
+  @media (hover: none), (max-width: 700px) { .oklar { display: none; } }
+
+  .serit {
+    list-style: none; margin: 0; padding: var(--s2) 0 var(--s3); display: flex; gap: var(--s3);
+    overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: thin; overscroll-behavior-x: contain;
+  }
+  .serit li { flex: 0 0 min(75vw, 300px); scroll-snap-align: start; }
+  .kartlik {
+    display: block; height: 100%; color: inherit; text-decoration: none; background: var(--yuzey);
+    border: 1px solid var(--cizgi-renk); border-radius: var(--radius); overflow: hidden;
+    transition: transform var(--t-bilesen) var(--ease-giris), border-color var(--t-bilesen);
+  }
+  .kartlik:hover, .kartlik:active { transform: scale(1.03); border-color: var(--vurgu); }
+  .kartlik :global(.kartlik-kapak) { aspect-ratio: 4 / 3; border-radius: 0; }
+  .kartlik h3 { margin: var(--s3) var(--s3) var(--s1); font-size: var(--fs-md); }
+  .kartlik p { margin: 0 var(--s3) var(--s3); font-size: var(--fs-sm); line-height: 1.5; }
+  @media (prefers-reduced-motion: reduce) { .kartlik:hover, .kartlik:active, .dugme:hover { transform: none; } }
+</style>

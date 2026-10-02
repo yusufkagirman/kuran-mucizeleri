@@ -1,0 +1,22 @@
+---
+import Ana from '../layouts/Ana.astro';
+---
+<Ana baslik="Hakkında" aciklama="Bu site ne yapar, içerik nereden gelir?">
+  <section class="kap hakkinda">
+    <h1>Hakkında</h1>
+    <p class="giris">Kur'an'ın mucizelerini sade, anlaşılır ve kaynaklı biçimde anlatan bir site.</p>
+    <ul class="ilkeler">
+      <li class="kart belir"><strong>Yalnız sağlam mucizeler</strong><p>Şüpheli ve ihtilaf doğuran iddialar yer almaz.</p></li>
+      <li class="kart belir"><strong>Kaynak gösterilir</strong><p>Her bilginin kaynağı sayfanın sonundadır.</p></li>
+      <li class="kart belir"><strong>Az ve öz</strong><p>Her mucize en sade haliyle, inceliği ve hikmetiyle anlatılır.</p></li>
+    </ul>
+  </section>
+</Ana>
+
+<style>
+  .hakkinda { padding-top: var(--s7); max-width: 900px; }
+  .giris { font-family: var(--font-baslik); font-size: clamp(1.5rem, 3.4vw, 2.2rem); line-height: 1.3; max-width: 30ch; }
+  .ilkeler { list-style: none; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s3); margin-top: var(--s6); }
+  .ilkeler strong { font-family: var(--font-baslik); font-size: var(--fs-lg); }
+  .ilkeler p { margin: var(--s2) 0 0; color: var(--soluk); }
+</style>

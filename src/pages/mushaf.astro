@@ -1,0 +1,115 @@
+---
+import { getCollection } from 'astro:content';
+import Ana from '../layouts/Ana.astro';
+
+const res = await fetch('https://api.alquran.cloud/v1/surah');
+if (!res.ok) throw new Error('Sure listesi alınamadı: ' + res.status);
+const sureler: { number: number; name: string; numberOfAyahs: number }[] = (await res.json()).data;
+
+const hepsi = await getCollection('mucizeler');
+const hucreler = sureler.map((s) => {
+  const liste = hepsi.filter((m) => m.data.ayetler.some((a) => a.sure === s.number));
+  const noktalar = liste.flatMap((m) =>
+    m.data.ayetler.filter((a) => a.sure === s.number).map((a) => ({
+      konu: m.data.konu[0], x: Math.min(100, Math.max(0, ((a.ayet - 0.5) / s.numberOfAyahs) * 100)),
+    }))
+  );
+  return { no: s.number, ad: s.name.replace(/^سُورَةُ\s*/, ''), ayet: s.numberOfAyahs, noktalar,
+    liste: liste.map((m) => ({ id: m.id, baslik: m.data.baslik })) };
+});
+const doluSure = hucreler.filter((h) => h.liste.length).length;
+---
+<Ana baslik="Mushaf haritası" aciklama="Kur'an'ın 114 suresi ve mucize anlatılan ayetler.">
+  <section class="kap giris">
+    <h1>Mushaf haritası</h1>
+    <p class="soluk">Kur'an'ın 114 suresi. Işıklar, mucize anlatılan ayetleri gösterir.</p>
+    <p class="arayuz sayac"><strong>{doluSure}</strong> surede <strong>{hepsi.length}</strong> mucize</p>
+  </section>
+
+  <section class="kap">
+    <div class="izgara">
+      {hucreler.map((h) => (
+        <div class="hucre" data-dolu={h.liste.length ? '' : undefined}>
+          <button type="button" class="hucre-dugme" disabled={!h.liste.length}
+            aria-expanded="false" aria-label={`${h.no}. sure, ${h.liste.length} mucize`}>
+            <span class="no arayuz">{h.no}</span>
+            <span class="ad arapca" dir="rtl" lang="ar">{h.ad}</span>
+            <span class="cizgi">
+              {h.noktalar.map((n) => <i style={`left:${n.x}%;--k:var(--konu-${n.konu})`}></i>)}
+            </span>
+          </button>
+          {h.liste.length > 0 && (
+            <div class="panel arayuz" hidden>
+              <strong>{h.no}. sure · {h.ayet} ayet</strong>
+              <ul>{h.liste.map((m) => <li><a href={`/mucize/${m.id}`}>{m.baslik}</a></li>)}</ul>
+            </div>
+          )}
+        </div>
+      ))}
+    </div>
+  </section>
+</Ana>
+
+<script>
+  const kapat = () => document.querySelectorAll<HTMLElement>('.panel:not([hidden])').forEach((p) => {
+    p.hidden = true;
+    p.previousElementSibling?.setAttribute('aria-expanded', 'false');
+  });
+  document.addEventListener('click', (e) => {
+    const t = e.target as HTMLElement;
+    const d = t.closest<HTMLButtonElement>('.hucre-dugme');
+    const panel = d?.nextElementSibling as HTMLElement | null;
+    const ac = !!panel && panel.hidden;
+    if (!t.closest('.panel')) kapat();
+    if (ac && d && panel) { panel.hidden = false; d.setAttribute('aria-expanded', 'true'); }
+  });
+  document.addEventListener('keydown', (e) => e.key === 'Escape' && kapat());
+</script>
+
+<style>
+  .giris { padding-top: var(--s5); }
+  .sayac { margin: 0 0 var(--s4); }
+  .izgara { display: grid; grid-template-columns: repeat(19, 1fr); gap: var(--s1); }
+  @media (max-width: 1000px) { .izgara { grid-template-columns: repeat(12, 1fr); } }
+  @media (max-width: 560px) { .izgara { grid-template-columns: repeat(6, 1fr); } }
+  .hucre { position: relative; aspect-ratio: 1; }
+  .hucre-dugme {
+    position: relative; width: 100%; height: 100%; padding: 2px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 1px; font: inherit; color: var(--soluk);
+    background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: 6px; opacity: 0.55; cursor: default;
+  }
+  .hucre[data-dolu] .hucre-dugme {
+    opacity: 1; color: var(--murekkep); background: var(--vurgu-zemin); border-color: var(--vurgu); cursor: pointer;
+    transition: transform var(--t-bilesen) var(--ease-giris);
+  }
+  .hucre[data-dolu] .hucre-dugme:hover { transform: scale(1.08); z-index: 1; }
+  .no { font-size: 0.6875rem; line-height: 1; }
+  .ad { font-size: clamp(0.7rem, 1.1vw, 0.95rem); line-height: 1.2; max-width: 100%; overflow: hidden; white-space: nowrap; }
+  .cizgi { position: absolute; left: 6px; right: 6px; bottom: 5px; height: 2px; background: var(--cizgi-renk); border-radius: 2px; }
+  .cizgi i {
+    position: absolute; top: 50%; width: 7px; height: 7px; margin: -3.5px 0 0 -3.5px; border-radius: 50%;
+    background: var(--k); box-shadow: 0 0 6px 2px var(--k);
+  }
+  .panel {
+    position: absolute; z-index: 5; top: 100%; left: 50%; transform: translateX(-50%); margin-top: var(--s1);
+    width: max-content; max-width: min(260px, 70vw); padding: var(--s3); font-size: var(--fs-sm);
+    background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius);
+    box-shadow: 0 8px 24px color-mix(in srgb, var(--murekkep) 20%, transparent);
+  }
+  .panel[hidden] { display: none; }
+  .panel ul { margin: var(--s2) 0 0; padding-left: var(--s4); }
+  /* kenardaki hücrelerde panel taşmasın */
+  @media (min-width: 1001px) {
+    .hucre:nth-child(19n+1) .panel, .hucre:nth-child(19n+2) .panel { left: 0; transform: none; }
+    .hucre:nth-child(19n) .panel, .hucre:nth-child(19n-1) .panel { left: auto; right: 0; transform: none; }
+  }
+  @media (max-width: 1000px) and (min-width: 561px) {
+    .hucre:nth-child(12n+1) .panel, .hucre:nth-child(12n+2) .panel { left: 0; transform: none; }
+    .hucre:nth-child(12n) .panel, .hucre:nth-child(12n-1) .panel { left: auto; right: 0; transform: none; }
+  }
+  @media (max-width: 560px) {
+    .hucre:nth-child(6n+1) .panel, .hucre:nth-child(6n+2) .panel { left: 0; transform: none; }
+    .hucre:nth-child(6n) .panel, .hucre:nth-child(6n-1) .panel { left: auto; right: 0; transform: none; }
+  }
+  @media (prefers-reduced-motion: reduce) { .hucre[data-dolu] .hucre-dugme:hover { transform: none; } }
+</style>

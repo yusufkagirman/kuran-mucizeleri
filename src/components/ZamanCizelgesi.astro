@@ -1,0 +1,68 @@
+---
+// Ayetin inişi ile keşif/gerçekleşme arasındaki fark. Ölçek iki noktaya göre kurulur; gelecek haberinde ayetteki süre bandı çizilir.
+interface Props {
+  nuzul: { donem: string; yil: number };
+  kesif: { yil: number; olay: string };
+  vaat?: { enAz: number; enCok: number; ifade: string };
+}
+const { nuzul, kesif, vaat } = Astro.props;
+const fark = kesif.yil - nuzul.yil;
+
+const sag = vaat ? Math.max(kesif.yil, nuzul.yil + vaat.enCok) : kesif.yil;
+const pay = Math.max(1, (sag - nuzul.yil) * 0.12);
+const bas = nuzul.yil - pay, son = sag + pay;
+const W = 600, X0 = 20, X1 = 580, Y = 90;
+const x = (yil: number) => X0 + ((yil - bas) / (son - bas)) * (X1 - X0);
+
+// Okunur aralıkta 3-6 çentik
+const adimlar = [1, 2, 5, 10, 25, 50, 100, 200, 250, 500];
+const adim = adimlar.find((a) => (son - bas) / a <= 6) ?? 1000;
+const centikler: number[] = [];
+for (let y = Math.ceil(bas / adim) * adim; y <= son; y += adim) centikler.push(y);
+const yakin = Math.abs(x(kesif.yil) - x(nuzul.yil)) < 110;
+---
+<div class="zc belir">
+  <p class="fark">
+    <span class="fark-sayi">{fark.toLocaleString('tr-TR')}</span>
+    <span class="fark-metin">{vaat ? 'yıl sonra haber gerçekleşti' : 'yıl sonra insanlık bunu öğrendi'}</span>
+  </p>
+  <svg viewBox={`0 0 ${W} 150`} role="img" aria-label={`Ayet ${nuzul.yil}, ${vaat ? 'gerçekleşme' : 'keşif'} ${kesif.yil}`}>
+    {vaat && (
+      <g class="vaat">
+        <rect x={x(nuzul.yil + vaat.enAz)} y={Y - 14} width={x(nuzul.yil + vaat.enCok) - x(nuzul.yil + vaat.enAz)} height="28" rx="6" />
+        <text x={(x(nuzul.yil + vaat.enAz) + x(nuzul.yil + vaat.enCok)) / 2} y={Y - 24} text-anchor="middle">{vaat.enAz}–{vaat.enCok} yıl</text>
+      </g>
+    )}
+    <line x1={X0} y1={Y} x2={X1} y2={Y} class="eksen" />
+    {centikler.map((y) => (
+      <g><line x1={x(y)} y1={Y - 4} x2={x(y)} y2={Y + 4} class="eksen" />{Math.abs(x(y) - x(kesif.yil)) > 24 && Math.abs(x(y) - x(nuzul.yil)) > 24 && <text x={x(y)} y={Y + 32} text-anchor="middle" class="yil">{y}</text>}</g>
+    ))}
+    {!vaat && <path d={`M ${x(nuzul.yil)} ${Y} C ${x(nuzul.yil)} 10, ${x(kesif.yil)} 10, ${x(kesif.yil)} ${Y}`} class="kopru" pathLength="1" />}
+    <rect x={x(nuzul.yil) - 8} y={Y - 8} width="16" height="16" transform={`rotate(45 ${x(nuzul.yil)} ${Y})`} class="nuzul" />
+    <circle cx={x(kesif.yil)} cy={Y} r="8" class="kesif" />
+    <text x={x(nuzul.yil)} y={Y + 54} text-anchor={yakin ? 'end' : 'middle'} dx={yakin ? 6 : 0} class="etiket-n">Ayet ~{nuzul.yil}</text>
+    <text x={x(kesif.yil)} y={Y + (yakin ? 72 : 54)} text-anchor={yakin ? 'start' : 'middle'} dx={yakin ? -6 : 0} class="etiket-k">{kesif.yil}</text>
+  </svg>
+  <p class="olay">{kesif.olay}</p>
+</div>
+
+<style>
+  .zc { width: 100%; }
+  .fark { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; justify-content: center; margin: 0 0 var(--s3); }
+  .fark-sayi { font-family: var(--font-baslik); font-size: clamp(4rem, 14vw, 8rem); line-height: 1; color: var(--vurgu); font-weight: 700; }
+  .fark-metin { font-family: var(--font-arayuz); font-size: var(--fs-lg); color: var(--soluk); }
+  svg { width: 100%; max-width: 720px; display: block; margin: 0 auto; overflow: visible; }
+  .eksen { stroke: var(--cizgi-renk); stroke-width: var(--cizgi); stroke-linecap: round; }
+  .yil { fill: var(--soluk); font: 13px var(--font-arayuz); }
+  .etiket-n, .etiket-k { font: 600 15px var(--font-arayuz); }
+  .etiket-n { fill: var(--vurgu); }
+  .etiket-k { fill: var(--murekkep); }
+  .nuzul { fill: var(--vurgu); }
+  .kesif { fill: var(--vurgu-2); }
+  .vaat rect { fill: var(--vurgu-zemin); stroke: var(--vurgu); stroke-width: var(--cizgi); stroke-dasharray: 4 4; }
+  .vaat text { fill: var(--vurgu); font: 600 13px var(--font-arayuz); }
+  .kopru { fill: none; stroke: var(--vurgu); stroke-width: var(--cizgi-vurgu); stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease-giris) 200ms; }
+  .zc:global(.gorundu) .kopru { stroke-dashoffset: 0; }
+  @media (prefers-reduced-motion: reduce) { .kopru { stroke-dashoffset: 0; } }
+  .olay { text-align: center; font-size: var(--fs-lg); max-width: 40ch; margin: var(--s4) auto 0; }
+</style>

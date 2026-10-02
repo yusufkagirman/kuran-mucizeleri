@@ -1,0 +1,124 @@
+---
+import Ana from '../layouts/Ana.astro';
+import Yildiz from '../components/Yildiz.astro';
+import { konular } from '../taksonomi';
+
+const paletler = [
+  { id: 'gece', ad: 'Koyu tema · Gece mürekkebi + altın', not: 'Gece okuması, ayet vurgusu güçlü, sinematik.' },
+  { id: 'parsomen', ad: 'Açık tema · Parşömen + lacivert', not: 'Gündüz okuması, sıcak ve yorulmayan.' },
+];
+const renkler = ['zemin', 'yuzey', 'murekkep', 'soluk', 'vurgu', 'vurgu-2'];
+---
+<Ana baslik="Marka kiti" aciklama="Sitenin renk, yazı, motif, şema ve hareket kuralları.">
+  <section class="kap marka">
+    <p class="etiket">Tek dil, tek kaynak: src/styles/tokens.css</p>
+    <h1>Marka kiti</h1>
+    <p class="okuma soluk">Sitedeki her renk, yazı, şema ve animasyon bu sayfadaki kurallardan gelir. İki tema: koyu (gece) ve açık (parşömen). Ziyaretçinin cihaz ayarı varsayılan, sağ üstteki düğmeyle değişir.</p>
+
+    <h2>Temalar</h2>
+    <div class="paletler">
+      {paletler.map((p) => (
+        <div class="palet" data-palet={p.id}>
+          <div class="palet-ic">
+            <p class="etiket">{p.ad}</p>
+            <h3>Demirin indirilmesi</h3>
+            <p class="arapca ornek-ayet" lang="ar">وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌ شَدِيدٌ</p>
+            <p class="ornek-metin">Demiri de indirdik. Onda büyük bir güç ve insanlar için faydalar vardır.</p>
+            <div class="seritler">
+              {renkler.map((r) => <span style={`background:var(--${r})`} title={r}></span>)}
+            </div>
+            <div class="tur-seritler">
+              {Object.entries(konular).map(([k, t]) => <span class="rozet" style={`--renk:var(--konu-${k})`}>{t.ad}</span>)}
+            </div>
+            <p class="arayuz soluk not">{p.not}</p>
+            <button type="button" class="sec arayuz" data-sec={p.id}>Bu temayı kullan</button>
+          </div>
+        </div>
+      ))}
+    </div>
+
+    <h2>Yazı</h2>
+    <div class="yazi kart">
+      <div><p class="etiket">Ayet · Amiri Quran</p><p class="arapca y-ayet" lang="ar">بِسْمِ ٱللَّهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</p></div>
+      <div><p class="etiket">Başlık · Playfair Display</p><p class="y-baslik">Gökten inen metal</p></div>
+      <div><p class="etiket">Gövde · Literata</p><p class="y-govde">Çağdaş bilim, Dünya'daki demirin yıldızlarda doğduğunu gösterir. Türkçe harfler: ı İ ğ Ğ ş Ş ç Ç ö Ö ü Ü â î û.</p></div>
+      <div><p class="etiket">Arayüz ve şema · IBM Plex Sans</p><p class="arayuz">Nüzul · 625 · Keşif · 1957 · Fark 1.332 yıl</p></div>
+    </div>
+
+    <h2>Motif</h2>
+    <div class="motifler kart">
+      <Yildiz boyut={96} />
+      <Yildiz boyut={64} dolu />
+      <span class="rozet" style="--renk:var(--vurgu)">Rozet</span>
+      <p class="soluk okuma">Tek motif: 8 uçlu yıldız. Logo, rozet, ayet numarası, bölüm ayracı ve yükleme animasyonu bundan türer. Canlı tasviri kullanılmaz; geometri, kesit ve bilimsel diyagram kullanılır.</p>
+    </div>
+
+    <h2>Şema kuralları</h2>
+    <div class="sema kart">
+      <svg viewBox="0 0 520 160" role="img" aria-label="Örnek şema">
+        <defs><marker id="ok" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0 L10 5 L0 10z" fill="var(--murekkep)" /></marker></defs>
+        <circle cx="80" cy="80" r="40" fill="none" stroke="var(--konu-gokyuzu)" stroke-width="1.5" />
+        <circle cx="80" cy="80" r="16" fill="var(--vurgu)" />
+        <line x1="130" y1="80" x2="300" y2="80" stroke="var(--murekkep)" stroke-width="2.5" stroke-linecap="round" marker-end="url(#ok)" />
+        <text x="215" y="68" text-anchor="middle" class="s-etiket">süpernova</text>
+        <circle cx="380" cy="80" r="28" fill="none" stroke="var(--vurgu-2)" stroke-width="1.5" />
+        <text x="380" y="132" text-anchor="middle" class="s-etiket">Dünya</text>
+        <text x="80" y="140" text-anchor="middle" class="s-etiket">demir çekirdek</text>
+      </svg>
+      <ul class="arayuz kurallar">
+        <li>8 px ızgara · çizgi 1,5 px, vurgu 2,5 px · yuvarlak uç · küçük dolu ok</li>
+        <li>Etiket çizginin yanında, lejant yok · anlam yalnız renge bırakılmaz</li>
+        <li>Arapça etiket Latin'den %15 büyük</li>
+      </ul>
+    </div>
+
+    <h2>Hareket</h2>
+    <div class="hareket kart arayuz">
+      {[['Mikro', 'var(--t-mikro)', '120 ms · düğme, hover'], ['Bileşen', 'var(--t-bilesen)', '250 ms · kart, açılır panel'], ['Bölüm', 'var(--t-bolum)', '450 ms · kaydırınca belirme']].map(([ad, t, n]) => (
+        <div class="h-satir"><span>{ad}</span><span class="h-iz"><i style={`animation-duration:calc(${t} * 6)`}></i></span><span class="soluk">{n}</span></div>
+      ))}
+      <p class="soluk">Hareket yalnız sebep-sonuç, aşama ya da ölçek anlatır. Kaydırmada bir kez tetiklenir. Ayet metni asla kaymaz. "Azaltılmış hareket" tercihi açıksa animasyonlar durur.</p>
+    </div>
+  </section>
+</Ana>
+
+<script>
+  document.querySelectorAll<HTMLButtonElement>('[data-sec]').forEach((b) => b.addEventListener('click', () => {
+    document.documentElement.dataset.palet = b.dataset.sec!;
+    try { localStorage.setItem('palet', b.dataset.sec!); } catch {}
+  }));
+</script>
+
+<style>
+  .marka { padding-top: var(--s6); }
+  .paletler { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s4); }
+  .palet { background: var(--zemin); color: var(--murekkep); border: 1px solid var(--cizgi-renk); border-radius: calc(var(--radius) * 1.5); overflow: hidden; }
+  .palet-ic { padding: var(--s5); display: grid; gap: var(--s2); }
+  .palet h3 { font-size: var(--fs-xl); margin: var(--s2) 0 0; }
+  .ornek-ayet { font-size: 1.9rem; text-align: right; color: var(--vurgu); margin: 0; }
+  .ornek-metin { font-style: italic; }
+  .seritler { display: grid; grid-template-columns: repeat(6, 1fr); height: 40px; border-radius: 8px; overflow: hidden; border: 1px solid var(--cizgi-renk); }
+  .tur-seritler { display: flex; flex-wrap: wrap; gap: 6px; }
+  .not { font-size: var(--fs-sm); margin: 0; }
+  .sec { justify-self: start; font: inherit; font-size: var(--fs-sm); padding: 8px 18px; border-radius: 999px; border: 1px solid var(--vurgu); background: transparent; color: var(--vurgu); cursor: pointer; }
+  .yazi { display: grid; gap: var(--s4); }
+  .yazi p { margin: 0; }
+  .y-ayet { font-size: 2.4rem; }
+  .y-baslik { font-family: var(--font-baslik); font-size: var(--fs-2xl); line-height: 1.1; }
+  .y-govde { font-size: var(--fs-lg); }
+  .motifler { display: flex; align-items: center; gap: var(--s5); flex-wrap: wrap; color: var(--vurgu); }
+  .motifler p { flex: 1 1 280px; margin: 0; }
+  .s-etiket { font: 13px var(--font-arayuz); fill: var(--murekkep); }
+  .kurallar { font-size: var(--fs-sm); padding-left: var(--s4); margin: var(--s3) 0 0; }
+  .hareket { display: grid; gap: var(--s3); font-size: var(--fs-sm); }
+  .h-satir { display: grid; grid-template-columns: 6rem 1fr 14rem; gap: var(--s3); align-items: center; }
+  .h-iz { height: 8px; background: var(--yuzey-2); border-radius: 4px; position: relative; overflow: hidden; }
+  .h-iz i { position: absolute; inset: 0 auto 0 0; width: 30%; background: var(--vurgu); border-radius: 4px; animation: kay ease-in-out infinite alternate; animation-timing-function: var(--ease-giris); }
+  @keyframes kay { to { left: 70%; } }
+  @media (prefers-reduced-motion: reduce) { .h-iz i { animation: none; } }
+  @media (max-width: 760px) {
+    .paletler { grid-template-columns: 1fr; }
+    .h-satir { grid-template-columns: 5rem 1fr; }
+    .h-satir .soluk { grid-column: 1 / -1; }
+  }
+</style>

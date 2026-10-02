@@ -1,0 +1,24 @@
+---
+// "Peki ama..." soruları: frontmatter'daki itirazlar açılır liste olarak.
+import Atif from './Atif.astro';
+interface Props { liste: { itiraz: string; cevap: string; kaynak?: string }[] }
+const { liste } = Astro.props;
+---
+<div class="itirazlar">
+  {liste.map((i) => (
+    <details class="itiraz">
+      <summary>{i.itiraz}</summary>
+      <p>{i.cevap}{i.kaynak && <Atif k={i.kaynak as any} />}</p>
+    </details>
+  ))}
+</div>
+
+<style>
+  .itirazlar { margin: var(--s4) 0 var(--s6); border-top: 1px solid var(--cizgi-renk); }
+  .itiraz { border-bottom: 1px solid var(--cizgi-renk); padding: var(--s3) 0; }
+  summary { cursor: pointer; font-family: var(--font-baslik); font-size: var(--fs-lg); list-style: none; display: flex; justify-content: space-between; gap: var(--s3); }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: '+'; color: var(--vurgu); font-family: var(--font-arayuz); transition: transform var(--t-bilesen); }
+  .itiraz[open] summary::after { transform: rotate(45deg); }
+  p { margin: var(--s3) 0 0; }
+</style>

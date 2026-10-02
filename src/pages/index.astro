@@ -1,0 +1,202 @@
+---
+// Ana sayfa A: Yıldızlı havuz. Her mucize bir yıldız, aynı konudakiler bir takımyıldız.
+// Yerleşim veriden otomatik (slug'a göre belirli rastgele); yeni mucize eklenince elle iş yok. Tek tıkla liste görünümü.
+import { getCollection } from 'astro:content';
+import Ana from '../layouts/Ana.astro';
+import Kapak from '../components/Kapak.astro';
+import { konular } from '../taksonomi';
+
+const hepsi = (await getCollection('mucizeler')).sort((a, b) => a.data.baslik.localeCompare(b.data.baslik, 'tr'));
+
+function tohumlu(t: string) {
+  let h = 2166136261;
+  for (const c of t) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+  return () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) / 4294967296);
+}
+
+// Her konu bir takımyıldız: yıldızlar altın açı sarmalında (üst üste binmez), biraz titreşimli.
+const kumeler = Object.entries(konular).map(([k, kon]) => {
+  const uyeler = hepsi.filter((m) => m.data.konu.includes(k));
+  const r = tohumlu(k);
+  const yildizlar = uyeler.map((m, i) => {
+    const a = i * 2.39996 + r() * 0.6, uz = 14 + 30 * Math.sqrt((i + 0.6) / Math.max(uyeler.length, 4));
+    return { m, x: 50 + uz * Math.cos(a), y: 44 + uz * Math.sin(a) * 0.7 };
+  });
+  const sus = Array.from({ length: 14 }, () => ({ x: 6 + r() * 88, y: 10 + r() * 82, s: 0.6 + r() * 1.2, g: r() * 4 }));
+  return { k, ad: kon.ad, yildizlar, sus };
+});
+const fon = (() => { const r = tohumlu('fon'); return Array.from({ length: 140 }, () => ({ x: r() * 100, y: r() * 100, s: 0.3 + r() * 1.1, k: r() < 0.5 ? 1 : 2 })); })();
+---
+<Ana baslik="Keşfet" aciklama="Kur'an mucizeleri: her yıldız bir mucize.">
+  <section class="gok" id="gok">
+    <svg class="fon" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+      {[1, 2].map((kat) => <g class={`fon-${kat}`}>{fon.filter((f) => f.k === kat).map((f) => <circle cx={f.x} cy={f.y} r={f.s * 0.12} />)}</g>)}
+    </svg>
+
+    <div class="kap ust">
+      <h1>Her yıldız<br />bir mucize.</h1>
+      <div class="araclar arayuz">
+        <input type="search" id="ara" placeholder="Ara: demir, Rum…" aria-label="Mucize ara" />
+        <div class="gorunum" role="tablist" aria-label="Görünüm">
+          <button type="button" role="tab" data-gorunum="gok" aria-selected="true">Gökyüzü</button>
+          <button type="button" role="tab" data-gorunum="liste" aria-selected="false">Liste</button>
+        </div>
+      </div>
+      <p class="sayac arayuz soluk"><span id="okunanSay">0</span> / {hepsi.length} mucizeyi keşfettin</p>
+    </div>
+
+    <div class="kap kumeler" id="kumeler">
+      {kumeler.map((k) => (
+        <div class:list={['kume', { bos: !k.yildizlar.length }]} style={`--k:var(--konu-${k.k})`}>
+          <p class="kume-ad arayuz">{k.ad} <span>{k.yildizlar.length || ''}</span></p>
+          <svg class="cizgiler" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true">
+            {k.sus.map((s) => <circle cx={s.x} cy={s.y} r={s.s * 0.35} class="sus" style={`animation-delay:${s.g}s`} />)}
+            {k.yildizlar.length > 1 && <polyline points={k.yildizlar.map((y) => `${y.x},${y.y}`).join(' ')} />}
+          </svg>
+          {k.yildizlar.map((y) => (
+            <div class="yildiz" style={`left:${y.x}%;top:${y.y}%`} data-slug={y.m.id} data-ara={`${y.m.data.baslik} ${y.m.data.kart} ${y.m.data.sureAdi}`.toLocaleLowerCase('tr')}>
+              <button type="button" class="nokta" aria-label={y.m.data.baslik} aria-expanded="false">
+                <svg viewBox="0 0 24 24" aria-hidden="true"><g><rect x="6" y="6" width="12" height="12" /><rect x="6" y="6" width="12" height="12" transform="rotate(45 12 12)" /></g></svg>
+              </button>
+              <span class="ad arayuz">{y.m.data.baslik}</span>
+              <div class="onizleme" role="dialog" aria-label={y.m.data.baslik}>
+                <p class="etiket">{y.m.data.sureAdi} · {y.m.data.ayetler[0].sure}:{y.m.data.ayetler[0].ayet}</p>
+                <strong>{y.m.data.baslik}</strong>
+                <p>{y.m.data.kart}</p>
+                <a href={`/mucize/${y.m.id}`} class="arayuz">Keşfet →</a>
+              </div>
+            </div>
+          ))}
+          {!k.yildizlar.length && <p class="yakinda arayuz">Yakında</p>}
+        </div>
+      ))}
+    </div>
+
+    <div class="kap liste" id="liste" hidden>
+      {hepsi.map((m) => (
+        <a class="liste-kart" href={`/mucize/${m.id}`} data-slug={m.id} data-ara={`${m.data.baslik} ${m.data.kart} ${m.data.sureAdi}`.toLocaleLowerCase('tr')}>
+          <Kapak konu={m.data.konu[0]} tohum={m.id} class="lk-kapak" />
+          <span class="lk-metin">
+            <span class="etiket">{m.data.konu.map((k) => konular[k as keyof typeof konular].ad).join(' · ')}</span>
+            <strong>{m.data.baslik}</strong>
+            <span class="soluk">{m.data.kart}</span>
+          </span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Ana>
+
+<script>
+  const gok = document.getElementById('gok')!;
+  const kumeler = document.getElementById('kumeler')!;
+  const liste = document.getElementById('liste')!;
+
+  // Okunanlar parlak
+  let okunan: string[] = [];
+  try { okunan = JSON.parse(localStorage.getItem('okunan') ?? '[]'); } catch {}
+  document.querySelectorAll<HTMLElement>('[data-slug]').forEach((el) => el.classList.toggle('okundu', okunan.includes(el.dataset.slug!)));
+  const tum = new Set([...document.querySelectorAll<HTMLElement>('.liste-kart')].map((e) => e.dataset.slug));
+  document.getElementById('okunanSay')!.textContent = String(okunan.filter((s) => tum.has(s)).length);
+
+  // Görünüm
+  function goster(g: string) {
+    kumeler.hidden = g !== 'gok'; liste.hidden = g !== 'liste';
+    document.querySelectorAll<HTMLButtonElement>('[data-gorunum]').forEach((b) => b.setAttribute('aria-selected', String(b.dataset.gorunum === g)));
+    try { localStorage.setItem('gorunum', g); } catch {}
+  }
+  document.querySelectorAll<HTMLButtonElement>('[data-gorunum]').forEach((b) => b.addEventListener('click', () => goster(b.dataset.gorunum!)));
+  try { const g = localStorage.getItem('gorunum'); if (g) goster(g); } catch {}
+
+  // Önizleme: dokununca açılır, dışarı dokununca kapanır; masaüstünde hover da açar (CSS)
+  document.querySelectorAll<HTMLElement>('.yildiz').forEach((y) => {
+    y.querySelector('.nokta')!.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const acik = y.classList.toggle('acik');
+      document.querySelectorAll('.yildiz.acik').forEach((o) => o !== y && o.classList.remove('acik'));
+      y.querySelector('.nokta')!.setAttribute('aria-expanded', String(acik));
+    });
+  });
+  document.addEventListener('click', () => document.querySelectorAll('.yildiz.acik').forEach((o) => o.classList.remove('acik')));
+
+  // Arama: eşleşmeyen yıldız söner, liste kartı gizlenir
+  document.getElementById('ara')!.addEventListener('input', (e) => {
+    const s = (e.target as HTMLInputElement).value.trim().toLocaleLowerCase('tr');
+    document.querySelectorAll<HTMLElement>('[data-ara]').forEach((el) => {
+      const uy = !s || el.dataset.ara!.includes(s);
+      el.classList.toggle('sondu', !uy);
+      if (el.classList.contains('liste-kart')) el.hidden = !uy;
+    });
+  });
+
+  // 2.5D: imleçle arka plan katmanları farklı hızda kayar
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    gok.addEventListener('pointermove', (e) => {
+      gok.style.setProperty('--px', String(e.clientX / innerWidth - 0.5));
+      gok.style.setProperty('--py', String(e.clientY / innerHeight - 0.5));
+    });
+  }
+</script>
+
+<style>
+  .gok { --px: 0; --py: 0; position: relative; min-height: calc(100svh - 64px); padding-bottom: var(--s7); overflow: hidden; }
+  .fon { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+  .fon circle { fill: var(--murekkep); }
+  .fon-1 { opacity: 0.35; transform: translate(calc(var(--px) * -8px), calc(var(--py) * -8px)); transition: transform 0.6s var(--ease-giris); }
+  .fon-2 { opacity: 0.6; transform: translate(calc(var(--px) * -18px), calc(var(--py) * -18px)); transition: transform 0.6s var(--ease-giris); }
+
+  .ust { position: relative; padding-top: var(--s7); display: grid; grid-template-columns: 1fr auto; align-items: end; gap: var(--s4); }
+  .ust h1 { font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.02; margin: 0; }
+  .araclar { display: flex; gap: var(--s3); align-items: center; flex-wrap: wrap; justify-content: flex-end; }
+  input[type='search'] { font: inherit; padding: 10px 16px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--murekkep); min-width: 220px; }
+  .gorunum { display: inline-flex; border: 1px solid var(--cizgi-renk); border-radius: 999px; padding: 3px; background: var(--yuzey); }
+  .gorunum button { font: inherit; font-size: var(--fs-sm); border: 0; background: none; color: var(--soluk); padding: 6px 14px; border-radius: 999px; cursor: pointer; }
+  .gorunum button[aria-selected='true'] { background: var(--vurgu); color: var(--zemin); }
+  .sayac { grid-column: 1 / -1; font-size: var(--fs-sm); margin: 0; }
+  .sayac span { color: var(--vurgu); font-weight: 600; }
+
+  .kumeler { position: relative; display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s3); margin-top: var(--s5); }
+  .kume { position: relative; aspect-ratio: 1 / 0.85; border-radius: 50%; background: radial-gradient(closest-side, color-mix(in srgb, var(--k) 14%, transparent), transparent); }
+  .kume-ad { position: absolute; left: 0; right: 0; bottom: 4%; text-align: center; margin: 0; font-size: var(--fs-xs); letter-spacing: 0.1em; text-transform: uppercase; color: var(--k); }
+  .kume-ad span { color: var(--soluk); margin-left: 4px; }
+  .kume.bos { opacity: 0.55; }
+  .yakinda { position: absolute; inset: 0; display: grid; place-items: center; margin: 0; font-size: var(--fs-xs); color: var(--soluk); }
+  .cizgiler { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+  .cizgiler polyline { fill: none; stroke: var(--k); stroke-width: 0.4; stroke-dasharray: 1.5 1.5; opacity: 0.7; vector-effect: non-scaling-stroke; }
+  .sus { fill: var(--murekkep); opacity: 0.25; animation: parilda 4s ease-in-out infinite; }
+  @keyframes parilda { 50% { opacity: 0.6; } }
+
+  .yildiz { position: absolute; transform: translate(-50%, -50%); z-index: 1; transition: opacity var(--t-bilesen); }
+  .yildiz:hover, .yildiz.acik { z-index: 5; }
+  .yildiz.sondu { opacity: 0.12; }
+  .nokta { width: 34px; height: 34px; padding: 0; border: 0; background: none; cursor: pointer; color: var(--k); display: grid; place-items: center; }
+  .nokta svg { width: 26px; height: 26px; overflow: visible; filter: drop-shadow(0 0 6px color-mix(in srgb, var(--k) 70%, transparent)); transition: transform var(--t-bilesen) var(--ease-giris); animation: don 30s linear infinite; }
+  .nokta g { fill: none; stroke: currentColor; stroke-width: 1.6; }
+  .okundu .nokta g { fill: currentColor; }
+  .nokta:hover svg, .acik .nokta svg { transform: scale(1.35); }
+  @keyframes don { to { rotate: 360deg; } }
+  .ad { position: absolute; top: 100%; left: 50%; transform: translateX(-50%); white-space: nowrap; font-size: var(--fs-xs); color: var(--murekkep); pointer-events: none; }
+  .onizleme { position: absolute; bottom: calc(100% + 8px); left: 50%; transform: translate(-50%, 6px); width: 240px; padding: var(--s3); background: var(--yuzey); border: 1px solid var(--k); border-radius: var(--radius); box-shadow: 0 16px 40px rgb(0 0 0 / 0.3); opacity: 0; pointer-events: none; transition: opacity var(--t-bilesen) var(--ease-giris), transform var(--t-bilesen) var(--ease-giris); }
+  .onizleme strong { font-family: var(--font-baslik); font-size: var(--fs-lg); display: block; }
+  .onizleme p { margin: var(--s1) 0 var(--s2); font-size: var(--fs-sm); }
+  .onizleme a { font-weight: 600; text-decoration: none; }
+  .yildiz.acik .onizleme { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+  @media (hover: hover) { .yildiz:hover .onizleme { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; } }
+
+  .liste { position: relative; display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--s3); margin-top: var(--s5); }
+  .liste-kart { display: grid; grid-template-rows: 160px auto; text-decoration: none; color: var(--murekkep); background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); overflow: hidden; transition: transform var(--t-bilesen) var(--ease-giris), border-color var(--t-mikro); }
+  .liste-kart:hover { transform: translateY(-3px); border-color: var(--vurgu); }
+  .liste-kart :global(.lk-kapak) { border-radius: 0; }
+  .lk-metin { display: grid; gap: var(--s1); padding: var(--s3) var(--s4) var(--s4); }
+  .lk-metin strong { font-family: var(--font-baslik); font-size: var(--fs-lg); }
+  .okundu.liste-kart { border-color: color-mix(in srgb, var(--vurgu) 50%, var(--cizgi-renk)); }
+
+  @media (max-width: 900px) { .kumeler { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 640px) {
+    .ust { grid-template-columns: 1fr; }
+    .araclar { justify-content: flex-start; }
+    input[type='search'] { min-width: 0; flex: 1; }
+    .onizleme { width: 200px; }
+  }
+  @media (prefers-reduced-motion: reduce) { .nokta svg, .sus { animation: none; } }
+</style>

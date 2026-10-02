@@ -1,0 +1,22 @@
+---
+// Orijinal çalışmadan kısa alıntı + künye.
+import kaynaklar from '../data/kaynaklar.json';
+interface Props { k: keyof typeof kaynaklar; ceviri?: string }
+const { k, ceviri } = Astro.props;
+const x = kaynaklar[k] as { yazar: string; yil: number; baslik: string; yayin: string; doi?: string };
+---
+<figure class="alinti">
+  <blockquote><slot /></blockquote>
+  {ceviri && <p class="ceviri">{ceviri}</p>}
+  <figcaption class="arayuz">
+    {x.yazar} ({x.yil}), <em>{x.baslik}</em>, {x.yayin}
+    {x.doi && <> · <a href={`https://doi.org/${x.doi}`} rel="noopener">makaleye git</a></>}
+  </figcaption>
+</figure>
+
+<style>
+  .alinti { margin: var(--s6) 0; padding: var(--s4) var(--s5); background: var(--yuzey); border-radius: var(--radius); border: 1px solid var(--cizgi-renk); }
+  blockquote { margin: 0; font-family: var(--font-baslik); font-style: italic; font-size: clamp(1.2rem, 2.4vw, 1.5rem); line-height: 1.45; }
+  .ceviri { margin: var(--s2) 0 0; color: var(--soluk); }
+  figcaption { margin-top: var(--s3); font-size: var(--fs-xs); color: var(--soluk); }
+</style>

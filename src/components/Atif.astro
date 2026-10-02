@@ -1,0 +1,22 @@
+---
+// Metin içi atıf: üzerine gelince/odaklanınca kaynak kartı açılır (Distill deseni). Numara sayfa sonundaki kaynakça sırasından gelir.
+import kaynaklar from '../data/kaynaklar.json';
+interface Props { k: keyof typeof kaynaklar }
+const { k } = Astro.props;
+const x = kaynaklar[k] as { yazar: string; yil: number; baslik: string; yayin: string; doi?: string };
+---
+<sup class="atif arayuz"><a href={`#k-${k}`} data-k={k}>[•]</a><span class="atif-kart" role="tooltip"><strong>{x.baslik}</strong><span>{x.yazar} ({x.yil < 0 ? `MÖ ~${-x.yil}` : x.yil})</span><em>{x.yayin}</em></span></sup>
+
+<style>
+  .atif { position: relative; font-size: 0.7em; line-height: 0; }
+  .atif a { text-decoration: none; padding: 0 2px; }
+  .atif-kart {
+    position: absolute; left: 50%; bottom: 1.6em; transform: translate(-50%, 6px); width: min(320px, 80vw);
+    display: grid; gap: 4px; padding: var(--s3); background: var(--yuzey-2); color: var(--murekkep);
+    border: 1px solid var(--cizgi-renk); border-radius: var(--radius); box-shadow: 0 12px 32px rgb(0 0 0 / 0.25);
+    font-size: var(--fs-xs); line-height: 1.45; text-align: left; z-index: 30;
+    opacity: 0; pointer-events: none; transition: opacity var(--t-bilesen) var(--ease-giris), transform var(--t-bilesen) var(--ease-giris);
+  }
+  .atif-kart em { color: var(--soluk); }
+  .atif:hover .atif-kart, .atif:focus-within .atif-kart { opacity: 1; transform: translate(-50%, 0); }
+</style>

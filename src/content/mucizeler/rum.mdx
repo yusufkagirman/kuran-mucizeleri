@@ -1,0 +1,48 @@
+---
+baslik: Rumların zaferi
+hook: |
+  Kur'an, yenik bir imparatorluğun ne zaman kazanacağını önceden söyledi.
+
+  614'te Bizans Perslere ağır bir yenilgi almış, Kudüs düşmüştü. Ayet "birkaç yıl içinde galip gelecekler" dedi. Mekkeliler güldü; Hz. Ebû Bekir ise bu söz üzerine bahse girdi.
+kart: Kur'an, yenik bir imparatorluğun birkaç yıl içinde kazanacağını önceden söyledi.
+konu: [gelecek, tarih]
+sureAdi: Rûm
+ayetler:
+  - { sure: 30, ayet: 2 }
+  - { sure: 30, ayet: 3 }
+  - { sure: 30, ayet: 4 }
+nuzul: { donem: "Mekke dönemi", yil: 615 }
+kesif: { yil: 622, olay: "Herakleios Perslere karşı ilk büyük zaferini kazandı; savaşın yönü döndü.", kaynak: greatrex2002 }
+vaat: { enAz: 3, enCok: 9, ifade: "bid'ı sinîn: birkaç yıl içinde" }
+itirazlar:
+  - itiraz: "Bu, basit bir siyasi tahmin olamaz mı?"
+    cevap: "O gün Bizans'ın toparlanacağına dair bir belirti yoktu. Ayet zaferle birlikte süresini de verdi; Mekkeli müşrikler de kazanacaklarından emin olarak bahse girdi."
+    kaynak: tirmizi
+  - itiraz: "Bizans'ın kesin zaferi 627–628'de geldi; bu dokuz yılı aşmıyor mu?"
+    cevap: "Bizans'ın zaferleri 622'de başladı ve savaşın yönü o yıl döndü. Bu, ayetin indiği yıldan itibaren dokuz yılın içindedir."
+    kaynak: greatrex2002
+kaynaklar: [greatrex2002, tirmizi]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Persler Antakya'yı ve Kudüs'ü almış, Bizans'ın hazinesi boşalmış, ordusu dağılmıştı.<Atif k="greatrex2002" /> Mekke müşrikleri bu habere sevinirken Rûm suresi indi:
+
+<AyetParca sure={30} ayet={3} sureAdi="Rûm" ar="غُلِبَتِ ٱلرُّومُ ۝ فِىٓ أَدْنَى ٱلْأَرْضِ وَهُم مِّنۢ بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ ۝ فِى بِضْعِ سِنِينَ" meal="Rumlar en yakın bir yerde yenildiler. Onlar bu yenilgilerinden bir kaç yıl sonra galip geleceklerdir." vurgu="bir kaç yıl sonra galip geleceklerdir" />
+
+Ayetteki *bid'ı sinîn* ifadesi üç ile dokuz arası yıl demektir; yani ayet yalnız kimin kazanacağını değil, ne zaman kazanacağını da söylüyordu. Hz. Ebû Bekir bu söze güvenerek müşriklerle bahse girdi.<Atif k="tirmizi" />
+
+Yedi yıl sonra, 622'de İmparator Herakleios Perslere karşı ilk büyük zaferini kazandı ve savaşın yönü döndü.<Atif k="greatrex2002" />
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} vaat={frontmatter.vaat} />
+
+Peki bu bir tahmin ya da tesadüf olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Kimsenin toparlanabileceğine ihtimal vermediği bir imparatorluğun zaferini, süresini de vererek, bir insan kendi bilgisiyle nasıl söyleyebilirdi?</MeydanOkuma>

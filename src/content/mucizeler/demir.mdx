@@ -1,0 +1,47 @@
+---
+baslik: Demirin indirilmesi
+hook: |
+  Bir kelime, sırrını 1.300 yıl sakladı.
+
+  Kur'an demirden söz ederken "yarattık" değil, "indirdik" dedi. O gün herkes demirin topraktan çıktığını biliyordu. Bu kelimenin neden seçildiğini anlamak için insanlığın yıldızların içine bakmayı öğrenmesi gerekti.
+kart: Bir kelime, sırrını 1.300 yıl sakladı. Kur'an demir için "indirdik" dedi.
+konu: [gokyuzu]
+sureAdi: Hadîd
+ayetler:
+  - { sure: 57, ayet: 25 }
+vurgu: "وَأَنزَلْنَا ٱلْحَدِيدَ"
+nuzul: { donem: "Medine dönemi", yil: 625 }
+kesif: { yil: 1957, olay: "Demirin yıldızların içinde oluştuğu ve yıldız patlamalarıyla uzaya saçıldığı gösterildi.", kaynak: b2fh1957 }
+itirazlar:
+  - itiraz: "\"İndirmek\" burada sadece \"yaratıp vermek\" anlamında olamaz mı?"
+    cevap: "Müfessirler bu anlamı da vermiştir. Ancak fiilin asıl anlamı yukarıdan aşağıya indirmektir ve demirin gerçekten gökten geldiği bugün bilinmektedir. Ayet iki anlamı birden taşır."
+  - itiraz: "Gökten düşen meteor demiri eski çağlarda da biliniyordu."
+    cevap: "Meteor demiri düşen birkaç taştan elde edilen nadir bir malzemeydi. Yeryüzündeki bütün demirin gökten geldiği ise ancak 20. yüzyılda anlaşıldı."
+kaynaklar: [b2fh1957]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Sahne from '../../etkilesim/demir/Sahne.astro';
+
+Ayetin indiği yıllarda demir, topraktan kazılıp çıkarılan bir madendi; gökle bir ilgisi olabileceği kimsenin aklına gelmezdi. Kur'an ise ondan şöyle söz etti:
+
+<AyetParca sure={57} ayet={25} sureAdi="Hadîd" ar="وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌۭ شَدِيدٌۭ وَمَنَٰفِعُ لِلنَّاسِ" meal="...pek sert olan ve insanlara birçok faydası bulunan demiri de indirdik..." vurgu="demiri de indirdik" />
+
+Ayetteki *enzelnâ* fiili, bir şeyin yukarıdan aşağıya inmesini anlatır; Kur'an aynı fiili gökten inen yağmur için de kullanır. Asırlar boyunca bu ifade "Allah demiri yarattı ve insanlara verdi" diye anlaşıldı, çünkü demirin gerçekten yukarıdan geldiğini gösteren hiçbir bilgi yoktu.
+
+<Sahne />
+
+O bilgi 1957'de geldi. Astrofizikçiler Burbidge, Fowler ve Hoyle, demirin büyük yıldızların içinde oluştuğunu ve bu yıldızlar patlayınca uzaya saçıldığını gösterdi.<Atif k="b2fh1957" /> Dünya'daki demirin tamamı da böyle oluştu: gökten indi.
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Okuma yazma bilmeyen bir insan, 7. yüzyılın Arabistan'ında, bilimin ancak 1.300 yıl sonra yıldızlara bakarak öğrendiği bir gerçeği tek kelimeyle nasıl söyleyebilirdi?</MeydanOkuma>

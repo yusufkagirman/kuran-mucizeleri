@@ -1,0 +1,83 @@
+---
+// Mucize sayfası: tek parça akan hikâye (vault: 10-Projeler/Kuran-Mucizeleri/Anlati-Kurali.md).
+// Hook (frontmatter) → hikâye (MDX gövdesi: ayet parçası, keşif, alıntı, itirazlar, meydan okuma) → paylaş → kaynaklar.
+import { getCollection, render } from 'astro:content';
+import Ana from '../../layouts/Ana.astro';
+import Kapak from '../../components/Kapak.astro';
+import Kaynakca from '../../components/Kaynakca.astro';
+import PaylasKarti from '../../components/PaylasKarti.astro';
+import { konular } from '../../taksonomi';
+
+export async function getStaticPaths() {
+  const hepsi = await getCollection('mucizeler');
+  return hepsi.map((m) => ({ params: { slug: m.id }, props: { m } }));
+}
+const { m } = Astro.props;
+const d = m.data;
+const { Content } = await render(m);
+const hook = d.hook.trim().split(/\n\s*\n/);
+const fark = d.kesif.yil - d.nuzul.yil;
+---
+<Ana baslik={d.baslik} aciklama={hook[0]}>
+  <article class="mucize" data-slug={m.id}>
+    <header class="giris">
+      <Kapak konu={d.konu[0]} tohum={m.id} class="arka" />
+      <div class="kap okuma-sut ic">
+        <p class="ust arayuz">
+          {d.konu.map((k) => <span style={`--k:var(--konu-${k})`}>{konular[k as keyof typeof konular].ad}</span>)}
+          <b>{d.baslik}</b>
+        </p>
+        {hook.map((p, i) => <p class:list={['hook', { ilk: i === 0 }]}>{p}</p>)}
+        <a href="#hikaye" class="asagi arayuz">Okumaya devam <span aria-hidden="true">↓</span></a>
+      </div>
+    </header>
+
+    <div class="kap okuma-sut hikaye" id="hikaye">
+      <Content />
+    </div>
+
+    <footer class="kap okuma-sut son">
+      <PaylasKarti baslik={d.baslik} soru={d.kart} vurgu={d.vurgu} fark={fark} farkMetni={d.vaat ? 'yıl sonra haber gerçekleşti' : 'yıl sonra insanlık bunu öğrendi'} konu={d.konu[0]} slug={m.id} />
+      {d.kaynaklar.length > 0 && (
+        <details class="kaynaklar-kat">
+          <summary class="arayuz">Kaynaklar ({d.kaynaklar.length})</summary>
+          <Kaynakca anahtarlar={d.kaynaklar} baslik={d.baslik} url={Astro.url.href} />
+        </details>
+      )}
+    </footer>
+  </article>
+</Ana>
+
+<script>
+  const slug = document.querySelector<HTMLElement>('.mucize')!.dataset.slug!;
+  try {
+    const o = new Set(JSON.parse(localStorage.getItem('okunan') ?? '[]'));
+    o.add(slug); localStorage.setItem('okunan', JSON.stringify([...o]));
+  } catch {}
+</script>
+
+<style>
+  .mucize { overflow-x: clip; }
+  .okuma-sut { max-width: 720px; }
+
+  .giris { position: relative; min-height: calc(100svh - 64px); display: grid; align-items: end; overflow: hidden; }
+  .giris :global(.arka) { position: absolute; inset: 0; border-radius: 0; opacity: 0.85; }
+  .giris::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, var(--zemin) 10%, color-mix(in srgb, var(--zemin) 60%, transparent) 65%, transparent); pointer-events: none; }
+  .ic { position: relative; z-index: 1; padding-bottom: var(--s6); }
+  .ust { display: flex; gap: var(--s2); align-items: center; flex-wrap: wrap; font-size: var(--fs-xs); margin-bottom: var(--s4); }
+  .ust span { padding: 2px 10px; border-radius: 999px; border: 1px solid var(--k); background: color-mix(in srgb, var(--k) 16%, var(--zemin)); }
+  .ust b { font-weight: 500; color: var(--soluk); letter-spacing: 0.04em; margin-left: var(--s2); }
+  .hook { font-family: var(--font-baslik); font-size: clamp(1.4rem, 3vw, 1.9rem); line-height: 1.35; margin: 0 0 var(--s3); }
+  .hook.ilk { font-size: clamp(2.2rem, 6vw, 3.8rem); line-height: 1.08; margin-bottom: var(--s4); }
+  .asagi { display: inline-flex; gap: var(--s2); margin-top: var(--s4); color: var(--soluk); text-decoration: none; font-size: var(--fs-sm); }
+  .asagi span { animation: zipla 1.8s var(--ease-giris) infinite; }
+  @keyframes zipla { 50% { transform: translateY(6px); } }
+
+  .hikaye { padding-top: var(--s6); font-size: clamp(1.1rem, 2vw, 1.25rem); line-height: 1.8; }
+  .hikaye :global(p) { margin: 0 0 var(--s4); }
+  .hikaye :global(.genis) { width: 100vw; margin-left: calc(50% - 50vw); }
+
+  .son { padding-bottom: var(--s6); }
+  .kaynaklar-kat { margin-top: var(--s6); }
+  .kaynaklar-kat summary { cursor: pointer; color: var(--soluk); font-size: var(--fs-sm); }
+</style>

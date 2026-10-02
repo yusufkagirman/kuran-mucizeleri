@@ -1,0 +1,40 @@
+---
+import kaynaklar from '../data/kaynaklar.json';
+interface Props { anahtarlar: string[]; baslik: string; url: string }
+const { anahtarlar, baslik, url } = Astro.props;
+const liste = anahtarlar.map((k) => ({ k, ...(kaynaklar as Record<string, any>)[k] }));
+const bugun = new Date().toLocaleDateString('tr-TR');
+---
+<section class="kaynakca" aria-labelledby="kaynaklar-b">
+  <h2 id="kaynaklar-b">Kaynaklar</h2>
+  <ol>
+    {liste.map((x) => (
+      <li id={`k-${x.k}`}>
+        {x.yazar} ({x.yil < 0 ? `MÖ ~${-x.yil}` : x.yil}). <em>{x.baslik}</em>. {x.yayin}.
+        {x.doi && <> <a href={`https://doi.org/${x.doi}`} rel="noopener">doi:{x.doi}</a></>}
+        {x.url && <> <a href={x.url} rel="noopener">bağlantı</a></>}
+      </li>
+    ))}
+  </ol>
+  <div class="alintila kart arayuz">
+    <p class="etiket">Bu maddeyi alıntılayın</p>
+    <p>Kur'an Mucizeleri. "{baslik}". Erişim {bugun}. {url}</p>
+  </div>
+</section>
+
+<script>
+  // Metindeki [•] atıflarını kaynakça sırasına göre numaralandır.
+  const sira = [...document.querySelectorAll('.kaynakca li')].map((li) => li.id.slice(2));
+  document.querySelectorAll<HTMLAnchorElement>('.atif a[data-k]').forEach((a) => {
+    const i = sira.indexOf(a.dataset.k!);
+    if (i >= 0) a.textContent = `[${i + 1}]`;
+  });
+</script>
+
+<style>
+  ol { padding-left: var(--s4); font-size: var(--fs-sm); }
+  li { margin-bottom: var(--s2); scroll-margin-top: 90px; }
+  li:target { background: var(--vurgu-zemin); border-radius: 6px; }
+  .alintila { margin-top: var(--s4); font-size: var(--fs-sm); }
+  .alintila p:last-child { margin: 0; word-break: break-word; }
+</style>

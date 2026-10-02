@@ -1,0 +1,89 @@
+---
+// 2.5D kapak: konuya göre üç katmanlı soyut çizim (canlı tasviri yok). İmleç/eğim ile katmanlar farklı hızda kayar.
+// Yeni mucize kendi konusunun kapağını otomatik alır.
+interface Props { konu: string; class?: string; tohum?: string }
+const { konu, class: sinif, tohum = konu } = Astro.props;
+
+// Belirli (deterministik) rastgele: aynı mucize her derlemede aynı çizimi alır
+let h = 2166136261;
+for (const c of tohum) h = Math.imul(h ^ c.charCodeAt(0), 16777619);
+const r = () => ((h = Math.imul(h ^ (h >>> 15), 2246822507) >>> 0) / 4294967296);
+const noktalar = Array.from({ length: 60 }, () => ({ x: r() * 400, y: r() * 300, s: 0.4 + r() * 1.4, o: 0.25 + r() * 0.6 }));
+const renk = `var(--konu-${konu}, var(--vurgu))`;
+---
+<div class:list={['kapak', sinif]} style={`--k:${renk}`} data-paralaks>
+  <svg viewBox="0 0 400 300" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <defs>
+      <radialGradient id={`par-${tohum}`} cx="50%" cy="50%" r="50%">
+        <stop offset="0" stop-color={renk} stop-opacity="0.55" />
+        <stop offset="1" stop-color={renk} stop-opacity="0" />
+      </radialGradient>
+    </defs>
+    <rect width="400" height="300" class="zemin" />
+    <g class="k1">{noktalar.map((n) => <circle cx={n.x} cy={n.y} r={n.s} opacity={n.o} class="toz" />)}</g>
+
+    {konu === 'gokyuzu' && <>
+      <g class="k2"><circle cx="270" cy="120" r="110" fill={`url(#par-${tohum})`} /><circle cx="270" cy="120" r="34" class="dolu" /></g>
+      <g class="k3"><path d="M-20 300 A 260 120 0 0 1 420 300" class="cizgi kalin" /><circle cx="90" cy="70" r="3" class="dolu" /><circle cx="130" cy="40" r="2" class="dolu" /></g>
+    </>}
+    {konu === 'yeryuzu' && <>
+      <g class="k2"><path d="M0 230 L80 140 L150 200 L230 90 L320 190 L400 130 L400 300 L0 300Z" class="dolgu-1" /></g>
+      <g class="k3"><path d="M0 270 L110 190 L190 250 L280 180 L400 260 L400 300 L0 300Z" class="dolgu-2" /></g>
+    </>}
+    {konu === 'canlilar' && <>
+      <g class="k2">{[0, 1, 2, 3, 4].map((i) => <polygon points="0,-30 26,-15 26,15 0,30 -26,15 -26,-15" transform={`translate(${140 + (i % 3) * 52 + (i > 2 ? 26 : 0)} ${120 + (i > 2 ? 45 : 0)})`} class="cizgi" />)}</g>
+      <g class="k3"><path d="M300 260 C 300 180, 360 150, 390 140 C 380 200, 340 240, 300 260Z" class="dolgu-2" /><path d="M300 260 L370 160" class="cizgi" /></g>
+    </>}
+    {konu === 'insan' && <>
+      <g class="k2">{[20, 38, 56, 74, 92].map((rr) => <path d={`M ${200 - rr} 170 A ${rr} ${rr * 1.2} 0 0 1 ${200 + rr} 170`} class="cizgi" />)}</g>
+      <g class="k3"><circle cx="200" cy="150" r="130" fill={`url(#par-${tohum})`} /></g>
+    </>}
+    {(konu === 'tarih') && <>
+      <g class="k2"><path d="M60 300 V170 A40 40 0 0 1 140 170 V300 M160 300 V150 A50 50 0 0 1 260 150 V300 M280 300 V170 A40 40 0 0 1 360 170 V300" class="cizgi kalin" /></g>
+      <g class="k3"><rect x="0" y="270" width="400" height="30" class="dolgu-2" /></g>
+    </>}
+    {konu === 'gelecek' && <>
+      <g class="k2"><circle cx="200" cy="230" r="70" fill={`url(#par-${tohum})`} />{Array.from({ length: 9 }, (_, i) => <line x1="200" y1="230" x2={200 + 190 * Math.cos(Math.PI + (i * Math.PI) / 8)} y2={230 + 190 * Math.sin(Math.PI + (i * Math.PI) / 8)} class="cizgi ince" />)}</g>
+      <g class="k3"><rect x="0" y="230" width="400" height="70" class="dolgu-2" /><line x1="0" y1="230" x2="400" y2="230" class="cizgi kalin" /></g>
+    </>}
+    {konu === 'dil' && <>
+      <g class="k2">{[0, 1, 2, 3].map((i) => <path d={`M 20 ${110 + i * 34} C 120 ${70 + i * 34}, 220 ${150 + i * 34}, 380 ${100 + i * 34}`} class="cizgi" />)}</g>
+      <g class="k3"><circle cx="300" cy="90" r="6" class="dolu" /><circle cx="318" cy="90" r="6" class="dolu" /></g>
+    </>}
+    {konu === 'sayilar' && <>
+      <g class="k2">{Array.from({ length: 7 }, (_, i) => Array.from({ length: 5 }, (_, j) => <circle cx={80 + i * 40} cy={70 + j * 40} r={(i + j) % 3 === 0 ? 5 : 2} class="dolu" />))}</g>
+      <g class="k3"><rect x="160" y="110" width="80" height="80" transform="rotate(45 200 150)" class="cizgi kalin" /><rect x="160" y="110" width="80" height="80" class="cizgi kalin" /></g>
+    </>}
+  </svg>
+</div>
+
+<script>
+  // Paralaks: imleç kapağın üstündeyken katmanlar farklı hızda kayar.
+  if (!matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    document.querySelectorAll<HTMLElement>('[data-paralaks]').forEach((el) => {
+      el.addEventListener('pointermove', (e) => {
+        const b = el.getBoundingClientRect();
+        el.style.setProperty('--px', String(((e.clientX - b.left) / b.width - 0.5) * 2));
+        el.style.setProperty('--py', String(((e.clientY - b.top) / b.height - 0.5) * 2));
+      });
+      el.addEventListener('pointerleave', () => { el.style.setProperty('--px', '0'); el.style.setProperty('--py', '0'); });
+    });
+  }
+</script>
+
+<style>
+  .kapak { --px: 0; --py: 0; position: relative; overflow: hidden; border-radius: var(--radius); background: var(--yuzey); }
+  svg { display: block; width: 100%; height: 100%; }
+  .zemin { fill: color-mix(in srgb, var(--k) 10%, var(--yuzey)); }
+  .toz { fill: var(--murekkep); }
+  .k1, .k2, .k3 { transition: transform var(--t-bolum) var(--ease-giris); }
+  .k1 { transform: translate(calc(var(--px) * -4px), calc(var(--py) * -4px)); }
+  .k2 { transform: translate(calc(var(--px) * -10px), calc(var(--py) * -8px)); }
+  .k3 { transform: translate(calc(var(--px) * -20px), calc(var(--py) * -14px)); }
+  .dolu { fill: var(--k); }
+  .cizgi { fill: none; stroke: var(--k); stroke-width: 1.5; stroke-linecap: round; }
+  .kalin { stroke-width: 2.5; }
+  .ince { stroke-width: 1; opacity: 0.6; }
+  .dolgu-1 { fill: color-mix(in srgb, var(--k) 35%, var(--yuzey)); }
+  .dolgu-2 { fill: color-mix(in srgb, var(--k) 60%, var(--yuzey)); }
+</style>
