@@ -1,0 +1,49 @@
+---
+baslik: Bel ile göğüs kemikleri arası
+hook: |
+  Kur'an, insanın yaratıldığı suyun bel ile göğüs kemikleri arasından çıktığını söyledi.
+
+  Târık suresi insanı "atılan bir sudan" yaratıldığını düşünmeye çağırır ve bu suyun yerini verir. Bazı yorumcular bunu, üreme bezlerinin anne karnında böbrek hizasında oluşup sonra aşağı inmesiyle ilişkilendirir. Bu ilişki tartışmalıdır; itirazları aşağıda.
+kart: Kur'an, insanın yaratıldığı suyun bel ile göğüs kemikleri arasından çıktığını söyledi.
+konu: [insan]
+sureAdi: Târık
+ayetler:
+  - { sure: 86, ayet: 6 }
+  - { sure: 86, ayet: 7 }
+vurgu: "بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ"
+nuzul: { donem: "Mekke dönemi", yil: 613 }
+kesif: { yil: 1786, olay: "John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.", kaynak: hunter1786 }
+itirazlar:
+  - itiraz: "Meni testislerde, prostatta ve seminal keseciklerde üretilir. Bunların hiçbiri bel ile kaburgalar arasında değildir."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Hipokrat ve antik tıp, meninin beyinden ve omurilikten gelip omurga boyunca aktığını düşünüyordu. Ayet o dönemin inancına benzemiyor mu?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Ayetteki fiil (yahrucu) bugün çıkan sıvıyı anlatır, embriyodaki gelişimi değil. Testislerin anne karnındaki yeri yorumu sonradan değil mi?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Klasik müfessirler sulbü erkeğin beli, terâibi kadının göğüs kemikleri diye açıkladı; Diyanet meali de \"erkek ve kadının\" ekler. Kadının sıvısı \"atılan\" bir su değildir."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [hunter1786, leeuwenhoek1677]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Kur'an insanı bu suya bakmaya çağırdı:
+
+<AyetParca sure={86} ayet={7} sureAdi="Târık" ar="خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ ۝ يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ" meal="O, erkek ve kadının beli ile kaburga kemikleri arasından atılagelen bir sudan yaratılmıştır." vurgu="beli ile kaburga kemikleri arasından" />
+
+Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir. Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı.
+
+Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> {/* EKİP KONTROLÜ: Ayeti testislerin embriyodaki yeriyle eşleştirmek modern ve tartışmalı bir yorumdur; genel kabul görmez. Mucizenin yayına girip girmeyeceğine ekip karar vermeli. */}
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama bu yorum ayete sonradan mı yüklendi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>İnsanın yaratıldığı suyun nereden geldiğini kimse bilmezken, bir insan ona bel ile göğüs kemikleri arasında bir yer göstermeye nereden cesaret edebilirdi?</MeydanOkuma>

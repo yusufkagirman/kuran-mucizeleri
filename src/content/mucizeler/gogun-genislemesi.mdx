@@ -1,0 +1,49 @@
+---
+baslik: Göğün genişlemesi
+hook: |
+  Evrenin genişlediğini teleskoplar 1929'da gördü; Kur'an bunu 1.300 yıl önce söylemişti.
+
+  Ayetin indiği dönemde gök, yerinde duran, hiç değişmeyen bir kubbe sanılıyordu. Kur'an ise göğü kendisinin kurduğunu ve onu genişlettiğini bildirdi. Bilim, evrenin durağan olmadığını ancak 20. yüzyılda kabul etti.
+kart: Evrenin genişlediğini teleskoplar 1929'da gördü; Kur'an bunu 1.300 yıl önce söyledi.
+konu: [gokyuzu]
+sureAdi: Zâriyât
+ayetler:
+  - { sure: 51, ayet: 47 }
+vurgu: "وَإِنَّا لَمُوسِعُونَ"
+nuzul: { donem: "Mekke dönemi", yil: 612 }
+kesif: { yil: 1929, olay: "Hubble, uzak gökadaların bizden uzaklaştığını ve uzaklaştıkça daha hızlı kaçtığını gösterdi; evrenin genişlediği anlaşıldı.", kaynak: hubble1929 }
+itirazlar:
+  - itiraz: "Bu ayet 1900'lere kadar \"genişletmeye gücümüz yeter\" diye çevriliyordu; \"genişletiyoruz\" anlamı Hubble'dan sonra verildi."
+    cevap: "\"Genişlettik\" anlamı Hubble'dan yaklaşık bin yıl önce de vardı. Taberî (ö. 923) tefsirinde İbn Zeyd'in bu ifadeyi \"onu genişletti\" diye açıkladığını aktarır; İbn Kesîr (ö. 1373) de \"göğün etrafını genişlettik\" diye açıklar. [EKİP KONTROLÜ: Taberî kendi tercihini \"güç sahibiyiz\" anlamından yana yapar; İbn Zeyd görüşü aktardığı ikinci görüştür. Fahreddin er-Râzî'deki ifade doğrulanamadı.]"
+    kaynak: taberi
+  - itiraz: "\"Genişleticiyiz\" ifadesi mecazdır; Allah'ın gücünü ya da rızkı genişletmesini anlatır."
+    cevap: "Ayetin öncesi ve sonrası fiziksel bir konuyu anlatır: göğün kurulması, yerin döşenmesi. Bu bağlamda yalnız bu ifadeyi mecaz saymak akışla uyuşmaz."
+  - itiraz: "Eski tefsirlerdeki \"genişlettik\" geçmiş zamandır, bir kerelik genişletmeyi anlatır; bugünkü sürekli genişlemeyle aynı şey değildir."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Evrenin genişlemesini ilk öneren Lemaître'dir (1927); Hubble'ın 1929 verisi bunu gözlemle destekledi. Sayfa neden 1929'u esas alıyor?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [hubble1929, lemaitre1927, taberi, ibnkesir]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda gök, başın üstünde duran ve hiç değişmeyen bir kubbe olarak bilinirdi. Kur'an göğün kuruluşunu anlatırken bir adım daha attı:
+
+<AyetParca sure={51} ayet={47} sureAdi="Zâriyât" ar="وَٱلسَّمَآءَ بَنَيْنَٰهَا بِأَيْي۟دٍۢ وَإِنَّا لَمُوسِعُونَ" meal="Göğü, gücümüzle Biz kurduk; şüphesiz biz onu genişleticiyiz." vurgu="biz onu genişleticiyiz" />
+
+Ayetteki *mûsiûn* kelimesi "genişleten, genişletmekte olan" demektir. Müfessirler bunu çoğunlukla Allah'ın gücünün genişliği diye anladı; bazıları ise göğün genişletilmesi olarak açıkladı.<Atif k="taberi" /> Göğün gerçekten büyüdüğünü gösterecek bir bilgi yoktu; bu yüzden ifade asırlarca bir güç beyanı olarak okundu.
+
+Bilim de uzun süre evreni durağan sandı. 1927'de Lemaître evrenin genişleyebileceğini hesapladı;<Atif k="lemaitre1927" /> 1929'da Edwin Hubble, uzak gökadaların bizden uzaklaştığını ve uzaklaştıkça daha hızlı kaçtığını ölçtü.<Atif k="hubble1929" /> Evren genişliyordu.
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama bu anlam ayete sonradan mı yüklendi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Herkesin göğü değişmez bir kubbe sandığı bir çağda, göğün genişletildiğini bir insan kendi bilgisiyle nasıl söyleyebilirdi?</MeydanOkuma>

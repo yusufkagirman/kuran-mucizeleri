@@ -1,0 +1,48 @@
+---
+baslik: Yalancı alın
+hook: |
+  Kur'an, yalanı ve günahı başın tam ön kısmına bağladı.
+
+  Alak suresi azgın bir adamı "yalancı, günahkâr nâsiye"sinden yakalanmakla uyarır; nâsiye, başın ön kısmıdır. Bugün karar vermeyi ve davranışı yöneten beyin bölgesinin, prefrontal korteksin, tam alnın arkasında olduğu biliniyor.
+kart: Kur'an, yalanı ve günahı başın tam ön kısmına bağladı.
+konu: [insan]
+sureAdi: Alak
+ayetler:
+  - { sure: 96, ayet: 15 }
+  - { sure: 96, ayet: 16 }
+vurgu: "نَاصِيَةٍۢ كَٰذِبَةٍ خَاطِئَةٍۢ"
+nuzul: { donem: "Mekke dönemi", yil: 612 }
+kesif: { yil: 1868, olay: "John Harlow, alın bölgesi demir çubukla parçalanan Phineas Gage'in kişiliğinin ve karar verme davranışının değiştiğini rapor etti.", kaynak: harlow1868 }
+itirazlar:
+  - itiraz: "Nâsiye alın değil, alnın üstündeki perçem (ön saç) demektir; Diyanet meali de \"perçem\" der."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "\"Perçeminden tutmak\" Arapçada birini boyun eğdirmek anlamında bir deyimdir. Kur'an aynı ifadeyi Hûd 56'da bütün canlılar için kullanır."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Yalan söylemek ve karar vermek yalnız alın lobunda değil, beynin geniş ağlarında işlenir. Ayette yalancı olan kişidir; alın bir mecaz olamaz mı?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    kaynak: damasio1994
+kaynaklar: [harlow1868, damasio1994]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda düşüncenin ve niyetin yeri kalp sayılırdı; başın ön kısmı yalnızca saçın başladığı, insanın onurunu taşıyan yerdi. Peygamberimizi namazdan alıkoymaya çalışan bir adam için Kur'an şöyle dedi:
+
+<AyetParca sure={96} ayet={16} sureAdi="Alak" ar="نَاصِيَةٍۢ كَٰذِبَةٍ خَاطِئَةٍۢ" meal="Yalancı ve günahkar perçeminden cehenneme sürükleriz." vurgu="Yalancı ve günahkar perçeminden" />
+
+Ayet yalanı ve günahı kişinin kendisine değil, başının ön kısmına yükler. Asırlar boyunca bu ifade, Arapçadaki "perçeminden tutup sürüklemek" deyimiyle, yani aşağılanma ve boyun eğdirilmeyle açıklandı.
+
+Başın ön kısmının davranışla ilgisi 1868'de anlaşılmaya başladı. Hekim John Harlow, alın bölgesi demir bir çubukla parçalanan Phineas Gage'in hayatta kaldığını ama kişiliğinin ve karar verme biçiminin değiştiğini rapor etti.<Atif k="harlow1868" /> Bugün planlama ve karar vermenin önemli bir kısmının alın lobunun ön bölümünde yürütüldüğü biliniyor.<Atif k="damasio1994" /> {/* EKİP KONTROLÜ: "yalan alın lobunda üretilir" şeklinde bir genel kabul yok; metin bilinçli olarak "karar verme" ile sınırlı tutuldu. */}
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu, sadece bir Arap deyimi olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Düşüncenin yeri kalp sanılırken, bir insan yalanı ve günahı başın tam ön kısmına bağlamayı nereden düşünebilirdi?</MeydanOkuma>

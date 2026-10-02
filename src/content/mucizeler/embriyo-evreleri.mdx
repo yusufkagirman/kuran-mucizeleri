@@ -1,0 +1,52 @@
+---
+baslik: Ana rahmindeki evreler
+hook: |
+  Kur'an, ana rahmindeki bebeğin gelişimini mikroskoptan bin yıl önce evre evre sıraladı.
+
+  Mü'minûn suresi insanın yaratılışını adım adım anlatır: nutfe, alaka, mudğa, kemik ve kemiği saran et. O gün kimse rahmin içini göremiyordu. Embriyonun evreleri ancak 19. yüzyılda mikroskopla sistemli olarak incelenebildi.
+kart: Kur'an, ana rahmindeki bebeğin gelişimini mikroskoptan bin yıl önce evre evre sıraladı.
+konu: [insan]
+sureAdi: Mü'minûn
+ayetler:
+  - { sure: 23, ayet: 12 }
+  - { sure: 23, ayet: 13 }
+  - { sure: 23, ayet: 14 }
+vurgu: "فَكَسَوْنَا ٱلْعِظَٰمَ لَحْمًۭا"
+nuzul: { donem: "Mekke dönemi", yil: 617 }
+kesif: { yil: 1828, olay: "Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini mikroskop gözlemleriyle sistemli olarak tarif etti.", kaynak: vonbaer1828 }
+itirazlar:
+  - itiraz: "Galenos (2. yüzyıl) ve Hipokrat yazıları da embriyonun meni ve kandan, sonra et ve kemikten oluştuğunu anlatıyordu. Bu sıra o gün zaten bilinmiyor muydu?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Ayet önce kemik, sonra et der. Modern embriyolojide kas ve kemik öncülleri aynı dokudan neredeyse aynı anda oluşur; kemikleşme ise kaslar belirdikten sonra başlar."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    kaynak: orahilly1987
+  - itiraz: "Diyanet dahil birçok meal \"alaka\"yı \"kan pıhtısı\" diye çevirir; embriyo hiçbir evrede kan pıhtısı değildir. \"Sülük gibi tutunan\" anlamı sonradan mı öne çıkarıldı?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Bu iddiayı yaygınlaştıran embriyolog Keith Moore'un çalışması Suudi destekli bir projeydi; Moore sonradan bu konuda konuşmaktan kaçındı."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    kaynak: golden2002
+kaynaklar: [vonbaer1828, orahilly1987, moore1983, golden2002]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda ana rahmi kapalı bir kutuydu. Düşükler dışında kimse bebeğin ilk haftalarını göremez, insanın nasıl şekillendiğini bilemezdi. Kur'an ise bu gelişimi sırasıyla anlattı:
+
+<AyetParca sure={23} ayet={14} sureAdi="Mü'minûn" ar="ثُمَّ خَلَقْنَا ٱلنُّطْفَةَ عَلَقَةًۭ فَخَلَقْنَا ٱلْعَلَقَةَ مُضْغَةًۭ فَخَلَقْنَا ٱلْمُضْغَةَ عِظَٰمًۭا فَكَسَوْنَا ٱلْعِظَٰمَ لَحْمًۭا" meal="Sonra nutfeyi kan pıhtısına çevirdik, kan pıhtısını bir çiğnemlik et yaptık, bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik..." vurgu="bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik" />
+
+Ayetteki *alaka* kelimesi hem "asılı duran, tutunan şey" hem "pıhtılaşmış kan" demektir; *mudğa* ise "çiğnenmiş lokma" anlamına gelir. Asırlar boyunca bu kelimeler, gözle görülemeyen bir sürecin genel bir tarifi olarak okundu.
+
+O süreç ancak mikroskopla görülebildi. 1828'de Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini gözlemleriyle sistemli olarak ortaya koydu.<Atif k="vonbaer1828" /> Bugün insan embriyosunun ilk haftaları evre evre sınıflandırılıyor.<Atif k="orahilly1987" /> {/* EKİP KONTROLÜ: "alaka = tutunan / mudğa = çiğnenmiş görünüm (somitler)" eşleştirmesi modern bir yorumdur, embriyolojide genel kabul değildir. Kemik-et sırası tartışmalı; bkz. itirazlar. */}
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu sıra, o çağın tıbbından alınmış olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Rahmin içini görmenin hiçbir yolu yokken, bir insan bebeğin gelişimini sırasıyla anlatmaya nereden cesaret edebilirdi?</MeydanOkuma>

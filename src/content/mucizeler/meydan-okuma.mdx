@@ -1,0 +1,47 @@
+---
+baslik: Benzerini getirin
+hook: |
+  Kur'an, sözü en büyük sanat sayan bir topluma "benzerini getirin, getiremeyeceksiniz" diye meydan okudu.
+
+  Araplar şiirde dünyanın en iddialı ustalarıydı ve Peygamber'e karşı her yolu denediler. Kur'an onlara kılıç değil tek bir kısa sure istedi. O günden bu yana bu meydan okuma, Kur'an'ın yerine konabilecek bir cevapla kapanmadı.
+kart: Kur'an, söz ustası bir topluma "benzerini getirin, getiremeyeceksiniz" dedi.
+konu: [dil]
+sureAdi: Bakara
+ayetler:
+  - { sure: 2, ayet: 23 }
+  - { sure: 2, ayet: 24 }
+  - { sure: 17, ayet: 88 }
+vurgu: "وَلَن تَفْعَلُوا۟"
+nuzul: { donem: "Medine dönemi", yil: 623 }
+kesif: { yil: 2026, olay: "Meydan okuma ilk dile getirildiği günden bugüne açık duruyor." }
+itirazlar:
+  - itiraz: "\"Benzeri\" ölçüsü belirsiz. Bir metnin Kur'an'a denk olduğuna kim karar verecek? Yanlışlanamayan bir meydan okuma kanıt sayılır mı?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Müseylime'den Ebü'l-Alâ el-Maarrî'ye ve günümüze kadar Kur'an'a benzetilmiş metinler yazıldı. Bunlar neden cevap sayılmıyor?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Homeros ya da Shakespeare gibi her büyük edebî eser için de \"benzeri yazılamaz\" denebilir."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Arapça bilmeyen biri bu üstünlüğü kendisi nasıl değerlendirebilir?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [ibnhisam]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda Araplar için söz, kılıçtan keskin bir silahtı. Panayırlarda şairler yarışır, beğenilen bir şiir bir kabileyi yüceltir, bir hiciv onu yerle bir ederdi. Kur'an bu insanlara en iyi bildikleri alanda seslendi:
+
+<AyetParca sure={2} ayet={24} sureAdi="Bakara" ar="فَأْتُوا۟ بِسُورَةٍۢ مِّن مِّثْلِهِۦ ... فَإِن لَّمْ تَفْعَلُوا۟ وَلَن تَفْعَلُوا۟" meal="...siz de onun benzeri bir sure meydana getirin... Yapamazsanız ki yapamayacaksınız..." vurgu="Yapamazsanız ki yapamayacaksınız" />
+
+Meydan okuma bununla da kalmadı. İsrâ suresinde Kur'an, insanlar ve cinler bir araya gelse de "benzerini ortaya koyamazlar" dedi. Mekke'nin söz ustaları Kur'an'ı dinledi; Velîd b. Muğîre gibi önde gelenleri onun şiire de kâhin sözüne de benzemediğini kabul etti.<Atif k="ibnhisam" /> Yine de Peygamber'e karşı sürgünü ve savaşı seçtiler; tek bir sure yazmayı değil.
+
+Ayetteki "yapamayacaksınız" sözü yalnız o günün Araplarına değil, sonra gelecek herkese söylenmişti. O günden bu yana Kur'an'a benzetilmek istenen metinler yazıldı, ama hiçbiri Kur'an'ın yerine konabilecek bir söz olarak kabul görmedi.
+
+Peki ama bu meydan okuma neye göre ölçülecek?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Hayatı boyunca tek bir şiir söylememiş bir insan, çağının en usta şairlerine "benzerini getiremeyeceksiniz" diyecek cesareti ve bu sözün asırlarca boşa çıkmayacağını nereden bulabilirdi?</MeydanOkuma>

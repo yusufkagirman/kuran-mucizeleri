@@ -1,0 +1,50 @@
+---
+baslik: Firavunun bedeni
+hook: |
+  Kur'an, denizde boğulan Firavun'un bedeninin sonraki nesillere ibret olarak kalacağını söyledi.
+
+  Firavun, Musa'nın peşinden denize girdi ve boğuldu. Ayet ona "senden sonrakilere bir ibret teşkil etmesi için bugün sadece senin cesedini çıkarıp atacağız" diye seslendi. Firavunların bedenlerinin bugün müzelerde durduğu ise ancak 19. yüzyılda ortaya çıktı.
+kart: Kur'an, boğulan Firavun'un bedeninin sonrakilere ibret olarak kalacağını söyledi.
+konu: [tarih]
+sureAdi: Yûnus
+ayetler:
+  - { sure: 10, ayet: 92 }
+vurgu: "نُنَجِّيكَ بِبَدَنِكَ"
+nuzul: { donem: "Mekke dönemi", yil: 620 }
+kesif: { yil: 1881, olay: "Deyrülbahri'deki gizli mezarda II. Ramses dahil firavunların mumyalanmış bedenleri bulundu.", kaynak: maspero1889 }
+itirazlar:
+  - itiraz: "Eski müfessirler ayeti \"Firavun'un cesedi sahile atıldı ki İsrailoğulları onun öldüğünü görsün\" diye anladı. \"Bedeni bugüne kadar korunacak\" anlamı sonradan yüklenmiş olamaz mı?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    kaynak: taberiYunus
+  - itiraz: "Kur'an Firavun'un adını vermez. Müzedeki mumyalardan hiçbirinin Musa'nın karşısındaki firavun olduğu kanıtlanmış değil."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Merneptah'ın mumyasında boğulma izi bulunduğu iddia edildi; bu iddia bilimsel olarak doğrulanmış mı?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    kaynak: smith1912
+  - itiraz: "Bütün firavunlar zaten mumyalanırdı. Bir firavunun bedeninin korunmasında olağanüstü ne var?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [maspero1889, smith1912, taberiYunus]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda Mekke'de Firavun, kitaplardan bilinen bir isimdi. Tevrat onun ordusunun denizde boğulduğunu ve kimsenin kurtulmadığını anlatıyordu; bedenine ne olduğundan söz etmiyordu. Kur'an ise Firavun'a şöyle seslendi:
+
+<AyetParca sure={10} ayet={92} sureAdi="Yûnus" ar="فَٱلْيَوْمَ نُنَجِّيكَ بِبَدَنِكَ لِتَكُونَ لِمَنْ خَلْفَكَ ءَايَةًۭ" meal="Senden sonrakilere bir ibret teşkil etmesi için bugün sadece senin cesedini çıkarıp (sahile) atacağız..." vurgu="senin cesedini çıkarıp (sahile) atacağız" />
+
+Ayet, ruhun değil bedenin kurtarılacağını ve bu bedenin "senden sonrakilere" bir ibret olacağını söylüyordu. Asırlar boyunca bu söz, cesedin sahile vurduğu ve İsrailoğullarının onu gördüğü şeklinde anlaşıldı.<Atif k="taberiYunus" /> Firavunların bedenleri ise kumların altında, kimsenin bilmediği mezarlarda duruyordu.
+
+1881'de Deyrülbahri'deki gizli bir mezarda, aralarında II. Ramses'in de bulunduğu firavunların mumyalanmış bedenleri ortaya çıkarıldı.<Atif k="maspero1889" /> Bu bedenler bugün Kahire'de sergileniyor.
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama bu bedenlerden biri gerçekten Musa'nın karşısındaki firavun mu?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Firavunların mezarlarının yerini kimsenin bilmediği bir çağda, Mekke'de yaşayan bir insan, Firavun'un bedeninin sonraki nesillerin göreceği bir ibret olarak kalacağını nasıl söyleyebilirdi?</MeydanOkuma>

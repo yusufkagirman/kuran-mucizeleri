@@ -1,0 +1,48 @@
+---
+baslik: Güneş ve Ay'ın yörüngeleri
+hook: |
+  Kur'an, Güneş'in de kendi yörüngesinde aktığını söyledi; bilim bunu 1927'de gösterdi.
+
+  Kopernik'ten sonra Güneş bir süre evrenin merkezinde yerinden kıpırdamayan bir yıldız sanıldı. Kur'an ise Güneş'in ve Ay'ın her birinin kendi yörüngesinde yüzdüğünü bildirmişti. Güneş'in de gökada çevresinde dolandığı ancak 20. yüzyılda anlaşıldı.
+kart: Kur'an, Güneş'in de kendi yörüngesinde aktığını söyledi; bilim bunu 1927'de gösterdi.
+konu: [gokyuzu]
+sureAdi: Yâsîn
+ayetler:
+  - { sure: 36, ayet: 38 }
+  - { sure: 36, ayet: 39 }
+  - { sure: 36, ayet: 40 }
+vurgu: "وَكُلٌّۭ فِى فَلَكٍۢ يَسْبَحُونَ"
+nuzul: { donem: "Mekke dönemi", yil: 615 }
+kesif: { yil: 1927, olay: "Oort, yakın yıldızların hareketinden gökadamızın döndüğünü gösterdi; Güneş de gökada merkezi çevresinde bir yörüngede dolanıyordu.", kaynak: oort1927 }
+itirazlar:
+  - itiraz: "7. yüzyılda herkes Güneş'in ve Ay'ın hareket ettiğine inanıyordu; Batlamyus modelinde ikisinin de ayrı birer küresi vardı. Ayet o günün bilgisini tekrar etmiyor mu?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "*Li-müstekarrin lehâ* ifadesi hadiste Güneş'in Arş altında secde ettiği yer olarak açıklanır (Buhârî); bunun gökadadaki yörüngeyle ne ilgisi var?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "\"Yörünge\" kelimesi meale aittir; *müstekar* aslında \"durak, karar yeri\" demektir."
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [oort1927, ibnkesir]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda insanlar Güneş'in her gün gökte yol aldığını görüyor ve onun Dünya'nın çevresinde döndüğüne inanıyordu. Kur'an, Güneş'i ve Ay'ı yan yana anlatırken her birine ayrı bir yol verdi:
+
+<AyetParca sure={36} ayet={40} sureAdi="Yâsîn" ar="لَا ٱلشَّمْسُ يَنۢبَغِى لَهَآ أَن تُدْرِكَ ٱلْقَمَرَ وَلَا ٱلَّيْلُ سَابِقُ ٱلنَّهَارِ ۚ وَكُلٌّۭ فِى فَلَكٍۢ يَسْبَحُونَ" meal="Aya erişmek güneşe düşmez. Gece de gündüzü geçemez. Her biri bir yörüngede yürürler." vurgu="Her biri bir yörüngede yürürler" />
+
+Ayetteki *yesbehûn* fiili "yüzerler" demektir; iki ayet önce de Güneş'in "akıp gittiğini" söyler. Sonraki asırlarda bilim tersine döndü: Kopernik'le Dünya'nın Güneş'in çevresinde döndüğü anlaşılınca Güneş bir süre yerinde duran bir merkez sayıldı. Ayetteki "Güneş de akar" sözü böylece bilimle çelişiyor gibi göründü.
+
+Bu görüntü 1927'de değişti. Jan Oort, yakın yıldızların hareketlerini inceleyerek gökadamızın döndüğünü gösterdi;<Atif k="oort1927" /> Güneş de gökadanın merkezi çevresinde, kendi yörüngesinde akıp gidiyordu.
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama Güneş'in hareket ettiğini zaten herkes söylemiyor muydu?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Bilimin bile Güneş'i yerinde duran bir merkez sandığı asırlardan önce, onun da bir yörüngede yüzdüğünü bir insan nereden bilebilirdi?</MeydanOkuma>

@@ -1,0 +1,46 @@
+---
+baslik: Azalıp artan rahim
+hook: |
+  Kur'an, rahmin durmadan azalıp arttığını söyledi.
+
+  Ra'd suresi, Allah'ın her dişinin taşıdığını ve rahimlerin eksiltip artırdığını bildiğini söyler. Rahmin iç zarının her ay kalınlaşıp döküldüğü ise ancak 20. yüzyılın başında mikroskopla gösterildi.
+kart: Kur'an, rahmin durmadan azalıp arttığını söyledi.
+konu: [insan]
+sureAdi: Ra'd
+ayetler:
+  - { sure: 13, ayet: 8 }
+vurgu: "وَمَا تَغِيضُ ٱلْأَرْحَامُ وَمَا تَزْدَادُ"
+nuzul: { donem: "Medine dönemi (tartışmalı)", yil: 623 }
+kesif: { yil: 1908, olay: "Hitschmann ve Adler, rahim iç zarının her ay düzenli olarak kalınlaşıp döküldüğünü mikroskopla gösterdi.", kaynak: hitschmann1908 }
+itirazlar:
+  - itiraz: "Diyanet dahil klasik mealler bu ifadeyi \"düşürdüğünü ve alıkoyduğunu\" diye çevirir; müfessirler düşük, erken ve geç doğum anlamını verir. Adet döngüsü yorumu sonradan değil mi?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Kadınlar her ay kanamayı zaten görüyordu; rahmin bir şey eksilttiği o gün de bilinmiyor muydu?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+  - itiraz: "Bugün ultrason ve genetik testlerle rahimdeki bebeğin cinsiyeti, hatta hastalıkları biliniyor. \"Rahimdekini bilmek\" artık insana da açık değil mi?"
+    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+kaynaklar: [hitschmann1908, noyes1950]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kaptı; içinde neler olup bittiğini kimse göremezdi. Kur'an ondan şöyle söz etti:
+
+<AyetParca sure={13} ayet={8} sureAdi="Ra'd" ar="ٱللَّهُ يَعْلَمُ مَا تَحْمِلُ كُلُّ أُنثَىٰ وَمَا تَغِيضُ ٱلْأَرْحَامُ وَمَا تَزْدَادُ" meal="Allah her dişinin rahminde taşıdığını, rahimlerin düşürdüğünü ve alıkoyduğunu bilir..." vurgu="rahimlerin düşürdüğünü ve alıkoyduğunu" />
+
+Ayetteki *tağîdu* fiili suyun çekilip azalmasını, *tezdâdu* ise artmasını anlatır. Asırlar boyunca bu ifade düşük, erken doğum ve gebeliğin uzaması diye anlaşıldı.
+
+Rahmin kendi içinde de azalıp arttığı 1908'de görüldü. Viyanalı hekimler Hitschmann ve Adler, rahim iç zarının her ay kalınlaştığını ve sonra döküldüğünü mikroskopla gösterdi.<Atif k="hitschmann1908" /> Bu döngü bugün gün gün izlenebiliyor.<Atif k="noyes1950" /> {/* EKİP KONTROLÜ: Bu mucize yönü (adet döngüsü) modern bir yorumdur; Diyanet meali ve klasik tefsirler düşük/gebelik süresi anlamını verir. Ekip bu yönü onaylamalı ya da "Allah rahimdekini bilir" (bilgi) yönüne çevirmeli. */}
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Rahmin içine bakmanın hiçbir yolu yokken, bir insan onun durmadan azalıp arttığını nereden bilebilirdi?</MeydanOkuma>
