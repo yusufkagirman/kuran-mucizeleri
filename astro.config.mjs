@@ -3,4 +3,5 @@ import mdx from '@astrojs/mdx';
 
 export default defineConfig({
   integrations: [mdx()],
+  server: { port: Number(process.env.PORT) || 4321 },
 });
