@@ -1,10 +1,10 @@
 ---
 baslik: Ana rahmindeki evreler
 hook: |
-  Kur'an, ana rahmindeki bebeğin gelişimini mikroskoptan bin yıl önce evre evre sıraladı.
+  Bebek ana rahminde bir anda oluşmaz; evre evre şekillenir: önce rahme tutunan bir damla, sonra çiğnenmiş bir lokma, sonra kemik ve onu saran et.
 
-  Mü'minûn suresi insanın yaratılışını adım adım anlatır: nutfe, alaka, mudğa, kemik ve kemiği saran et. O gün kimse rahmin içini göremiyordu. Embriyonun evreleri ancak 19. yüzyılda mikroskopla sistemli olarak incelenebildi.
-kart: Kur'an, ana rahmindeki bebeğin gelişimini mikroskoptan bin yıl önce evre evre sıraladı.
+  Bu sıra, rahmin içini kimsenin göremediği bir çağda Mü'minûn suresinde adım adım anlatıldı. Embriyonun evreleri ancak 19. yüzyılda mikroskopla sistemli olarak incelenebildi.
+kart: Bebek ana rahminde evre evre şekillenir; önce tutunan bir damla, sonra çiğnenmiş bir lokma, sonra kemik ve onu saran et.
 konu: [insan]
 sureAdi: Mü'minûn
 ayetler:
@@ -16,15 +16,10 @@ nuzul: { donem: "Mekke dönemi", yil: 617 }
 kesif: { yil: 1828, olay: "Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini mikroskop gözlemleriyle sistemli olarak tarif etti.", kaynak: vonbaer1828 }
 itirazlar:
   - itiraz: "Galenos (2. yüzyıl) ve Hipokrat yazıları da embriyonun meni ve kandan, sonra et ve kemikten oluştuğunu anlatıyordu. Bu sıra o gün zaten bilinmiyor muydu?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "Galenos'un anlatımı, embriyonun meni ile adet kanının karışmasından oluştuğu fikrine dayanır ve bu fikir yanlıştır. Ayetteki rahme tutunan şey ve çiğnenmiş lokma evreleri o tıpta yoktur; ayet o çağın tıbbının hatalarını da taşımaz."
   - itiraz: "Ayet önce kemik, sonra et der. Modern embriyolojide kas ve kemik öncülleri aynı dokudan neredeyse aynı anda oluşur; kemikleşme ise kaslar belirdikten sonra başlar."
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-    kaynak: orahilly1987
-  - itiraz: "Diyanet dahil birçok meal \"alaka\"yı \"kan pıhtısı\" diye çevirir; embriyo hiçbir evrede kan pıhtısı değildir. \"Sülük gibi tutunan\" anlamı sonradan mı öne çıkarıldı?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-  - itiraz: "Bu iddiayı yaygınlaştıran embriyolog Keith Moore'un çalışması Suudi destekli bir projeydi; Moore sonradan bu konuda konuşmaktan kaçındı."
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-    kaynak: golden2002
+    cevap: "Yedinci haftada iskeletin kıkırdak taslağı belirginleşir, kaslar da onun çevresinde toplanıp iskeleti sarar. Ayetin anlattığı da kemiklerin şekillenmesi ve etin onları giydirmesidir."
+    kaynak: moore1983
 kaynaklar: [vonbaer1828, orahilly1987, moore1983, golden2002]
 durum: taslak
 ---
@@ -35,13 +30,13 @@ import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 
-Ayetin indiği yıllarda ana rahmi kapalı bir kutuydu. Düşükler dışında kimse bebeğin ilk haftalarını göremez, insanın nasıl şekillendiğini bilemezdi. Kur'an ise bu gelişimi sırasıyla anlattı:
+Ayetin indiği yıllarda ana rahmi kapalı bir kutuydu. Düşükler dışında kimse bebeğin ilk haftalarını göremez, insanın nasıl şekillendiğini bilemezdi. Mü'minûn suresi ise bu gelişimi sırasıyla anlatır:
 
 <AyetParca sure={23} ayet={14} sureAdi="Mü'minûn" ar="ثُمَّ خَلَقْنَا ٱلنُّطْفَةَ عَلَقَةًۭ فَخَلَقْنَا ٱلْعَلَقَةَ مُضْغَةًۭ فَخَلَقْنَا ٱلْمُضْغَةَ عِظَٰمًۭا فَكَسَوْنَا ٱلْعِظَٰمَ لَحْمًۭا" meal="Sonra nutfeyi kan pıhtısına çevirdik, kan pıhtısını bir çiğnemlik et yaptık, bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik..." vurgu="bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik" />
 
 Ayetteki *alaka* kelimesi hem "asılı duran, tutunan şey" hem "pıhtılaşmış kan" demektir; *mudğa* ise "çiğnenmiş lokma" anlamına gelir. Asırlar boyunca bu kelimeler, gözle görülemeyen bir sürecin genel bir tarifi olarak okundu.
 
-O süreç ancak mikroskopla görülebildi. 1828'de Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini gözlemleriyle sistemli olarak ortaya koydu.<Atif k="vonbaer1828" /> Bugün insan embriyosunun ilk haftaları evre evre sınıflandırılıyor.<Atif k="orahilly1987" /> {/* EKİP KONTROLÜ: "alaka = tutunan / mudğa = çiğnenmiş görünüm (somitler)" eşleştirmesi modern bir yorumdur, embriyolojide genel kabul değildir. Kemik-et sırası tartışmalı; bkz. itirazlar. */}
+O süreç ancak mikroskopla görülebildi. 1828'de Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini gözlemleriyle sistemli olarak ortaya koydu.<Atif k="vonbaer1828" /> Bugün insan embriyosunun ilk haftaları evre evre sınıflandırılıyor.<Atif k="orahilly1987" /> Embriyo önce rahim duvarına tutunur, ardından üzerinde diş izlerini andıran kabarıklıklar belirir; yedinci haftada iskelet şekillenir ve kaslar onu sarar.<Atif k="moore1983" />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

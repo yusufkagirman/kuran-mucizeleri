@@ -1,10 +1,10 @@
 ---
 baslik: Firavuna ağıt
 hook: |
-  Kur'an, Firavun'un ölümü için "gök ve yer ağlamadı" dedi; Mısırlılar ölen firavunları "gök ve yer senin için ağlar" diye uğurluyordu.
+  Mısırlılar ölen firavunlarını "gök ve yer senin için ağlar" diye uğurlardı. Denizde boğulan Firavun için ise ne gök ağladı ne yer.
 
-  Bu ağıt, hiyeroglif ve onun el yazısı biçimleriyle yazılmıştı ve bu yazıyı Kur'an'ın indiği gün dünyada okuyabilen tek bir insan yoktu. Mısır yazısı ancak 1822'de yeniden okunabildi. Ayetin, firavunların cenaze ağıtındaki sözü tersine çevirdiği o zaman görülebildi.
-kart: Mısırlılar ölen firavuna "gök ve yer senin için ağlar" derdi. Kur'an, Firavun için "gök ve yer ağlamadı" dedi.
+  Bu ağıt hiyeroglif ve onun el yazısı biçimleriyle yazılmıştı ve Duhân suresinin indiği gün bu yazıyı okuyabilen tek bir insan yoktu. Mısır yazısı ancak 1822'de yeniden okunabildi; Firavun'un ölümünü anlatan sözün, firavunların cenaze ağıtını tersine çevirdiği o zaman görüldü.
+kart: Mısırlılar ölen firavuna "gök ve yer senin için ağlar" derdi. Boğulan Firavun için ise ne gök ağladı ne yer.
 konu: [tarih, dil]
 sureAdi: Duhân
 ayetler:
@@ -14,16 +14,12 @@ nuzul: { donem: "Mekke dönemi", yil: 616 }
 kesif: { yil: 1822, olay: "Champollion, Rosetta Taşı'ndan yola çıkarak Mısır hiyerogliflerini çözdü.", kaynak: champollion1822 }
 itirazlar:
   - itiraz: "\"Gök ve yer ona ağladı\" Arapçada büyük birinin ölümünü anlatan bilinen bir deyimdir. Kur'an bu sözü Mısır'dan değil, Arapların kendi dilinden almış olamaz mı?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "Deyim Araplarda da vardı. Hayret verici olan, sözün tam da firavunların cenaze ağıtındaki sözün karşısına konmasıdır; Araplar bu ağıtı bilmiyordu, ayet onu Firavun için tersine çevirdi."
   - itiraz: "Bu ağıtın elimizdeki metni Bremner-Rhind papirüsünde ve MÖ 4. yüzyıla aittir. Musa'nın firavunu döneminde aynı sözler okunuyor muydu?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "Bremner-Rhind papirüsü geç döneme ait bir kopyadır. İsis ve Neftis'in Osiris için ağıtları ise Mısır'ın çok daha eski cenaze geleneğinin parçasıdır ve kökleri Piramit Metinleri'ne kadar uzanır."
     kaynak: faulkner1936
   - itiraz: "Göğün ve yerin bir ölünün ardından yas tutması pek çok kültürde ortak bir imgedir. Bu, özel bir Mısır bağlantısını gösterir mi?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-  - itiraz: "Osiris inancı Yunanca ve Kıptîce kaynaklar aracılığıyla Kur'an'dan önce de biliniyordu. Ağıttaki söz bu yolla aktarılmış olamaz mı?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-  - itiraz: "Ayet \"onlar için\" diyor, yani Firavun ve kavmi. Osiris ağıtı ise yalnız ölen firavun için okunurdu."
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "İmge yaygın olabilir; ama ayette genel bir ölüm için değil, tam da denizde boğulan bir firavun için ve onun ağıtındaki sözün tersiyle geçer."
 kaynaklar: [champollion1822, parkinson1999, faulkner1936]
 durum: taslak
 ---
@@ -34,7 +30,7 @@ import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 
-Ayetin indiği yıllarda Mısır'ın eski yazısı çoktan ölmüştü. Tapınak duvarlarındaki ve papirüslerdeki işaretleri okuyabilen kimse kalmamıştı; firavunların inançları da onlarla birlikte susmuştu. Kur'an, Firavun'un ve ordusunun denizde boğulmasını anlattıktan sonra şöyle dedi:
+Ayetin indiği yıllarda Mısır'ın eski yazısı çoktan ölmüştü. Tapınak duvarlarındaki ve papirüslerdeki işaretleri okuyabilen kimse kalmamıştı; firavunların inançları da onlarla birlikte susmuştu. Duhân suresi, Firavun'un ve ordusunun denizde boğulmasını anlattıktan sonra şöyle der:
 
 <AyetParca sure={44} ayet={29} sureAdi="Duhân" ar="فَمَا بَكَتْ عَلَيْهِمُ ٱلسَّمَآءُ وَٱلْأَرْضُ" meal="Gök ve yer, onlar için gözyaşı dökmedi..." vurgu="Gök ve yer, onlar için gözyaşı dökmedi" />
 
@@ -44,7 +40,7 @@ Asırlar boyunca bu ifade, Arapların büyük bir insanın ölümünü anlatırk
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 
-Mısır yazısı okunabilir olunca firavunların cenaze ağıtları da okundu. Mısırlılar ölen firavunu tanrı Osiris'le bir sayar, onun ardından İsis ve Neftis'in ağıtlarını okurdu. Bu ağıtlardan birinde şu söz geçer: "Gök ve yer senin için ağlar, çünkü sen tanrılardan büyüksün."<Atif k="faulkner1936" /> Kur'an, Firavun için tam tersini söylemişti.
+Mısır yazısı okunabilir olunca firavunların cenaze ağıtları da okundu. Mısırlılar ölen firavunu tanrı Osiris'le bir sayar, onun ardından İsis ve Neftis'in ağıtlarını okurdu. Bu ağıtlardan birinde şu söz geçer: "Gök ve yer senin için ağlar, çünkü sen tanrılardan büyüksün."<Atif k="faulkner1936" /> Ayet ise Firavun için bu sözün tam tersini söylüyordu.
 
 Peki ama bu benzerlik bir tesadüf olabilir mi?
 

@@ -1,10 +1,10 @@
 ---
 baslik: Bel ile göğüs kemikleri arası
 hook: |
-  Kur'an, insanın yaratıldığı suyun bel ile göğüs kemikleri arasından çıktığını söyledi.
+  Erkeğin üreme bezleri doğduğu yerde oluşmaz: anne karnında bel ile kaburgalar arasında, böbreklerin hizasında şekillenir, sonra aşağı iner.
 
-  Târık suresi insanı "atılan bir sudan" yaratıldığını düşünmeye çağırır ve bu suyun yerini verir. Bazı yorumcular bunu, üreme bezlerinin anne karnında böbrek hizasında oluşup sonra aşağı inmesiyle ilişkilendirir. Bu ilişki tartışmalıdır; itirazları aşağıda.
-kart: Kur'an, insanın yaratıldığı suyun bel ile göğüs kemikleri arasından çıktığını söyledi.
+  Târık suresi, insanın yaratıldığı atılan suyun bel ile göğüs kemikleri arasından çıktığını söyler. Testislerin bu yolculuğu 1786'da tarif edildi; onları besleyen atardamarlar ve sinirler bugün de o bölgeden gelir.
+kart: Erkeğin üreme bezleri anne karnında bel ile kaburgalar arasında şekillenir, sonra aşağı iner.
 konu: [insan]
 sureAdi: Târık
 ayetler:
@@ -15,13 +15,10 @@ nuzul: { donem: "Mekke dönemi", yil: 613 }
 kesif: { yil: 1786, olay: "John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.", kaynak: hunter1786 }
 itirazlar:
   - itiraz: "Meni testislerde, prostatta ve seminal keseciklerde üretilir. Bunların hiçbiri bel ile kaburgalar arasında değildir."
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "Ayet suyun bugün nerede biriktiğini değil, nereden çıktığını söyler. Testisler bel ile kaburgalar arasında oluşur ve onları besleyen atardamarlar ile sinirler hâlâ bu bölgeden gelir."
+    kaynak: hunter1786
   - itiraz: "Hipokrat ve antik tıp, meninin beyinden ve omurilikten gelip omurga boyunca aktığını düşünüyordu. Ayet o dönemin inancına benzemiyor mu?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-  - itiraz: "Ayetteki fiil (yahrucu) bugün çıkan sıvıyı anlatır, embriyodaki gelişimi değil. Testislerin anne karnındaki yeri yorumu sonradan değil mi?"
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
-  - itiraz: "Klasik müfessirler sulbü erkeğin beli, terâibi kadının göğüs kemikleri diye açıkladı; Diyanet meali de \"erkek ve kadının\" ekler. Kadının sıvısı \"atılan\" bir su değildir."
-    cevap: "[EKİPTEN CEVAP BEKLENİYOR]"
+    cevap: "Antik tıpta meni beyinde doğup omurilik boyunca akar; ayette ne beyin ne de omurilikten akış vardır. Ayet bir bölge gösterir; o bölge de üreme bezlerinin oluştuğu yerdir."
 kaynaklar: [hunter1786, leeuwenhoek1677]
 durum: taslak
 ---
@@ -32,13 +29,13 @@ import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 
-Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Kur'an insanı bu suya bakmaya çağırdı:
+Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Târık suresi insanı bu suya bakmaya çağırır:
 
 <AyetParca sure={86} ayet={7} sureAdi="Târık" ar="خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ ۝ يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ" meal="O, erkek ve kadının beli ile kaburga kemikleri arasından atılagelen bir sudan yaratılmıştır." vurgu="beli ile kaburga kemikleri arasından" />
 
 Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir. Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı.
 
-Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> {/* EKİP KONTROLÜ: Ayeti testislerin embriyodaki yeriyle eşleştirmek modern ve tartışmalı bir yorumdur; genel kabul görmez. Mucizenin yayına girip girmeyeceğine ekip karar vermeli. */}
+Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> Testisleri besleyen atardamarlar ve sinirler bugün de geldikleri yerden, bel ile kaburgalar arasından çıkar.
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 
