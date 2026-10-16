@@ -1,0 +1,51 @@
+---
+// Firavuna ağıt: ağıttaki söz ile ayetteki söz aynı kartın iki yüzü. "Çevir" kartı döndürür; söz tersine döner.
+---
+<figure class="ayna">
+  <div class="kart-ic" aria-live="polite">
+    <blockquote class="yuz on">
+      <p class="etiket">Firavun ağıtı · İsis ve Neftis</p>
+      <p class="soz">«Gök ve yer senin için <mark>ağlar</mark>, çünkü sen tanrılardan büyüksün.»</p>
+    </blockquote>
+    <blockquote class="yuz arka">
+      <p class="etiket">Duhân 44:29 · boğulan Firavun ve ordusu için</p>
+      <p class="ar arapca" lang="ar">فَمَا بَكَتْ عَلَيْهِمُ ٱلسَّمَآءُ وَٱلْأَرْضُ</p>
+      <p class="soz">«Gök ve yer, onlar için <mark>gözyaşı dökmedi</mark>...»</p>
+    </blockquote>
+  </div>
+  <figcaption class="arayuz">
+    <button type="button" aria-pressed="false">Sözü çevir ↻</button>
+    <span class="soluk">Aynı söz, iki yüzü.</span>
+  </figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.ayna').forEach((a) => {
+    const b = a.querySelector('button')!;
+    b.addEventListener('click', () => {
+      const c = a.classList.toggle('cevrik');
+      b.setAttribute('aria-pressed', String(c));
+    });
+  });
+</script>
+
+<style>
+  .ayna { margin: var(--s6) 0; perspective: 1400px; }
+  .kart-ic { display: grid; transform-style: preserve-3d; transition: transform var(--t-bolum) var(--ease-giris); }
+  .cevrik .kart-ic { transform: rotateY(180deg); }
+  .yuz { grid-area: 1 / 1; margin: 0; padding: var(--s5); border-radius: var(--radius); backface-visibility: hidden; -webkit-backface-visibility: hidden; display: flex; flex-direction: column; justify-content: center; min-height: 240px; }
+  .on { background: color-mix(in srgb, var(--konu-tarih) 18%, var(--yuzey)); border: 1px solid var(--konu-tarih); }
+  .arka { transform: rotateY(180deg); background: var(--yuzey); border: 1px solid var(--vurgu); }
+  .soz { font-family: var(--font-baslik); font-size: clamp(1.4rem, 3.4vw, 2rem); line-height: 1.35; margin: 0; }
+  .ar { font-size: clamp(1.6rem, 4vw, 2.2rem); line-height: 1.8; margin: 0 0 var(--s2); text-align: right; }
+  mark { background: linear-gradient(transparent 50%, var(--fosfor) 50%); color: inherit; padding: 0 2px; }
+  figcaption { display: flex; align-items: center; gap: var(--s3); flex-wrap: wrap; margin-top: var(--s3); font-size: var(--fs-sm); }
+  button { font: inherit; font-weight: 600; padding: 8px 20px; border-radius: 999px; border: 0; background: var(--vurgu); color: var(--zemin); cursor: pointer; }
+  @media (prefers-reduced-motion: reduce) {
+    .kart-ic { transition: none; transform: none !important; }
+    .yuz { backface-visibility: visible; transform: none; }
+    .arka { display: none; }
+    .cevrik .on { display: none; }
+    .cevrik .arka { display: flex; }
+  }
+</style>

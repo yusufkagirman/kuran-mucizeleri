@@ -1,0 +1,56 @@
+---
+// Nâsiye: yandan baş şeması. Okur iki katmanı açıp kapatır: ayetteki "nâsiye" (başın ön kısmı) ve
+// alnın arkasındaki prefrontal bölge. İkisi üst üste gelince örtüşme görünür. Temsilî şema, ölçüsüz.
+---
+<section class="nb" aria-label="Başın ön kısmı ve alnın arkasındaki beyin bölgesi">
+  <div class="nb-dugme arayuz" role="group" aria-label="Katmanlar">
+    <button type="button" data-k="nasiye" aria-pressed="true">Nâsiye: başın ön kısmı</button>
+    <button type="button" data-k="pfk" aria-pressed="false">Prefrontal korteks</button>
+  </div>
+  <svg viewBox="0 0 400 360" role="img" aria-label="Yandan insan başı şeması. Birinci katman başın ön kısmını, ikinci katman alnın hemen arkasındaki prefrontal korteksi gösterir; ikisi aynı yere düşer.">
+    <path class="bas" d="M300 330 L300 280 C 340 270, 352 250, 346 228 L 362 214 C 366 208, 362 202, 354 198 L 360 176 C 364 168, 360 160, 352 156 C 356 110, 340 60, 290 36 C 230 8, 140 20, 96 70 C 58 112, 56 180, 84 228 C 100 256, 120 270, 130 300 L 132 330 Z" />
+    <path class="beyin" d="M110 170 C 96 120, 130 60, 200 52 C 270 46, 330 80, 332 140 C 334 176, 318 196, 290 204 C 250 214, 200 214, 160 210 C 130 206, 116 196, 110 170 Z" />
+    <path class="pfk" d="M262 54 C 304 64, 334 96, 332 140 C 331 170, 320 188, 300 198 C 286 186, 270 160, 262 130 C 256 104, 254 76, 262 54 Z" />
+    <path class="nasiye" d="M250 30 C 300 34, 346 76, 354 150 C 356 160, 352 166, 346 166 C 336 120, 310 76, 262 58 C 244 50, 236 36, 250 30 Z" />
+    <circle class="goz" cx="336" cy="200" r="5" />
+    <text class="etk e-nasiye" x="210" y="22">nâsiye</text>
+    <text class="etk e-pfk" x="236" y="236">prefrontal korteks</text>
+  </svg>
+  <p class="nb-not arayuz" aria-live="polite">Ayetin yalanı ve günahı yüklediği yer: başın ön kısmı.</p>
+</section>
+
+<script>
+  const notlar: Record<string, string> = {
+    nasiye: 'Ayetin yalanı ve günahı yüklediği yer: başın ön kısmı.',
+    pfk: 'Planlamayı ve karar vermeyi yürüten bölge: alnın hemen arkası.',
+    ikisi: 'İki katman aynı yere düşer: alnın hemen arkası.',
+  };
+  document.querySelectorAll<HTMLElement>('.nb').forEach((sec) => {
+    const dugmeler = [...sec.querySelectorAll<HTMLButtonElement>('button')];
+    const not = sec.querySelector<HTMLElement>('.nb-not')!;
+    const guncelle = () => {
+      const acik = dugmeler.filter((b) => b.getAttribute('aria-pressed') === 'true').map((b) => b.dataset.k!);
+      dugmeler.forEach((b) => sec.classList.toggle(`g-${b.dataset.k}`, acik.includes(b.dataset.k!)));
+      not.textContent = acik.length === 2 ? notlar.ikisi : acik.length === 1 ? notlar[acik[0]] : 'Bir katman seçin.';
+    };
+    dugmeler.forEach((b) => b.addEventListener('click', () => { b.setAttribute('aria-pressed', String(b.getAttribute('aria-pressed') !== 'true')); guncelle(); }));
+    guncelle();
+  });
+</script>
+
+<style>
+  .nb { margin: var(--s6) 0; padding: var(--s4); border-radius: var(--radius); background: var(--yuzey); border: 1px solid var(--cizgi-renk); }
+  .nb-dugme { display: flex; flex-wrap: wrap; gap: var(--s2); justify-content: center; }
+  .nb-dugme button { font: inherit; font-size: var(--fs-xs); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--soluk); cursor: pointer; transition: all var(--t-mikro); }
+  .nb-dugme button[aria-pressed='true'] { color: var(--vurgu); border-color: var(--vurgu); background: var(--vurgu-zemin); }
+  svg { display: block; width: 100%; max-width: 420px; height: auto; margin: var(--s3) auto 0; }
+  .bas { fill: var(--yuzey-2); stroke: var(--soluk); stroke-width: var(--cizgi); }
+  .beyin { fill: color-mix(in srgb, var(--konu-insan) 14%, var(--yuzey)); stroke: var(--cizgi-renk); stroke-width: var(--cizgi); }
+  .goz { fill: var(--soluk); }
+  .nasiye { fill: var(--fosfor); stroke: var(--uyari); stroke-width: var(--cizgi); }
+  .pfk { fill: color-mix(in srgb, var(--vurgu) 55%, transparent); }
+  .nasiye, .pfk, .etk { opacity: 0; transition: opacity var(--t-bolum) var(--ease-giris); }
+  .etk { font: 600 14px var(--font-arayuz); fill: var(--murekkep); }
+  .g-nasiye .nasiye, .g-nasiye .e-nasiye, .g-pfk .pfk, .g-pfk .e-pfk { opacity: 1; }
+  .nb-not { margin: var(--s2) 0 0; text-align: center; font-size: var(--fs-sm); min-height: 1.6em; }
+</style>

@@ -1,0 +1,103 @@
+---
+// Embriyo evreleri: ayetin sırasıyla adım adım ilerleyen evre gezgini. Her adım: ayetteki kelime (Arapça + okunuş),
+// metindeki anlamı ve o evreyi gösteren gerçek fotoğraf(lar). Görsel alt yazıları yalnız fotoğrafta olanı söyler.
+interface Resim { src: string; alt: string; not: string; kunye: string; url: string }
+interface Evre { ar: string; ad: string; anlam: string; resimler: Resim[] }
+interface Props { evreler: Evre[] }
+const { evreler } = Astro.props;
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<section class="ee" aria-label="Ayetteki sırayla embriyonun evreleri">
+  <div class="ee-yol arayuz" role="tablist" aria-label="Evreler">
+    {evreler.map((e, i) => (
+      <button type="button" role="tab" id={`ee-t${i}`} aria-controls={`ee-p${i}`} aria-selected={i === 0 ? 'true' : 'false'} tabindex={i === 0 ? 0 : -1}>
+        <span class="no">{i + 1}</span>
+        <span class="ar arapca" lang="ar">{e.ar}</span>
+        <span class="ad">{e.ad}</span>
+      </button>
+    ))}
+  </div>
+  {evreler.map((e, i) => (
+    <div class="ee-panel" role="tabpanel" id={`ee-p${i}`} aria-labelledby={`ee-t${i}`} hidden={i !== 0}>
+      <p class="anlam"><span class="ar arapca" lang="ar">{e.ar}</span> {e.anlam}</p>
+      <ul class:list={['res', { cift: e.resimler.length > 1 }]}>
+        {e.resimler.map((r) => (
+          <li>
+            <a href={`${taban}${r.src}`} target="_blank" rel="noopener" aria-label="Görseli büyüt">
+              <img src={`${taban}${r.src}`} alt={r.alt} loading="lazy" decoding="async" />
+            </a>
+            <p class="not">{r.not}</p>
+            <small class="arayuz kunye"><a href={r.url} rel="noopener">{r.kunye}</a></small>
+          </li>
+        ))}
+      </ul>
+    </div>
+  ))}
+  <div class="ee-alt arayuz">
+    <button type="button" class="geri" aria-label="Önceki evre">←</button>
+    <span class="sayac" aria-hidden="true">1 / {evreler.length}</span>
+    <button type="button" class="ileri" aria-label="Sonraki evre">Sonraki evre →</button>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.ee').forEach((sec) => {
+    const sekme = [...sec.querySelectorAll<HTMLButtonElement>('[role=tab]')];
+    const panel = [...sec.querySelectorAll<HTMLElement>('[role=tabpanel]')];
+    const sayac = sec.querySelector<HTMLElement>('.sayac')!;
+    const geri = sec.querySelector<HTMLButtonElement>('.geri')!;
+    const ileri = sec.querySelector<HTMLButtonElement>('.ileri')!;
+    let su = 0;
+    const git = (i: number, odak = false) => {
+      su = (i + sekme.length) % sekme.length;
+      sekme.forEach((s, k) => { s.setAttribute('aria-selected', String(k === su)); s.tabIndex = k === su ? 0 : -1; s.classList.toggle('gecti', k < su); });
+      panel.forEach((p, k) => (p.hidden = k !== su));
+      sayac.textContent = `${su + 1} / ${sekme.length}`;
+      geri.disabled = su === 0;
+      ileri.textContent = su === sekme.length - 1 ? 'Başa dön ↺' : 'Sonraki evre →';
+      if (odak) sekme[su].focus();
+    };
+    sekme.forEach((s, i) => {
+      s.addEventListener('click', () => git(i));
+      s.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowRight') git(su + 1, true);
+        if (e.key === 'ArrowLeft') git(su - 1, true);
+      });
+    });
+    geri.addEventListener('click', () => git(su - 1));
+    ileri.addEventListener('click', () => git(su + 1));
+    git(0);
+  });
+</script>
+
+<style>
+  .ee { margin: var(--s6) 0; padding: var(--s4); border-radius: var(--radius); background: var(--yuzey); border: 1px solid var(--cizgi-renk); }
+  .ee-yol { display: grid; grid-template-columns: repeat(auto-fit, minmax(0, 1fr)); gap: var(--s1); position: relative; }
+  .ee-yol::before { content: ''; position: absolute; left: 6%; right: 6%; top: 22px; height: 2px; background: var(--cizgi-renk); }
+  [role='tab'] { position: relative; display: flex; flex-direction: column; align-items: center; gap: 2px; font: inherit; padding: 0 2px var(--s2); border: 0; background: none; color: var(--soluk); cursor: pointer; min-width: 0; }
+  .no { display: grid; place-items: center; width: 28px; height: 28px; margin: 8px 0 4px; border-radius: 50%; background: var(--zemin); border: 2px solid var(--cizgi-renk); font-size: var(--fs-xs); font-weight: 600; transition: all var(--t-bilesen); }
+  [role='tab'] .ar { font-size: 1.35rem; line-height: 1.4; color: var(--murekkep); }
+  [role='tab'] .ad { font-size: var(--fs-xs); text-align: center; }
+  [role='tab'].gecti .no { border-color: var(--vurgu); color: var(--vurgu); }
+  [role='tab'][aria-selected='true'] { color: var(--vurgu); }
+  [role='tab'][aria-selected='true'] .no { background: var(--vurgu); border-color: var(--vurgu); color: var(--zemin); transform: scale(1.12); }
+  [role='tab']:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 2px; border-radius: 6px; }
+  .ee-panel { margin-top: var(--s3); animation: belir var(--t-bolum) var(--ease-giris); }
+  @keyframes belir { from { opacity: 0; transform: translateY(6px); } }
+  .anlam { font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.4; margin: 0 0 var(--s3); }
+  .anlam .ar { font-size: 1.6rem; color: var(--vurgu); margin-left: var(--s2); }
+  .res { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+  .res.cift { grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); }
+  .res li { margin: 0; min-width: 0; }
+  .res img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); border: 1px solid var(--cizgi-renk); background: var(--yuzey-2); }
+  .res:not(.cift) img { aspect-ratio: auto; max-height: 480px; width: auto; max-width: 100%; margin: 0 auto; }
+  .res .not { margin: var(--s2) 0 0; font-size: var(--fs-sm); line-height: 1.45; }
+  .kunye { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  .kunye a { color: inherit; text-decoration: underline dotted; }
+  .ee-alt { display: flex; align-items: center; justify-content: space-between; margin-top: var(--s3); font-size: var(--fs-xs); color: var(--soluk); }
+  .ee-alt button { font: inherit; padding: 6px 14px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--murekkep); cursor: pointer; }
+  .ee-alt button:hover:not(:disabled) { border-color: var(--vurgu); color: var(--vurgu); }
+  .ee-alt button:disabled { opacity: 0.4; cursor: default; }
+  @media (max-width: 520px) { [role='tab'] .ad { display: none; } }
+  @media (prefers-reduced-motion: reduce) { .ee-panel { animation: none; } }
+</style>

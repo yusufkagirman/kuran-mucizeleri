@@ -1,0 +1,67 @@
+---
+// Benzerini getirin: meydan okumanın muhatabı halka halka genişler. Ortada istenen tek şey: bir sure.
+// Altta meydan okumanın açık durduğu süre, ziyaret yılına göre (JS yoksa derleme yılı).
+interface Props { yil: number; bugun: number }
+const { yil, bugun } = Astro.props;
+const adimlar = [
+  { r: 90, ad: 'Söz ustaları', not: 'İlk muhataplar: sözü kılıçtan keskin sayan, çağının en büyük şairleri.', ayet: 'Bakara 23–24' },
+  { r: 150, ad: 'Bütün insanlar ve cinler', not: 'Hepsi bir araya gelse de benzerini ortaya koyamayacaklar.', ayet: 'İsrâ 88' },
+  { r: 210, ad: 'Sonra gelecek herkes', not: '"Yapamayacaksınız" sözü yalnız o günün Araplarına söylenmedi.', ayet: 'Bakara 24' },
+];
+---
+<section class="halka" data-adim="1" data-yil={yil} aria-label="Meydan okumanın genişleyen muhatabı">
+  <div class="sahne">
+    <svg viewBox="-230 -230 460 460" aria-hidden="true">
+      {adimlar.map((a, i) => <circle r={a.r} class={`h h${i + 1}`} />)}
+      <circle r="44" class="merkez" />
+      <text y="-4" text-anchor="middle" class="m1">bir</text>
+      <text y="18" text-anchor="middle" class="m2">sure</text>
+    </svg>
+  </div>
+  <ol class="liste">
+    {adimlar.map((a, i) => (
+      <li data-i={i + 1}>
+        <span class="no arayuz">{a.ayet}</span>
+        <b>{a.ad}</b>
+        <span>{a.not}</span>
+      </li>
+    ))}
+  </ol>
+  <button type="button" class="arayuz">Meydan okumayı genişlet →</button>
+  <p class="sayac"><span class="sayi">{(bugun - yil).toLocaleString('tr-TR')}</span> <span class="arayuz soluk">yıldır açık: ~{yil}'ten bu yana Kur'an'ın yerine konabilecek bir cevap verilemedi.</span></p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.halka').forEach((s) => {
+    const b = s.querySelector('button')!;
+    const max = s.querySelectorAll('.liste li').length;
+    b.addEventListener('click', () => {
+      const n = (+s.dataset.adim! % max) + 1;
+      s.dataset.adim = String(n);
+      b.textContent = n === max ? 'Baştan izle ↺' : 'Meydan okumayı genişlet →';
+    });
+    const sayi = s.querySelector('.sayi')!;
+    sayi.textContent = (new Date().getFullYear() - +s.dataset.yil!).toLocaleString('tr-TR');
+  });
+</script>
+
+<style>
+  .halka { margin: var(--s6) 0; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--s4) var(--s5); align-items: center; }
+  .sahne { grid-row: span 2; }
+  svg { display: block; width: 100%; max-width: 380px; margin: 0 auto; overflow: visible; }
+  .h { fill: color-mix(in srgb, var(--konu-dil) 10%, transparent); stroke: var(--konu-dil); stroke-width: 2; transform: scale(0.4); opacity: 0; transition: transform var(--t-bolum) var(--ease-giris), opacity var(--t-bolum) var(--ease-giris); }
+  .merkez { fill: var(--vurgu); }
+  .m1, .m2 { fill: var(--zemin); font-family: var(--font-baslik); }
+  .m1 { font-size: 15px; } .m2 { font-size: 21px; font-weight: 700; }
+  [data-adim='1'] .h1, [data-adim='2'] :is(.h1, .h2), [data-adim='3'] .h { transform: none; opacity: 1; }
+  .liste { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+  .liste li { display: flex; flex-direction: column; gap: 2px; padding-left: var(--s3); border-left: 3px solid var(--cizgi-renk); opacity: 0.35; transition: opacity var(--t-bilesen), border-color var(--t-bilesen); font-size: var(--fs-sm); line-height: 1.45; }
+  .liste b { font-family: var(--font-baslik); font-size: var(--fs-lg); }
+  .no { font-size: var(--fs-xs); color: var(--konu-dil); }
+  [data-adim='1'] li[data-i='1'], [data-adim='2'] li:is([data-i='1'], [data-i='2']), [data-adim='3'] li { opacity: 1; border-color: var(--konu-dil); }
+  button { justify-self: start; font: inherit; font-weight: 600; padding: 10px 22px; border-radius: 999px; border: 0; background: var(--vurgu); color: var(--zemin); cursor: pointer; }
+  .sayac { grid-column: 1 / -1; display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; justify-content: center; margin: var(--s4) 0 0; padding-top: var(--s4); border-top: 1px solid var(--cizgi-renk); text-align: center; }
+  .sayi { font: 700 clamp(3rem, 10vw, 5.5rem) / 1 var(--font-baslik); color: var(--konu-dil); font-variant-numeric: tabular-nums; }
+  @media (max-width: 640px) { .halka { grid-template-columns: 1fr; } .sahne { grid-row: auto; } }
+  @media (prefers-reduced-motion: reduce) { .h { transition: none; } }
+</style>

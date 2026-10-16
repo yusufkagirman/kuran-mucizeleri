@@ -29,12 +29,20 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import KovanTahmin from '../../etkilesim/bal-arisi/KovanTahmin.astro';
+import Fiiller from '../../etkilesim/bal-arisi/Fiiller.astro';
 
-Ayetin indiği yıllarda insanlar balı biliyor, arıyı besliyordu; ama kovanın içindeki düzeni ve arıların cinsiyetini kimse bilmiyordu. Nahl suresi arıya verilen emri şöyle anlatır:
+Ayetin indiği yıllarda insanlar balı biliyor, arıyı besliyordu; ama kovanın içindeki düzeni ve arıların cinsiyetini kimse bilmiyordu.
+
+<KovanTahmin />
+
+Nahl suresi arıya verilen emri şöyle anlatır:
 
 <AyetParca sure={16} ayet={68} sureAdi="Nahl" ar="وَأَوْحَىٰ رَبُّكَ إِلَى ٱلنَّحْلِ أَنِ ٱتَّخِذِى مِنَ ٱلْجِبَالِ بُيُوتًۭا ... ثُمَّ كُلِى مِن كُلِّ ٱلثَّمَرَٰتِ فَٱسْلُكِى سُبُلَ رَبِّكِ ذُلُلًۭا" meal='Rabbin bal arısına: "Dağlarda, ağaçlarda ve hazırlanmış kovanlarda yuva edin; sonra her çeşit üründen ye; sonra da Rabbinin işlemen için gösterdiği yollardan yürü" diye öğretti...' vurgu="sonra her çeşit üründen ye; sonra da Rabbinin işlemen için gösterdiği yollardan yürü" />
 
 Türkçede görünmeyen ayrıntı Arapçada açıktır: *ittehızî*, *kulî*, *fesülükî* fiilleri dişil kiptedir. Asırlar boyunca bu, yalnızca bir dil kuralı olarak okundu; çünkü arının kendisi de kovanın başındaki "kral" sanılıyordu.
+
+<Fiiller />
 
 Kovanı yönetenin dişi olduğunu 1609'da İngiliz arıcı Charles Butler yazdı.<Atif k="butler1609" /> Sonraki çalışmalar, balı yapan, kovanı kuran ve çiçekten çiçeğe uçan işçi arıların da dişi olduğunu gösterdi; erkek arılar bal yapmaz.
 

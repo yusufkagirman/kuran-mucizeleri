@@ -1,0 +1,116 @@
+---
+// Göğün genişlemesi, "keşif" bölümü: kaydırıcıyla genişleyen gökada alanı.
+// Her gökada merkezdeki "biz"den uzaklık × ölçek konumunda; uzak olan aynı sürede daha çok yol alır (Hubble 1929, metindeki iddia).
+let t = 7;
+const rnd = () => ((t = (t * 9301 + 49297) % 233280) / 233280);
+const gokadalar = Array.from({ length: 46 }, () => {
+  const a = rnd() * Math.PI * 2, d = 18 + Math.sqrt(rnd()) * 150;
+  return { x: Math.cos(a) * d, y: Math.sin(a) * d * 0.62, rx: 2 + rnd() * 3.5, don: rnd() * 180, op: 0.45 + rnd() * 0.5 };
+});
+// İzlenen üç gökada: yakın, orta, uzak
+const izlenen = [
+  { ad: 'Yakın', x: 34, y: -22 },
+  { ad: 'Orta', x: -70, y: 38 },
+  { ad: 'Uzak', x: 128, y: 56 },
+].map((g) => ({ ...g, d: Math.hypot(g.x, g.y) }));
+const birim = izlenen[0].d;
+---
+<figure class="genisleme" aria-labelledby="gen-baslik">
+  <figcaption id="gen-baslik" class="etiket">Gök genişlerken</figcaption>
+  <svg viewBox="-300 -170 600 340" role="img" aria-label="Ortada 'biz' diye işaretli bir gökada ve çevresinde dağınık gökadalar. Kaydırıcı ilerledikçe bütün gökadalar merkezden ve birbirinden uzaklaşır; uzaktaki gökada aynı sürede daha çok yol alır.">
+    <g class="alan">
+      {gokadalar.map((g) => (
+        <g class="gx" data-x={g.x.toFixed(1)} data-y={g.y.toFixed(1)} transform={`translate(${g.x.toFixed(1)} ${g.y.toFixed(1)})`}>
+          <ellipse rx={g.rx.toFixed(1)} ry={(g.rx * 0.45).toFixed(1)} transform={`rotate(${g.don.toFixed(0)})`} opacity={g.op.toFixed(2)} />
+        </g>
+      ))}
+    </g>
+    <g class="izler">
+      {izlenen.map((g, i) => (
+        <g class="iz" data-x={g.x} data-y={g.y} data-i={i}>
+          <line x1="0" y1="0" x2={g.x} y2={g.y} />
+          <g class="uc" transform={`translate(${g.x} ${g.y})`}>
+            <ellipse rx="6" ry="3" transform="rotate(-20)" />
+            <text y="-11" text-anchor="middle">{g.ad}</text>
+          </g>
+        </g>
+      ))}
+    </g>
+    <g class="biz"><circle r="7" /><text y="22" text-anchor="middle">biz</text></g>
+  </svg>
+
+  <div class="kontrol arayuz">
+    <button type="button" class="oynat" aria-label="Genişlemeyi oynat">▶</button>
+    <label class="kaydir">
+      <span>Zaman</span>
+      <input type="range" min="100" max="200" value="100" step="1" aria-label="Zaman: evrenin ölçeği" />
+    </label>
+  </div>
+
+  <table class="tablo arayuz">
+    <thead><tr><th scope="col">Gökada</th><th scope="col">Uzaklık</th><th scope="col">Bu sürede aldığı yol</th></tr></thead>
+    <tbody>
+      {izlenen.map((g) => (
+        <tr><th scope="row">{g.ad}</th><td class="uz" data-d={(g.d / birim).toFixed(3)}>{(g.d / birim).toLocaleString('tr-TR', { maximumFractionDigits: 1 })}</td><td class="yol">0</td></tr>
+      ))}
+    </tbody>
+  </table>
+  <p class="not arayuz">Kaydırıcıyı sürükleyin: bütün gökadalar birbirinden uzaklaşır; uzaktaki gökada aynı sürede daha çok yol alır.</p>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.genisleme').forEach((kok) => {
+    const giris = kok.querySelector<HTMLInputElement>('input')!;
+    const oynat = kok.querySelector<HTMLButtonElement>('.oynat')!;
+    const gx = [...kok.querySelectorAll<SVGGElement>('.gx')].map((el) => [el, +el.dataset.x!, +el.dataset.y!] as const);
+    const iz = [...kok.querySelectorAll<SVGGElement>('.iz')].map((el) => [el, +el.dataset.x!, +el.dataset.y!] as const);
+    const satir = [...kok.querySelectorAll<HTMLTableCellElement>('.uz')].map((td) => [td, td.nextElementSibling as HTMLElement, +td.dataset.d!] as const);
+    const fmt = (n: number) => n.toLocaleString('tr-TR', { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+
+    function ciz(a: number) {
+      for (const [el, x, y] of gx) el.setAttribute('transform', `translate(${x * a} ${y * a})`);
+      for (const [el, x, y] of iz) {
+        el.querySelector('line')!.setAttribute('x2', String(x * a));
+        el.querySelector('line')!.setAttribute('y2', String(y * a));
+        el.querySelector('.uc')!.setAttribute('transform', `translate(${x * a} ${y * a})`);
+      }
+      for (const [uz, yol, d] of satir) { uz.textContent = fmt(d * a); yol.textContent = (a > 1 ? '+' : '') + fmt(d * (a - 1)); }
+    }
+    giris.addEventListener('input', () => ciz(+giris.value / 100));
+
+    let id = 0;
+    oynat.addEventListener('click', () => {
+      cancelAnimationFrame(id);
+      if (matchMedia('(prefers-reduced-motion: reduce)').matches) { giris.value = giris.value === '200' ? '100' : '200'; ciz(+giris.value / 100); return; }
+      const bas = performance.now();
+      const adim = (s: number) => {
+        const p = Math.min(1, (s - bas) / 3500);
+        const a = 1 + p * p * (3 - 2 * p);
+        giris.value = String(Math.round(a * 100)); ciz(a);
+        if (p < 1) id = requestAnimationFrame(adim);
+      };
+      id = requestAnimationFrame(adim);
+    });
+    ciz(1);
+  });
+</script>
+
+<style>
+  .genisleme { margin: var(--s6) 0; padding: var(--s4); background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); }
+  .etiket { margin-bottom: var(--s3); }
+  svg { display: block; width: 100%; height: auto; background: radial-gradient(ellipse at center, var(--yuzey-2), var(--yuzey) 75%); border-radius: calc(var(--radius) - 4px); }
+  .gx ellipse { fill: var(--konu-gokyuzu); }
+  .iz line { stroke: var(--vurgu); stroke-width: 1.2; stroke-dasharray: 3 4; }
+  .uc ellipse { fill: var(--vurgu); }
+  .uc text, .biz text { font: 600 11px var(--font-arayuz); fill: var(--murekkep); }
+  .biz circle { fill: var(--murekkep); }
+  .kontrol { display: flex; align-items: center; gap: var(--s3); margin-top: var(--s3); }
+  .oynat { flex: none; width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--vurgu); font-size: 1rem; cursor: pointer; }
+  .kaydir { flex: 1; display: flex; align-items: center; gap: var(--s3); font-size: var(--fs-sm); color: var(--soluk); }
+  .kaydir input { flex: 1; accent-color: var(--vurgu); min-height: 44px; }
+  .tablo { width: 100%; margin-top: var(--s3); border-collapse: collapse; font-size: var(--fs-sm); font-variant-numeric: tabular-nums; }
+  .tablo th, .tablo td { text-align: left; padding: 6px var(--s2); border-bottom: 1px solid var(--cizgi-renk); }
+  .tablo thead th { font-weight: 500; color: var(--soluk); font-size: var(--fs-xs); }
+  .tablo .yol { color: var(--vurgu); font-weight: 600; }
+  .not { margin: var(--s3) 0 0; font-size: var(--fs-xs); color: var(--soluk); }
+</style>

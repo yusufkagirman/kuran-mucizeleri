@@ -1,0 +1,101 @@
+---
+// Direksiz gökler: üç adımlı sahne. Tavan ve direkler → direkler kalkar, gök yerinde → görünmeyen bağ (kütleçekim).
+// Metin yalnız sayfadaki anlatıyı tekrar eder; yeni bilgi eklemez.
+const adimlar = [
+  { dugme: 'Tavan', metin: 'Ayetin indiği yıllarda gök, uçlarından bir yere dayanan bir tavan gibi düşünülürdü.' },
+  { dugme: 'Direkleri kaldır', metin: 'Direkleri kaldırın: gök yine yerinde duruyor. Peki onu ne tutuyor?' },
+  { dugme: 'Görünmeyeni göster', metin: "Newton'un gösterdiği görünmeyen bağ: kütleçekim, Ay'ı Dünya'nın, Dünya'yı Güneş'in çevresinde tutar." },
+];
+// Gök bandı: üst eğri Q(40,92)-(300,-10)-(560,92), alt eğri Q(40,132)-(300,50)-(560,132)
+const egri = (x: number, u: number, k: number) => { const t = (x - 40) / 520; return u * (1 - t) ** 2 + 2 * k * t * (1 - t) + u * t * t; };
+const yildiz = [[80, 0.4], [125, 0.7], [170, 0.3], [235, 0.6], [290, 0.35], [340, 0.7], [395, 0.4], [445, 0.65], [490, 0.3], [530, 0.55]]
+  .map(([x, f]) => [x, egri(x, 92, -10) + (egri(x, 132, 50) - egri(x, 92, -10)) * f]);
+const direkler = [70, 210, 390, 530].map((x) => ({ x, ust: egri(x, 132, 50) - 4 }));
+---
+<figure class="direkler" data-adim="0">
+  <div class="dugmeler arayuz" role="group" aria-label="Sahne adımları">
+    {adimlar.map((a, i) => (
+      <button type="button" data-i={i} aria-pressed={i === 0 ? 'true' : 'false'}><span class="no">{i + 1}</span>{a.dugme}</button>
+    ))}
+  </div>
+  <svg viewBox="0 0 600 320" role="img" aria-label="Üç adımlı çizim: önce direklere dayanan bir gök tavanı, sonra direkler kalkınca boşlukta duran gök, en son Güneş, çevresinde dolanan Dünya ve Dünya'nın çevresinde dolanan Ay; aralarında kesikli çizgilerle gösterilen görünmez kütleçekim bağı.">
+    <g class="tavan">
+      <path d="M40 92 Q300 -10 560 92 L560 132 Q300 50 40 132 Z" />
+      {yildiz.map(([x, y]) => <circle cx={x} cy={y.toFixed(1)} r="2.2" class="y" />)}
+    </g>
+    <g class="direk">
+      {direkler.map((d) => <rect x={d.x - 7} y={d.ust.toFixed(1)} width="14" height={(290 - d.ust).toFixed(1)} rx="3" />)}
+    </g>
+    <line x1="20" y1="290" x2="580" y2="290" class="yer" />
+    <text x="300" y="200" text-anchor="middle" class="soru">?</text>
+
+    <g class="bag" transform="translate(300 165)">
+      <circle r="114" class="yorunge" />
+      <circle r="22" class="gunes" />
+      <g class="don">
+        <line x1="22" y1="0" x2="106" y2="0" class="cekim" />
+        <g transform="translate(114 0)">
+          <circle r="30" class="yorunge" />
+          <circle r="9" class="dunya" />
+          <g class="don don-ay">
+            <line x1="9" y1="0" x2="27" y2="0" class="cekim" />
+            <circle cx="30" r="4" class="ay" />
+          </g>
+        </g>
+      </g>
+      <text y="142" text-anchor="middle" class="etk">kütleçekim</text>
+    </g>
+  </svg>
+  <figcaption class="metin" aria-live="polite">{adimlar[0].metin}</figcaption>
+  <script type="application/json" class="veri" set:html={JSON.stringify(adimlar.map((a) => a.metin))} />
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.direkler').forEach((kok) => {
+    const metinler: string[] = JSON.parse(kok.querySelector('.veri')!.textContent!);
+    const yaz = kok.querySelector('.metin')!;
+    const dugmeler = [...kok.querySelectorAll<HTMLButtonElement>('button')];
+    dugmeler.forEach((b) => b.addEventListener('click', () => {
+      const i = +b.dataset.i!;
+      kok.dataset.adim = String(i);
+      dugmeler.forEach((d) => d.setAttribute('aria-pressed', String(d === b)));
+      yaz.textContent = metinler[i];
+    }));
+  });
+</script>
+
+<style>
+  .direkler { margin: var(--s6) 0; padding: var(--s4); background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); }
+  .dugmeler { display: flex; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s3); }
+  button { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s3); border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--murekkep); font: 500 var(--fs-sm) var(--font-arayuz); cursor: pointer; transition: background var(--t-mikro), border-color var(--t-mikro); }
+  button[aria-pressed='true'] { border-color: var(--vurgu); background: var(--vurgu-zemin); }
+  .no { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--yuzey-2); font-size: var(--fs-xs); }
+  button[aria-pressed='true'] .no { background: var(--vurgu); color: var(--zemin); }
+
+  svg { display: block; width: 100%; height: auto; }
+  svg * { transition: opacity var(--t-bolum) var(--ease-giris), transform var(--t-bolum) var(--ease-giris); }
+  .tavan path { fill: var(--konu-gokyuzu); opacity: 0.85; }
+  .tavan .y { fill: var(--zemin); }
+  .direk rect { fill: var(--konu-yeryuzu); }
+  .yer { stroke: var(--konu-yeryuzu); stroke-width: 3; stroke-linecap: round; }
+  .soru { font: 700 64px var(--font-baslik); fill: var(--vurgu); opacity: 0; }
+  .bag { opacity: 0; }
+  .yorunge { fill: none; stroke: var(--cizgi-renk); stroke-width: 1.2; }
+  .gunes { fill: var(--vurgu); }
+  .dunya { fill: var(--konu-gokyuzu); }
+  .ay { fill: var(--soluk); }
+  .cekim { stroke: var(--vurgu); stroke-width: 1.6; stroke-dasharray: 4 5; }
+  .etk { font: 600 13px var(--font-arayuz); fill: var(--vurgu); letter-spacing: 0.06em; }
+  .don { animation: don 18s linear infinite; }
+  .don-ay { animation-duration: 3s; }
+  @keyframes don { to { transform: rotate(360deg); } }
+
+  [data-adim='1'] .direk { opacity: 0; transform: translateY(40px); }
+  [data-adim='1'] .soru { opacity: 1; }
+  [data-adim='2'] .direk, [data-adim='2'] .tavan, [data-adim='2'] .yer { opacity: 0; }
+  [data-adim='2'] .direk { transform: translateY(40px); }
+  [data-adim='2'] .bag { opacity: 1; }
+
+  .metin { margin-top: var(--s3); min-height: 3.2em; font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.4; }
+  @media (prefers-reduced-motion: reduce) { .don { animation: none; } }
+</style>

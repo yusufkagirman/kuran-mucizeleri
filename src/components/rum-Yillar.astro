@@ -1,0 +1,89 @@
+---
+// Rumların zaferi: yıl yıl kaydırıcı. Ayetin verdiği "birkaç yıl" (3–9) bandı şeridin üstünde; olay metinleri yalnız sayfadaki metinden.
+interface Props { nuzul: number; enAz: number; enCok: number }
+const { nuzul, enAz, enCok } = Astro.props;
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const BAS = 614, SON = 628;
+const olaylar: Record<number, string> = {
+  614: 'Bizans Perslere ağır bir yenilgi aldı; Kudüs düştü.',
+  [nuzul]: 'Rûm suresi indi: Rumlar birkaç yıl içinde galip gelecek. Hz. Ebû Bekir bu söze güvenerek bahse girdi.',
+  622: 'Herakleios Perslere karşı ilk büyük zaferini kazandı; savaşın yönü döndü.',
+  624: "Tirmizî'nin aktardığı rivayette Rum zaferinin haberi Bedir gününe denk gelir.",
+  627: "Bizans'ın kesin zaferi 627–628'de geldi.",
+  628: "Bizans'ın kesin zaferi 627–628'de geldi.",
+};
+const yillar = Array.from({ length: SON - BAS + 1 }, (_, i) => BAS + i);
+const veri = yillar.map((y) => ({
+  y,
+  olay: olaylar[y] ?? '',
+  bant: y - nuzul >= enAz && y - nuzul <= enCok,
+  sira: y - nuzul,
+}));
+---
+<section class="yillar" aria-label="Yıl yıl: yenilgiden zafere" data-veri={JSON.stringify(veri)}>
+  <ol class="serit" aria-hidden="true" style={`--n:${yillar.length}`}>
+    {veri.map((v) => <li class:list={{ bant: v.bant, olay: v.olay, ilk: v.bant && v.sira === enAz }} data-y={v.y}><span>{v.y}</span></li>)}
+  </ol>
+  <p class="bant-etiket arayuz" style={`--a:${nuzul + enAz - BAS};--b:${nuzul + enCok - BAS + 1};--n:${yillar.length}`}><span>bid'ı sinîn · {enAz}–{enCok} yıl</span></p>
+  <label class="arayuz">
+    <span class="gorunmez">Yıl seç</span>
+    <input type="range" min={BAS} max={SON} step="1" value={nuzul} />
+  </label>
+  <div class="pano" aria-live="polite">
+    <p class="yil"><span class="y">{nuzul}</span><span class="sira arayuz"></span></p>
+    <p class="olay-metin">{olaylar[nuzul]}</p>
+    <figure class="sikke" hidden>
+      <img src={`${taban}/img/rum/herakleios-solidus.jpg`} alt="Altın bir sikke: önyüzde taçlı, uzun sakallı bir imparator ile yanında daha genç bir figürün büstü." loading="lazy" decoding="async" />
+      <figcaption>
+        Herakleios ve oğlu Herakleios Konstantin'in altın sikkesi (solidus).
+        <small class="arayuz"><a href="https://commons.wikimedia.org/wiki/File:Solidus_of_Heraclius_and_Heraclius_Constantine_MET_sf04-2-821s1.jpg" rel="noopener">Metropolitan Museum of Art, CC0, Wikimedia Commons</a></small>
+      </figcaption>
+    </figure>
+  </div>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.yillar').forEach((s) => {
+    const veri: { y: number; olay: string; bant: boolean; sira: number }[] = JSON.parse(s.dataset.veri!);
+    const input = s.querySelector('input')!;
+    const y = s.querySelector('.y')!, sira = s.querySelector('.sira')!, olay = s.querySelector('.olay-metin')!;
+    const sikke = s.querySelector<HTMLElement>('.sikke')!;
+    const hucre = [...s.querySelectorAll<HTMLElement>('.serit li')];
+    const ciz = () => {
+      const v = veri.find((x) => x.y === +input.value)!;
+      y.textContent = String(v.y);
+      sira.textContent = v.sira < 0 ? 'ayetten önce' : v.sira === 0 ? 'ayetin indiği yıl' : `ayetten sonra ${v.sira}. yıl${v.bant ? ' · ayetin verdiği süre içinde' : ''}`;
+      olay.textContent = v.olay;
+      sikke.hidden = v.y !== 622;
+      hucre.forEach((h) => h.classList.toggle('secili', +h.dataset.y! === v.y));
+    };
+    input.addEventListener('input', ciz);
+    ciz();
+  });
+</script>
+
+<style>
+  .yillar { margin: var(--s6) 0; padding: var(--s4); border-radius: var(--radius); background: var(--yuzey); border: 1px solid var(--cizgi-renk); }
+  .serit { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(var(--n), 1fr); gap: 2px; }
+  .serit li { height: 44px; border-radius: 4px; background: var(--yuzey-2); position: relative; display: flex; align-items: flex-end; justify-content: center; transition: background var(--t-mikro); }
+  .serit li span { font: 0.62rem var(--font-arayuz); color: var(--soluk); padding-bottom: 3px; writing-mode: vertical-rl; transform: rotate(180deg); }
+  .serit li.bant { background: color-mix(in srgb, var(--konu-gelecek) 30%, var(--yuzey-2)); }
+  .serit li.olay::before { content: ''; position: absolute; top: 6px; width: 8px; height: 8px; transform: rotate(45deg); background: var(--konu-tarih); }
+  .serit li.secili { background: var(--vurgu); }
+  .serit li.secili span { color: var(--zemin); }
+  .bant-etiket { position: relative; height: 22px; margin: 4px 0 0; font-size: var(--fs-xs); }
+  .bant-etiket span { position: absolute; left: calc(var(--a) / var(--n) * 100%); width: calc((var(--b) - var(--a)) / var(--n) * 100%); text-align: center; border-top: 2px solid var(--konu-gelecek); color: var(--konu-gelecek); padding-top: 2px; white-space: nowrap; }
+  label { display: block; margin-top: var(--s2); }
+  input { width: 100%; accent-color: var(--vurgu); }
+  .gorunmez { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  .pano { margin-top: var(--s3); min-height: 9rem; }
+  .yil { display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; margin: 0; }
+  .y { font: 700 clamp(2.6rem, 8vw, 4rem) / 1 var(--font-baslik); color: var(--vurgu); font-variant-numeric: tabular-nums; }
+  .sira { font-size: var(--fs-sm); color: var(--soluk); }
+  .olay-metin { margin: var(--s2) 0 0; font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.4; }
+  .sikke { display: grid; grid-template-columns: 96px 1fr; gap: var(--s3); align-items: center; margin: var(--s3) 0 0; font-size: var(--fs-sm); line-height: 1.45; }
+  .sikke[hidden] { display: none; }
+  .sikke img { width: 96px; height: auto; border-radius: 50%; }
+  small { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  small a { color: inherit; text-decoration: underline dotted; }
+</style>

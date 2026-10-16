@@ -1,0 +1,140 @@
+---
+// Güneş ve Ay'ın yörüngeleri: iç içe yörüngeler, üç ölçek. Ay → Dünya'nın çevresi, Dünya → Güneş'in çevresi, Güneş → gökada merkezinin çevresi.
+// Mesafe ve hızlar gösterim içindir, ölçekli değildir. Sayı yalnız sayfanın girişindeki ifadeden alınır.
+const seviyeler = [
+  { ad: 'Ay', metin: "Ay, Dünya'nın çevresinde kendi yörüngesinde akar." },
+  { ad: 'Dünya', metin: "Dünya, Ay'ıyla birlikte Güneş'in çevresinde döner." },
+  { ad: 'Güneş', metin: 'Güneş de bütün gezegenleriyle birlikte gökadanın merkezi çevresinde akıp gider.' },
+];
+let t = 11;
+const rnd = () => ((t = (t * 9301 + 49297) % 233280) / 233280);
+const kol = Array.from({ length: 320 }, (_, i) => {
+  const r = 30 + rnd() ** 0.8 * 400;
+  const a = Math.log(r / 30) * 2.2 + (i % 2) * Math.PI + (rnd() - 0.5) * 0.7;
+  return { x: Math.cos(a) * r, y: Math.sin(a) * r, s: 1.5 + rnd() * 2.5, o: 0.25 + rnd() * 0.5 };
+});
+---
+<figure class="ic-ice" data-seviye="0">
+  <div class="dugmeler arayuz" role="group" aria-label="Ölçek">
+    {seviyeler.map((s, i) => <button type="button" data-i={i} aria-pressed={i === 0 ? 'true' : 'false'}>{s.ad}</button>)}
+  </div>
+  <div class="cerceve">
+    <svg viewBox="-20 -20 40 40" role="img" aria-label="İç içe yörüngeler: Ay Dünya'nın, Dünya Güneş'in, Güneş de gökada merkezinin çevresinde dolanır. Düğmelerle ölçek değişir.">
+      <g class="gokada">
+        <circle r="60" class="merkez" />
+        {kol.map((k) => <circle cx={k.x.toFixed(1)} cy={k.y.toFixed(1)} r={k.s.toFixed(1)} opacity={k.o.toFixed(2)} class="kol" />)}
+      </g>
+      <circle r="300" class="yorunge" vector-effect="non-scaling-stroke" />
+      <circle r="40" class="yorunge y-dunya" vector-effect="non-scaling-stroke" />
+      <circle r="8" class="yorunge y-ay" vector-effect="non-scaling-stroke" />
+      <circle r="3" class="gunes" />
+      <circle r="2.5" class="dunya" />
+      <circle r="1" class="ay" />
+      <text class="et et-gunes" text-anchor="middle">Güneş</text>
+      <text class="et et-dunya" text-anchor="middle">Dünya</text>
+      <text class="et et-ay" text-anchor="middle">Ay</text>
+      <text class="et et-merkez" text-anchor="middle">gökada merkezi</text>
+    </svg>
+    <p class="hiz" aria-hidden="true"><b>800.000+</b> km/sa</p>
+  </div>
+  <figcaption class="metin" aria-live="polite">{seviyeler[0].metin}</figcaption>
+  <p class="not arayuz">Uzaklıklar, boyutlar ve hızlar gösterim içindir; ölçekli değildir.</p>
+  <script type="application/json" class="veri" set:html={JSON.stringify(seviyeler.map((s) => s.metin))} />
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.ic-ice').forEach((kok) => {
+    const svg = kok.querySelector('svg')!;
+    const q = <T extends Element>(s: string) => svg.querySelector<T>(s)!;
+    const [gunes, dunya, ay] = ['.gunes', '.dunya', '.ay'].map((s) => q<SVGCircleElement>(s));
+    const yD = q<SVGCircleElement>('.y-dunya'), yA = q<SVGCircleElement>('.y-ay');
+    const etG = q<SVGTextElement>('.et-gunes'), etD = q<SVGTextElement>('.et-dunya'), etA = q<SVGTextElement>('.et-ay'), etM = q<SVGTextElement>('.et-merkez');
+    const gokada = q<SVGGElement>('.gokada');
+    const metinler: string[] = JSON.parse(kok.querySelector('.veri')!.textContent!);
+    const yaz = kok.querySelector('.metin')!;
+    const dugmeler = [...kok.querySelectorAll<HTMLButtonElement>('button')];
+    const rm = matchMedia('(prefers-reduced-motion: reduce)');
+    const GEN = [44, 130, 820]; // her seviyenin görüş genişliği (dünya birimi)
+
+    let hedef = 0, kaynak = 0, gecis = 1, zaman = 0, onceki = 0, gorunur = true;
+    const konum = (s: number) => {
+      const aG = s / 40, aD = s / 8, aA = s / 1.6;
+      const g = [Math.cos(aG) * 300, Math.sin(aG) * 300];
+      const d = [g[0] + Math.cos(aD) * 40, g[1] + Math.sin(aD) * 40];
+      const a = [d[0] + Math.cos(aA) * 8, d[1] + Math.sin(aA) * 8];
+      return { g, d, a };
+    };
+    const set = (el: Element, o: Record<string, number | string>) => { for (const k in o) el.setAttribute(k, String(o[k])); };
+
+    function ciz(ms: number) {
+      const dt = onceki ? Math.min(50, ms - onceki) / 1000 : 0;
+      onceki = ms;
+      if (!rm.matches) zaman += dt;
+      const { g, d, a } = konum(zaman);
+      // Önceki ve yeni seviyenin (hareket eden) odakları arasında geçiş; genişlik logaritmik
+      const odaklar = [d, g, [0, 0]];
+      gecis = rm.matches ? 1 : Math.min(1, gecis + dt / 1.4);
+      const e = gecis * gecis * (3 - 2 * gecis);
+      const o0 = odaklar[kaynak], o1 = odaklar[hedef];
+      const w = Math.exp(Math.log(GEN[kaynak]) + (Math.log(GEN[hedef]) - Math.log(GEN[kaynak])) * e);
+      const cx = o0[0] + (o1[0] - o0[0]) * e, cy = o0[1] + (o1[1] - o0[1]) * e;
+      const h = w * 0.62;
+      svg.setAttribute('viewBox', `${cx - w / 2} ${cy - h / 2} ${w} ${h}`);
+
+      const r = (taban: number, k = 0.012) => Math.max(taban, w * k);
+      set(gunes, { cx: g[0], cy: g[1], r: r(3) });
+      set(dunya, { cx: d[0], cy: d[1], r: r(1.6, 0.007) });
+      set(ay, { cx: a[0], cy: a[1], r: r(0.42, 0.004) });
+      set(yD, { cx: g[0], cy: g[1] });
+      set(yA, { cx: d[0], cy: d[1] });
+      const fs = w * 0.034;
+      set(etG, { x: g[0], y: g[1] - r(3) - fs * 0.5, 'font-size': fs });
+      set(etD, { x: d[0], y: d[1] + r(1.6, 0.007) + fs * 1.1, 'font-size': fs });
+      set(etA, { x: a[0], y: a[1] - r(0.42, 0.004) - fs * 0.5, 'font-size': fs });
+      set(etM, { x: 0, y: 95, 'font-size': fs });
+      const yakin = (lo: number, hi: number) => Math.max(0, Math.min(1, (hi - w) / (hi - lo)));
+      etA.style.opacity = String(yakin(60, 110));
+      yA.style.opacity = String(yakin(60, 160));
+      etD.style.opacity = String(yakin(200, 500));
+      gokada.style.opacity = String(1 - yakin(250, 600));
+      etM.style.opacity = gokada.style.opacity;
+      if (gorunur) requestAnimationFrame(ciz);
+    }
+
+    dugmeler.forEach((b) => b.addEventListener('click', () => {
+      const yeni = +b.dataset.i!;
+      if (yeni === hedef) return;
+      kaynak = hedef; hedef = yeni; gecis = 0;
+      kok.dataset.seviye = String(hedef);
+      dugmeler.forEach((d) => d.setAttribute('aria-pressed', String(d === b)));
+      yaz.textContent = metinler[hedef];
+    }));
+    // Ekran dışındayken döngüyü durdur
+    new IntersectionObserver(([g]) => {
+      const once = gorunur; gorunur = g.isIntersecting;
+      if (gorunur && !once) { onceki = 0; requestAnimationFrame(ciz); }
+    }).observe(kok);
+    requestAnimationFrame(ciz);
+  });
+</script>
+
+<style>
+  .ic-ice { margin: var(--s6) 0; }
+  .dugmeler { display: inline-flex; border: 1px solid var(--cizgi-renk); border-radius: 999px; padding: 3px; margin-bottom: var(--s3); background: var(--yuzey); }
+  button { min-height: 40px; min-width: 76px; padding: 0 var(--s3); border: 0; border-radius: 999px; background: transparent; color: var(--soluk); font: 500 var(--fs-sm) var(--font-arayuz); cursor: pointer; }
+  button[aria-pressed='true'] { background: var(--murekkep); color: var(--zemin); }
+  .cerceve { position: relative; border-radius: var(--radius); overflow: hidden; background: #070b18; border: 1px solid var(--cizgi-renk); }
+  svg { display: block; width: 100%; height: auto; aspect-ratio: 1 / 0.62; }
+  .yorunge { fill: none; stroke: rgba(200, 210, 240, 0.35); stroke-width: 1; stroke-dasharray: 3 4; }
+  .gunes { fill: #f6c453; }
+  .dunya { fill: #7fa7e6; }
+  .ay { fill: #d8d3c8; }
+  .merkez { fill: #f3dcae; opacity: 0.55; filter: blur(6px); }
+  .kol { fill: #b9c6ea; }
+  .et { fill: #f3ebdd; font-family: var(--font-arayuz); font-weight: 600; }
+  .hiz { position: absolute; right: var(--s3); bottom: var(--s2); margin: 0; color: #f3ebdd; font: 500 var(--fs-sm) var(--font-arayuz); opacity: 0; transform: translateY(6px); transition: opacity var(--t-bolum) var(--ease-giris), transform var(--t-bolum) var(--ease-giris); }
+  .hiz b { font: 700 clamp(1.6rem, 5vw, 2.6rem) var(--font-baslik); color: #f6c453; }
+  [data-seviye='2'] .hiz { opacity: 1; transform: none; }
+  .metin { margin-top: var(--s3); font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.4; min-height: 2.8em; }
+  .not { margin: 0; font-size: var(--fs-xs); color: var(--soluk); }
+</style>

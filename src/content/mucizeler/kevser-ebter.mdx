@@ -28,9 +28,14 @@ durum: taslak
 
 import AyetParca from '../../components/AyetParca.astro';
 import Atif from '../../components/Atif.astro';
-import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Soy from '../../components/kevser-ebter-Soy.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+<Gorsel genis resimler={[
+  { src: '/img/kevser-ebter/kevser-hat.jpg', alt: "Tezhipli bir sayfada Kevser suresi: üstte sure başlığı, altında besmele ve sarı-kahve bulut motifleri arasında üç satır Arapça hat.", baslik: 'Kevser suresinin tamamı', not: "Başlık, besmele ve üç ayet; son satır: «İnne şânieke hüve'l-ebter». Ahmed Neyrizî'nin hattı.", kunye: 'Ahmad Neirizi, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Alkawthar.jpg' },
+]} />
 
 Mekke'de bir adamın adı oğullarıyla yaşardı; oğlu kalmayana *ebter*, yani kökü kesik denirdi. Peygamber'in oğulları küçük yaşta vefat edince Âs b. Vâil gibi düşmanları onu bu sözle andı ve öldüğünde adının da unutulacağını söyledi.<Atif k="uzum2022kevser" /> Kevser suresi bu söz üzerine indi:
 
@@ -40,7 +45,7 @@ O gün Peygamber'in yaşayan bir oğlu yoktu ve olmayacaktı. Bu söz, gözle g�
 
 625'te kızı Fâtıma'nın oğlu Hasan doğdu, ardından Hüseyin geldi.<Atif k="figlali1997hasan" /> Peygamber'in soyu onlardan bugüne kadar sürdü.
 
-<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+<Soy />
 
 Peki ama alay edenlerin de soyu sürmedi mi?
 

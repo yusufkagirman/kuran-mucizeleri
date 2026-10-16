@@ -1,0 +1,79 @@
+---
+// Bulutların ağırlığı: "önce tahmin et, sonra tart" etkileşimi. Okur bir kümülüsün taşıdığı suyu tahmin eder,
+// sonra 500 kare (her kare 1 ton) dolarak cevap belirir. Sayı metinden (usgs2019); burada yalnız sunuluyor.
+const TON = 500;
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<section class="terazi" aria-labelledby="terazi-soru">
+  <figure class="foto">
+    <img src={`${taban}/img/bulutlarin-agirligi/kumulus.jpg`} alt="Mavi gökyüzünde, beyaz ve kabarık, yukarı doğru yükselen büyük bir kümülüs bulutu." loading="lazy" decoding="async" />
+    <figcaption class="arayuz">
+      Kümülüs bulutu
+      <small><a href="https://commons.wikimedia.org/wiki/File:2016_Chmura_Cumulus_congestus_01.jpg" rel="noopener">Foto: Jacek Halicki, CC BY-SA 4.0, Wikimedia Commons</a></small>
+    </figcaption>
+  </figure>
+
+  <form class="soru">
+    <p id="terazi-soru" class="soru-metin">Bir kilometreküplük sıradan bir kümülüs bulutu sizce kaç ton su taşır?</p>
+    <label class="arayuz">
+      <span>Tahmininiz</span>
+      <output name="o">10</output><span>ton</span>
+      <input type="range" name="t" min="0" max="1000" step="10" value="10" aria-describedby="terazi-soru" />
+    </label>
+    <button type="submit" class="arayuz">Tart</button>
+  </form>
+
+  <div class="cevap" hidden>
+    <p class="sonuc"><b>Yaklaşık {TON} ton.</b> <span class="fark arayuz"></span></p>
+    <ol class="kareler" aria-label={`${TON} kare; her kare bir ton suyu gösterir.`}>
+      {Array.from({ length: TON }, (_, i) => <li style={`--i:${i}`}></li>)}
+    </ol>
+    <p class="aciklama arayuz">Her kare 1 ton su. Hesap ve kaynağı aşağıda.</p>
+  </div>
+  <noscript><style is:inline>.terazi .cevap { display: block !important; } .terazi .soru button { display: none; } .terazi .kareler li { opacity: .85 !important; transform: none !important; }</style></noscript>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.terazi').forEach((k) => {
+    const f = k.querySelector('form')!;
+    const t = f.elements.namedItem('t') as HTMLInputElement;
+    const o = f.elements.namedItem('o') as HTMLOutputElement;
+    const cevap = k.querySelector<HTMLElement>('.cevap')!;
+    const fark = k.querySelector<HTMLElement>('.fark')!;
+    t.addEventListener('input', () => (o.value = t.value));
+    f.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const g = +t.value;
+      fark.textContent = g === 500 ? 'Tam isabet.' : `Sizin tahmininiz ${g} tondu.`;
+      cevap.hidden = false;
+      requestAnimationFrame(() => cevap.classList.add('dolu'));
+    });
+  });
+</script>
+
+<style>
+  .terazi { margin: var(--s7) 0; display: grid; gap: var(--s4); }
+  .foto { margin: 0; }
+  .foto img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+  figcaption { display: flex; flex-wrap: wrap; justify-content: space-between; gap: var(--s2); margin-top: var(--s2); font-size: var(--fs-sm); }
+  figcaption small { font-size: 0.7rem; color: var(--soluk); }
+  figcaption a { color: inherit; text-decoration: underline dotted; }
+
+  .soru { display: grid; gap: var(--s3); padding: var(--s4); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); background: var(--yuzey); }
+  .soru-metin { margin: 0 !important; font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.35; }
+  label { display: flex; flex-wrap: wrap; align-items: baseline; gap: var(--s2); font-size: var(--fs-sm); color: var(--soluk); }
+  output { font: 700 var(--fs-xl) var(--font-baslik); color: var(--murekkep); min-width: 3ch; text-align: right; }
+  input[type='range'] { flex: 1 1 100%; accent-color: var(--konu-gokyuzu); min-height: 32px; }
+  button { justify-self: start; padding: var(--s2) var(--s5); border-radius: 999px; border: 0; background: var(--konu-gokyuzu); color: var(--zemin); font-weight: 600; font-size: var(--fs-md); cursor: pointer; }
+  button:focus-visible, input:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+
+  .sonuc { margin: 0 0 var(--s3) !important; font-family: var(--font-baslik); font-size: var(--fs-xl); line-height: 1.2; }
+  .sonuc b { color: var(--konu-gokyuzu); }
+  .fark { display: block; font-size: var(--fs-sm); color: var(--soluk); margin-top: var(--s1); }
+  .kareler { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(50, 1fr); gap: 2px; }
+  @media (max-width: 600px) { .kareler { grid-template-columns: repeat(25, 1fr); } }
+  .kareler li { aspect-ratio: 1; border-radius: 2px; background: var(--konu-gokyuzu); opacity: 0; transform: scale(0.3); transition: opacity 200ms, transform 200ms var(--ease-giris); transition-delay: calc(var(--i) * 3ms); }
+  .dolu .kareler li { opacity: 0.85; transform: none; }
+  .aciklama { margin: var(--s2) 0 0 !important; font-size: var(--fs-xs); color: var(--soluk); }
+  @media (prefers-reduced-motion: reduce) { .kareler li { transition: none; } }
+</style>

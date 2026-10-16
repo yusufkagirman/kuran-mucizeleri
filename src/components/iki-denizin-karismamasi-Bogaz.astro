@@ -1,0 +1,74 @@
+---
+// İki denizin karışmaması: 'harita' = iki denizin buluştuğu yerin uydu görüntüsü (etiketli),
+// 'kesit' = Cebelitarık'ta iki su kütlesinin zıt yönde, üst üste akışını gösteren şematik, ölçeksiz kesit.
+interface Props { bolum: 'harita' | 'kesit' }
+const { bolum } = Astro.props;
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+// Akıntı çizgileri: üstte sağa, altta sola
+const ust = [52, 74, 96];
+const alt = [168, 190, 212];
+---
+{bolum === 'harita' ? (
+  <figure class="harita">
+    <div class="cerceve">
+      <img src={`${taban}/img/iki-denizin-karismamasi/cebelitarik.jpg`} alt="Uydudan Cebelitarık Boğazı: solda geniş Atlas Okyanusu, sağda Akdeniz; üstte İspanya, altta Fas kıyıları; iki deniz ortadaki dar boğazda buluşuyor." loading="lazy" decoding="async" />
+      <span class="etiket arayuz" style="left:18%;top:60%">Atlas Okyanusu</span>
+      <span class="etiket arayuz" style="left:80%;top:58%">Akdeniz</span>
+      <span class="etiket isaret arayuz" style="left:51.5%;top:51%">Cebelitarık Boğazı</span>
+    </div>
+    <figcaption>
+      <span>Atlas Okyanusu ile Akdeniz'in buluştuğu yer, uydudan.</span>
+      <small class="arayuz"><a href="https://commons.wikimedia.org/wiki/File:Strait_of_Gibraltar_(MODIS_2019-03-14).jpg" rel="noopener">MODIS, NASA GSFC, kamu malı, Wikimedia Commons</a></small>
+    </figcaption>
+  </figure>
+) : (
+  <figure class="kesit">
+    <svg viewBox="0 0 600 280" role="img" aria-labelledby="kesit-baslik">
+      <title id="kesit-baslik">Şematik kesit: Atlantik suyu üstte Akdeniz'e doğru, Akdeniz suyu altta Atlantik'e doğru akar; aralarında ince bir geçiş bölgesi vardır.</title>
+      <rect x="0" y="30" width="600" height="96" class="su-ust" />
+      <rect x="0" y="126" width="600" height="14" class="gecis" />
+      <rect x="0" y="140" width="600" height="96" class="su-alt" />
+      <path d="M0 250 C 120 248, 200 236, 260 214 C 290 204, 320 204, 350 214 C 420 238, 500 252, 600 254 L600 280 L0 280 Z" class="taban" />
+      <line x1="0" y1="30" x2="600" y2="30" class="yuzey" />
+      {ust.map((y) => <line x1="20" y1={y} x2="580" y2={y} class="akis sag" />)}
+      {alt.map((y) => <line x1="20" y1={y} x2="580" y2={y} class="akis sol" />)}
+      <text x="12" y="20" class="yon">← Atlantik</text>
+      <text x="588" y="20" text-anchor="end" class="yon">Akdeniz →</text>
+      <text x="300" y="80" text-anchor="middle" class="ad">Atlantik suyu Akdeniz'e akar →</text>
+      <text x="300" y="133" text-anchor="middle" class="ad-k">geçiş bölgesi</text>
+      <text x="300" y="196" text-anchor="middle" class="ad">← Akdeniz suyu Atlantik'e akar</text>
+    </svg>
+    <figcaption>
+      Cebelitarık Boğazı'nın şematik kesiti (ölçeksiz): iki su kütlesi zıt yönde, üst üste akar ve aralarında ince bir geçiş bölgesi kalır.
+    </figcaption>
+  </figure>
+)}
+
+<style>
+  figure { margin: var(--s6) 0; }
+  figcaption { margin-top: var(--s2); font-size: var(--fs-sm); line-height: 1.45; display: grid; gap: 2px; }
+  figcaption small { font-size: 0.7rem; color: var(--soluk); }
+  figcaption a { color: inherit; text-decoration: underline dotted; }
+
+  .cerceve { position: relative; }
+  .cerceve img { display: block; width: 100%; height: auto; border-radius: var(--radius); }
+  .etiket { position: absolute; transform: translate(-50%, -50%); padding: 2px 10px; border-radius: 999px; font-size: clamp(0.7rem, 1.8vw, var(--fs-sm)); font-weight: 600; color: #fff; background: rgb(0 0 0 / 0.45); white-space: nowrap; pointer-events: none; }
+  .etiket.isaret { transform: translate(-50%, -100%); background: var(--vurgu); }
+  .etiket.isaret::after { content: ''; position: absolute; left: 50%; top: 100%; width: 2px; height: 14px; background: var(--vurgu); }
+
+  svg { display: block; width: 100%; height: auto; border-radius: var(--radius); overflow: hidden; }
+  .su-ust { fill: color-mix(in srgb, var(--vurgu-2) 45%, var(--zemin)); }
+  .su-alt { fill: color-mix(in srgb, var(--konu-gokyuzu) 60%, var(--zemin)); }
+  .gecis { fill: color-mix(in srgb, var(--vurgu-2) 25%, var(--konu-gokyuzu) 25%); opacity: 0.7; }
+  .taban { fill: var(--konu-yeryuzu); }
+  .yuzey { stroke: var(--murekkep); stroke-width: var(--cizgi); opacity: 0.4; }
+  .akis { stroke: var(--zemin); stroke-width: 2; stroke-dasharray: 14 22; stroke-linecap: round; opacity: 0.75; }
+  .akis.sag { animation: sag 2.4s linear infinite; }
+  .akis.sol { animation: sol 3.2s linear infinite; }
+  @keyframes sag { to { stroke-dashoffset: -36; } }
+  @keyframes sol { to { stroke-dashoffset: 36; } }
+  .yon { font: 600 13px var(--font-arayuz); fill: var(--soluk); }
+  .ad { font: 600 17px var(--font-arayuz); fill: var(--murekkep); paint-order: stroke; stroke: color-mix(in srgb, var(--zemin) 70%, transparent); stroke-width: 4px; }
+  .ad-k { font: 11px var(--font-arayuz); fill: var(--murekkep); dominant-baseline: middle; }
+  @media (prefers-reduced-motion: reduce) { .akis { animation: none; } }
+</style>

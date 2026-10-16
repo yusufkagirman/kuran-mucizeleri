@@ -1,0 +1,65 @@
+---
+// Firavuna ağıt: Rosetta Taşı'nın üç yazısı. Düğmeye basınca o yazının bölgesi aydınlanır, diğerleri kararır.
+// Bant sınırları görseldeki yazı bölgelerine göre elle ölçüldü (yüzde, yukarıdan).
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const bantlar = [
+  { ad: 'Hiyeroglif', ust: 2, alt: 35 },
+  { ad: 'Demotik', ust: 35, alt: 73 },
+  { ad: 'Yunanca', ust: 73, alt: 100 },
+];
+---
+<section class="rosetta" aria-label="Rosetta Taşı ve hiyerogliflerin çözülmesi">
+  <figure class="tas">
+    <div class="cerceve">
+      <img src={`${taban}/img/firavuna-agit/rosetta.jpg`} alt="Rosetta Taşı: üst kısmında hiyeroglif, ortasında demotik, altında Yunanca satırlar bulunan koyu renkli, kırık bir taş levha." loading="lazy" decoding="async" />
+      {bantlar.map((b, i) => <span class="bant" data-i={i} style={`top:${b.ust}%;height:${b.alt - b.ust}%`} aria-hidden="true"><b>{b.ad}</b></span>)}
+    </div>
+    <div class="dugmeler arayuz" role="group" aria-label="Taştaki yazıyı seç">
+      {bantlar.map((b, i) => <button type="button" data-i={i} aria-pressed="false">{b.ad}</button>)}
+    </div>
+    <figcaption>
+      Rosetta Taşı. Aynı metin üç kez yazılmış: hiyeroglif, demotik ve Yunanca.
+      <small class="arayuz"><a href="https://commons.wikimedia.org/wiki/File:Rosetta_Stone.JPG" rel="noopener">Hans Hillewaert, CC BY-SA 4.0, Wikimedia Commons</a></small>
+    </figcaption>
+  </figure>
+  <figure class="mektup">
+    <img src={`${taban}/img/firavuna-agit/lettre-dacier.jpg`} alt="1822 tarihli Fransızca kitapçık kapağı: Lettre à M. Dacier, par M. Champollion le jeune." loading="lazy" decoding="async" />
+    <figcaption>
+      Champollion'un 1822'de yayımlanan <em>Lettre à M. Dacier</em>'sinin kapağı.
+      <small class="arayuz"><a href="https://commons.wikimedia.org/wiki/File:Lettre_%C3%A0_M._Dacier_(1822).jpg" rel="noopener">Librairie Firmin Didot, kamu malı, Wikimedia Commons</a></small>
+    </figcaption>
+  </figure>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.rosetta').forEach((s) => {
+    const dug = [...s.querySelectorAll<HTMLButtonElement>('button')];
+    const bant = [...s.querySelectorAll<HTMLElement>('.bant')];
+    dug.forEach((d) => d.addEventListener('click', () => {
+      const acik = d.getAttribute('aria-pressed') !== 'true';
+      dug.forEach((x) => x.setAttribute('aria-pressed', String(acik && x === d)));
+      s.classList.toggle('secili', acik);
+      bant.forEach((b) => b.classList.toggle('aktif', acik && b.dataset.i === d.dataset.i));
+    }));
+  });
+</script>
+
+<style>
+  .rosetta { display: grid; grid-template-columns: 3fr 2fr; gap: var(--s4); align-items: start; margin: var(--s6) 0; }
+  figure { margin: 0; }
+  .cerceve { position: relative; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--cizgi-renk); }
+  img { display: block; width: 100%; height: auto; background: var(--yuzey-2); }
+  .mektup img { border-radius: var(--radius); border: 1px solid var(--cizgi-renk); }
+  .bant { position: absolute; left: 0; right: 0; transition: background var(--t-bilesen) var(--ease-giris); }
+  .bant b { position: absolute; right: var(--s2); top: var(--s2); font: 600 var(--fs-xs) var(--font-arayuz); padding: 2px 10px; border-radius: 999px; background: var(--zemin); color: var(--murekkep); opacity: 0; transition: opacity var(--t-bilesen); }
+  .secili .bant { background: rgb(0 0 0 / 0.6); }
+  .secili .bant.aktif { background: transparent; box-shadow: inset 0 0 0 2px var(--vurgu); }
+  .bant.aktif b { opacity: 1; }
+  .dugmeler { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s3); }
+  button { font: inherit; font-size: var(--fs-sm); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--murekkep); cursor: pointer; }
+  button[aria-pressed='true'] { border-color: var(--vurgu); background: var(--vurgu); color: var(--zemin); }
+  figcaption { margin-top: var(--s2); font-size: var(--fs-sm); line-height: 1.5; }
+  small { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  small a { color: inherit; text-decoration: underline dotted; }
+  @media (max-width: 640px) { .rosetta { grid-template-columns: 1fr; } .mektup { max-width: 260px; } }
+</style>

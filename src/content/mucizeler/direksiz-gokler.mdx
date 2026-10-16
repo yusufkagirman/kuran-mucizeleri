@@ -28,6 +28,8 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Direkler from '../../etkilesim/direksiz-gokler/Direkler.astro';
 
 Ayetin indiği yıllarda gök, uçlarından bir yere dayanan büyük bir tavan gibi düşünülürdü; bir tavanın da onu taşıyan bir şeye ihtiyacı vardı. Ra'd suresi ise göklerin yükseltilişini şöyle anlatır:
 
@@ -35,7 +37,14 @@ Ayetin indiği yıllarda gök, uçlarından bir yere dayanan büyük bir tavan g
 
 Ayetteki *bi-ğayri amedin teravnehâ* ifadesi iki türlü okunabilir: "gördüğünüz gibi direksiz" ya da "görebileceğiniz direkler olmadan". İbn Abbas, Mücahid, Hasan ve Katade gibi ilk müfessirler ikinci anlamı tercih edip "göklerin direkleri vardır ama görünmez" dedi.<Atif k="ibnkesir" /> Bu görünmeyen direğin ne olduğunu ise kimse söyleyemedi.
 
+<Direkler />
+
 1687'de Isaac Newton, Ay'ı Dünya'nın, gezegenleri Güneş'in çevresinde tutan kuvvetin görünmeyen kütleçekim olduğunu gösterdi.<Atif k="newton1687" /> Gök cisimleri bir yere dayanmıyor, görünmez bir bağla yerlerinde duruyordu.
+
+<Gorsel duzen="karsilastir" resimler={[
+  { src: '/img/direksiz-gokler/newton-gulle.png', alt: "Newton'un çizimi: tepesinde bir dağ (V) olan küre ve dağdan çıkıp küreyi giderek daha uzaktan dolanan eğri yollar (D, E, F, G), dışta iki büyük çember.", baslik: "Newton'un çizimi", not: 'Dağın tepesinden (V) atılan güllelerin yolları ve küreyi çevreleyen yörüngeler.', kunye: 'Isaac Newton, A Treatise of the System of the World (1728), kamu malı', url: "https://commons.wikimedia.org/wiki/File:Newton%27s_cannonball_cropped.svg" },
+  { src: '/img/direksiz-gokler/ay-dunya-epic.png', alt: "Uzaydan çekilmiş fotoğraf: Ay, bulutlu mavi Dünya'nın önünden geçiyor; arkada siyah boşluk.", baslik: 'Uzaydan bakınca', not: "Ay, Dünya'nın önünden geçerken; ikisinin arasında görünür hiçbir bağ yok.", kunye: 'NASA/NOAA, DSCOVR EPIC, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Dark_side_of_the_Moon.png' },
+]} />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

@@ -1,0 +1,63 @@
+---
+// Firavunun bedeni: yüzeyden gizli mezarın dibine iniş. Her katman bir öncekinden koyu; soldaki ray kaydırdıkça dolar.
+// Görseller public/img/firavunun-bedeni/, künyeler Wikimedia Commons sayfalarından.
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const katmanlar = [
+  {
+    etiket: 'Yüzey', src: '/img/firavunun-bedeni/db320-giris.jpg',
+    alt: 'Kayaya oyulmuş, aşağı doğru kararan dar ve derin bir kuyu ağzı.',
+    not: "Deyrülbahri'deki gizli mezarın (DB320) kayaya oyulmuş giriş kuyusu.",
+    kunye: 'Keith Hazell, CC BY 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:DB320_Tomb.jpg',
+  },
+  {
+    etiket: 'Kuyu ve dehlizler', src: '/img/firavunun-bedeni/maspero-plan.jpg',
+    alt: 'Mezarın kesit ve plan çizimi: solda dik bir kuyu, ondan sağa uzanan uzun dehlizler ve en uçta bir oda.',
+    not: "Gaston Maspero'nun çizdiği mezar planı: dik kuyu (A), dehlizler ve en uçtaki oda (G).",
+    kunye: 'Gaston Maspero, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:TT320_Maspero_interior_diagram.jpg',
+  },
+  {
+    etiket: '1881', src: '/img/firavunun-bedeni/mumyalar-1881.jpg',
+    alt: 'Bir odada yan yana dizilmiş, bir kısmı açık çok sayıda tabut ve sargılı mumya.',
+    not: "Deyrülbahri'deki gizli mezardan çıkarılan tabutlar ve mumyalar.",
+    kunye: 'Émile Brugsch, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:DB320_Mummies_1881.jpg',
+  },
+];
+---
+<section class="kazi" aria-label="Gizli mezara iniş: yüzeyden mezar odasına">
+  <ol>
+    {katmanlar.map((k, i) => (
+      <li class="katman belir" style={`--derin:${(i + 1) * 9}%`}>
+        <span class="ray" aria-hidden="true"></span>
+        <p class="etiket">{k.etiket}</p>
+        <figure>
+          <a href={`${taban}${k.src}`} target="_blank" rel="noopener" aria-label="Görseli büyüt">
+            <img src={`${taban}${k.src}`} alt={k.alt} loading="lazy" decoding="async" />
+          </a>
+          <figcaption>
+            {k.not}
+            <small class="arayuz"><a href={k.url} rel="noopener">{k.kunye}</a></small>
+          </figcaption>
+        </figure>
+      </li>
+    ))}
+  </ol>
+</section>
+
+<style>
+  .kazi { margin: var(--s7) 0; }
+  ol { list-style: none; margin: 0; padding: 0; border-radius: var(--radius); overflow: hidden; border: 1px solid var(--cizgi-renk); }
+  .katman { position: relative; padding: var(--s5) var(--s4) var(--s5) var(--s6); background: color-mix(in srgb, var(--konu-tarih) var(--derin), var(--zemin)); }
+  .katman + .katman { border-top: 1px dashed var(--cizgi-renk); }
+  .ray { position: absolute; left: var(--s4); top: 0; bottom: 0; width: 3px; background: var(--cizgi-renk); }
+  .ray::after { content: ''; position: absolute; inset: 0; background: var(--konu-tarih); transform: scaleY(0); transform-origin: top; transition: transform var(--t-bolum) var(--ease-giris) 150ms; }
+  .gorundu .ray::after { transform: scaleY(1); }
+  .ray::before { content: ''; position: absolute; left: -5px; top: calc(var(--s5) + 6px); width: 13px; height: 13px; transform: rotate(45deg); background: var(--konu-tarih); z-index: 1; }
+  .etiket { margin: 0 0 var(--s3); }
+  figure { margin: 0; }
+  img { display: block; width: 100%; height: auto; border-radius: calc(var(--radius) - 4px); background: var(--yuzey-2); }
+  figcaption { margin-top: var(--s2); font-size: var(--fs-sm); line-height: 1.5; }
+  small { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  small a { color: inherit; text-decoration: underline dotted; }
+  @media (max-width: 560px) { .katman { padding-left: var(--s5); } .ray { left: var(--s3); } }
+  @media (prefers-reduced-motion: reduce) { .ray::after { transform: scaleY(1); transition: none; } }
+</style>

@@ -30,11 +30,18 @@ durum: taslak
 
 import AyetParca from '../../components/AyetParca.astro';
 import Atif from '../../components/Atif.astro';
-import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Yillar from '../../components/rum-Yillar.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 
-Persler Antakya'yı ve Kudüs'ü almış, Bizans'ın hazinesi boşalmış, ordusu dağılmıştı.<Atif k="greatrex2002" /> Mekke müşrikleri bu habere sevinirken Rûm suresi indi:
+Persler Antakya'yı ve Kudüs'ü almış, Bizans'ın hazinesi boşalmış, ordusu dağılmıştı.<Atif k="greatrex2002" />
+
+<Gorsel genis resimler={[
+  { src: '/img/rum/harita-611-624.jpg', alt: "Anadolu, Suriye ve Ermenistan haritası: pembe Bizans toprakları, sarı Sasani toprakları; kırmızı oklar Pers ordularının, mavi oklar Bizans ordularının 611-624 arası yollarını gösteriyor.", baslik: 'Bizans-Pers savaşı, 611–624', not: "Kırmızı oklar Pers, mavi oklar Bizans seferleri; düz mavi çizgi Herakleios'un 622 seferi. Antakya (Antioch) haritanın güneyinde.", kunye: 'Mohammad Adil, CC BY-SA 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Byzantine-persian_campaigns_611-624-mohammad_adil_rais.PNG' },
+]} />
+
+Mekke müşrikleri bu habere sevinirken Rûm suresi indi:
 
 <AyetParca sure={30} ayet={3} sureAdi="Rûm" ar="غُلِبَتِ ٱلرُّومُ ۝ فِىٓ أَدْنَى ٱلْأَرْضِ وَهُم مِّنۢ بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ ۝ فِى بِضْعِ سِنِينَ" meal="Rumlar en yakın bir yerde yenildiler. Onlar bu yenilgilerinden bir kaç yıl sonra galip geleceklerdir." vurgu="bir kaç yıl sonra galip geleceklerdir" />
 
@@ -42,7 +49,9 @@ Ayetteki *bid'ı sinîn* ifadesi üç ile dokuz arası yıl demektir; yani ayet 
 
 Yedi yıl sonra, 622'de İmparator Herakleios Perslere karşı ilk büyük zaferini kazandı ve savaşın yönü döndü.<Atif k="greatrex2002" />
 
-<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} vaat={frontmatter.vaat} />
+Yenilginin yılından kesin zafere kadar, yıl yıl:
+
+<Yillar nuzul={frontmatter.nuzul.yil} enAz={frontmatter.vaat.enAz} enCok={frontmatter.vaat.enCok} />
 
 Peki bu bir tahmin ya da tesadüf olabilir mi?
 

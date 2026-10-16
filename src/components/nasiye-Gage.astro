@@ -1,0 +1,45 @@
+---
+// Nâsiye: Phineas Gage "vaka dosyası". Solda dar portre, sağda çubuğun beyindeki yolu. Alt yazılar yalnız görselde olanı söyler.
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const portre = {
+  src: '/img/nasiye/gage-portre.jpg',
+  alt: 'Eski, sepya tonlu portre fotoğrafı: takım elbiseli genç bir adam oturuyor, bir gözü kapalı, elinde boyu kadar uzun bir demir çubuk tutuyor.',
+  not: 'Phineas Gage, kendisini yaralayan demir çubuğu elinde tutarken.',
+  kunye: 'Fotoğrafçı bilinmiyor, kamu malı, Wikimedia Commons',
+  url: 'https://commons.wikimedia.org/wiki/File:Phineas_Gage_GageMillerPhoto2010-02-17_Unretouched_Color_Cropped.jpg',
+};
+const yol = {
+  src: '/img/nasiye/gage-cubuk-yolu.png',
+  alt: 'Beynin yukarıdan alınmış dört yatay kesit görüntüsü yan yana; her birinde beynin ön kısmında kırmızı bir daire.',
+  not: 'Çubuğun Gage’in beyninden geçtiği yol, dört yatay kesitte kırmızıyla işaretli: hepsinde beynin ön kısmı.',
+  kunye: 'M. Thiebaut de Schotten ve ark., CC BY 4.0, Wikimedia Commons',
+  url: 'https://commons.wikimedia.org/wiki/File:Phineas_Gage_-_trajectory_of_the_bar_through_the_skull.png',
+};
+---
+<figure class="gage">
+  <figcaption class="ust arayuz">Vaka · Phineas Gage · Harlow, 1868</figcaption>
+  <div class="ic">
+    <div class="portre">
+      <a href={`${taban}${portre.src}`} target="_blank" rel="noopener" aria-label="Görseli büyüt"><img src={`${taban}${portre.src}`} alt={portre.alt} loading="lazy" decoding="async" /></a>
+      <p class="not">{portre.not}</p>
+      <small class="arayuz kunye"><a href={portre.url} rel="noopener">{portre.kunye}</a></small>
+    </div>
+    <div class="yol">
+      <a href={`${taban}${yol.src}`} target="_blank" rel="noopener" aria-label="Görseli büyüt"><img src={`${taban}${yol.src}`} alt={yol.alt} loading="lazy" decoding="async" /></a>
+      <p class="not">{yol.not}</p>
+      <small class="arayuz kunye"><a href={yol.url} rel="noopener">{yol.kunye}</a></small>
+    </div>
+  </div>
+</figure>
+
+<style>
+  .gage { margin: var(--s6) 0; padding: var(--s4); border-radius: var(--radius); background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-top: 4px solid var(--vurgu); }
+  .ust { font-size: var(--fs-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); margin-bottom: var(--s3); }
+  .ic { display: grid; grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); gap: var(--s4); align-items: center; }
+  img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--cizgi-renk); background: var(--yuzey-2); }
+  .portre img { filter: sepia(0.15); }
+  .not { margin: var(--s2) 0 0; font-size: var(--fs-sm); line-height: 1.45; }
+  .kunye { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  .kunye a { color: inherit; text-decoration: underline dotted; }
+  @media (max-width: 560px) { .ic { grid-template-columns: 1fr; } .portre { max-width: 260px; margin: 0 auto; } }
+</style>

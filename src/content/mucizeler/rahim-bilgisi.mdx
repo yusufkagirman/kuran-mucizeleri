@@ -27,6 +27,10 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Dongu from '../../components/rahim-bilgisi-Dongu.astro';
+
+<Dongu />
 
 Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kaptı; içinde neler olup bittiğini kimse göremezdi. Ra'd suresi ondan şöyle söz eder:
 
@@ -35,6 +39,8 @@ Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kapt�
 Ayetteki *tağîdu* fiili suyun çekilip azalmasını, *tezdâdu* ise artmasını anlatır. Asırlar boyunca bu ifade düşük, erken doğum ve gebeliğin uzaması diye anlaşıldı.
 
 Rahmin kendi içinde de azalıp arttığı 1908'de görüldü. Viyanalı hekimler Hitschmann ve Adler, rahim iç zarının her ay kalınlaştığını ve sonra döküldüğünü mikroskopla gösterdi.<Atif k="hitschmann1908" /> Bu döngü bugün gün gün izlenebiliyor.<Atif k="noyes1950" />
+
+<Gorsel duzen="karsilastir" baslik="Rahim iç zarı: şemada ve mikroskopta" resimler={[{ src: '/img/rahim-bilgisi/endometrium-dongu.jpg', alt: 'Üç panelli siyah-beyaz şema. A ve B panellerinde hormon eğrileri, C panelinde rahim iç zarının kalınlığı: ilk günlerde incelir, sonra 28. güne doğru giderek kalınlaşır. Altta 1-28 gün numaraları.', baslik: 'Bir aylık döngü', not: 'C panelindeki taralı bant, rahim iç zarının kalınlığı: ayın başında incelir, sonra gün gün kalınlaşır.', kunye: 'DESIDERIUS (Hollandaca Vikipedi), kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Figure_1.1_Endometrium_cyclus.jpg' }, { src: '/img/rahim-bilgisi/endometrium-salgi.jpg', alt: 'Mikroskop görüntüsü: mor-pembe boyalı doku kesiti; üstte zar katmanları, altta kas tabakası. Katmanlar İngilizce/Latince etiketli: stratum compactum, spongiosum, basale ve myometrium.', baslik: 'Salgı evresindeki iç zarın kesiti', not: 'Üstteki katmanlar iç zar, en alttaki kas tabakası rahim duvarı.', kunye: 'Dr. Roshan Nasimudeen, CC BY-SA 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Secretory_endometrium.jpg' }]} />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

@@ -27,14 +27,23 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Genisleme from '../../etkilesim/gogun-genislemesi/Genisleme.astro';
 
 Ayetin indiği yıllarda gök, başın üstünde duran ve hiç değişmeyen bir kubbe olarak bilinirdi. Kur'an göğün kuruluşunu anlatırken bir adım daha attı:
+
+<Gorsel duzen="karsilastir" baslik="Kubbe ve derinlik" resimler={[
+  { src: '/img/gogun-genislemesi/kubbe-gravur.jpg', alt: 'Gravür: yıldızlı gök, yeryüzünün üstüne kapanmış bir kubbe gibi çizilmiş; bir yolcu kubbenin kenarından başını dışarı uzatıyor.', baslik: 'Kubbe', not: "Göğü yeryüzüne kapanmış bir kubbe olarak çizen gravür (Flammarion'un kitabından, 1888).", kunye: "Flammarion, L'atmosphère (1888), sanatçısı bilinmiyor; kamu malı", url: 'https://commons.wikimedia.org/wiki/File:The_Flammarion_Engraving_(ca._1888).jpg' },
+  { src: '/img/gogun-genislemesi/ultra-derin-alan.jpg', alt: 'Kapkara gök zemininde sayısız küçük ışık lekesi; sarmal ve eliptik gökadalar.', baslik: 'Derinlik', not: "Hubble Uzay Teleskobu'nun Ultra Derin Alan görüntüsü: ışık lekelerinin neredeyse hepsi birer gökada.", kunye: 'NASA, ESA, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Hubble_ultra_deep_field.jpg' },
+]} />
 
 <AyetParca sure={51} ayet={47} sureAdi="Zâriyât" ar="وَٱلسَّمَآءَ بَنَيْنَٰهَا بِأَيْي۟دٍۢ وَإِنَّا لَمُوسِعُونَ" meal="Göğü, gücümüzle Biz kurduk; şüphesiz biz onu genişleticiyiz." vurgu="biz onu genişleticiyiz" />
 
 Ayetteki *mûsiûn* kelimesi "genişleten, genişletmekte olan" demektir. Müfessirler bunu çoğunlukla Allah'ın gücünün genişliği diye anladı; bazıları ise göğün genişletilmesi olarak açıkladı.<Atif k="taberi" /> Göğün gerçekten büyüdüğünü gösterecek bir bilgi yoktu; bu yüzden ifade asırlarca bir güç beyanı olarak okundu.
 
 Bilim de uzun süre evreni durağan sandı. 1927'de Lemaître evrenin genişleyebileceğini hesapladı;<Atif k="lemaitre1927" /> 1929'da Edwin Hubble, uzak gökadaların bizden uzaklaştığını ve uzaklaştıkça daha hızlı kaçtığını ölçtü.<Atif k="hubble1929" /> Evren genişliyordu.
+
+<Genisleme />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

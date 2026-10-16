@@ -29,6 +29,8 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Donusum from '../../components/petrol-Donusum.astro';
 
 Ayetin indiği yıllarda petrol, bazı yerlerde topraktan sızan kara ve yapışkan bir sıvı olarak bilinirdi; nereden geldiğini kimse bilmezdi. A'lâ suresi ise yeşil otlağın akıbetini şöyle anlattı:
 
@@ -36,7 +38,13 @@ Ayetin indiği yıllarda petrol, bazı yerlerde topraktan sızan kara ve yapış
 
 Ayetteki *ahvâ* kelimesi "koyu, kararmış" demektir. Müfessirler bunu, yeşil otun kuruyup kararmış bir süprüntüye dönmesi olarak açıkladı;<Atif k="ibnkesir" /> bu, herkesin her yıl gördüğü bir değişimdi.
 
-1936'da Alfred Treibs, petrolün içinde bitkilere yeşil rengini veren klorofilden türemiş moleküller buldu.<Atif k="treibs1936" /> Kapkara petrolün, bir zamanlar yaşamış canlıların kalıntılarından oluştuğu böylece güçlü biçimde desteklendi. Ayetteki yeşilden siyaha dönüşüm, toprağın derinliklerinde de yaşanıyordu.
+1936'da Alfred Treibs, petrolün içinde bitkilere yeşil rengini veren klorofilden türemiş moleküller buldu.<Atif k="treibs1936" />
+
+<Gorsel duzen="tek" resimler={[{ src: "/img/petrol/treibs-klorofil.png", alt: "İki molekülün yapı formülü yan yana. Solda merkezinde vanadyum (V) bulunan, petrolden elde edilen Treibs molekülü; sağda merkezinde magnezyum (Mg) bulunan klorofil. İkisinin halka iskeleti birbirine çok benziyor.", baslik: "Solda petrolden çıkan molekül, sağda klorofil", not: "Merkezdeki metal farklı (V ve Mg); çevresindeki halka yapısı birbirine çok benzer.", kunye: "Smokefoot, kamu malı, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Treibs%26Chlorophyll.png" }]} />
+
+Kapkara petrolün, bir zamanlar yaşamış canlıların kalıntılarından oluştuğu böylece güçlü biçimde desteklendi. Ayetteki yeşilden siyaha dönüşüm, toprağın derinliklerinde de yaşanıyordu.
+
+<Donusum />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

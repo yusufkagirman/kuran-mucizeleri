@@ -28,6 +28,8 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Inis from '../../components/sulb-teraib-Inis.astro';
 
 Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Târık suresi insanı bu suya bakmaya çağırır:
 
@@ -35,7 +37,11 @@ Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, a
 
 Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir. Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı.
 
+<Inis />
+
 Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> Testisleri besleyen atardamarlar ve sinirler bugün de geldikleri yerden, bel ile kaburgalar arasından çıkar.
+
+<Gorsel baslik="1918 tarihli bir anatomi atlasından" resimler={[{ src: '/img/sulb-teraib/testis-inisi-gray.png', alt: 'Yan yana üç siyah-beyaz çizim. Soldakinde testis (t.) karın boşluğunda (a.c.), aşağıyı gösteren bir okla; ortadakinde testis torbaya (s.) inmiş; sağdakinde torbanın içinde, çevresi zarla sarılı.', baslik: 'Testisin inişi, üç adımda', not: 'Soldan sağa: karın boşluğundaki testis (t.) aşağı iner ve torbaya (s.) yerleşir.', kunye: "Henry Gray, Anatomy of the Human Body (1918), Şekil 1015, kamu malı, Wikimedia Commons", url: 'https://commons.wikimedia.org/wiki/File:Diagram_to_illustrate_the_descent_of_the_testis_and_the_manner_in_which_the_tunica_vaginalis_is_derived.png' }]} />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

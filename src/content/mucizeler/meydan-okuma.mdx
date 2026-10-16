@@ -32,6 +32,8 @@ import AyetParca from '../../components/AyetParca.astro';
 import Atif from '../../components/Atif.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Halka from '../../components/meydan-okuma-Halka.astro';
 
 Ayetin indiği yıllarda Araplar için söz, kılıçtan keskin bir silahtı. Panayırlarda şairler yarışır, beğenilen bir şiir bir kabileyi yüceltir, bir hiciv onu yerle bir ederdi. Kur'an bu insanlara en iyi bildikleri alanda seslendi:
 
@@ -39,7 +41,13 @@ Ayetin indiği yıllarda Araplar için söz, kılıçtan keskin bir silahtı. Pa
 
 Meydan okuma bununla da kalmadı. İsrâ suresinde meydan okuma bütün insanlara ve cinlere genişledi: hepsi bir araya gelse de benzerini ortaya koyamayacaklardı. Mekke'nin söz ustaları Kur'an'ı dinledi; Velîd b. Muğîre gibi önde gelenleri onun şiire de kâhin sözüne de benzemediğini kabul etti.<Atif k="ibnhisam" /> Yine de Peygamber'e karşı sürgünü ve savaşı seçtiler; tek bir sure yazmayı değil.
 
+<Halka yil={frontmatter.nuzul.yil} bugun={frontmatter.kesif.yil} />
+
 Ayetteki "yapamayacaksınız" sözü yalnız o günün Araplarına değil, sonra gelecek herkese söylenmişti. O günden bu yana Kur'an'a benzetilmek istenen metinler yazıldı, ama hiçbiri Kur'an'ın yerine konabilecek bir söz olarak kabul görmedi.
+
+<Gorsel genis resimler={[
+  { src: '/img/meydan-okuma/birmingham.jpg', alt: 'Yıpranmış kenarlı iki parşömen yaprak üzerinde kahverengi mürekkeple, köşeli bir yazıyla Arapça satırlar.', baslik: 'Meydan okunan metin', not: "Birmingham Kur'an yazmasından iki yaprak (Birmingham Üniversitesi).", kunye: 'Anonim, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg' },
+]} />
 
 Peki ama bu meydan okuma neye göre ölçülecek?
 

@@ -29,6 +29,8 @@ import Atif from '../../components/Atif.astro';
 import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import IcIceYorunge from '../../etkilesim/gunes-ve-ay-yorungeleri/IcIceYorunge.astro';
 
 Ayetin indiği yıllarda insanlar Güneş'in her gün gökte yol aldığını görüyor ve onun Dünya'nın çevresinde döndüğüne inanıyordu. Kur'an, Güneş'i ve Ay'ı yan yana anlatırken her birine ayrı bir yol verdi:
 
@@ -36,7 +38,15 @@ Ayetin indiği yıllarda insanlar Güneş'in her gün gökte yol aldığını g�
 
 Ayetteki *yesbehûn* fiili "yüzerler" demektir; iki ayet önce de Güneş'in "akıp gittiğini" söyler. Sonraki asırlarda bilim tersine döndü: Kopernik'le Dünya'nın Güneş'in çevresinde döndüğü anlaşılınca Güneş bir süre yerinde duran bir merkez sayıldı. Ayetteki "Güneş de akar" sözü böylece bilimle çelişiyor gibi göründü.
 
+<Gorsel duzen="serit" baslik="Göğün haritası nasıl değişti" resimler={[
+  { src: '/img/gunes-ve-ay-yorungeleri/batlamyus.jpg', alt: 'Renkli 17. yüzyıl gök haritası: ortada Dünya küresi, çevresinde gezegenlerin ve burçların kuşakları.', baslik: 'Dünya merkezde', not: "Batlamyus modeli: Dünya ortada, Ay, Güneş ve gezegenler onun çevresindeki kuşaklarda (Cellarius'un atlası, 1660).", kunye: 'Andreas Cellarius / Jan van Loon, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Cellarius_ptolemaic_system.jpg' },
+  { src: '/img/gunes-ve-ay-yorungeleri/kopernik.jpg', alt: "Eski bir kitap sayfasında iç içe çemberler; ortada 'Sol' (Güneş), çemberlerin üzerinde gezegen adları.", baslik: 'Güneş merkezde', not: "Kopernik'in çizimi (1543): ortada Güneş (Sol), çevresinde gezegenlerin yolları.", kunye: 'Nicolaus Copernicus, De revolutionibus (1543), kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Copernican_heliocentrism_diagram-2.jpg' },
+  { src: '/img/gunes-ve-ay-yorungeleri/samanyolu.jpg', alt: 'Yukarıdan bakılmış sarmal bir gökada çizimi: parlak bir merkez ve çevresinde kıvrılan kollar.', baslik: 'Güneş de yolda', not: 'Gökadamızın sanatçı çizimi: parlak merkez ve çevresindeki sarmal kollar.', kunye: 'NASA/JPL-Caltech/R. Hurt, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Milky_Way_2005.jpg' },
+]} />
+
 Bu görüntü 1927'de değişti. Jan Oort, yakın yıldızların hareketlerini inceleyerek gökadamızın döndüğünü gösterdi;<Atif k="oort1927" /> Güneş de gökadanın merkezi çevresinde, kendi yörüngesinde akıp gidiyordu.
+
+<IcIceYorunge />
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
 

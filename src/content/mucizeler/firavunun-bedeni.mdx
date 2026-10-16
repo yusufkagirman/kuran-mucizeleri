@@ -28,7 +28,8 @@ durum: taslak
 
 import AyetParca from '../../components/AyetParca.astro';
 import Atif from '../../components/Atif.astro';
-import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Kazi from '../../components/firavunun-bedeni-Kazi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 
@@ -38,11 +39,16 @@ Ayetin indiği yıllarda Mekke'de Firavun, kitaplardan bilinen bir isimdi. Tevra
 
 Ayet, ruhun değil bedenin kurtarılacağını ve bu bedenin "senden sonrakilere" bir ibret olacağını söylüyordu. Asırlar boyunca bu söz, cesedin sahile vurduğu ve İsrailoğullarının onu gördüğü şeklinde anlaşıldı.<Atif k="taberiYunus" /> Firavunların bedenleri ise kumların altında, kimsenin bilmediği mezarlarda duruyordu.
 
+<Kazi />
+
 1881'de Deyrülbahri'deki gizli bir mezarda, aralarında II. Ramses'in de bulunduğu firavunların mumyalanmış bedenleri ortaya çıkarıldı.<Atif k="maspero1889" /> Bu bedenler bugün Kahire'de sergileniyor.
 
-<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
-
 Peki ama bu bedenlerden biri gerçekten Musa'nın karşısındaki firavun mu?
+
+<Gorsel duzen="karsilastir" genis baslik="Musa'nın firavunu olarak en çok gösterilen iki isim" resimler={[
+  { src: '/img/firavunun-bedeni/ramses-ii.jpg', alt: "II. Ramses'in mumyalanmış başı, yandan ve önden iki fotoğraf.", baslik: 'II. Ramses', not: 'Mumyanın yandan ve önden görünüşü.', kunye: 'G. Elliot Smith, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Mummy_of_Ramesses_II_-_02_(cropped).JPG' },
+  { src: '/img/firavunun-bedeni/merneptah.jpg', alt: "Merneptah'ın mumyalanmış başı ve göğsü, önden fotoğraf.", baslik: 'Merneptah', not: 'Mumyanın önden görünüşü.', kunye: 'G. Elliot Smith, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Merneptah_mummy_head.png' },
+]} />
 
 <Itirazlar liste={frontmatter.itirazlar} />
 

@@ -1,0 +1,77 @@
+---
+// Petrol: yeşilden kapkaraya dönüşümü okurun kendi elinde süren kaydırıcı. Üç fotoğraf üst üste; kaydırıcı aralarında
+// geçiş yapar, alttaki renk şeridi aynı yolu gösterir. JS yoksa veya hareket azaltılmışsa üçü yan yana durur.
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const evreler = [
+  { src: '/img/petrol/otlak.jpg', ad: 'Yeşil otlak', alt: 'Yemyeşil, gür otlarla kaplı bir otlak; arkada otlayan koyunlar ve bir çiftlik evi.', kunye: 'Pauline Eccles, CC BY-SA 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Lush_green_pasture,_Strangford_-_geograph.org.uk_-_963373.jpg' },
+  { src: '/img/petrol/kuru-ot.jpg', ad: 'Kuruyup kararan ot', alt: 'Tarlada kurumuş, sararıp kahverengileşmiş ot ve saman yığını.', kunye: 'Kambai Akau, CC BY-SA 4.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Dried_grass_in_the_field_near_Katari.jpg' },
+  { src: '/img/petrol/ham-petrol.jpg', ad: 'Ham petrol', alt: 'Bir cam şişe ve küçük bir beherde koyu kahverengi, neredeyse siyah ham petrol.', kunye: 'Nefronus, CC0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Petroleum_sample.jpg' },
+];
+---
+<section class="donusum" aria-label="Yeşilden kapkaraya: otlak, kuru ot ve ham petrol">
+  <div class="sahne">
+    {evreler.map((e, i) => (
+      <figure style={`--i:${i}`}>
+        <img src={`${taban}${e.src}`} alt={e.alt} loading="lazy" decoding="async" />
+        <figcaption class="arayuz"><b>{e.ad}</b><small><a href={e.url} rel="noopener">{e.kunye}</a></small></figcaption>
+      </figure>
+    ))}
+  </div>
+  <label class="kaydir arayuz">
+    <span class="gorunmez">Dönüşümü ilerletin</span>
+    <input type="range" min="0" max="200" value="0" aria-valuetext={evreler[0].ad} />
+  </label>
+  <ol class="serit arayuz" aria-hidden="true">
+    {evreler.map((e) => <li>{e.ad}</li>)}
+  </ol>
+</section>
+
+<script>
+  const ads = ['Yeşil otlak', 'Kuruyup kararan ot', 'Ham petrol'];
+  document.querySelectorAll<HTMLElement>('.donusum').forEach((k) => {
+    if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    const r = k.querySelector('input')!;
+    const f = [...k.querySelectorAll<HTMLElement>('figure')];
+    k.classList.add('canli');
+    const ciz = () => {
+      const p = +r.value / 100; // 0..2
+      f.forEach((el, i) => {
+        const o = Math.max(0, 1 - Math.abs(p - i));
+        el.style.opacity = String(o);
+        el.style.pointerEvents = o > 0.5 ? 'auto' : 'none';
+        el.style.setProperty('--c', o > 0.5 ? '1' : '0');
+      });
+      k.style.setProperty('--p', String(p / 2));
+      r.setAttribute('aria-valuetext', ads[Math.round(p)]);
+    };
+    r.addEventListener('input', ciz);
+    ciz();
+  });
+</script>
+
+<style>
+  .donusum { margin: var(--s7) 0; }
+  .sahne { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: var(--s3); }
+  figure { margin: 0; }
+  img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: var(--radius); }
+  figcaption { display: grid; gap: 2px; margin-top: var(--s2); font-size: var(--fs-sm); }
+  figcaption small { font-size: 0.7rem; color: var(--soluk); }
+  figcaption a { color: inherit; text-decoration: underline dotted; }
+  .kaydir, .serit { display: none; }
+
+  /* Canlı mod: üç foto üst üste, kaydırıcıyla geçiş */
+  .canli .sahne { display: grid; grid-template-columns: 1fr; }
+  .canli figure { grid-area: 1 / 1; transition: opacity var(--t-mikro) linear; }
+  .canli figcaption { opacity: var(--c, 0); transition: opacity var(--t-mikro); position: absolute; left: var(--s3); bottom: var(--s3); padding: var(--s1) var(--s3); border-radius: 999px; background: color-mix(in srgb, var(--zemin) 85%, transparent); }
+  .canli figure { position: relative; }
+  .canli .kaydir { display: block; margin-top: var(--s4); }
+  .canli input { width: 100%; min-height: 32px; accent-color: color-mix(in srgb, #4E7A3A calc((1 - var(--p, 0)) * 100%), #1a1410); }
+  .canli .serit {
+    display: flex; justify-content: space-between; list-style: none; margin: var(--s2) 0 0; padding: var(--s2) var(--s3) 0;
+    font-size: var(--fs-xs); color: var(--soluk);
+    border-top: 6px solid transparent;
+    border-image: linear-gradient(90deg, #4E8A2E, #A88A4A 50%, #1a1410) 1;
+  }
+  .gorunmez { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); }
+  input:focus-visible { outline: 2px solid var(--vurgu); outline-offset: 3px; }
+</style>

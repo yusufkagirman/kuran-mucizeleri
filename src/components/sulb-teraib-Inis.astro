@@ -1,0 +1,83 @@
+---
+// Sulb ve terâib: yandan bakış şeması. Kaydırıcı testisi böbrek hizasından aşağı indirir; besleyen atardamar
+// çıktığı yerde (bel ile kaburgalar arası) kalır ve uzar. Ölçüsüz, temsilî şema; etiketler metindeki kelimeler.
+const kaburga = [0, 1, 2, 3, 4, 5, 6];
+---
+<section class="si" aria-label="Testisin anne karnındaki inişi, yandan şema">
+  <svg viewBox="0 0 420 520" role="img" aria-label="Yandan gövde şeması: arkada omurga (sulb), önde göğüs kemikleri (terâib). Testis anne karnında böbreğin hizasında, bel ile kaburgalar arasında oluşur ve aşağı iner; onu besleyen atardamar başladığı yerden uzayarak peşinden gider.">
+    <defs>
+      <linearGradient id="si-bolge" x1="0" x2="1">
+        <stop offset="0" stop-color="var(--vurgu)" stop-opacity="0.22" />
+        <stop offset="1" stop-color="var(--vurgu)" stop-opacity="0.05" />
+      </linearGradient>
+    </defs>
+    <path class="govde" d="M110 30 C 80 120, 70 220, 90 330 C 100 390, 120 430, 160 450 L 300 450 C 330 420, 335 360, 330 300 C 340 200, 330 110, 300 30 Z" />
+    <path class="torba" d="M212 448 C 206 490, 254 500, 250 448" />
+    <rect class="bolge" x="120" y="200" width="200" height="90" rx="12" fill="url(#si-bolge)" />
+    <g class="omurga">
+      {Array.from({ length: 13 }, (_, i) => <rect x="108" y={40 + i * 30} width="26" height="24" rx="5" />)}
+    </g>
+    <g class="kaburga">
+      {kaburga.map((i) => <path d={`M134 ${60 + i * 24} C 200 ${40 + i * 24}, 290 ${70 + i * 26}, 306 ${110 + i * 26}`} />)}
+    </g>
+    <line class="aort" x1="146" y1="40" x2="146" y2="420" />
+    <ellipse class="bobrek" cx="168" cy="250" rx="16" ry="28" />
+    <path class="damar" d="M146 240 L 200 250" />
+    <ellipse class="testis" cx="200" cy="250" rx="10" ry="14" />
+    <path class="iz" d="M200 250 C 210 330, 220 400, 230 472" />
+    <text x="96" y="22" class="etk sol">sulb · bel, omurga</text>
+    <text x="320" y="96" class="etk">terâib</text>
+    <text x="320" y="112" class="etk alt">göğüs kemikleri</text>
+    <text x="300" y="196" text-anchor="end" class="etk vurgu">bel ile kaburgalar arası</text>
+    <text x="156" y="300" class="etk kucuk">böbrek</text>
+  </svg>
+  <div class="si-kontrol arayuz">
+    <span>anne karnında</span>
+    <label><span class="gorunmez">Testisin inişi</span><input type="range" min="0" max="100" value="0" /></label>
+    <span>doğuma doğru</span>
+  </div>
+  <p class="si-not arayuz" aria-live="polite">Testis böbreğin hizasında oluşur.</p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.si').forEach((sec) => {
+    const r = sec.querySelector<HTMLInputElement>('input')!;
+    const t = sec.querySelector<SVGEllipseElement>('.testis')!;
+    const d = sec.querySelector<SVGPathElement>('.damar')!;
+    const not = sec.querySelector<HTMLElement>('.si-not')!;
+    // İz eğrisi üzerinde konum (metindeki sırayla: oluşur → aşağı iner).
+    const iz = sec.querySelector<SVGPathElement>('.iz')!;
+    const L = iz.getTotalLength();
+    const ciz = () => {
+      const p = +r.value / 100;
+      const n = iz.getPointAtLength(L * p);
+      t.setAttribute('cx', String(n.x)); t.setAttribute('cy', String(n.y));
+      d.setAttribute('d', `M146 240 C 175 ${250 + p * 60}, ${n.x - 10} ${n.y - 80 * p}, ${n.x} ${n.y}`);
+      not.textContent = p < 0.15 ? 'Testis böbreğin hizasında oluşur.' : p < 0.95 ? 'Doğuma doğru aşağı iner; atardamar geldiği yerden peşinden uzanır.' : 'Atardamar bugün de bel ile kaburgalar arasından çıkar.';
+    };
+    r.addEventListener('input', ciz); ciz();
+  });
+</script>
+
+<style>
+  .si { margin: var(--s6) auto; max-width: 460px; padding: var(--s4); border-radius: var(--radius); background: var(--yuzey); border: 1px solid var(--cizgi-renk); }
+  svg { display: block; width: 100%; height: auto; }
+  .govde { fill: var(--yuzey-2); stroke: var(--cizgi-renk); stroke-width: var(--cizgi); }
+  .omurga rect { fill: var(--zemin); stroke: var(--soluk); stroke-width: 1.2; }
+  .kaburga path { fill: none; stroke: var(--soluk); stroke-width: 2.5; stroke-linecap: round; opacity: 0.7; }
+  .aort { stroke: var(--konu-insan); stroke-width: 6; stroke-linecap: round; opacity: 0.55; }
+  .bobrek { fill: color-mix(in srgb, var(--konu-insan) 35%, var(--yuzey)); }
+  .damar { fill: none; stroke: var(--konu-insan); stroke-width: var(--cizgi-vurgu); }
+  .testis { fill: var(--vurgu); stroke: var(--murekkep); stroke-width: 1; }
+  .torba { fill: var(--yuzey-2); stroke: var(--cizgi-renk); stroke-width: var(--cizgi); }
+  .iz { fill: none; stroke: var(--soluk); stroke-width: 1; stroke-dasharray: 3 5; }
+  .etk { font: 500 13px var(--font-arayuz); fill: var(--murekkep); }
+  .etk.sol { text-anchor: start; }
+  .etk.alt, .etk.kucuk { fill: var(--soluk); font-size: 12px; }
+  .etk.vurgu { fill: var(--vurgu); font-weight: 600; }
+  .si-kontrol { display: flex; align-items: center; gap: var(--s2); margin-top: var(--s3); font-size: var(--fs-xs); color: var(--soluk); }
+  .si-kontrol label { flex: 1; display: flex; }
+  .si-kontrol input { width: 100%; accent-color: var(--vurgu); }
+  .si-not { margin: var(--s2) 0 0; font-size: var(--fs-sm); text-align: center; min-height: 2.6em; }
+  .gorunmez { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); }
+</style>

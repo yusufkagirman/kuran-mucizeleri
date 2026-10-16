@@ -1,0 +1,65 @@
+---
+// Soyu kesik olan: görünürde kesilen dal ve süren dal. Görününce dallar sırayla çizilir (layout'taki .belir/.gorundu).
+---
+<figure class="soy belir">
+  <svg viewBox="0 0 600 470" role="img" aria-label="Soy ağacı: Hz. Muhammed'den iki dal çıkar. Oğulları dalı küçük yaşta vefatla kesilir. Kızı Fâtıma'nın dalı 625'te doğan Hasan ve Hüseyin'e, oradan da bugüne kadar uzanır.">
+    <defs>
+      <linearGradient id="soy-son" gradientUnits="userSpaceOnUse" x1="0" y1="370" x2="0" y2="455">
+        <stop offset="0" stop-color="currentColor" stop-opacity="1" />
+        <stop offset="1" stop-color="currentColor" stop-opacity="0" />
+      </linearGradient>
+    </defs>
+    <g class="kesik">
+      <path d="M300 62 C300 110 140 90 140 140" pathLength="1" class="dal d1" />
+      <path d="M124 156 L156 140" class="kesme" />
+      <text x="140" y="186" text-anchor="middle" class="ad">Oğulları</text>
+      <text x="140" y="208" text-anchor="middle" class="not">küçük yaşta vefat ettiler</text>
+    </g>
+    <g class="suren">
+      <path d="M300 62 C300 110 440 90 440 140" pathLength="1" class="dal d2" />
+      <path d="M440 196 C440 230 370 220 370 262" pathLength="1" class="dal d3" />
+      <path d="M440 196 C440 230 510 220 510 262" pathLength="1" class="dal d3" />
+      <path d="M370 324 C370 350 440 340 440 370 M510 304 C510 345 440 340 440 370" pathLength="1" class="dal d4" />
+      <path d="M440 370 L440 455" class="iz" stroke="url(#soy-son)" />
+      <text x="440" y="166" text-anchor="middle" class="ad">Fâtıma</text>
+      <text x="440" y="186" text-anchor="middle" class="not">kızı</text>
+      <text x="370" y="290" text-anchor="middle" class="ad">Hasan</text>
+      <text x="370" y="312" text-anchor="middle" class="not">625</text>
+      <text x="510" y="290" text-anchor="middle" class="ad">Hüseyin</text>
+      <text x="456" y="420" class="not son">bugüne kadar</text>
+    </g>
+    <rect x="292" y="22" width="16" height="16" transform="rotate(45 300 30)" class="kok" />
+    <text x="300" y="14" text-anchor="middle" class="ad">Hz. Muhammed</text>
+  </svg>
+  <figcaption class="arayuz soluk">Mekke'de "ebter" denen, görünürde kesilen dal; soy ise kızı Fâtıma'dan sürdü.</figcaption>
+</figure>
+
+<style>
+  .soy { margin: var(--s6) 0; }
+  svg { display: block; width: 100%; max-width: 560px; margin: 0 auto; overflow: visible; color: var(--konu-gelecek); }
+  .dal { fill: none; stroke: currentColor; stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; stroke-dashoffset: 1; }
+  .kesik .dal { stroke: var(--soluk); stroke-dasharray: 0.02 0.025; stroke-dashoffset: 0; opacity: 0; }
+  .kesme { stroke: var(--vurgu); stroke-width: 3; stroke-linecap: round; opacity: 0; }
+  .iz { stroke-width: 3; fill: none; stroke-dasharray: 2 6; opacity: 0; }
+  .kok { fill: var(--vurgu); }
+  .ad { font: 600 18px var(--font-baslik); fill: var(--murekkep); }
+  .not { font: 13px var(--font-arayuz); fill: var(--soluk); }
+  .son { fill: var(--konu-gelecek); }
+  .suren text, .kesik text { opacity: 0; }
+  figcaption { text-align: center; font-size: var(--fs-sm); margin-top: var(--s3); }
+
+  .gorundu .kesik .dal, .gorundu .kesik text { opacity: 1; transition: opacity 600ms var(--ease-giris) 200ms; }
+  .gorundu .kesme { opacity: 1; transition: opacity 200ms 900ms; }
+  .gorundu .dal { stroke-dashoffset: 0; transition: stroke-dashoffset 700ms var(--ease-giris); }
+  .gorundu .d2 { transition-delay: 1200ms; }
+  .gorundu .d3 { transition-delay: 1800ms; }
+  .gorundu .d4 { transition-delay: 2400ms; }
+  .gorundu .suren text { opacity: 1; transition: opacity 500ms 1600ms; }
+  .gorundu .iz { opacity: 1; transition: opacity 800ms 3000ms; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dal { stroke-dashoffset: 0 !important; }
+    .kesik .dal, .kesme, .iz, .suren text, .kesik text { opacity: 1 !important; transition: none !important; }
+    .suren .dal { stroke-dasharray: none; }
+  }
+</style>

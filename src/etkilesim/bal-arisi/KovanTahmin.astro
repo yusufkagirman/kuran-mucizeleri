@@ -1,0 +1,91 @@
+---
+// Dişi bal arısı: "önce siz tahmin edin" kartları. Kovanın üç arısı; dokununca cinsiyeti ve işi açılır.
+// Bilgiler yalnız sayfa metninden: işçi bal yapar/petek örer/çiçekten çiçeğe uçar, kraliçe kovanı yönetir, erkek bal yapmaz.
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+const arilar = [
+  {
+    ad: 'Kraliçe', src: '/img/bal-arisi/kralice.jpg', cevir: false, disi: true, is: 'Kovanı yönetir.',
+    alt: 'Yandan çekilmiş bal arısı kraliçesi; uzun, sivri bir karın.',
+    kunye: 'USGS Bee Inventory and Monitoring Lab, CC BY 2.0',
+    url: 'https://commons.wikimedia.org/wiki/File:Apis_mellifera,_Queen,_side,_MD,_Talbot_County_2013-09-30-17.45.51_ZS_PMax.jpg',
+  },
+  {
+    ad: 'İşçi', src: '/img/bal-arisi/isci.jpg', cevir: true, disi: true, is: 'Bal yapar, petek örer, çiçekten çiçeğe uçar.',
+    alt: 'Yandan çekilmiş işçi bal arısı; tüylü gövde, büyük bileşik göz.',
+    kunye: 'USGS Bee Inventory and Monitoring Lab, kamu malı',
+    url: 'https://commons.wikimedia.org/wiki/File:Apis_mellifera,_F,_Side,_MD,_Granite,_marian_2014-01-26-11.36.20_ZS_PMax_(12756517263).jpg',
+  },
+  {
+    ad: 'Erkek', src: '/img/bal-arisi/erkek.jpg', cevir: false, disi: false, is: 'Bal yapmaz, petek örmez, çiçeğe konmaz.',
+    alt: 'Yandan çekilmiş erkek bal arısı; iri gözler ve tıknaz gövde.',
+    kunye: 'USGS Bee Inventory and Monitoring Lab, CC BY 2.0',
+    url: 'https://commons.wikimedia.org/wiki/File:Apis_mellifera,_Drone,_side,_MD,_Talbot_County_2013-09-30-18.32.00_ZS_PMax.jpg',
+  },
+];
+---
+<section class="kovan" aria-labelledby="kovan-soru">
+  <p class="etiket">Önce siz tahmin edin</p>
+  <h3 id="kovan-soru" class="soru">Kovandaki bu üç arıdan hangileri dişi?</h3>
+  <ul class="kartlar">
+    {arilar.map((a, i) => (
+      <li>
+        <button type="button" class:list={['kart-ari', { disi: a.disi }]} aria-expanded="false">
+          <img src={`${taban}${a.src}`} alt={a.alt} loading="lazy" decoding="async" class:list={{ cevir: a.cevir }} />
+          <span class="ad">{i + 1}. arı</span>
+          <span class="cevap" aria-hidden="true">
+            <b>{a.disi ? 'Dişi' : 'Erkek'}</b>
+            <span class="rol">{a.ad}</span>
+            <span>{a.is}</span>
+          </span>
+          <span class="ipucu arayuz" aria-hidden="true">Dokunun</span>
+        </button>
+        <small class="kunye arayuz"><a href={a.url} rel="noopener">{a.kunye}</a></small>
+      </li>
+    ))}
+  </ul>
+  <p class="sonuc" hidden>Üç arıdan ikisi dişi: kovanı yöneten de, balı yapan da.</p>
+</section>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.kovan').forEach((kok) => {
+    const kartlar = [...kok.querySelectorAll<HTMLButtonElement>('.kart-ari')];
+    const sonuc = kok.querySelector<HTMLElement>('.sonuc')!;
+    kartlar.forEach((b) => b.addEventListener('click', () => {
+      b.setAttribute('aria-expanded', 'true');
+      b.querySelector('.cevap')!.removeAttribute('aria-hidden');
+      if (kartlar.every((k) => k.getAttribute('aria-expanded') === 'true')) sonuc.hidden = false;
+    }));
+  });
+</script>
+
+<style>
+  .kovan { margin: var(--s6) 0; }
+  .etiket { margin-bottom: var(--s2); }
+  .soru { margin: 0 0 var(--s4); font-size: var(--fs-xl); }
+  .kartlar { list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s3); }
+  @media (max-width: 600px) { .kartlar { grid-template-columns: 1fr; } }
+  li { min-width: 0; }
+  .kart-ari {
+    position: relative; display: block; width: 100%; padding: 0; border: 1px solid var(--cizgi-renk); border-radius: var(--radius);
+    background: #000; color: #f3ebdd; text-align: left; cursor: pointer; overflow: hidden; aspect-ratio: 4 / 3.4;
+  }
+  img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-bolum) var(--ease-giris), opacity var(--t-bolum); }
+  img.cevir { transform: scaleX(-1); }
+  .ad { position: absolute; left: var(--s3); top: var(--s2); font: 600 var(--fs-lg) var(--font-baslik); text-shadow: 0 1px 8px #000; }
+  .ipucu { position: absolute; right: var(--s3); top: var(--s3); font-size: var(--fs-xs); padding: 2px 10px; border-radius: 999px; background: rgba(0, 0, 0, 0.55); border: 1px solid rgba(255, 255, 255, 0.25); }
+  .cevap {
+    position: absolute; inset: auto 0 0 0; padding: var(--s3); display: flex; flex-direction: column; gap: 2px;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.88) 55%, transparent); font: var(--fs-sm)/1.4 var(--font-arayuz);
+    opacity: 0; transform: translateY(12px); transition: opacity var(--t-bolum) var(--ease-giris), transform var(--t-bolum) var(--ease-giris);
+  }
+  .cevap b { font: 700 var(--fs-xl) var(--font-baslik); color: #9fd88a; }
+  .rol { font-weight: 600; opacity: 0.85; }
+  .kart-ari:not(.disi) .cevap b { color: #b9c6ea; }
+  [aria-expanded='true'] .cevap { opacity: 1; transform: none; }
+  [aria-expanded='true'] .ipucu { display: none; }
+  [aria-expanded='true'].disi { border-color: var(--konu-canlilar); box-shadow: 0 0 0 2px var(--konu-canlilar); }
+  .kunye { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  .kunye a { color: inherit; text-decoration: underline dotted; }
+  .sonuc { margin: var(--s4) 0 0; padding-left: var(--s3); border-left: 3px solid var(--konu-canlilar); font-family: var(--font-baslik); font-size: var(--fs-lg); line-height: 1.4; }
+  @media (max-width: 600px) { .kart-ari { aspect-ratio: 16 / 10; } }
+</style>

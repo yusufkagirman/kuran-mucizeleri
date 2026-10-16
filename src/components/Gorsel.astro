@@ -1,0 +1,47 @@
+---
+// Konuyu gösteren dış kaynaklı görsel(ler). Dosyalar public/img/<slug>/ altında; künye (yazar, lisans, kaynak sayfa) zorunlu.
+// duzen: 'tek' (tam genişlik) | 'serit' (evre evre yan yana, telefonda kaydırmalı) | 'izgara' (2-3 sütun) | 'karsilastir' (iki görsel yan yana, büyük)
+interface Resim { src: string; alt: string; baslik?: string; not?: string; kunye: string; url: string }
+interface Props { resimler: Resim[]; duzen?: 'tek' | 'serit' | 'izgara' | 'karsilastir'; baslik?: string; genis?: boolean }
+const { resimler, duzen = resimler.length === 1 ? 'tek' : 'izgara', baslik, genis = false } = Astro.props;
+const taban = import.meta.env.BASE_URL.replace(/\/$/, '');
+---
+<figure class:list={['gorsel', duzen, { genis }]}>
+  {baslik && <figcaption class="ust">{baslik}</figcaption>}
+  <ol>
+    {resimler.map((r, i) => (
+      <li>
+        <a href={`${taban}${r.src}`} target="_blank" rel="noopener" aria-label="Görseli büyüt">
+          <img src={`${taban}${r.src}`} alt={r.alt} loading="lazy" decoding="async" />
+        </a>
+        {(r.baslik || r.not) && (
+          <p class="alt">
+            {duzen === 'serit' && <span class="no">{i + 1}</span>}
+            {r.baslik && <b>{r.baslik}</b>}
+            {r.not && <span>{r.not}</span>}
+          </p>
+        )}
+        <small class="arayuz kunye"><a href={r.url} rel="noopener">{r.kunye}</a></small>
+      </li>
+    ))}
+  </ol>
+</figure>
+
+<style>
+  .gorsel { margin: var(--s6) 0; }
+  .gorsel.genis { width: min(1100px, 100vw); margin-left: 50%; transform: translateX(-50%); padding: 0 var(--s3); box-sizing: border-box; }
+  ol { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--s3); }
+  .ust { font-family: var(--font-arayuz); font-size: var(--fs-xs); letter-spacing: 0.08em; text-transform: uppercase; color: var(--soluk); margin-bottom: var(--s3); }
+  li { margin: 0; min-width: 0; }
+  img { display: block; width: 100%; height: auto; border-radius: var(--radius); border: 1px solid var(--cizgi-renk); background: var(--yuzey-2); }
+  .alt { margin: var(--s2) 0 0; font-size: var(--fs-sm); line-height: 1.45; display: flex; flex-direction: column; gap: 2px; }
+  .alt b { font-family: var(--font-baslik); font-weight: 600; }
+  .alt .no { align-self: flex-start; font: 600 var(--fs-xs) var(--font-arayuz); padding: 0 8px; border-radius: 999px; background: var(--yuzey-2); color: var(--soluk); }
+  .kunye { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }
+  .kunye a { color: inherit; text-decoration: underline dotted; }
+  .izgara ol { grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); }
+  .karsilastir ol { grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); }
+  .serit ol { grid-auto-flow: column; grid-auto-columns: minmax(200px, 38%); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: var(--s2); }
+  .serit li { scroll-snap-align: start; }
+  @media (max-width: 600px) { .serit ol { grid-auto-columns: 78%; } }
+</style>
