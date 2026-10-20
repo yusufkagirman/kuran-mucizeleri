@@ -62,7 +62,7 @@ const evreler = [
   /* Canlı mod: üç foto üst üste, kaydırıcıyla geçiş */
   .canli .sahne { display: grid; grid-template-columns: 1fr; }
   .canli figure { grid-area: 1 / 1; transition: opacity var(--t-mikro) linear; }
-  .canli figcaption { opacity: var(--c, 0); transition: opacity var(--t-mikro); position: absolute; left: var(--s3); bottom: var(--s3); padding: var(--s1) var(--s3); border-radius: 999px; background: color-mix(in srgb, var(--zemin) 85%, transparent); }
+  .canli figcaption { opacity: var(--c, 0); transition: opacity var(--t-mikro); position: absolute; left: var(--s3); bottom: var(--s3); padding: var(--s1) var(--s3); border-radius: var(--radius); background: color-mix(in srgb, var(--zemin) 85%, transparent); }
   .canli figure { position: relative; }
   .canli .kaydir { display: block; margin-top: var(--s4); }
   .canli input { width: 100%; min-height: 32px; accent-color: color-mix(in srgb, #4E7A3A calc((1 - var(--p, 0)) * 100%), #1a1410); }

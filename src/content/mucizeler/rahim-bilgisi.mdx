@@ -1,7 +1,7 @@
 ---
 baslik: Azalıp artan rahim
 hook: |
-  Rahim hiç durmaz: her ay iç zarı kalınlaşır, sonra dökülür ve yeniden kurulur.
+  Rahim hiç durmaz: her ay iç zarı kalınlaşır, sonra dökülür ve baştan kurulur.
 
   Ra'd suresi, Allah'ın her dişinin rahminde taşıdığını, rahimlerin neyi eksiltip neyi artırdığını bildiğini söyler. Rahmin iç zarındaki bu aylık azalıp artış ise ancak 20. yüzyılın başında mikroskopla gösterildi.
 kart: Rahim hiç durmaz; her ay kalınlaşır, dökülür ve yeniden kurulur.
@@ -14,11 +14,14 @@ nuzul: { donem: "Medine dönemi (tartışmalı)", yil: 623 }
 kesif: { yil: 1908, olay: "Hitschmann ve Adler, rahim iç zarının her ay düzenli olarak kalınlaşıp döküldüğünü mikroskopla gösterdi.", kaynak: hitschmann1908 }
 itirazlar:
   - itiraz: "Kadınlar her ay kanamayı zaten görüyordu; rahmin bir şey eksilttiği o gün de bilinmiyor muydu?"
-    cevap: "Kanama görülüyordu ama nereden geldiği bilinmiyordu; eski tıp onu vücutta biriken fazla kanın dışarı atılması sanıyordu. Rahmin iç zarının her ay kalınlaşıp sonra döküldüğü ancak mikroskopla görüldü."
+    cevap: "Kanama görülüyordu ama nereden ve nasıl geldiği bilinmiyordu. Rahmin iç zarının her ay kalınlaşıp sonra döküldüğü, yani rahmin kendi içinde azalıp arttığı ancak mikroskopla görüldü."
     kaynak: hitschmann1908
+  - itiraz: "Müfessirler bu ayeti çocuğun erken ya da geç doğması, tek ya da ikiz olması diye açıklar. Aylık döngüyle ne ilgisi var?"
+    cevap: "Bu klasik açıklama doğrudur ve geçerliliğini korur. Ayetteki \"eksiltme ve artırma\" ifadesi geniştir; rahmin her ay kendi içinde yaşadığı azalıp artma da bu ifadenin kapsadığı gerçeklerden biridir."
+    kaynak: diyanetrad
   - itiraz: "Bugün ultrason ve genetik testlerle rahimdeki bebeğin cinsiyeti, hatta hastalıkları biliniyor. \"Rahimdekini bilmek\" artık insana da açık değil mi?"
     cevap: "Ultrason ve testler rahimdekinin bir kısmını, belli bir anda ve araçla gösterir. Ayet, her dişinin rahminde olup biteni her an ve eksiksiz bilmekten söz eder; bu bilgi bugün de insana kapalıdır."
-kaynaklar: [hitschmann1908, noyes1950]
+kaynaklar: [hitschmann1908, jamaendo, diyanetrad, noyes1950]
 durum: taslak
 ---
 
@@ -29,23 +32,69 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Gorsel from '../../components/Gorsel.astro';
 import Dongu from '../../components/rahim-bilgisi-Dongu.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim tur="sahne" yil={623}>
 
 <Dongu />
 
-Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kaptı; içinde neler olup bittiğini kimse göremezdi. Ra'd suresi ondan şöyle söz eder:
+</Adim>
+
+<Adim yil={623} etiket="623 civarı · Medine">
+
+Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kaptı. İçinde neler olup bittiğini kimse göremezdi.
+
+Ra'd suresi ondan şöyle söz eder:
+
+</Adim>
+
+<Adim tur="genis" yil={623} etiket="Ra'd suresi">
 
 <AyetParca sure={13} ayet={8} sureAdi="Ra'd" ar="ٱللَّهُ يَعْلَمُ مَا تَحْمِلُ كُلُّ أُنثَىٰ وَمَا تَغِيضُ ٱلْأَرْحَامُ وَمَا تَزْدَادُ" meal="Allah her dişinin rahminde taşıdığını, rahimlerin düşürdüğünü ve alıkoyduğunu bilir..." vurgu="rahimlerin düşürdüğünü ve alıkoyduğunu" />
 
-Ayetteki *tağîdu* fiili suyun çekilip azalmasını, *tezdâdu* ise artmasını anlatır. Asırlar boyunca bu ifade düşük, erken doğum ve gebeliğin uzaması diye anlaşıldı.
+</Adim>
 
-Rahmin kendi içinde de azalıp arttığı 1908'de görüldü. Viyanalı hekimler Hitschmann ve Adler, rahim iç zarının her ay kalınlaştığını ve sonra döküldüğünü mikroskopla gösterdi.<Atif k="hitschmann1908" /> Bu döngü bugün gün gün izlenebiliyor.<Atif k="noyes1950" />
+<Adim>
+
+Ayetteki *tağîdu* fiili suyun çekilip azalmasını, *tezdâdu* ise artmasını anlatır.
+
+Asırlar boyunca bu ifade, çocuğun erken ya da geç doğması, tek ya da ikiz olması diye açıklandı.<Atif k="diyanetrad" /> Rahmin kendi içinde de bir şeyin azalıp arttığını görmenin yolu yoktu.
+
+</Adim>
+
+<Adim yil={1908} etiket="1908 · Viyana">
+
+1908'de Viyanalı iki kadın doğum hekimi, Fritz Hitschmann ve Ludwig Adler, rahmin iç zarından alınan örnekleri mikroskop altında gün gün karşılaştırdı.
+
+Gördükleri şaşırtıcıydı: iç zar her ay kalınlaşıyor, sonra dökülüyor ve yeniden kuruluyordu.<Atif k="hitschmann1908" /> Sonraki araştırmacılar bu bulguyu doğruladı.<Atif k="jamaendo" />
+
+</Adim>
+
+<Adim>
+
+Rahim, hayat boyunca her ay kendi içinde azalıp artan bir organdır. Kanama, bu döngünün yalnızca gözle görülen ucudur.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Gorsel duzen="karsilastir" baslik="Rahim iç zarı: şemada ve mikroskopta" resimler={[{ src: '/img/rahim-bilgisi/endometrium-dongu.jpg', alt: 'Üç panelli siyah-beyaz şema. A ve B panellerinde hormon eğrileri, C panelinde rahim iç zarının kalınlığı: ilk günlerde incelir, sonra 28. güne doğru giderek kalınlaşır. Altta 1-28 gün numaraları.', baslik: 'Bir aylık döngü', not: 'C panelindeki taralı bant, rahim iç zarının kalınlığı: ayın başında incelir, sonra gün gün kalınlaşır.', kunye: 'DESIDERIUS (Hollandaca Vikipedi), kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Figure_1.1_Endometrium_cyclus.jpg' }, { src: '/img/rahim-bilgisi/endometrium-salgi.jpg', alt: 'Mikroskop görüntüsü: mor-pembe boyalı doku kesiti; üstte zar katmanları, altta kas tabakası. Katmanlar İngilizce/Latince etiketli: stratum compactum, spongiosum, basale ve myometrium.', baslik: 'Salgı evresindeki iç zarın kesiti', not: 'Üstteki katmanlar iç zar, en alttaki kas tabakası rahim duvarı.', kunye: 'Dr. Roshan Nasimudeen, CC BY-SA 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Secretory_endometrium.jpg' }]} />
 
+</Adim>
+
+<Adim tur="genis" yil={1908}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Rahmin içine bakmanın hiçbir yolu yokken, bir insan onun durmadan azalıp arttığını nereden bilebilirdi?</MeydanOkuma>
+<MeydanOkuma>Rahmin içine bakmanın hiçbir yolu yokken, onun durmadan azalıp arttığını anlatan söz neye dayanıyordu?</MeydanOkuma>

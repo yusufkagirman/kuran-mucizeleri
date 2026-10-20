@@ -1,0 +1,86 @@
+---
+import '../styles/global.css';
+import Yildiz from '../components/Yildiz.astro';
+
+interface Props { baslik: string; aciklama?: string }
+const { baslik, aciklama = "Kur'an mucizeleri: kaynaklı, anlaşılır, interaktif ansiklopedi." } = Astro.props;
+const yol = Astro.url.pathname;
+const menu = [
+  { href: '/', ad: 'Keşfet' },
+  { href: '/vitrin', ad: 'Vitrin' },
+  { href: '/mushaf', ad: 'Mushaf' },
+  { href: '/hakkinda', ad: 'Hakkında' },
+];
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{baslik} · Kur'an Mucizeleri</title>
+    <meta name="description" content={aciklama} />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet" />
+    <script is:inline>
+      try { const p = localStorage.getItem('palet'); if (p) document.documentElement.dataset.palet = p; } catch {}
+    </script>
+  </head>
+  <body>
+    <header class="ust">
+      <div class="kap ust-ic">
+        <a href="/" class="logo"><Yildiz boyut={26} /><span>Kur'an Mucizeleri</span></a>
+        <nav class="arayuz" aria-label="Ana menü">
+          {menu.map((m) => <a href={m.href} aria-current={(m.href === '/' ? yol === '/' : yol.startsWith(m.href)) ? 'page' : undefined}>{m.ad}</a>)}
+          <button type="button" class="palet-dugme" id="paletDugme" aria-label="Koyu / açık tema" title="Koyu / açık tema">
+            <svg class="ay" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M13 10.5A6 6 0 0 1 5.5 3a6 6 0 1 0 7.5 7.5z" fill="currentColor" /></svg>
+            <svg class="gunes" width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="3.2" fill="currentColor" /><g stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M8 1v1.6M8 13.4V15M1 8h1.6M13.4 8H15M3 3l1.1 1.1M11.9 11.9 13 13M3 13l1.1-1.1M11.9 4.1 13 3" /></g></svg>
+          </button>
+        </nav>
+      </div>
+    </header>
+    <main>
+      <slot />
+    </main>
+    <footer class="alt arayuz">
+      <div class="kap">
+        <p class="soluk">Prototip · Ayet metni ve Diyanet meali: alquran.cloud · Tilavet: everyayah.com · <a href="/marka">Marka kiti</a></p>
+      </div>
+    </footer>
+    <script>
+      const d = document.getElementById('paletDugme');
+      d?.addEventListener('click', () => {
+        const simdi = document.documentElement.dataset.palet ?? (matchMedia('(prefers-color-scheme: dark)').matches ? 'gece' : 'parsomen');
+        const yeni = simdi === 'gece' ? 'parsomen' : 'gece';
+        document.documentElement.dataset.palet = yeni;
+        try { localStorage.setItem('palet', yeni); } catch {}
+        document.dispatchEvent(new CustomEvent('palet', { detail: yeni }));
+      });
+      const g = new IntersectionObserver((es) => es.forEach((e) => {
+        if (e.isIntersecting) { e.target.classList.add('gorundu'); g.unobserve(e.target); }
+      }), { rootMargin: '0px 0px -10% 0px' });
+      document.querySelectorAll('.belir').forEach((el) => g.observe(el));
+    </script>
+  </body>
+</html>
+
+<style>
+  .ust { border-bottom: 1px solid var(--cizgi-renk); position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--zemin) 88%, transparent); backdrop-filter: blur(8px); }
+  .ust-ic { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); min-height: 64px; flex-wrap: wrap; }
+  .logo { display: flex; align-items: center; gap: var(--s2); color: var(--vurgu); text-decoration: none; font-family: var(--font-baslik); font-size: 1.25rem; font-weight: 600; }
+  .logo span { color: var(--murekkep); }
+  nav { display: flex; align-items: center; gap: var(--s4); font-size: var(--fs-sm); }
+  nav a { color: var(--soluk); text-decoration: none; padding: var(--s1) 0; border-bottom: 2px solid transparent; transition: color var(--t-mikro); }
+  nav a:hover, nav a[aria-current='page'] { color: var(--murekkep); border-bottom-color: var(--vurgu); }
+  .palet-dugme { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--vurgu); cursor: pointer; display: grid; place-items: center; }
+  .palet-dugme svg { grid-area: 1 / 1; }
+  .gunes { display: none; }
+  :global([data-palet='gece']) .gunes { display: block; }
+  :global([data-palet='gece']) .ay { display: none; }
+  @media (prefers-color-scheme: dark) {
+    :global(:root:not([data-palet='parsomen'])) .gunes { display: block; }
+    :global(:root:not([data-palet='parsomen'])) .ay { display: none; }
+  }
+  .alt { border-top: 1px solid var(--cizgi-renk); margin-top: var(--s8); padding: var(--s5) 0; font-size: var(--fs-xs); }
+  @media (max-width: 560px) { nav { gap: var(--s3); } .logo span { font-size: 1.05rem; } }
+</style>

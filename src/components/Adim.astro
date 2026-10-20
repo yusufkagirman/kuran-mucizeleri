@@ -1,0 +1,35 @@
+---
+// Hikâyenin bir adımı: yıl paneli bu adımın yılını gösterir (yoksa bir öncekini).
+// tur: 'kart' (metin, dar) | 'genis' (ayet, zaman çizgisi; geniş kart) | 'sahne' (görsel/etkileşim; çerçevesiz, geniş)
+interface Props { yil?: number; etiket?: string; tur?: 'kart' | 'genis' | 'sahne' }
+const { yil, etiket, tur = 'kart' } = Astro.props;
+---
+<section class:list={['adim', `adim-${tur}`]} data-yil={yil}>
+  <div class="ic">
+    {etiket && <span class="etiket-ust">{etiket}</span>}
+    <slot />
+  </div>
+</section>
+
+<style>
+  .adim { min-height: 85svh; display: flex; align-items: center; justify-content: center; padding: 150px 16px 32px; }
+  .ic { width: min(560px, 100%); }
+  .adim-kart .ic, .adim-genis .ic { background: var(--yuzey); border-radius: var(--radius); padding: 22px 24px; box-shadow: var(--golge); }
+  .adim-genis .ic, .adim-sahne .ic { width: min(760px, 100%); }
+  .adim-genis .ic { text-align: center; }
+  .etiket-ust { display: block; margin-bottom: 6px; font: 600 0.9375rem var(--font-arayuz); color: var(--vurgu-metin); font-variant-numeric: tabular-nums; }
+  .adim-sahne .etiket-ust { text-align: center; }
+  .ic :global(p) { margin: 0 0 0.7em; }
+  .ic > :global(p:last-child) { margin-bottom: 0; }
+  .ic :global(.genis) { width: auto; margin-left: 0; }
+  .ic :global(.ayet-parca), .ic :global(.zc) { margin: 0; }
+  .ic :global(.fark-sayi) { font-size: clamp(3rem, 8vw, 5rem); }
+  .ic :global(.zc svg) { max-height: 130px; }
+  .adim-sahne .ic > :global(*:first-child) { margin-top: 0; }
+  .adim-sahne .ic > :global(*:last-child) { margin-bottom: 0; }
+  @media (max-width: 899px) {
+    .adim { min-height: 90svh; padding: 120px 10px 24px; }
+    .adim-kart .ic, .adim-genis .ic { padding: 16px; }
+    .ic { font-size: 0.9375rem; line-height: 1.6; }
+  }
+</style>

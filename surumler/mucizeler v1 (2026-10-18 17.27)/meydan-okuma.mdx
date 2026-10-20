@@ -1,0 +1,56 @@
+---
+baslik: Benzerini getirin
+hook: |
+  Sözü kılıçtan keskin sayan bir topluma tek bir kısa sure yazmaları söylendi; o sure hiç yazılamadı.
+
+  Araplar şiirde dünyanın en iddialı ustalarıydı ve Peygamber'e karşı her yolu denediler. Onlardan istenen kılıç değil, tek bir kısa sureydi. O günden bu yana bu meydan okumaya, Kur'an'ın yerine konabilecek bir cevap verilemedi.
+kart: Çağının en büyük söz ustalarından tek bir kısa sure istendi; o sure hiç yazılamadı.
+konu: [dil]
+sureAdi: Bakara
+ayetler:
+  - { sure: 2, ayet: 23 }
+  - { sure: 2, ayet: 24 }
+  - { sure: 17, ayet: 88 }
+vurgu: "وَلَن تَفْعَلُوا۟"
+nuzul: { donem: "Medine dönemi", yil: 623 }
+kesif: { yil: 2026, olay: "Meydan okuma ilk dile getirildiği günden bugüne açık duruyor." }
+itirazlar:
+  - itiraz: "\"Benzeri\" ölçüsü belirsiz. Bir metnin Kur'an'a denk olduğuna kim karar verecek? Yanlışlanamayan bir meydan okuma kanıt sayılır mı?"
+    cevap: "Ölçü, Kur'an'ın dil güzelliğini, söz örgüsünü ve anlam derinliğini birlikte taşıyan bir metindir; hakemi de o dilin ustalarıdır. İlk muhataplar çağın en büyük söz ustalarıydı ve bir karşılık getiremediklerini kendi davranışlarıyla gösterdiler."
+    kaynak: yavuz2000icaz
+  - itiraz: "Müseylime'den Ebü'l-Alâ el-Maarrî'ye ve günümüze kadar Kur'an'a benzetilmiş metinler yazıldı. Bunlar neden cevap sayılmıyor?"
+    cevap: "Bu denemeler kendi dönemlerinde bile, dilin ustaları tarafından Kur'an'ın ifadelerini taklit eden zayıf metinler olarak görüldü. Hiçbiri, o dili en iyi bilenlerce Kur'an'a denk kabul edilmedi."
+    kaynak: bakillani
+  - itiraz: "Arapça bilmeyen biri bu üstünlüğü kendisi nasıl değerlendirebilir?"
+    cevap: "Bir dili bilmeyen, o dilin büyük şairini dilin ustalarından öğrenir; Kur'an için de durum böyledir. Asırlardır Arap dilinin en büyük âlimleri ve edipleri Kur'an'ın üslubunun eşsiz olduğunu kabul eder."
+    kaynak: yavuz2000icaz
+kaynaklar: [ibnhisam, yavuz2000icaz, bakillani]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Halka from '../../components/meydan-okuma-Halka.astro';
+
+Ayetin indiği yıllarda Araplar için söz, kılıçtan keskin bir silahtı. Panayırlarda şairler yarışır, beğenilen bir şiir bir kabileyi yüceltir, bir hiciv onu yerle bir ederdi. Kur'an bu insanlara en iyi bildikleri alanda seslendi:
+
+<AyetParca sure={2} ayet={24} sureAdi="Bakara" ar="فَأْتُوا۟ بِسُورَةٍۢ مِّن مِّثْلِهِۦ ... فَإِن لَّمْ تَفْعَلُوا۟ وَلَن تَفْعَلُوا۟" meal="...siz de onun benzeri bir sure meydana getirin... Yapamazsanız ki yapamayacaksınız..." vurgu="Yapamazsanız ki yapamayacaksınız" />
+
+Meydan okuma bununla da kalmadı. İsrâ suresinde meydan okuma bütün insanlara ve cinlere genişledi: hepsi bir araya gelse de benzerini ortaya koyamayacaklardı. Mekke'nin söz ustaları Kur'an'ı dinledi; Velîd b. Muğîre gibi önde gelenleri onun şiire de kâhin sözüne de benzemediğini kabul etti.<Atif k="ibnhisam" /> Yine de Peygamber'e karşı sürgünü ve savaşı seçtiler; tek bir sure yazmayı değil.
+
+<Halka yil={frontmatter.nuzul.yil} bugun={frontmatter.kesif.yil} />
+
+Ayetteki "yapamayacaksınız" sözü yalnız o günün Araplarına değil, sonra gelecek herkese söylenmişti. O günden bu yana Kur'an'a benzetilmek istenen metinler yazıldı, ama hiçbiri Kur'an'ın yerine konabilecek bir söz olarak kabul görmedi.
+
+<Gorsel genis resimler={[
+  { src: '/img/meydan-okuma/birmingham.jpg', alt: 'Yıpranmış kenarlı iki parşömen yaprak üzerinde kahverengi mürekkeple, köşeli bir yazıyla Arapça satırlar.', baslik: 'Meydan okunan metin', not: "Birmingham Kur'an yazmasından iki yaprak (Birmingham Üniversitesi).", kunye: 'Anonim, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Birmingham_Quran_manuscript.jpg' },
+]} />
+
+Peki ama bu meydan okuma neye göre ölçülecek?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Hayatı boyunca tek bir şiir söylememiş bir insan, çağının en usta şairlerine "benzerini getiremeyeceksiniz" diyecek cesareti ve bu sözün asırlarca boşa çıkmayacağını nereden bulabilirdi?</MeydanOkuma>

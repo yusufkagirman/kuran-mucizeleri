@@ -1,10 +1,10 @@
 ---
 baslik: Güneş ve Ay'ın yörüngeleri
 hook: |
-  Güneş yerinde durmuyor; bütün gezegenleriyle birlikte gökadanın çevresinde saatte 800 bin kilometreyi aşan bir hızla akıp gidiyor.
+  Güneş yerinde durmuyor. Bütün gezegenleriyle, Dünya ve siz de dahil, gökadanın çevresinde saatte yaklaşık 828 bin kilometre hızla akıp gidiyor.
 
-  Kopernik'ten sonra Güneş bir süre evrenin merkezinde kıpırdamayan bir yıldız sanıldı. Ayet ise Güneş'in ve Ay'ın her birinin kendi yörüngesinde yüzdüğünü anlatır. Güneş'in de gökada çevresinde dolandığı ancak 20. yüzyılda anlaşıldı.
-kart: Güneş yerinde durmuyor; bütün gezegenleriyle birlikte kendi yörüngesinde akıp gidiyor.
+  Kopernik'ten sonra Güneş uzun süre evrenin merkezinde kıpırdamayan bir yıldız sanıldı. Ayet ise Güneş'in ve Ay'ın her birinin kendi yörüngesinde yüzdüğünü anlatır. Güneş'in de gökadanın çevresinde dolandığı ancak 20. yüzyılda anlaşıldı.
+kart: Güneş yerinde durmuyor; bütün gezegenleriyle birlikte gökadanın çevresinde saatte 828 bin km hızla akıp gidiyor.
 konu: [gokyuzu]
 sureAdi: Yâsîn
 ayetler:
@@ -20,7 +20,7 @@ itirazlar:
   - itiraz: "*Li-müstekarrin lehâ* ifadesi hadiste Güneş'in Arş altında secde ettiği yer olarak açıklanır (Buhârî); bunun gökadadaki yörüngeyle ne ilgisi var?"
     cevap: "Müfessirler bu ifade için iki anlam aktarır: Güneş'in yolculuğunun sona ereceği vakit ve Arş altındaki yeri. İki anlamda da Güneş durmadan akıp giden bir varlıktır; hadis onun nereye kadar aktığını, gökbilim ise nasıl aktığını anlatır."
     kaynak: ibnkesir
-kaynaklar: [oort1927, ibnkesir]
+kaynaklar: [oort1927, nasastarchild2000, nrao2015, ibnkesir, buhari3199]
 durum: taslak
 ---
 
@@ -31,12 +31,38 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Gorsel from '../../components/Gorsel.astro';
 import IcIceYorunge from '../../etkilesim/gunes-ve-ay-yorungeleri/IcIceYorunge.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda insanlar Güneş'in her gün gökte yol aldığını görüyor ve onun Dünya'nın çevresinde döndüğüne inanıyordu. Kur'an, Güneş'i ve Ay'ı yan yana anlatırken her birine ayrı bir yol verdi:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={615} etiket="615 civarı · Mekke">
+
+Ayetin indiği yıllarda insanlar Güneş'in her gün gökte yol aldığını görüyor ve onun Dünya'nın çevresinde döndüğüne inanıyordu.
+
+Yâsîn suresi Güneş'i ve Ay'ı yan yana anlatırken her birine ayrı bir yol verdi:
+
+</Adim>
+
+<Adim tur="genis" yil={615} etiket="Yâsîn suresi">
 
 <AyetParca sure={36} ayet={40} sureAdi="Yâsîn" ar="لَا ٱلشَّمْسُ يَنۢبَغِى لَهَآ أَن تُدْرِكَ ٱلْقَمَرَ وَلَا ٱلَّيْلُ سَابِقُ ٱلنَّهَارِ ۚ وَكُلٌّۭ فِى فَلَكٍۢ يَسْبَحُونَ" meal="Aya erişmek güneşe düşmez. Gece de gündüzü geçemez. Her biri bir yörüngede yürürler." vurgu="Her biri bir yörüngede yürürler" />
 
-Ayetteki *yesbehûn* fiili "yüzerler" demektir; iki ayet önce de Güneş'in "akıp gittiğini" söyler. Sonraki asırlarda bilim tersine döndü: Kopernik'le Dünya'nın Güneş'in çevresinde döndüğü anlaşılınca Güneş bir süre yerinde duran bir merkez sayıldı. Ayetteki "Güneş de akar" sözü böylece bilimle çelişiyor gibi göründü.
+</Adim>
+
+<Adim>
+
+Ayetteki *yesbehûn* fiili "yüzerler, akıp giderler" demektir; iki ayet önce de Güneş'in kendi durağına doğru "akıp gittiği" söylenir.
+
+</Adim>
+
+<Adim yil={1543} etiket="1543">
+
+Sonraki asırlarda bilim tersine döndü. 1543'te Kopernik, Dünya'nın Güneş'in çevresinde döndüğünü yazdı; Güneş artık her şeyin ortasında duran, kıpırdamayan bir merkezdi. Ayetteki "her biri yüzer" sözü böylece bilimle çelişiyor gibi göründü.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Gorsel duzen="serit" baslik="Göğün haritası nasıl değişti" resimler={[
   { src: '/img/gunes-ve-ay-yorungeleri/batlamyus.jpg', alt: 'Renkli 17. yüzyıl gök haritası: ortada Dünya küresi, çevresinde gezegenlerin ve burçların kuşakları.', baslik: 'Dünya merkezde', not: "Batlamyus modeli: Dünya ortada, Ay, Güneş ve gezegenler onun çevresindeki kuşaklarda (Cellarius'un atlası, 1660).", kunye: 'Andreas Cellarius / Jan van Loon, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Cellarius_ptolemaic_system.jpg' },
@@ -44,14 +70,38 @@ Ayetteki *yesbehûn* fiili "yüzerler" demektir; iki ayet önce de Güneş'in "a
   { src: '/img/gunes-ve-ay-yorungeleri/samanyolu.jpg', alt: 'Yukarıdan bakılmış sarmal bir gökada çizimi: parlak bir merkez ve çevresinde kıvrılan kollar.', baslik: 'Güneş de yolda', not: 'Gökadamızın sanatçı çizimi: parlak merkez ve çevresindeki sarmal kollar.', kunye: 'NASA/JPL-Caltech/R. Hurt, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Milky_Way_2005.jpg' },
 ]} />
 
-Bu görüntü 1927'de değişti. Jan Oort, yakın yıldızların hareketlerini inceleyerek gökadamızın döndüğünü gösterdi;<Atif k="oort1927" /> Güneş de gökadanın merkezi çevresinde, kendi yörüngesinde akıp gidiyordu.
+</Adim>
+
+<Adim yil={1927} etiket="1927 · Hollanda">
+
+Bu görüntü 1927'de değişti. Hollandalı gökbilimci Jan Oort, yakın yıldızların hareketlerini inceleyerek gökadamızın döndüğünü gösterdi.<Atif k="oort1927" /> Güneş de gökadanın merkezi çevresinde, kendi yörüngesinde akıp gidiyordu.
+
+</Adim>
+
+<Adim>
+
+Bugünkü ölçümler bu yolculuğun boyutunu veriyor. Güneş saatte yaklaşık 828 bin kilometre, yani saniyede 230 kilometre gidiyor.<Atif k="nasastarchild2000" />
+
+Bu hızla bile tek bir tur 226 ile 230 milyon yıl sürüyor.<Atif k="nrao2015" />
+
+</Adim>
+
+<Adim tur="sahne">
 
 <IcIceYorunge />
 
+</Adim>
+
+<Adim tur="genis" yil={1927}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki ama Güneş'in hareket ettiğini zaten herkes söylemiyor muydu?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Bilimin bile Güneş'i yerinde duran bir merkez sandığı asırlardan önce, onun da bir yörüngede yüzdüğünü bir insan nereden bilebilirdi?</MeydanOkuma>
+<MeydanOkuma>Bilimin bile Güneş'i yerinde duran bir merkez sandığı asırlardan önce, onun da bir yörüngede yüzdüğünü anlatan söz neye dayanıyordu?</MeydanOkuma>

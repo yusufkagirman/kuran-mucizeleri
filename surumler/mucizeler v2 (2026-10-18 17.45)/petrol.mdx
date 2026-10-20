@@ -1,0 +1,93 @@
+---
+baslik: Petrol
+hook: |
+  Toprağın derinliklerinden çıkan kapkara petrol, bir zamanlar güneşte yeşeren canlılardan doğdu.
+
+  Ayet, yeşil otlağı çıkaran Allah'ın onu sonra kapkara bir kalıntıya çevirdiğini anlatır. Petrolün içinde bitkilere yeşil rengini veren klorofilin izleri bulununca, kara petrolün de yeşil canlılardan geldiği anlaşıldı.
+kart: Kapkara petrol, bir zamanlar güneşte yeşeren canlılardan doğdu.
+konu: [yeryuzu]
+sureAdi: A'lâ
+ayetler:
+  - { sure: 87, ayet: 4 }
+  - { sure: 87, ayet: 5 }
+vurgu: "فَجَعَلَهُۥ غُثَآءً أَحْوَىٰ"
+nuzul: { donem: "Mekke dönemi", yil: 611 }
+kesif: { yil: 1936, olay: "Treibs, petrolde bitkilerin klorofilinden türeyen molekülleri buldu; petrolün canlı kalıntılarından oluştuğu güçlü biçimde desteklendi.", kaynak: treibs1936 }
+itirazlar:
+  - itiraz: "İbn Abbas ve ilk müfessirler ayeti, yeşil otun kuruyup kararmış bir süprüntüye dönmesi olarak açıklar; bunu her yıl herkes görür. Petrolle ne ilgisi var?"
+    cevap: "Ayetin bu ilk anlamı doğrudur ve geçerliliğini korur. Yeşilden siyaha dönüşüm yeryüzünde her yıl görülür; aynı dönüşüm toprağın derinliklerinde milyonlarca yılda da yaşanır ve petrolü meydana getirir."
+    kaynak: ibnkesir
+  - itiraz: "Petrol çoğunlukla denizdeki plankton ve alglerden oluşur, karadaki otlaktan değil. Karadaki bitkilerden oluşan daha çok kömürdür; ayetteki \"otlak\" petrole uymuyor."
+    cevap: "Petrolün büyük kısmını oluşturan plankton ve algler de klorofil taşıyan yeşil canlılardır; petrolün bir kısmı da karadaki bitkilerden oluşur. Dönüşümün özü aynıdır: yeşil canlı, kapkara bir kalıntıya döner."
+    kaynak: treibs1936
+kaynaklar: [treibs1936, ibnkesir]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Donusum from '../../components/petrol-Donusum.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={611} etiket="611 civarı · Mekke">
+
+Ayetin indiği yıllarda petrol, bazı yerlerde topraktan sızan kara ve yapışkan bir sıvı olarak bilinirdi; nereden geldiğini kimse bilmezdi. A'lâ suresi ise yeşil otlağın akıbetini şöyle anlattı:
+
+</Adim>
+
+<Adim tur="genis" yil={611} etiket="A'lâ suresi">
+
+<AyetParca sure={87} ayet={5} sureAdi="A'lâ" ar="وَٱلَّذِىٓ أَخْرَجَ ٱلْمَرْعَىٰ ۝ فَجَعَلَهُۥ غُثَآءً أَحْوَىٰ" meal="O, yeşillikler bitirmiştir. Sonra da onları siyah çerçöpe çevirmiştir." vurgu="siyah çerçöpe çevirmiştir" />
+
+</Adim>
+
+<Adim>
+
+Ayetteki *ahvâ* kelimesi "koyu, kararmış" demektir. Müfessirler bunu, yeşil otun kuruyup kararmış bir süprüntüye dönmesi olarak açıkladı;<Atif k="ibnkesir" /> bu, herkesin her yıl gördüğü bir değişimdi.
+
+</Adim>
+
+<Adim yil={1936} etiket="1936">
+
+1936'da Alfred Treibs, petrolün içinde bitkilere yeşil rengini veren klorofilden türemiş moleküller buldu.<Atif k="treibs1936" />
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Gorsel duzen="tek" resimler={[{ src: "/img/petrol/treibs-klorofil.png", alt: "İki molekülün yapı formülü yan yana. Solda merkezinde vanadyum (V) bulunan, petrolden elde edilen Treibs molekülü; sağda merkezinde magnezyum (Mg) bulunan klorofil. İkisinin halka iskeleti birbirine çok benziyor.", baslik: "Solda petrolden çıkan molekül, sağda klorofil", not: "Merkezdeki metal farklı (V ve Mg); çevresindeki halka yapısı birbirine çok benzer.", kunye: "Smokefoot, kamu malı, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Treibs%26Chlorophyll.png" }]} />
+
+</Adim>
+
+<Adim>
+
+Kapkara petrolün, bir zamanlar yaşamış canlıların kalıntılarından oluştuğu böylece güçlü biçimde desteklendi. Ayetteki yeşilden siyaha dönüşüm, toprağın derinliklerinde de yaşanıyordu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Donusum />
+
+</Adim>
+
+<Adim tur="genis" yil={1936}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
+
+Peki ama ayet sadece kuruyan otu anlatıyor olamaz mı?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Petrolün nereden geldiğini kimsenin bilmediği bir çağda, yeşil canlının kapkara bir kalıntıya dönüşünü anlatan bu söz bir insanın bilgisinden mi doğdu?</MeydanOkuma>

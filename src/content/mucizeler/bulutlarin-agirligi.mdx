@@ -1,9 +1,9 @@
 ---
 baslik: Bulutların ağırlığı
 hook: |
-  Gökyüzünde pamuk gibi süzülen sıradan bir bulut, yüzlerce ton su taşır.
+  Başınızın üstünde pamuk gibi süzülen sıradan bir bulut, yüzlerce ton su taşır.
 
-  Ayetin indiği çağda bulut, rüzgârla sürüklenen hafif bir buhar gibi görünürdü. Ayet ise rüzgârların taşıdığı bulutları *sikâl*, yani "ağırlar" diye anar. Bir bulutun ne kadar su taşıdığı ancak 20. yüzyılda ölçülebildi.
+  Ayetin indiği çağda bulut, rüzgârın önünde sürüklenen tüy kadar hafif bir buhar gibi görünürdü. Ayet ise rüzgârların taşıdığı bulutları "ağırlar" diye anar. Bir bulutun içinde ne kadar su olduğu ancak 20. yüzyılda ölçülebildi.
 kart: Pamuk gibi süzülen sıradan bir bulut, yüzlerce ton su taşır.
 konu: [gokyuzu]
 sureAdi: A'râf
@@ -14,10 +14,10 @@ nuzul: { donem: "Mekke dönemi", yil: 619 }
 kesif: { yil: 1955, olay: "Uçakla yapılan ölçümler, kümülüs bulutlarının her metreküpünde ne kadar su taşıdığını ortaya koydu; bir bulutun yüzlerce ton su taşıdığı hesaplanabildi.", kaynak: warner1955 }
 itirazlar:
   - itiraz: "Bulutların su taşıdığı yağmurdan beri bilinir; suyu olan şeyin ağır olduğunu söylemek için bilim gerekmez."
-    cevap: "Bulutun yağmur getirdiği bilinse de bulut gözle hafif, havada asılı duran bir şey olarak görünür. Bir bulutun yüzlerce ton su taşıdığı ancak ölçümlerle anlaşıldı."
+    cevap: "Bulutun yağmur getirdiği bilinse de bulut, gözle hafif ve havada asılı duran bir şey olarak görünür. İçindeki suyun yüzlerce ton tuttuğu ancak ölçüm ve hesapla anlaşıldı."
     kaynak: usgs2019
   - itiraz: "Bulut gerçekten ağırsa neden düşmüyor? Bu, ayetteki tarife ters düşmez mi?"
-    cevap: "Bulutun suyu çok küçük damlacıklara bölünmüş, geniş bir alana dağılmıştır; yükselen hava akımları bu damlacıkları havada tutar. Ayet de bulutun kendi kendine durduğunu değil, rüzgârların onu taşıdığını anlatır."
+    cevap: "Bulutun suyu çok küçük damlacıklara bölünmüş ve geniş bir alana dağılmıştır; bulutun nemli havası, altındaki kuru havadan daha hafiftir. Ayet de bulutun kendi kendine durduğunu değil, rüzgârların onu taşıdığını anlatır."
     kaynak: usgs2019
 kaynaklar: [warner1955, usgs2019]
 durum: taslak
@@ -29,21 +29,69 @@ import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Terazi from '../../components/bulutlarin-agirligi-Terazi.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda bulut, rüzgârın önünde sürüklenen, tüy kadar hafif bir buhar gibi görünürdü. Kur'an ise rüzgârların taşıdığı bulutları şöyle anlattı:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={619} etiket="619 civarı · Mekke">
+
+Ayetin indiği yıllarda bulut, gökyüzünde rüzgârın önünde sürüklenen, tüy kadar hafif bir buhar gibi görünürdü. Çölde yaşayan insanlar onu yağmurun habercisi olarak tanırdı; içinde ne kadar su olduğunu bilmenin ise yolu yoktu.
+
+Kur'an, rüzgârların taşıdığı bulutları şöyle anlattı:
+
+</Adim>
+
+<Adim tur="genis" yil={619} etiket="A'râf suresi">
 
 <AyetParca sure={7} ayet={57} sureAdi="A'râf" ar="حَتَّىٰٓ إِذَآ أَقَلَّتْ سَحَابًۭا ثِقَالًۭا سُقْنَٰهُ لِبَلَدٍۢ مَّيِّتٍۢ" meal="...Rüzgarlar, yağmur yüklü bulutları taşıdığında, onu ölü bir memlekete gönderir..." vurgu="yağmur yüklü bulutları" />
 
-Ayetteki *sehâben sikâlen* ifadesinin kelime anlamı "ağır bulutlar"dır; meal bu ağırlığı yağmur yükü olarak verir. Asırlar boyunca ifade, bulutun yağmur getirdiğini anlatan bir benzetme gibi okundu; bir bulutun gerçekte ne kadar ağır olduğunu tartmanın yolu yoktu.
+</Adim>
+
+<Adim>
+
+Ayetteki *sehâben sikâlen* ifadesinin kelime anlamı "ağır bulutlar"dır; meal bu ağırlığı yağmur yükü olarak verir.
+
+Asırlar boyunca ifade, bulutun yağmur getirdiğini anlatan bir benzetme gibi okundu. Bir bulutun gerçekte ne kadar ağır olduğunu tartmanın yolu yoktu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Terazi />
 
-Bu yol 20. yüzyılda açıldı. 1955'te J. Warner, bulutların içine uçakla girip kümülüs bulutlarının taşıdığı su miktarını ölçtü.<Atif k="warner1955" /> Bugün bir kilometreküplük sıradan bir kümülüs bulutunun yaklaşık 500 ton su taşıdığı hesaplanır.<Atif k="usgs2019" />
+</Adim>
+
+<Adim yil={1955} etiket="1955">
+
+Bu yol 20. yüzyılda açıldı. 1955'te J. Warner, pek çok kümülüs bulutunun içindeki sıvı suyu ölçtüğü çalışmasını yayımladı.<Atif k="warner1955" />
+
+</Adim>
+
+<Adim>
+
+Hesap şaşırtıcı derecede basittir. Kümülüs bulutunun her metreküpünde yaklaşık yarım gram su bulunur. Bir kilometreküplük bulutta ise bir milyar metreküp vardır.
+
+Sonuç: sıradan, tek bir bulut yaklaşık 500 ton su taşır.<Atif k="usgs2019" />
+
+</Adim>
+
+<Adim>
+
+Peki bu kadar ağır bir şey nasıl düşmez? Su, gözle görülmeyecek kadar küçük damlacıklara bölünüp geniş bir alana yayılmıştır; bulutun nemli havası, altındaki kuru havadan daha hafiftir.<Atif k="usgs2019" /> Bulutu taşıyan, onu iten rüzgârdır.
+
+</Adim>
+
+<Adim tur="genis" yil={1955}>
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki ama yağmur yüklü bir bulutun ağır olduğunu söylemek gerçekten bir sır mıydı?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Bulutu hafif bir buhar sanan bir çağda, onu "ağır" diye niteleyen bilgi nereden gelmiş olabilir?</MeydanOkuma>
+<MeydanOkuma>Bulutu hafif bir buhar sanan bir çağda, onu "ağır" diye anan söz neye dayanıyordu?</MeydanOkuma>

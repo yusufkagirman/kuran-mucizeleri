@@ -1,0 +1,55 @@
+---
+baslik: Direksiz gökler
+hook: |
+  Uçsuz bucaksız gök hiçbir şeye dayanmadan durur; onu yerinde tutan, gözle görülmeyen bir kuvvettir.
+
+  Ayetin indiği dönemde gök, uçlarından dağlara ya da direklere dayanan bir tavan gibi düşünülürdü. Ayet ise göklerin görebileceğiniz direkler olmadan yükseltildiğini anlatır; İbn Abbas gibi ilk müfessirler bunu "direkleri var ama görünmüyor" diye açıkladı. Gök cisimlerini yerinde tutan görünmez kuvvet, kütleçekim, ancak 1687'de tarif edildi.
+kart: Gök hiçbir şeye dayanmadan durur; onu yerinde tutan, gözle görülmeyen bir kuvvettir.
+konu: [gokyuzu]
+sureAdi: Ra'd
+ayetler:
+  - { sure: 13, ayet: 2 }
+vurgu: "بِغَيْرِ عَمَدٍۢ تَرَوْنَهَا"
+nuzul: { donem: "Mekke dönemi (tartışmalı)", yil: 620 }
+kesif: { yil: 1687, olay: "Newton, gök cisimlerini yörüngelerinde tutan kuvvetin görünmeyen kütleçekim olduğunu gösterdi.", kaynak: newton1687 }
+itirazlar:
+  - itiraz: "Ayetin bir okunuşu \"gördüğünüz gibi direksiz\" demektir; Diyanet meali de böyle çevirir. İbn Kesîr de bağlama uygun olanın bu olduğunu söyler. Bu okunuşta görünmeyen bir direkten söz edilmez."
+    cevap: "Müfessirler iki anlamı da aktarır; İbn Abbas, Mücahid, Hasan ve Katade'den \"gökleri tutan direkler vardır ama siz onları görmezsiniz\" anlamı rivayet edilir. İki okunuşta da gök, görülebilen hiçbir dayanak olmadan durmaktadır."
+    kaynak: ibnkesir
+  - itiraz: "Kütleçekim gökleri değil, gök cisimlerini birbirine bağlar; ayetteki \"gökler\" ile Newton'un kuvveti aynı şey mi?"
+    cevap: "Ayetin devamı, Güneş ve Ay'ın belirlenmiş bir süreye kadar akıp gittiğini anlatır; yani söz, gökteki cisimlerle birlikte bütün yukarı âlem hakkındadır. Bu cisimleri yerlerinde tutan da kütleçekimdir."
+    kaynak: newton1687
+kaynaklar: [newton1687, ibnkesir]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Direkler from '../../etkilesim/direksiz-gokler/Direkler.astro';
+
+Ayetin indiği yıllarda gök, uçlarından bir yere dayanan büyük bir tavan gibi düşünülürdü; bir tavanın da onu taşıyan bir şeye ihtiyacı vardı. Ra'd suresi ise göklerin yükseltilişini şöyle anlatır:
+
+<AyetParca sure={13} ayet={2} sureAdi="Ra'd" ar="ٱللَّهُ ٱلَّذِى رَفَعَ ٱلسَّمَٰوَٰتِ بِغَيْرِ عَمَدٍۢ تَرَوْنَهَا" meal="Gökleri, gördüğünüz gibi, direksiz yükselten... Allah'tır..." vurgu="direksiz yükselten" />
+
+Ayetteki *bi-ğayri amedin teravnehâ* ifadesi iki türlü okunabilir: "gördüğünüz gibi direksiz" ya da "görebileceğiniz direkler olmadan". İbn Abbas, Mücahid, Hasan ve Katade gibi ilk müfessirler ikinci anlamı tercih edip "göklerin direkleri vardır ama görünmez" dedi.<Atif k="ibnkesir" /> Bu görünmeyen direğin ne olduğunu ise kimse söyleyemedi.
+
+<Direkler />
+
+1687'de Isaac Newton, Ay'ı Dünya'nın, gezegenleri Güneş'in çevresinde tutan kuvvetin görünmeyen kütleçekim olduğunu gösterdi.<Atif k="newton1687" /> Gök cisimleri bir yere dayanmıyor, görünmez bir bağla yerlerinde duruyordu.
+
+<Gorsel duzen="karsilastir" resimler={[
+  { src: '/img/direksiz-gokler/newton-gulle.png', alt: "Newton'un çizimi: tepesinde bir dağ (V) olan küre ve dağdan çıkıp küreyi giderek daha uzaktan dolanan eğri yollar (D, E, F, G), dışta iki büyük çember.", baslik: "Newton'un çizimi", not: 'Dağın tepesinden (V) atılan güllelerin yolları ve küreyi çevreleyen yörüngeler.', kunye: 'Isaac Newton, A Treatise of the System of the World (1728), kamu malı', url: "https://commons.wikimedia.org/wiki/File:Newton%27s_cannonball_cropped.svg" },
+  { src: '/img/direksiz-gokler/ay-dunya-epic.png', alt: "Uzaydan çekilmiş fotoğraf: Ay, bulutlu mavi Dünya'nın önünden geçiyor; arkada siyah boşluk.", baslik: 'Uzaydan bakınca', not: "Ay, Dünya'nın önünden geçerken; ikisinin arasında görünür hiçbir bağ yok.", kunye: 'NASA/NOAA, DSCOVR EPIC, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Dark_side_of_the_Moon.png' },
+]} />
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama ayet gerçekten görünmeyen bir direkten mi söz ediyor?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Göğü bir tavana benzeten bir çağda, onu tutan şeyin görünmeyen bir direk olduğunu bir insan nereden bilebilirdi?</MeydanOkuma>

@@ -59,7 +59,7 @@ const adimlar = [
   .liste b { font-family: var(--font-baslik); font-size: var(--fs-lg); }
   .no { font-size: var(--fs-xs); color: var(--konu-dil); }
   [data-adim='1'] li[data-i='1'], [data-adim='2'] li:is([data-i='1'], [data-i='2']), [data-adim='3'] li { opacity: 1; border-color: var(--konu-dil); }
-  button { justify-self: start; font: inherit; font-weight: 600; padding: 10px 22px; border-radius: 999px; border: 0; background: var(--vurgu); color: var(--zemin); cursor: pointer; }
+  button { justify-self: start; font: inherit; font-weight: 600; padding: 10px 22px; border-radius: var(--radius); border: 0; background: var(--vurgu); color: var(--zemin); cursor: pointer; }
   .sayac { grid-column: 1 / -1; display: flex; align-items: baseline; gap: var(--s3); flex-wrap: wrap; justify-content: center; margin: var(--s4) 0 0; padding-top: var(--s4); border-top: 1px solid var(--cizgi-renk); text-align: center; }
   .sayi { font: 700 clamp(3rem, 10vw, 5.5rem) / 1 var(--font-baslik); color: var(--konu-dil); font-variant-numeric: tabular-nums; }
   @media (max-width: 640px) { .halka { grid-template-columns: 1fr; } .sahne { grid-row: auto; } }

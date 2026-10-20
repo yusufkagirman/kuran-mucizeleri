@@ -1,0 +1,96 @@
+---
+baslik: Direksiz gökler
+hook: |
+  Başınızı kaldırıp baktığınız gök hiçbir şeye dayanmadan durur. Onu yerinde tutan, gözle görülmeyen bir kuvvettir.
+
+  Ayetin indiği çağda gök, uçlarından bir yere dayanan dev bir tavana benzetilirdi. Ayet ise göklerin, görebileceğiniz direkler olmadan yükseltildiğini anlatır. Gök cisimlerini yerinde tutan görünmez kuvvet, kütleçekim, ancak 1687'de tarif edildi.
+kart: Gök hiçbir şeye dayanmadan durur; onu yerinde tutan, gözle görülmeyen bir kuvvettir.
+{{SABIT}}
+itirazlar:
+  - itiraz: "Ayetin bir okunuşu \"gördüğünüz gibi direksiz\" demektir; Diyanet meali de böyle çevirir. İbn Kesîr de bu okunuşu tercih eder. Bu okunuşta görünmeyen bir direkten söz edilmez."
+    cevap: "Müfessirler iki anlamı da aktarır; İbn Abbas, Mücahid, Hasan ve Katade'den \"gökleri tutan direkler vardır ama siz onları görmezsiniz\" anlamı rivayet edilir. İki okunuşta da gök, görülebilen hiçbir dayanak olmadan durmaktadır."
+    kaynak: ibnkesir
+  - itiraz: "Kütleçekim gökleri değil, gök cisimlerini birbirine bağlar; ayetteki \"gökler\" ile Newton'un kuvveti aynı şey mi?"
+    cevap: "Ayetin devamı, Güneş ve Ay'ın belirlenmiş bir süreye kadar akıp gittiğini anlatır; yani söz, gökteki cisimlerle birlikte bütün yukarı âlem hakkındadır. Bu cisimleri yerlerinde tutan da kütleçekimdir."
+    kaynak: newton1687
+kaynaklar: [newton1687, newtonfordham, ibnkesir, niv2011job]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Direkler from '../../etkilesim/direksiz-gokler/Direkler.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={620} etiket="620 civarı · Mekke">
+
+Ayetin indiği yıllarda gök, uçlarından bir yere dayanan büyük bir tavan gibi düşünülürdü. Bir tavanın da onu taşıyan bir şeye ihtiyacı vardı.
+
+Bölgenin eski metinleri bile göğün direklerinden söz eder; Eyüp kitabında "göğün direkleri titrer" denir.<Atif k="niv2011job" />
+
+</Adim>
+
+<Adim>
+
+Ra'd suresi ise göklerin yükseltilişini şöyle anlatır:
+
+</Adim>
+
+<Adim tur="genis" yil={620} etiket="Ra'd suresi">
+
+{{AYET1}}
+
+</Adim>
+
+<Adim>
+
+Ayetteki *bi-ğayri amedin teravnehâ* ifadesi iki türlü okunabilir: "gördüğünüz gibi direksiz" ya da "görebileceğiniz direkler olmadan".
+
+İbn Abbas, Mücahid, Hasan ve Katade gibi ilk müfessirler ikinci anlamı da aktardı: "Göklerin direkleri vardır, ama siz onları görmezsiniz."<Atif k="ibnkesir" /> Bu görünmeyen direğin ne olduğunu ise kimse söyleyemedi.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Direkler />
+
+</Adim>
+
+<Adim yil={1687} etiket="1687 · İngiltere">
+
+Cevap bin yıl sonra geldi. 1687'de Isaac Newton, *Principia* adlı eserinde gezegenleri yollarında tutan şeyin, Güneş'in ve gezegenlerin merkezine doğru çeken bir kuvvet olduğunu gösterdi.<Atif k="newtonfordham" />
+
+</Adim>
+
+<Adim>
+
+Bu kuvvetin, kütleçekimin, ne rengi vardı ne de şekli. Ay'ı Dünya'nın, Dünya'yı Güneş'in çevresinde tutuyordu.<Atif k="newton1687" /> Gök cisimleri hiçbir yere dayanmıyor, görünmez bir bağla yerlerinde duruyordu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+{{GORSEL1}}
+
+</Adim>
+
+<Adim tur="genis" yil={1687}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
+
+Peki ama ayet gerçekten görünmeyen bir direkten mi söz ediyor?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Göğü bir tavana benzeten bir çağda, onun görünmeyen bir bağla durduğunu anlatan söz neye dayanıyordu?</MeydanOkuma>

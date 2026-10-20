@@ -1,0 +1,92 @@
+---
+baslik: Soyu kesik olan
+hook: |
+  Oğulları ölen Peygamber'e "soyu kesik" diye güldüler. Bugün onun adı her gün milyonlarca kez anılıyor; gülenleri ise kimse hatırlamıyor.
+
+  Mekke'de oğlu kalmayan adamın adının da onunla öleceğine inanılırdı. Kevser suresi, alay edilenin değil alay edenin unutulacağını bildirdi. Peygamber'in soyu kızı Fâtıma'dan sürdü; onu "soyu kesik" diye küçümseyenleri ise çoğunlukla bu surenin hikâyesinden biliyoruz.
+kart: Oğulları ölen Peygamber'e "soyu kesik" diye güldüler. Bugün onun adı her gün anılıyor, gülenleri kimse hatırlamıyor.
+{{SABIT}}
+itirazlar:
+  - itiraz: "Peygamber'e \"ebter\" diyenlerden Âs b. Vâil'in oğulları Amr ve Hişâm Müslüman oldu, onun soyu da sürdü. Ayet bu durumda nasıl doğru çıkmış olur?"
+    cevap: "Âs'ın oğulları Müslüman olunca babalarının düşmanlığından ayrılıp Peygamber'in safına geçti; Hişâm, Habeşistan'a hicret eden ilk Müslümanlar arasındaydı. Müfessirler ebteri hayırdan ve anılmaktan kesilmek diye de açıklar; Âs'ın adı bugün yalnız bu surenin hikâyesinde geçer."
+    kaynak: fayda1991asbvail
+  - itiraz: "Arap geleneğinde soy babadan sayılır. Kızından süren bir soy, o gün \"ebter\" olmamak sayılır mıydı?"
+    cevap: "Araplar soyu babadan saydığı için Peygamber'i ebter saydılar. Peygamber ise Fâtıma'nın oğulları Hasan ile Hüseyin'i kendi evladı gibi andı; onların soyu bugüne kadar Peygamber'in soyu olarak bilinir."
+    kaynak: figlali1997hasan
+  - itiraz: "Ayet biyolojik soyu değil, hayrın ve anılmanın kesilmesini anlatıyor olabilir. Bunu bir gelecek haberi saymak zorlama değil mi?"
+    cevap: "Müfessirler ebteri hayırdan ve anılmaktan kesilmek diye de açıklar. Ayet iki yönden de gerçekleşti: Peygamber'in hem adı hem soyu sürdü, ona kin tutanların adı ise unutuldu."
+    kaynak: uzum2022kevser
+kaynaklar: [uzum2022kevser, ibnkesir108, fayda1991asbvail, figlali1997hasan]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Soy from '../../components/kevser-ebter-Soy.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim tur="sahne" yil={613}>
+
+{{GORSEL1}}
+
+</Adim>
+
+<Adim yil={613} etiket="613 civarı · Mekke">
+
+Mekke'de bir adamın adı oğullarıyla yaşardı. Oğlu kalmayana *ebter* denirdi: kökü kesik, soyu sürmeyen.<Atif k="fayda1991asbvail" />
+
+Peygamber'in oğulları Kasım ve Abdullah küçük yaşta öldü.<Atif k="fayda1991asbvail" />
+
+</Adim>
+
+<Adim>
+
+Düşmanları bu acıyı alay konusu yaptı. İbn Abbas, Mücahid ve Katade'nin aktardığına göre Âs b. Vâil, Peygamber için "Bırakın onu, o soyu kesik biri; ölünce adı da anılmaz" dedi.<Atif k="ibnkesir108" /><Atif k="uzum2022kevser" />
+
+Kevser suresi bu söz üzerine indi:
+
+</Adim>
+
+<Adim tur="genis" yil={613} etiket="Kevser suresi">
+
+{{AYET1}}
+
+</Adim>
+
+<Adim>
+
+O gün Peygamber'in yaşayan bir oğlu yoktu ve ardında bir oğul bırakmayacaktı. Ayet, gözle görülen gerçeğin tam tersini söylüyordu: soyu kesik olan sen değilsin, sana kin tutandır.
+
+</Adim>
+
+<Adim yil={625} etiket="625 · Medine">
+
+Birkaç yıl sonra, Medine'de, kızı Fâtıma'nın oğlu Hasan doğdu; ardından kardeşi Hüseyin geldi.<Atif k="figlali1997hasan" /> Peygamber'in soyu bu iki torundan çoğalarak bugüne kadar sürdü.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Soy />
+
+</Adim>
+
+<Adim>
+
+Bugün dünyanın her yerinde ezanlarda, namazlarda Peygamber'in adı anılıyor. Ona "soyu kesik" diyen adamı ise insanlar çoğunlukla bu surenin hikâyesinden tanıyor.
+
+</Adim>
+
+</Hikaye>
+
+Peki ama alay edenlerin de soyu sürmedi mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Oğullarını birer birer toprağa veren bir insan, kendi adının asırlarca anılacağını, ona gülenlerin ise unutulacağını nasıl bilebilirdi?</MeydanOkuma>

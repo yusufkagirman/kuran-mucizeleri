@@ -1,0 +1,55 @@
+---
+baslik: Firavunun bedeni
+hook: |
+  Denizde boğulan Firavun'un ruhu kurtulmadı, bedeni kurtarıldı: sonra gelenler görüp ibret alsın diye.
+
+  Yûnus suresi, Musa'nın peşinden denize girip boğulan Firavun'a bedeninin kurtarılacağını ve sonrakilere ibret olacağını söyler. Firavunların mumyalanmış bedenleri ise ancak 1881'de gizli bir mezarda bulundu ve bugün Kahire'de sergileniyor.
+kart: Denizde boğulan Firavun'un ruhu kurtulmadı, bedeni kurtarıldı; sonra gelenler görüp ibret alsın diye.
+konu: [tarih]
+sureAdi: Yûnus
+ayetler:
+  - { sure: 10, ayet: 92 }
+vurgu: "نُنَجِّيكَ بِبَدَنِكَ"
+nuzul: { donem: "Mekke dönemi", yil: 620 }
+kesif: { yil: 1881, olay: "Deyrülbahri'deki gizli mezarda II. Ramses dahil firavunların mumyalanmış bedenleri bulundu.", kaynak: maspero1889 }
+itirazlar:
+  - itiraz: "Eski müfessirler ayeti \"Firavun'un cesedi sahile atıldı ki İsrailoğulları onun öldüğünü görsün\" diye anladı. \"Bedeni bugüne kadar korunacak\" anlamı sonradan yüklenmiş olamaz mı?"
+    cevap: "Ayet, bedenin \"senden sonrakilere\" ibret olacağını söyler; bu, yalnız o gün sahilde olanlarla sınırlı değildir. Cesedin sahile atılması da bedenin sonraki nesillere ibret olarak kalması da aynı sözün içindedir."
+    kaynak: bucaille1976
+  - itiraz: "Kur'an Firavun'un adını vermez. Müzedeki mumyalardan hiçbirinin Musa'nın karşısındaki firavun olduğu kanıtlanmış değil."
+    cevap: "Ayet bir isim vermez; anlattığı, boğulan Firavun'un bedeninin kurtarılıp ibret olacağıdır. Musa'nın firavunu en çok II. Ramses ya da oğlu Merneptah olarak gösterilir ve ikisinin bedeni de bugün Kahire'de sergileniyor."
+    kaynak: bucaille1976
+  - itiraz: "Bütün firavunlar zaten mumyalanırdı. Bir firavunun bedeninin korunmasında olağanüstü ne var?"
+    cevap: "Mumyalanmak bedeni korumaya yetmedi; firavun mezarlarının çoğu soyuldu, bedenlerin büyük kısmı kayboldu. Deyrülbahri'de bulunanlar, saklandıkları gizli mezar sayesinde bugüne ulaşıp herkesin gözü önüne çıktı."
+    kaynak: maspero1889
+kaynaklar: [maspero1889, smith1912, taberiYunus]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Kazi from '../../components/firavunun-bedeni-Kazi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+
+Ayetin indiği yıllarda Mekke'de Firavun, kitaplardan bilinen bir isimdi. Tevrat onun ordusunun denizde boğulduğunu ve kimsenin kurtulmadığını anlatıyordu; bedenine ne olduğundan söz etmiyordu. Yûnus suresi ise boğulan Firavun'a şöyle seslenir:
+
+<AyetParca sure={10} ayet={92} sureAdi="Yûnus" ar="فَٱلْيَوْمَ نُنَجِّيكَ بِبَدَنِكَ لِتَكُونَ لِمَنْ خَلْفَكَ ءَايَةًۭ" meal="Senden sonrakilere bir ibret teşkil etmesi için bugün sadece senin cesedini çıkarıp (sahile) atacağız..." vurgu="senin cesedini çıkarıp (sahile) atacağız" />
+
+Ayet, ruhun değil bedenin kurtarılacağını ve bu bedenin "senden sonrakilere" bir ibret olacağını söylüyordu. Asırlar boyunca bu söz, cesedin sahile vurduğu ve İsrailoğullarının onu gördüğü şeklinde anlaşıldı.<Atif k="taberiYunus" /> Firavunların bedenleri ise kumların altında, kimsenin bilmediği mezarlarda duruyordu.
+
+<Kazi />
+
+1881'de Deyrülbahri'deki gizli bir mezarda, aralarında II. Ramses'in de bulunduğu firavunların mumyalanmış bedenleri ortaya çıkarıldı.<Atif k="maspero1889" /> Bu bedenler bugün Kahire'de sergileniyor.
+
+Peki ama bu bedenlerden biri gerçekten Musa'nın karşısındaki firavun mu?
+
+<Gorsel duzen="karsilastir" genis baslik="Musa'nın firavunu olarak en çok gösterilen iki isim" resimler={[
+  { src: '/img/firavunun-bedeni/ramses-ii.jpg', alt: "II. Ramses'in mumyalanmış başı, yandan ve önden iki fotoğraf.", baslik: 'II. Ramses', not: 'Mumyanın yandan ve önden görünüşü.', kunye: 'G. Elliot Smith, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Mummy_of_Ramesses_II_-_02_(cropped).JPG' },
+  { src: '/img/firavunun-bedeni/merneptah.jpg', alt: "Merneptah'ın mumyalanmış başı ve göğsü, önden fotoğraf.", baslik: 'Merneptah', not: 'Mumyanın önden görünüşü.', kunye: 'G. Elliot Smith, kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Merneptah_mummy_head.png' },
+]} />
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Firavunların mezarlarının yerini kimsenin bilmediği bir çağda, Mekke'de yaşayan bir insan, Firavun'un bedeninin sonraki nesillerin göreceği bir ibret olarak kalacağını nasıl söyleyebilirdi?</MeydanOkuma>

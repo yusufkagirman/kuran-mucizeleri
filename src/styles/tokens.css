@@ -1,112 +1,101 @@
-/* Marka kiti: sitedeki her renk, yazı, boşluk ve hareket buradan gelir. Elle renk yazma, token kullan. */
+/* Marka kiti v2 (2026-10-16, public/sunum/marka-kiti.html): sitedeki her renk, yazı, boşluk ve hareket buradan gelir.
+   Katmanlar: 1) ham ölçekler (gri 1-12, zümrüt, veri)  2) anlam (zemin, metin, vurgu)  3) bileşenler yalnız anlamı kullanır.
+   Eski ad uyumu: data-palet='gece' = koyu, 'parsomen' = açık; --murekkep, --cizgi-renk vb. adlar korunur. */
 
 :root {
-  /* Yazı */
+  /* Yazı: tek sans aile, ayet için Amiri Quran */
   --font-ayet: 'Amiri Quran', 'Scheherazade New', serif;
-  --font-govde: 'Literata', Georgia, serif;
-  --font-baslik: 'Playfair Display', Georgia, serif;
-  --font-arayuz: 'IBM Plex Sans', 'IBM Plex Sans Arabic', system-ui, sans-serif;
+  --font-govde: 'Figtree', system-ui, sans-serif;
+  --font-baslik: var(--font-govde);
+  --font-arayuz: var(--font-govde);
 
+  /* 1.25 oranlı ölçek, 18 px gövde */
   --fs-xs: 0.8125rem;
   --fs-sm: 0.9375rem;
-  --fs-md: 1.0625rem;
+  --fs-md: 1.125rem;
   --fs-lg: 1.375rem;
-  --fs-xl: 2rem;
-  --fs-2xl: clamp(2.25rem, 5vw, 3.5rem);
-  --fs-ayet: clamp(1.75rem, 4vw, 2.5rem);
+  --fs-xl: clamp(1.75rem, 3.6vw, 2.25rem);
+  --fs-2xl: clamp(2.5rem, 6vw, 3.75rem);
+  --fs-ayet: clamp(1.75rem, 4.2vw, 2.5rem);
 
   /* 8 px ızgara */
   --s1: 4px; --s2: 8px; --s3: 16px; --s4: 24px; --s5: 32px; --s6: 48px; --s7: 64px; --s8: 96px;
-  --radius: 10px;
-  --olcu: 68ch; /* okuma sütunu */
+  --radius: 8px;
+  --olcu: 64ch;
 
   /* Şema */
   --cizgi: 1.5px;
   --cizgi-vurgu: 2.5px;
 
-  /* Hareket */
-  --t-mikro: 120ms;
-  --t-bilesen: 250ms;
-  --t-bolum: 450ms;
-  --ease-giris: cubic-bezier(0.05, 0.7, 0.1, 1);
-  --ease-cikis: cubic-bezier(0.3, 0, 0.8, 0.15);
+  /* Hareket: UI 300 ms altı; giriş/çıkış ease-out, ekranda yer değiştirme ease-in-out */
+  --t-mikro: 160ms;
+  --t-bilesen: 220ms;
+  --t-bolum: 400ms;
+  --ease-giris: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-cikis: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-hareket: cubic-bezier(0.77, 0, 0.175, 1);
 }
 
-/* Açık tema: Parşömen + lacivert (varsayılan) */
+/* Açık tema (varsayılan) */
 :root, [data-palet='parsomen'] {
-  --zemin: #F4EDE0;
-  --yuzey: #FBF7EF;
-  --yuzey-2: #EDE3D1;
-  --murekkep: #14274E;
-  --soluk: #5E6577;
-  --cizgi-renk: #D9CDB6;
-  --vurgu: #A8452B;
-  --vurgu-2: #2E6A73;
-  --vurgu-zemin: rgba(168, 69, 43, 0.08);
-  --uyari: #9A5B12;
-
-  --fosfor: rgba(255, 214, 0, 0.55);
-  --konu-gokyuzu: #2F5597;
-  --konu-yeryuzu: #6B5B2E;
-  --konu-canlilar: #4E7A3A;
-  --konu-insan: #A8452B;
-  --konu-tarih: #9A7A2E;
-  --konu-gelecek: #2E6A73;
-  --konu-dil: #6B4A93;
-  --konu-sayilar: #8A3D62;
+  --g1: #FCFCFC; --g2: #F8F8F8; --g3: #F1F1F1; --g4: #E9E9E9; --g5: #E2E2E2; --g6: #DADADA;
+  --g7: #CECECE; --g8: #BBBBBB; --g9: #8D8D8D; --g10: #838383; --g11: #646464; --g12: #202020;
+  --a-cizgi: rgba(0, 0, 0, 0.085); --a-cizgi-guclu: rgba(0, 0, 0, 0.15);
+  --y3: #E6F6EB; --y9: #1A8754; --y10: #147A4A; --y11: #18794E; --y-ust: #FFFFFF;
+  --fosfor: #FFE76B;
+  --v-mavi: #3E63DD; --v-kirmizi: #DC3E42; --v-kum: #EBDDB8; --v-deniz: #D5E3EB; --v-kara: #F1F1EF;
+  --golge: 0 0 0 1px rgba(0, 0, 0, 0.06), 0 1px 2px rgba(0, 0, 0, 0.05), 0 8px 24px -10px rgba(0, 0, 0, 0.14);
+  --konu-gokyuzu: #3E63DD; --konu-yeryuzu: #9A6B2F; --konu-canlilar: #2B9A66; --konu-insan: #CA4A64;
+  --konu-tarih: #AD5A1F; --konu-gelecek: #0D74CE; --konu-dil: #8E4EC6; --konu-sayilar: #C2298A;
+  --uyari: #AB6400;
   color-scheme: light;
 }
 
-/* Koyu tema: Gece mürekkebi + altın */
+/* Koyu tema */
 [data-palet='gece'] {
-  --zemin: #0B1020;
-  --yuzey: #131A33;
-  --yuzey-2: #1B2445;
-  --murekkep: #F3EBDD;
-  --soluk: #A9A9BC;
-  --cizgi-renk: #2A3358;
-  --vurgu: #C9A24B;
-  --vurgu-2: #2FA3A0;
-  --vurgu-zemin: rgba(201, 162, 75, 0.12);
-  --uyari: #E0A458;
-
-  --fosfor: rgba(255, 200, 40, 0.38);
-  --konu-gokyuzu: #7FA7E6;
-  --konu-yeryuzu: #C9A27A;
-  --konu-canlilar: #8FBF7A;
-  --konu-insan: #E07A6A;
-  --konu-tarih: #C9A24B;
-  --konu-gelecek: #2FA3A0;
-  --konu-dil: #B48CD9;
-  --konu-sayilar: #E58FB8;
+  --g1: #111111; --g2: #191919; --g3: #222222; --g4: #2A2A2A; --g5: #313131; --g6: #3A3A3A;
+  --g7: #484848; --g8: #606060; --g9: #6E6E6E; --g10: #7B7B7B; --g11: #B4B4B4; --g12: #EEEEEE;
+  --a-cizgi: rgba(255, 255, 255, 0.09); --a-cizgi-guclu: rgba(255, 255, 255, 0.16);
+  --y3: #0F2E22; --y9: #2F9E6A; --y10: #37AE76; --y11: #4CC38A; --y-ust: #FFFFFF;
+  --fosfor: #6B5A00;
+  --v-mavi: #7B9BF5; --v-kirmizi: #FF7A72; --v-kum: #3F3A2B; --v-deniz: #0F1A21; --v-kara: #1B1D1E;
+  --golge: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 28px -12px rgba(0, 0, 0, 0.8);
+  --konu-gokyuzu: #7B9BF5; --konu-yeryuzu: #D6A35C; --konu-canlilar: #4CC38A; --konu-insan: #F0819C;
+  --konu-tarih: #F0A060; --konu-gelecek: #70B8FF; --konu-dil: #BF7AF0; --konu-sayilar: #F17EC2;
+  --uyari: #FFCA16;
   color-scheme: dark;
 }
 
-/* Kullanıcı seçmediyse sistem ayarına uy */
+/* Kullanıcı seçmediyse sistem ayarına uy (koyu değerlerin aynısı) */
 @media (prefers-color-scheme: dark) {
   :root:not([data-palet='parsomen']) {
-  --zemin: #0B1020;
-  --yuzey: #131A33;
-  --yuzey-2: #1B2445;
-  --murekkep: #F3EBDD;
-  --soluk: #A9A9BC;
-  --cizgi-renk: #2A3358;
-  --vurgu: #C9A24B;
-  --vurgu-2: #2FA3A0;
-  --vurgu-zemin: rgba(201, 162, 75, 0.12);
-  --uyari: #E0A458;
-
-  --fosfor: rgba(255, 200, 40, 0.38);
-  --konu-gokyuzu: #7FA7E6;
-  --konu-yeryuzu: #C9A27A;
-  --konu-canlilar: #8FBF7A;
-  --konu-insan: #E07A6A;
-  --konu-tarih: #C9A24B;
-  --konu-gelecek: #2FA3A0;
-  --konu-dil: #B48CD9;
-  --konu-sayilar: #E58FB8;
-  color-scheme: dark;
+    --g1: #111111; --g2: #191919; --g3: #222222; --g4: #2A2A2A; --g5: #313131; --g6: #3A3A3A;
+    --g7: #484848; --g8: #606060; --g9: #6E6E6E; --g10: #7B7B7B; --g11: #B4B4B4; --g12: #EEEEEE;
+    --a-cizgi: rgba(255, 255, 255, 0.09); --a-cizgi-guclu: rgba(255, 255, 255, 0.16);
+    --y3: #0F2E22; --y9: #2F9E6A; --y10: #37AE76; --y11: #4CC38A; --y-ust: #FFFFFF;
+    --fosfor: #6B5A00;
+    --v-mavi: #7B9BF5; --v-kirmizi: #FF7A72; --v-kum: #3F3A2B; --v-deniz: #0F1A21; --v-kara: #1B1D1E;
+    --golge: 0 0 0 1px rgba(255, 255, 255, 0.08), 0 1px 2px rgba(0, 0, 0, 0.5), 0 10px 28px -12px rgba(0, 0, 0, 0.8);
+    --konu-gokyuzu: #7B9BF5; --konu-yeryuzu: #D6A35C; --konu-canlilar: #4CC38A; --konu-insan: #F0819C;
+    --konu-tarih: #F0A060; --konu-gelecek: #70B8FF; --konu-dil: #BF7AF0; --konu-sayilar: #F17EC2;
+    --uyari: #FFCA16;
+    color-scheme: dark;
+  }
 }
+
+/* Anlam katmanı (eski adlar korunur) */
+:root {
+  --zemin: var(--g1);
+  --yuzey: var(--g2);
+  --yuzey-2: var(--g3);
+  --murekkep: var(--g12);
+  --soluk: var(--g11);
+  --cizgi-renk: var(--a-cizgi);
+  --vurgu: var(--y9);
+  --vurgu-metin: var(--y11);
+  --vurgu-ust: var(--y-ust);
+  --vurgu-zemin: var(--y3);
+  --vurgu-2: var(--v-mavi);
 }
 
 @media (prefers-reduced-motion: reduce) {

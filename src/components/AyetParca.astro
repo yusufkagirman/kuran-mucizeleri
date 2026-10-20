@@ -1,6 +1,5 @@
 ---
-// Akış içinde ayetin yalnız mucize olan kısmı: kısa Arapça parça + meal parçası; mucizeye işaret eden ifade sarı fosforlu.
-import Yildiz from './Yildiz.astro';
+// Ayetin yalnız mucize olan kısmı, marka kitindeki ayet bloğu: Arapça ve meal aynı eksende ortalı; mucizeye işaret eden ifade fosforlu.
 interface Props { sure: number; ayet: number; sureAdi: string; ar: string; meal: string; vurgu: string; mutercim?: string }
 const { sure, ayet, sureAdi, ar, meal, vurgu, mutercim = 'Diyanet İşleri Başkanlığı' } = Astro.props;
 const [once, sonra] = meal.includes(vurgu) ? meal.split(vurgu) : [meal, ''];
@@ -11,7 +10,7 @@ const ses = `https://everyayah.com/data/Alafasy_128kbps/${pad(sure)}${pad(ayet)}
   <p class="ar arapca" lang="ar">{ar}</p>
   <blockquote class="meal">«{once}{meal.includes(vurgu) && <mark>{vurgu}</mark>}{sonra}»</blockquote>
   <figcaption class="arayuz">
-    <Yildiz boyut={14} /> {sureAdi} {sure}:{ayet} · Meal: {mutercim}
+    <span>{sureAdi} {sure}:{ayet} · Meal: {mutercim}</span>
     <button type="button" class="dinle" data-ses={ses} aria-label="Ayeti dinle">▶ Dinle</button>
   </figcaption>
 </figure>
@@ -27,12 +26,13 @@ const ses = `https://everyayah.com/data/Alafasy_128kbps/${pad(sure)}${pad(ayet)}
 </script>
 
 <style>
-  .ayet-parca { margin: var(--s6) 0; padding: var(--s4) 0 var(--s4) var(--s4); border-left: 3px solid var(--vurgu); }
-  .ar { font-size: clamp(1.8rem, 4vw, 2.4rem); line-height: 1.9; margin: 0 0 var(--s2); text-align: right; }
-  .meal { margin: 0 0 var(--s3); font-family: var(--font-baslik); font-size: clamp(1.3rem, 2.8vw, 1.7rem); line-height: 1.5; }
-  mark { background: linear-gradient(transparent 50%, var(--fosfor) 50%); color: inherit; padding: 0 2px; }
-  figcaption { display: flex; align-items: center; gap: var(--s2); flex-wrap: wrap; font-size: var(--fs-xs); color: var(--soluk); }
-  figcaption :global(svg) { color: var(--vurgu); }
-  .dinle { font: inherit; margin-left: auto; padding: 4px 12px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--murekkep); cursor: pointer; }
-  .dinle:hover { border-color: var(--vurgu); color: var(--vurgu); }
+  .ayet-parca { margin: var(--s6) 0; text-align: center; }
+  .ar { font-size: clamp(1.6rem, 3.6vw, 2.2rem); line-height: 2.1; margin: 0 0 var(--s3); text-align: center; }
+  .meal { margin: 0 auto var(--s3); max-width: 34em; font-size: clamp(1.0625rem, 2vw, 1.1875rem); line-height: 1.6; }
+  mark { background: linear-gradient(transparent 12%, var(--fosfor) 12%, var(--fosfor) 88%, transparent 88%); color: inherit; padding: 0 0.12em; border-radius: 2px; }
+  figcaption { display: flex; align-items: center; justify-content: center; gap: var(--s3); flex-wrap: wrap; font-size: var(--fs-xs); color: var(--soluk); }
+  .dinle { font: inherit; padding: 4px 12px; border-radius: var(--radius); border: 0; background: var(--yuzey-2); color: var(--murekkep); cursor: pointer; transition: transform var(--t-mikro) var(--ease-giris); }
+  .dinle:active { transform: scale(0.97); }
+  @media (hover: hover) and (pointer: fine) { .dinle:hover { color: var(--vurgu-metin); } }
+  @media (max-width: 899px) { .ar { font-size: 1.3rem; line-height: 2.3; } }
 </style>

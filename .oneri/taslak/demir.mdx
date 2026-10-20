@@ -1,0 +1,113 @@
+---
+baslik: Demirin indirilmesi
+hook: |
+  Elinizdeki demir bu dünyada doğmadı.
+
+  Bıçaktaki, çivideki, kanınızdaki demir; hepsi Güneş'ten önce yaşamış yıldızların içinde oluştu ve o yıldızlar patlayınca uzaya saçıldı. Ayetin indiği gün bunu bilen kimse yoktu. İnsanlığın bunu öğrenmesi için yıldızların içine bakmayı öğrenmesi gerekti.
+kart: Elinizdeki demir bu dünyada doğmadı; patlayan yıldızlardan geldi.
+konu: [gokyuzu]
+sureAdi: Hadîd
+ayetler:
+  - { sure: 57, ayet: 25 }
+vurgu: "وَأَنزَلْنَا ٱلْحَدِيدَ"
+nuzul: { donem: "Medine dönemi", yil: 625 }
+kesif: { yil: 1957, olay: "Demirin yıldızların içinde oluştuğu ve yıldız patlamalarıyla uzaya saçıldığı gösterildi.", kaynak: b2fh1957 }
+itirazlar:
+  - itiraz: "\"İndirmek\" burada sadece \"yaratıp vermek\" anlamında olamaz mı?"
+    cevap: "Bu anlam da verilmiştir; kelime bağlamına göre \"yaratmak\" ve \"bahşetmek\" diye de anlaşılır. Ancak fiilin asıl anlamı yukarıdan aşağıya indirmektir ve Dünya'daki demirin, Dünya oluşmadan önce yıldızların içinde oluştuğu bugün bilinmektedir."
+    kaynak: gezer2006
+  - itiraz: "Kur'an \"indirdik\" fiilini hayvanlar (Zümer 39:6) ve elbise (A'râf 7:26) için de kullanır; demirde neden farklı anlaşılsın?"
+    cevap: "O ayetlerde de indirmek, Allah katından verilen bir nimeti anlatır. Demirde bu anlamın yanında, maddenin kendisinin yeryüzünde değil yıldızlarda oluştuğu da bugün bilinmektedir."
+  - itiraz: "Karbon, oksijen, silisyum gibi başka elementler de yıldızlarda oluşur; demirin özel bir yanı var mı?"
+    cevap: "Demir, yıldızın içinde enerji üreterek oluşabilen son elementtir. Demiri kaynaştırmak enerji kazandırmaz; çekirdeğinde demir biriken büyük yıldız artık ayakta duramaz, çöker ve patlar. Demir, yıldızın ömrünü bitiren elementtir."
+    kaynak: nasa2013supernova
+  - itiraz: "Gökten düşen meteor demiri eski çağlarda da biliniyordu."
+    cevap: "Doğru; Tutankamon'un mezarından çıkan hançerin bıçağı bile göktaşı demirindendir. Ama bunlar düşen birkaç taştan elde edilen nadir parçalardı. Yeryüzündeki bütün demirin yıldızlarda oluştuğu ise ancak 20. yüzyılda anlaşıldı."
+    kaynak: eos2016tut
+kaynaklar: [hoyle1954, b2fh1957, nasa2013supernova, gezer2006, eos2016tut]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Sahne from '../../etkilesim/demir/Sahne.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={625} etiket="625 civarı · Medine">
+
+Ayetin indiği yıllarda demir, topraktan kazılıp ocaklarda eritilen bir madendi. Kılıç, zırh, çapa ve çivi ondan yapılırdı.
+
+Nereden geldiğini soran yoktu; cevap ayağın altındaydı. Kur'an ise ondan şöyle söz etti:
+
+</Adim>
+
+<Adim tur="genis" yil={625} etiket="Hadîd suresi">
+
+{{AYET1}}
+
+</Adim>
+
+<Adim>
+
+Ayetteki *enzelnâ* fiili, bir şeyin yukarıdan aşağıya inmesini anlatır; Kur'an aynı fiili gökten inen yağmur için de kullanır (Kâf 50:9).
+
+Asırlar boyunca bu ifade çoğunlukla "yarattı, insanlara bahşetti" anlamında okundu.<Atif k="gezer2006" /> Demirin gerçekten yukarıdan geldiğini düşündürecek hiçbir bilgi yoktu.
+
+</Adim>
+
+<Adim>
+
+O bilgi, insanlığın yıldızların içinde neler olduğunu hesaplamayı öğrenmesiyle geldi. Önce kısaca yıldızın içine bakalım:
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Sahne />
+
+</Adim>
+
+<Adim yil={1954} etiket="1954 · İngiltere">
+
+1954'te İngiliz astronom Fred Hoyle, demir ve ona yakın elementlerin çok sıcak yıldızların içinde oluşabileceğini hesapladı.<Atif k="hoyle1954" />
+
+</Adim>
+
+<Adim yil={1957} etiket="1957">
+
+Üç yıl sonra Hoyle, Margaret ve Geoffrey Burbidge ve William Fowler'la birlikte yüz sayfalık bir makale yayımladı. Makale, elementlerin yıldızlarda nasıl oluştuğunu tek tek anlattı: demir, büyük yıldızların içinde oluşuyor ve bu yıldızlar patlayınca uzaya saçılıyordu.<Atif k="b2fh1957" />
+
+</Adim>
+
+<Adim>
+
+Demir yıldızın son durağıdır: onu kaynaştırmak enerji kazandırmaz. Çekirdeğinde demir biriken yıldız ayakta duramaz, çöker ve patlar.<Atif k="nasa2013supernova" /> Dünyamız, işte böyle ölen yıldızların uzaya saçtığı maddeden oluştu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+{{GORSEL1}}
+
+</Adim>
+
+<Adim tur="genis" yil={1957}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
+
+Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Demiri herkes topraktan çıkarırken, onun yukarıdan geldiğini anlatan bu söz neye dayanıyordu?</MeydanOkuma>

@@ -1,10 +1,10 @@
 ---
 baslik: Bel ile göğüs kemikleri arası
 hook: |
-  Erkeğin üreme bezleri doğduğu yerde oluşmaz: anne karnında bel ile kaburgalar arasında, böbreklerin hizasında şekillenir, sonra aşağı iner.
+  Erkeğin üreme bezleri doğduğu yerde oluşmaz: anne karnında, karnın arka duvarında, böbreklerin hemen yanında şekillenir, sonra aşağı iner.
 
-  Târık suresi, insanın yaratıldığı atılan suyun bel ile göğüs kemikleri arasından çıktığını söyler. Testislerin bu yolculuğu 1786'da tarif edildi; onları besleyen atardamarlar ve sinirler bugün de o bölgeden gelir.
-kart: Erkeğin üreme bezleri anne karnında bel ile kaburgalar arasında şekillenir, sonra aşağı iner.
+  Târık suresi, insanın yaratıldığı atılan suyun bel ile göğüs kemikleri arasından çıktığını söyler. Testislerin bu yolculuğu 18. yüzyılda tarif edildi; onları besleyen atardamar bugün de o bölgeden, bel omurlarının hizasından gelir.
+kart: Erkeğin üreme bezleri anne karnında böbreklerin yanında oluşur, sonra aşağı iner.
 konu: [insan]
 sureAdi: Târık
 ayetler:
@@ -15,11 +15,14 @@ nuzul: { donem: "Mekke dönemi", yil: 613 }
 kesif: { yil: 1786, olay: "John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.", kaynak: hunter1786 }
 itirazlar:
   - itiraz: "Meni testislerde, prostatta ve seminal keseciklerde üretilir. Bunların hiçbiri bel ile kaburgalar arasında değildir."
-    cevap: "Ayet suyun bugün nerede biriktiğini değil, nereden çıktığını söyler. Testisler bel ile kaburgalar arasında oluşur ve onları besleyen atardamarlar ile sinirler hâlâ bu bölgeden gelir."
-    kaynak: hunter1786
+    cevap: "Ayet suyun bugün nerede biriktiğini değil, nereden çıktığını söyler. Testisler karnın arka duvarında, böbreklerin yanında oluşur ve onları besleyen atardamar hâlâ ikinci bel omuru hizasından, böbreklerin yakınından çıkar."
+    kaynak: odonnell2026endotext
   - itiraz: "Hipokrat ve antik tıp, meninin beyinden ve omurilikten gelip omurga boyunca aktığını düşünüyordu. Ayet o dönemin inancına benzemiyor mu?"
     cevap: "Antik tıpta meni beyinde doğup omurilik boyunca akar; ayette ne beyin ne de omurilikten akış vardır. Ayet bir bölge gösterir; o bölge de üreme bezlerinin oluştuğu yerdir."
-kaynaklar: [hunter1786, leeuwenhoek1677]
+  - itiraz: "*Sulb* ve *terâib* kelimelerinin anlamı tartışmalıdır; bazı dilbilimciler başka bölgeler anlar. Bu okuma kesin mi?"
+    cevap: "Kelimeler farklı biçimlerde açıklanmıştır. En yaygın açıklamada *sulb* bel ve omurga, *terâib* göğüs kemikleridir; sayfa bu yaygın açıklamayı esas alır."
+    kaynak: albalushi2021sulb
+kaynaklar: [hunter1786, leeuwenhoek1677, statpearls2023testis, odonnell2026endotext, albalushi2021sulb]
 durum: taslak
 ---
 
@@ -30,23 +33,79 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Gorsel from '../../components/Gorsel.astro';
 import Inis from '../../components/sulb-teraib-Inis.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Târık suresi insanı bu suya bakmaya çağırır:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={613} etiket="613 civarı · Mekke">
+
+Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu. Ama o suyun içinde ne olduğu ve vücudun neresinde hazırlandığı bilinmiyordu.
+
+Târık suresi insanı bu suya bakmaya çağırır:
+
+</Adim>
+
+<Adim tur="genis" yil={613} etiket="Târık suresi">
 
 <AyetParca sure={86} ayet={7} sureAdi="Târık" ar="خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ ۝ يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ" meal="O, erkek ve kadının beli ile kaburga kemikleri arasından atılagelen bir sudan yaratılmıştır." vurgu="beli ile kaburga kemikleri arasından" />
 
-Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir. Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı.
+</Adim>
+
+<Adim>
+
+Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir.
+
+Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı. Suyun gerçekte nerede hazırlandığını görmenin yolu yoktu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Inis />
 
-Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> Testisleri besleyen atardamarlar ve sinirler bugün de geldikleri yerden, bel ile kaburgalar arasından çıkar.
+</Adim>
+
+<Adim yil={1677} etiket="1677 · Hollanda">
+
+1677'de Hollandalı Antonie van Leeuwenhoek, kendi yaptığı mikroskopla bu suyun içinde yüzen canlı hücreleri gördü ve Londra'daki Kraliyet Cemiyeti'ne bildirdi.<Atif k="leeuwenhoek1677" />
+
+</Adim>
+
+<Adim yil={1786} etiket="1786">
+
+Bir asır sonra İngiliz cerrah John Hunter, anne karnındaki bebeklerde testislerin yerini inceledi. Testisler aşağıda değil, karnın içinde, yukarıda oluşuyor ve doğuma doğru aşağı iniyordu.<Atif k="hunter1786" />
+
+</Adim>
+
+<Adim>
+
+Bugün bu yolculuk ayrıntısıyla biliniyor. Testisler karnın arka duvarında, böbreklerin hemen yanında şekillenir. İlk iki ayda karnın alt kısmına iner; 26. haftadan sonra yolculuğun ikinci aşaması başlar ve çoğu bebekte 33. haftada tamamlanır.<Atif k="statpearls2023testis" />
+
+</Adim>
+
+<Adim>
+
+Yolculuğun izi hiç silinmez: testisleri besleyen atardamar bugün de aşağıdan değil, yukarıdan, ikinci bel omuru hizasından, böbreklerin yakınından çıkar.<Atif k="odonnell2026endotext" />
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Gorsel baslik="1918 tarihli bir anatomi atlasından" resimler={[{ src: '/img/sulb-teraib/testis-inisi-gray.png', alt: 'Yan yana üç siyah-beyaz çizim. Soldakinde testis (t.) karın boşluğunda (a.c.), aşağıyı gösteren bir okla; ortadakinde testis torbaya (s.) inmiş; sağdakinde torbanın içinde, çevresi zarla sarılı.', baslik: 'Testisin inişi, üç adımda', not: 'Soldan sağa: karın boşluğundaki testis (t.) aşağı iner ve torbaya (s.) yerleşir.', kunye: "Henry Gray, Anatomy of the Human Body (1918), Şekil 1015, kamu malı, Wikimedia Commons", url: 'https://commons.wikimedia.org/wiki/File:Diagram_to_illustrate_the_descent_of_the_testis_and_the_manner_in_which_the_tunica_vaginalis_is_derived.png' }]} />
 
+</Adim>
+
+<Adim tur="genis" yil={1786}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki ama bu yorum ayete sonradan mı yüklendi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>İnsanın yaratıldığı suyun nereden geldiğini kimse bilmezken, bir insan ona bel ile göğüs kemikleri arasında bir yer göstermeye nereden cesaret edebilirdi?</MeydanOkuma>
+<MeydanOkuma>İnsanın yaratıldığı suyun nereden geldiğini kimse bilmezken, ona bel ile göğüs kemikleri arasında bir yer gösteren söz neye dayanıyordu?</MeydanOkuma>

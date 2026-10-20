@@ -1,0 +1,52 @@
+---
+baslik: İki denizin karışmaması
+hook: |
+  Buluşan iki deniz, aralarındaki görünmez bir sınırla yan yana akar; her biri kendi tuzunu ve sıcaklığını korur.
+
+  Ayetin indiği dönemde su suya karışır, deniz denize katılır sanılırdı. Ayet ise buluşan iki denizin arasında bir engel bulunduğunu ve birbirinin sınırını aşamadıklarını anlatır. Farklı tuzluluk ve sıcaklıktaki su kütlelerinin yan yana kalarak akabildiği ancak 20. yüzyıl okyanus bilimiyle ayrıntılı olarak ölçüldü.
+kart: Buluşan iki deniz görünmez bir sınırla ayrılır; her biri kendi tuzunu ve sıcaklığını korur.
+konu: [yeryuzu]
+sureAdi: Rahmân
+ayetler:
+  - { sure: 55, ayet: 19 }
+  - { sure: 55, ayet: 20 }
+vurgu: "بَيْنَهُمَا بَرْزَخٌۭ لَّا يَبْغِيَانِ"
+nuzul: { donem: "Mekke dönemi (tartışmalı)", yil: 614 }
+kesif: { yil: 1961, olay: "Wüst, Akdeniz'deki su kütlelerinin tuzluluk ve sıcaklıklarına göre ayrı katmanlar halinde dolaştığını ve Cebelitarık'ta Atlantik suyuyla iki ayrı akıntı halinde yer değiştirdiğini ayrıntılı olarak gösterdi.", kaynak: wust1961 }
+itirazlar:
+  - itiraz: "Denizler aslında karışır; aradaki geçiş bölgesi kesin bir duvar değildir, sular zamanla birbirine geçer. \"Sınırı aşamazlar\" sözü bilimsel olarak doğru mu?"
+    cevap: "Ayet suların hiç değmediğini değil, aralarında bir engel olduğunu ve birinin ötekine baskın gelmediğini söyler. Geçiş bölgesinde sular kısmen karışır, ama iki su kütlesi kendi tuzluluğunu ve sıcaklığını koruyarak ayrı akmayı sürdürür."
+    kaynak: wust1961
+  - itiraz: "Nehir ağızlarında tatlı suyun tuzlu suyun üstünde aktığını denizciler ve dalgıçlar eskiden beri görüyordu; bunun için bilim gerekmez."
+    cevap: "Suyun yüzeyde ayrı aktığı görülebilirdi; ama bu ayrılığın tuzluluk ve sıcaklık farkından doğan, büyük denizler arasında da süren kalıcı bir sınır olduğu ancak okyanus biliminin ölçümleriyle anlaşıldı."
+    kaynak: wust1961
+kaynaklar: [wust1961, ibnkesir]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Bogaz from '../../components/iki-denizin-karismamasi-Bogaz.astro';
+
+<Bogaz bolum="harita" />
+
+Ayetin indiği yıllarda iki su buluştuğunda birbirine karışıp tek su olduğu düşünülürdü; deniz, denizin devamıydı. Rahmân suresi ise buluşan iki denizi şöyle anlatır:
+
+<AyetParca sure={55} ayet={20} sureAdi="Rahmân" ar="مَرَجَ ٱلْبَحْرَيْنِ يَلْتَقِيَانِ ۝ بَيْنَهُمَا بَرْزَخٌۭ لَّا يَبْغِيَانِ" meal="Aralarında bir engel vardır; birbirinin sınırını aşamazlar." vurgu="birbirinin sınırını aşamazlar" />
+
+Ayetteki *berzah* "iki şey arasındaki engel" demektir. İbn Kesîr gibi müfessirler bu engeli iki suyu ayıran kara parçası olarak açıkladı;<Atif k="ibnkesir" /> sınırın neden ve nasıl oluştuğunu söyleyecek bir bilgi yoktu.
+
+Bu bilgi okyanus biliminin gelişmesiyle geldi. 1961'de Georg Wüst, Akdeniz'deki su kütlelerinin tuzluluk ve sıcaklıklarına göre ayrı katmanlar halinde dolaştığını, Cebelitarık'ta da Atlantik suyuyla büyük ölçüde ayrı kalan iki akıntı halinde yer değiştirdiğini ayrıntılı olarak gösterdi.<Atif k="wust1961" /> Farklı tuzluluk ve sıcaklıktaki sular, aralarındaki geçiş bölgesiyle yan yana kalabiliyordu.
+
+<Bogaz bolum="kesit" />
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki ama denizler zaten sonunda karışmıyor mu?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Suyun suya karıştığı herkesçe bilinen bir çağda, buluşan iki denizin arasında aşılamayan bir sınır bulunduğunu bir insan nereden bilebilirdi?</MeydanOkuma>

@@ -1,0 +1,96 @@
+---
+baslik: Göğün genişlemesi
+hook: |
+  Evren yerinde durmuyor. Siz bu cümleyi okurken uzak gökadalar birbirinden biraz daha uzaklaştı.
+
+  Ayetin indiği dönemde gök, başın üstünde duran, hiç değişmeyen bir kubbe gibi görünürdü. Ayet ise göğün kurulduğunu ve genişletilmekte olduğunu anlatır. Bilim, evrenin durağan olmadığını ancak 20. yüzyılda kabul etti.
+kart: Evren yerinde durmuyor; gökadalar her an birbirinden uzaklaşıyor, gök genişliyor.
+{{SABIT}}
+itirazlar:
+  - itiraz: "Bu ayete \"genişletiyoruz\" anlamı Hubble'dan sonra mı verildi?"
+    cevap: "Hayır. \"Onu genişletti\" açıklaması Hubble'dan yaklaşık bin yıl önce de vardı: Taberî (ö. 923) tefsirinde İbn Zeyd'in bu ifadeyi \"onu genişletti\" diye açıkladığını aktarır; İbn Kesîr (ö. 1373) de \"onu genişlettik\" diye açıklar."
+    kaynak: taberi
+  - itiraz: "\"Genişleticiyiz\" ifadesi mecazdır; Allah'ın gücünü ya da rızkı genişletmesini anlatır."
+    cevap: "Müfessirlerin bir kısmı ifadeyi gücün genişliği diye açıklamıştır. Ancak ayetin öncesi ve sonrası fiziksel bir konuyu anlatır: göğün kurulması, yerin döşenmesi. İbn Zeyd ve İbn Kesîr de ifadeyi göğün genişletilmesi olarak açıklar."
+    kaynak: ibnkesir5147
+kaynaklar: [hubble1929, lemaitre1927, taberi, ibnkesir5147, esa2004hudf]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Genisleme from '../../etkilesim/gogun-genislemesi/Genisleme.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={612} etiket="612 civarı · Mekke">
+
+Ayetin indiği yıllarda gök, başın üstünde duran ve hiç değişmeyen bir kubbe gibi görünürdü. Yıldızlar her gece aynı yerden doğar, aynı yerde batardı.
+
+Zâriyât suresi göğün kuruluşunu anlatırken bir adım daha atar:
+
+</Adim>
+
+<Adim tur="genis" yil={612} etiket="Zâriyât suresi">
+
+{{AYET1}}
+
+</Adim>
+
+<Adim>
+
+Ayetteki *mûsiûn* kelimesi "genişleten, genişletmekte olan" demektir.
+
+Müfessirler bunu çoğunlukla "yaratmaya gücü geniş olan" diye açıkladı. Ama Taberî, İbn Zeyd'in "onu genişletti" dediğini de aktarır.<Atif k="taberi" /> İbn Kesîr de ifadeyi "onu genişlettik" diye açıklar.<Atif k="ibnkesir5147" /> Göğün gerçekten büyüdüğünü gösterecek bir bilgi ise yoktu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+{{GORSEL1}}
+
+</Adim>
+
+<Adim>
+
+Bilim de uzun süre evreni durağan sandı. Gökyüzü sonsuzdan beri aynıydı ve öyle kalacaktı.
+
+</Adim>
+
+<Adim yil={1927} etiket="1927 · Belçika">
+
+1927'de Belçikalı rahip ve fizikçi Georges Lemaître, denklemlerden yola çıkarak evrenin genişlediğini ve uzak gökadaların bizden kaçması gerektiğini hesapladı.<Atif k="lemaitre1927" />
+
+</Adim>
+
+<Adim yil={1929} etiket="1929 · Kaliforniya">
+
+İki yıl sonra Edwin Hubble teleskobunu uzak gökadalara çevirdi ve ölçtü: gökadalar bizden uzaklaşıyordu, üstelik ne kadar uzaktaysalar o kadar hızlı kaçıyorlardı.<Atif k="hubble1929" /> Evren genişliyordu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Genisleme />
+
+</Adim>
+
+<Adim tur="genis" yil={1929}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
+
+Peki ama bu anlam ayete sonradan mı yüklendi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Herkesin göğü değişmez bir kubbe sandığı bir çağda, göğün genişletildiğini anlatan söz neye dayanıyordu?</MeydanOkuma>

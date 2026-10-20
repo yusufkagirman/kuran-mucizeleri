@@ -1,10 +1,10 @@
 ---
 baslik: Demirin indirilmesi
 hook: |
-  Bir kelime, sırrını 1.300 yıl sakladı.
+  Elinizdeki demir bu dünyada doğmadı.
 
-  Kur'an demirden söz ederken "yarattık" değil, "indirdik" dedi. O gün herkes demirin topraktan çıktığını biliyordu. Bu kelimenin neden seçildiğini anlamak için insanlığın yıldızların içine bakmayı öğrenmesi gerekti.
-kart: Bir kelime, sırrını 1.300 yıl sakladı. Kur'an demir için "indirdik" dedi.
+  Bıçaktaki, çivideki, kanınızdaki demir; hepsi Güneş'ten önce yaşamış yıldızların içinde oluştu ve o yıldızlar patlayınca uzaya saçıldı. Ayetin indiği gün bunu bilen kimse yoktu. İnsanlığın bunu öğrenmesi için yıldızların içine bakmayı öğrenmesi gerekti.
+kart: Elinizdeki demir bu dünyada doğmadı; patlayan yıldızlardan geldi.
 konu: [gokyuzu]
 sureAdi: Hadîd
 ayetler:
@@ -14,15 +14,17 @@ nuzul: { donem: "Medine dönemi", yil: 625 }
 kesif: { yil: 1957, olay: "Demirin yıldızların içinde oluştuğu ve yıldız patlamalarıyla uzaya saçıldığı gösterildi.", kaynak: b2fh1957 }
 itirazlar:
   - itiraz: "\"İndirmek\" burada sadece \"yaratıp vermek\" anlamında olamaz mı?"
-    cevap: "Müfessirler bu anlamı da vermiştir. Ancak fiilin asıl anlamı yukarıdan aşağıya indirmektir ve Dünya'daki demirin, Dünya oluşmadan önce yıldızların içinde oluştuğu bugün bilinmektedir."
-  - itiraz: "Kur'an \"indirdik\" fiilini hayvanlar (Zümer 6) ve elbise (A'râf 26) için de kullanır; demirde neden farklı anlaşılsın?"
+    cevap: "Bu anlam da verilmiştir; kelime bağlamına göre \"yaratmak\" ve \"bahşetmek\" diye de anlaşılır. Ancak fiilin asıl anlamı yukarıdan aşağıya indirmektir ve Dünya'daki demirin, Dünya oluşmadan önce yıldızların içinde oluştuğu bugün bilinmektedir."
+    kaynak: gezer2006
+  - itiraz: "Kur'an \"indirdik\" fiilini hayvanlar (Zümer 39:6) ve elbise (A'râf 7:26) için de kullanır; demirde neden farklı anlaşılsın?"
     cevap: "O ayetlerde de indirmek, Allah katından verilen bir nimeti anlatır. Demirde bu anlamın yanında, maddenin kendisinin yeryüzünde değil yıldızlarda oluştuğu da bugün bilinmektedir."
   - itiraz: "Karbon, oksijen, silisyum gibi başka elementler de yıldızlarda oluşur; demirin özel bir yanı var mı?"
-    cevap: "Demir, yıldızın içinde enerji üreterek oluşabilen son elementtir. Çekirdeğinde demir biriken büyük yıldız artık yanamaz, çöker ve patlar; demir, yıldızın ömrünü bitiren elementtir."
-    kaynak: b2fh1957
+    cevap: "Demir, yıldızın içinde enerji üreterek oluşabilen son elementtir. Demiri kaynaştırmak enerji kazandırmaz; çekirdeğinde demir biriken büyük yıldız artık ayakta duramaz, çöker ve patlar. Demir, yıldızın ömrünü bitiren elementtir."
+    kaynak: nasa2013supernova
   - itiraz: "Gökten düşen meteor demiri eski çağlarda da biliniyordu."
-    cevap: "Meteor demiri düşen birkaç taştan elde edilen nadir bir malzemeydi. Yeryüzündeki bütün demirin yıldızlarda oluştuğu ise ancak 20. yüzyılda anlaşıldı."
-kaynaklar: [b2fh1957]
+    cevap: "Doğru; Tutankamon'un mezarından çıkan hançerin bıçağı bile göktaşı demirindendir. Ama bunlar düşen birkaç taştan elde edilen nadir parçalardı. Yeryüzündeki bütün demirin yıldızlarda oluştuğu ise ancak 20. yüzyılda anlaşıldı."
+    kaynak: eos2016tut
+kaynaklar: [hoyle1954, b2fh1957, nasa2013supernova, gezer2006, eos2016tut]
 durum: taslak
 ---
 
@@ -33,23 +35,79 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Sahne from '../../etkilesim/demir/Sahne.astro';
 import Gorsel from '../../components/Gorsel.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda demir, topraktan kazılıp çıkarılan bir madendi; gökle bir ilgisi olabileceği kimsenin aklına gelmezdi. Kur'an ise ondan şöyle söz etti:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={625} etiket="625 civarı · Medine">
+
+Ayetin indiği yıllarda demir, topraktan kazılıp ocaklarda eritilen bir madendi. Kılıç, zırh, çapa ve çivi ondan yapılırdı.
+
+Nereden geldiğini soran yoktu; cevap ayağın altındaydı. Kur'an ise ondan şöyle söz etti:
+
+</Adim>
+
+<Adim tur="genis" yil={625} etiket="Hadîd suresi">
 
 <AyetParca sure={57} ayet={25} sureAdi="Hadîd" ar="وَأَنزَلْنَا ٱلْحَدِيدَ فِيهِ بَأْسٌۭ شَدِيدٌۭ وَمَنَٰفِعُ لِلنَّاسِ" meal="...pek sert olan ve insanlara birçok faydası bulunan demiri de indirdik..." vurgu="demiri de indirdik" />
 
-Ayetteki *enzelnâ* fiili, bir şeyin yukarıdan aşağıya inmesini anlatır; Kur'an aynı fiili gökten inen yağmur için de kullanır. Asırlar boyunca bu ifade "Allah demiri yarattı ve insanlara verdi" diye anlaşıldı, çünkü demirin gerçekten yukarıdan geldiğini gösteren hiçbir bilgi yoktu.
+</Adim>
+
+<Adim>
+
+Ayetteki *enzelnâ* fiili, bir şeyin yukarıdan aşağıya inmesini anlatır; Kur'an aynı fiili gökten inen yağmur için de kullanır (Kâf 50:9).
+
+Asırlar boyunca bu ifade çoğunlukla "yarattı, insanlara bahşetti" anlamında okundu.<Atif k="gezer2006" /> Demirin gerçekten yukarıdan geldiğini düşündürecek hiçbir bilgi yoktu.
+
+</Adim>
+
+<Adim>
+
+O bilgi, insanlığın yıldızların içinde neler olduğunu hesaplamayı öğrenmesiyle geldi. Önce kısaca yıldızın içine bakalım:
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Sahne />
 
-O bilgi 1957'de geldi. Astrofizikçiler Burbidge, Fowler ve Hoyle, demirin büyük yıldızların içinde oluştuğunu ve bu yıldızlar patlayınca uzaya saçıldığını gösterdi.<Atif k="b2fh1957" /> Dünya'daki demir de böyle oluştu: gezegenimiz, ölen yıldızların uzaya saçtığı bu maddeden meydana geldi.
+</Adim>
+
+<Adim yil={1954} etiket="1954 · İngiltere">
+
+1954'te İngiliz astronom Fred Hoyle, demir ve ona yakın elementlerin çok sıcak yıldızların içinde oluşabileceğini hesapladı.<Atif k="hoyle1954" />
+
+</Adim>
+
+<Adim yil={1957} etiket="1957">
+
+Üç yıl sonra Hoyle, Margaret ve Geoffrey Burbidge ve William Fowler'la birlikte yüz sayfalık bir makale yayımladı. Makale, elementlerin yıldızlarda nasıl oluştuğunu tek tek anlattı: demir, büyük yıldızların içinde oluşuyor ve bu yıldızlar patlayınca uzaya saçılıyordu.<Atif k="b2fh1957" />
+
+</Adim>
+
+<Adim>
+
+Demir yıldızın son durağıdır: onu kaynaştırmak enerji kazandırmaz. Çekirdeğinde demir biriken yıldız ayakta duramaz, çöker ve patlar.<Atif k="nasa2013supernova" /> Dünyamız, işte böyle ölen yıldızların uzaya saçtığı maddeden oluştu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Gorsel duzen="karsilastir" genis baslik="Patlamış bir yıldızın kalıntısı: Cassiopeia A" resimler={[{ src: "/img/demir/cas-a.jpg", alt: "Siyah zemin üzerinde kırmızı, mor ve mavi tonlarda, düzensiz yuvarlak bir gaz bulutu: Cassiopeia A süpernova kalıntısının Chandra X-ışını görüntüsü.", baslik: "Kalıntının X-ışınlarıyla görüntüsü", kunye: "NASA/CXC/SAO/Rutgers/J. Hughes, kamu malı, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Cassiopeia_A-_Chandra_Maps_Vital_Elements_in_Supernovas_(1999-casajph_-_casa).jpg" }, { src: "/img/demir/cas-a-demir.jpg", alt: "Siyah zemin üzerinde yeşil bir hale ve içinde pembe-sarı parlak öbekler: Cassiopeia A kalıntısında demir iyonlarından gelen X-ışınlarının haritası. Köşede Fe K etiketi ve ölçek çubuğu var.", baslik: "Aynı kalıntıda yalnız demirin yaydığı X-ışınları", not: "Parlak öbekler, demirin yoğun olduğu bölgeler.", kunye: "NASA/GSFC/U. Hwang ve ark., kamu malı, Wikimedia Commons", url: "https://commons.wikimedia.org/wiki/File:Cassiopeia_A-_Chandra_X-ray_Image_with_Scale_Bar_(X-rays_from_Iron_ions)_(2000-cas_a062700-more-6).jpg" }]} />
 
+</Adim>
+
+<Adim tur="genis" yil={1957}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Okuma yazma bilmeyen bir insan, 7. yüzyılın Arabistan'ında, bilimin ancak 1.300 yıl sonra yıldızlara bakarak öğrendiği bir gerçeği tek kelimeyle nasıl söyleyebilirdi?</MeydanOkuma>
+<MeydanOkuma>Demiri herkes topraktan çıkarırken, onun yukarıdan geldiğini anlatan bu söz neye dayanıyordu?</MeydanOkuma>

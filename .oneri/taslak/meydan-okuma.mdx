@@ -1,0 +1,94 @@
+---
+baslik: Benzerini getirin
+hook: |
+  Sözü kılıçtan keskin sayan bir topluma tek bir kısa sure yazmaları söylendi. O sure bugüne kadar getirilemedi.
+
+  Araplar şiirde çağının en iddialı ustalarıydı ve Peygamber'e karşı her yolu denediler. Onlardan istenen kılıç değil, üç ayetlik bir sure bile olabilecek tek bir benzerdi. O günden bu yana meydan okuma açık duruyor.
+kart: Sözü kılıçtan keskin sayan bir topluma tek bir kısa sure yazmaları söylendi; o sure bugüne kadar getirilemedi.
+{{SABIT}}
+itirazlar:
+  - itiraz: "\"Benzeri\" ölçüsü belirsiz. Bir metnin Kur'an'a denk olduğuna kim karar verecek? Yanlışlanamayan bir meydan okuma kanıt sayılır mı?"
+    cevap: "Ölçü, Kur'an'ın dil güzelliğini, söz örgüsünü ve anlam derinliğini birlikte taşıyan bir metindir; hakemi de o dilin ustalarıdır. İlk muhataplar çağın en büyük söz ustalarıydı ve bir karşılık getiremediklerini kendi davranışlarıyla gösterdiler."
+    kaynak: yavuz2000icaz
+  - itiraz: "Müseylime'den Ebü'l-Alâ el-Maarrî'ye ve günümüze kadar Kur'an'a benzetilmiş metinler yazıldı. Bunlar neden cevap sayılmıyor?"
+    cevap: "Bu denemeler kendi dönemlerinde bile, dilin ustaları tarafından Kur'an'ın ifadelerini taklit eden zayıf metinler olarak görüldü; Bâkıllânî, Müseylime'nin sözlerini tek tek ele alıp bu açıdan değerlendirir. Hiçbiri, o dili en iyi bilenlerce Kur'an'a denk kabul edilmedi."
+    kaynak: bakillani
+  - itiraz: "Arapça bilmeyen biri bu üstünlüğü kendisi nasıl değerlendirebilir?"
+    cevap: "Bir dili bilmeyen, o dilin büyük şairini dilin ustalarından öğrenir; Kur'an için de durum böyledir. Asırlardır Arap dilinin büyük âlimleri ve edipleri Kur'an'ın üslubunun eşsiz olduğunu kabul eder."
+    kaynak: yavuz2000icaz
+kaynaklar: [ukaz2012azizova, fayda2013velid, ibnhisam, yavuz2000icaz, bakillani]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Halka from '../../components/meydan-okuma-Halka.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={623} etiket="623 civarı · Medine">
+
+Ayetin indiği yıllarda Araplar için söz, kılıçtan keskin bir silahtı. Beğenilen bir şiir bir kabileyi yüceltir, bir hiciv onu yerle bir ederdi.
+
+Mekke yakınındaki Ukaz panayırında şairler kırmızı deriden çadırlarda şiirlerini okur, en iyiler yarışırdı.<Atif k="ukaz2012azizova" />
+
+</Adim>
+
+<Adim>
+
+Kur'an bu insanlara, en iyi bildikleri alanda seslendi:
+
+</Adim>
+
+<Adim tur="genis" yil={623} etiket="Bakara suresi">
+
+{{AYET1}}
+
+</Adim>
+
+<Adim>
+
+İstenen uzun bir kitap değildi; tek bir sure yeterdi. Kur'an'ın en kısa suresi üç ayettir.
+
+Meydan okuma bununla da kalmadı. İsrâ suresinde bütün insanlara ve cinlere genişledi: hepsi bir araya gelse de benzerini ortaya koyamayacaklardı.<Atif k="yavuz2000icaz" />
+
+</Adim>
+
+<Adim>
+
+Mekke'nin söz ustaları Kur'an'ı dinledi. Önde gelenlerinden Velîd b. Muğîre, onu şiir, kâhin sözü ya da deli sözü saymayı reddetti; çare olarak ona "sihir" demeye karar verdi.<Atif k="fayda2013velid" />
+
+Yine de Peygamber'e karşı boykotu, sürgünü ve savaşı seçtiler; tek bir sure yazmayı değil.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Halka yil={frontmatter.nuzul.yil} bugun={frontmatter.kesif.yil} />
+
+</Adim>
+
+<Adim>
+
+Ayetteki "asla yapamayacaksınız" sözü yalnız o günün Araplarına değil, sonra gelecek herkese söylenmişti. O günden bu yana Kur'an'a benzetilmek istenen metinler yazıldı, ama hiçbiri Kur'an'ın yerine konabilecek bir söz olarak kabul görmedi.
+
+</Adim>
+
+<Adim tur="sahne">
+
+{{GORSEL1}}
+
+</Adim>
+
+</Hikaye>
+
+Peki ama bu meydan okuma neye göre ölçülecek?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Hayatı boyunca tek bir şiir söylememiş bir insan, çağının en usta şairlerine "benzerini getiremeyeceksiniz" diyecek cesareti ve bu sözün asırlarca boşa çıkmayacağını nereden bulabilirdi?</MeydanOkuma>

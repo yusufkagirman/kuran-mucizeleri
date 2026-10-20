@@ -1,0 +1,51 @@
+---
+baslik: Azalıp artan rahim
+hook: |
+  Rahim hiç durmaz: her ay iç zarı kalınlaşır, sonra dökülür ve yeniden kurulur.
+
+  Ra'd suresi, Allah'ın her dişinin rahminde taşıdığını, rahimlerin neyi eksiltip neyi artırdığını bildiğini söyler. Rahmin iç zarındaki bu aylık azalıp artış ise ancak 20. yüzyılın başında mikroskopla gösterildi.
+kart: Rahim hiç durmaz; her ay kalınlaşır, dökülür ve yeniden kurulur.
+konu: [insan]
+sureAdi: Ra'd
+ayetler:
+  - { sure: 13, ayet: 8 }
+vurgu: "وَمَا تَغِيضُ ٱلْأَرْحَامُ وَمَا تَزْدَادُ"
+nuzul: { donem: "Medine dönemi (tartışmalı)", yil: 623 }
+kesif: { yil: 1908, olay: "Hitschmann ve Adler, rahim iç zarının her ay düzenli olarak kalınlaşıp döküldüğünü mikroskopla gösterdi.", kaynak: hitschmann1908 }
+itirazlar:
+  - itiraz: "Kadınlar her ay kanamayı zaten görüyordu; rahmin bir şey eksilttiği o gün de bilinmiyor muydu?"
+    cevap: "Kanama görülüyordu ama nereden geldiği bilinmiyordu; eski tıp onu vücutta biriken fazla kanın dışarı atılması sanıyordu. Rahmin iç zarının her ay kalınlaşıp sonra döküldüğü ancak mikroskopla görüldü."
+    kaynak: hitschmann1908
+  - itiraz: "Bugün ultrason ve genetik testlerle rahimdeki bebeğin cinsiyeti, hatta hastalıkları biliniyor. \"Rahimdekini bilmek\" artık insana da açık değil mi?"
+    cevap: "Ultrason ve testler rahimdekinin bir kısmını, belli bir anda ve araçla gösterir. Ayet, her dişinin rahminde olup biteni her an ve eksiksiz bilmekten söz eder; bu bilgi bugün de insana kapalıdır."
+kaynaklar: [hitschmann1908, noyes1950]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Dongu from '../../components/rahim-bilgisi-Dongu.astro';
+
+<Dongu />
+
+Ayetin indiği yıllarda rahim, bebeğin içinde büyüdüğü kapalı bir kaptı; içinde neler olup bittiğini kimse göremezdi. Ra'd suresi ondan şöyle söz eder:
+
+<AyetParca sure={13} ayet={8} sureAdi="Ra'd" ar="ٱللَّهُ يَعْلَمُ مَا تَحْمِلُ كُلُّ أُنثَىٰ وَمَا تَغِيضُ ٱلْأَرْحَامُ وَمَا تَزْدَادُ" meal="Allah her dişinin rahminde taşıdığını, rahimlerin düşürdüğünü ve alıkoyduğunu bilir..." vurgu="rahimlerin düşürdüğünü ve alıkoyduğunu" />
+
+Ayetteki *tağîdu* fiili suyun çekilip azalmasını, *tezdâdu* ise artmasını anlatır. Asırlar boyunca bu ifade düşük, erken doğum ve gebeliğin uzaması diye anlaşıldı.
+
+Rahmin kendi içinde de azalıp arttığı 1908'de görüldü. Viyanalı hekimler Hitschmann ve Adler, rahim iç zarının her ay kalınlaştığını ve sonra döküldüğünü mikroskopla gösterdi.<Atif k="hitschmann1908" /> Bu döngü bugün gün gün izlenebiliyor.<Atif k="noyes1950" />
+
+<Gorsel duzen="karsilastir" baslik="Rahim iç zarı: şemada ve mikroskopta" resimler={[{ src: '/img/rahim-bilgisi/endometrium-dongu.jpg', alt: 'Üç panelli siyah-beyaz şema. A ve B panellerinde hormon eğrileri, C panelinde rahim iç zarının kalınlığı: ilk günlerde incelir, sonra 28. güne doğru giderek kalınlaşır. Altta 1-28 gün numaraları.', baslik: 'Bir aylık döngü', not: 'C panelindeki taralı bant, rahim iç zarının kalınlığı: ayın başında incelir, sonra gün gün kalınlaşır.', kunye: 'DESIDERIUS (Hollandaca Vikipedi), kamu malı, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Figure_1.1_Endometrium_cyclus.jpg' }, { src: '/img/rahim-bilgisi/endometrium-salgi.jpg', alt: 'Mikroskop görüntüsü: mor-pembe boyalı doku kesiti; üstte zar katmanları, altta kas tabakası. Katmanlar İngilizce/Latince etiketli: stratum compactum, spongiosum, basale ve myometrium.', baslik: 'Salgı evresindeki iç zarın kesiti', not: 'Üstteki katmanlar iç zar, en alttaki kas tabakası rahim duvarı.', kunye: 'Dr. Roshan Nasimudeen, CC BY-SA 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Secretory_endometrium.jpg' }]} />
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu, kelimeye sonradan yüklenmiş bir anlam olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Rahmin içine bakmanın hiçbir yolu yokken, bir insan onun durmadan azalıp arttığını nereden bilebilirdi?</MeydanOkuma>

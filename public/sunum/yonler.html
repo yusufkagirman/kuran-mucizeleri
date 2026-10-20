@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="tr" data-yon="satir" data-tema="acik">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Tasarım Yönleri · Kur'an Mucizeleri</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Alegreya:ital,wght@0,400;0,500;0,700;1,400&family=Alegreya+Sans:wght@400;500;700&family=Spectral:ital,wght@0,400;0,600;1,400&family=Barlow+Semi+Condensed:wght@400;500;600&family=Piazzolla:ital,opsz,wght@0,8..30,400;0,8..30,600;0,8..30,800;1,8..30,400&family=Commissioner:wght@400;500;600&family=Archivo:wdth,wght@62..125,400;62..125,600;62..125,800;62..125,900&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet">
+<style>
+/* Karşılaştırma sayfası: aynı dört Rum sahnesi, dört tasarım dili. Yön <html data-yon>, tema <html data-tema>. */
+* { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; background: var(--zemin); color: var(--metin); font-family: var(--f-govde); font-size: 1.0625rem; line-height: 1.6; -webkit-font-smoothing: antialiased; }
+button { font: inherit; color: inherit; }
+.ar { font-family: 'Amiri Quran', serif; direction: rtl; }
+
+/* ── Yön seçici (karşılaştırma aracı, tasarımın parçası değil) ── */
+.secici { position: sticky; top: 0; z-index: 50; display: flex; flex-wrap: wrap; gap: 6px; align-items: center; padding: 10px 16px;
+  background: #fff; color: #222; border-bottom: 1px solid #ddd; font: 500 14px/1 system-ui, sans-serif; }
+.secici b { margin-right: 6px; font-weight: 600; }
+.secici button { border: 1px solid #ccc; background: #fff; padding: 8px 12px; cursor: pointer; border-radius: 4px; }
+.secici button[aria-pressed='true'] { background: #222; color: #fff; border-color: #222; }
+.secici .ayrac { flex: 1; }
+.yon-not { max-width: 1100px; margin: 0 auto; padding: 14px 16px 0; font: 14px/1.5 system-ui, sans-serif; color: var(--soluk); }
+
+.sahne { max-width: 1100px; margin: 0 auto; padding: 72px 16px; }
+.sahne + .sahne { border-top: var(--ayirici); }
+.sahne-ad { font: 13px/1 system-ui, sans-serif; color: var(--soluk); margin: 0 0 20px; opacity: .8; }
+
+/* ── 1. Açılış ── */
+.acilis h1 { margin: 0; }
+.acilis .hook { max-width: 34em; }
+/* ── 2. Harita ── */
+.harita-sahne { display: grid; gap: 20px; position: relative; }
+.harita-kutu { position: relative; }
+#harita { display: block; width: 100%; height: auto; background: var(--h-deniz); }
+.deniz { fill: var(--h-deniz); stroke: var(--h-kiyi); stroke-width: 1; }
+.kara-zemin { fill: var(--h-kara); }
+.bolge { fill: var(--h-rum); fill-opacity: var(--h-op); stroke: var(--h-kara); stroke-width: 1; }
+.bolge.P { fill: var(--h-pers); }
+.tarama { fill: url(#tarama); opacity: 0; } .tarama.P { opacity: 1; }
+.nehir { fill: none; stroke: var(--h-deniz); stroke-width: 1.6; }
+.ok { fill: none; stroke: var(--h-pers); stroke-width: 3; stroke-linecap: round; }
+.ok-ucu { fill: var(--h-pers); }
+.imp { font-family: var(--f-harita-imp); font-size: var(--h-imp-boy); letter-spacing: var(--h-imp-iz); font-weight: var(--h-imp-kal); font-style: var(--h-imp-stil); text-anchor: middle; }
+.bolge-ad { font-family: var(--f-harita); font-size: 13px; font-style: italic; fill: var(--h-soluk); text-anchor: middle; }
+.sehir-ad { font-family: var(--f-harita); font-size: 14px; font-weight: 500; fill: var(--h-metin); }
+.hale { paint-order: stroke; stroke: var(--h-hale); stroke-width: var(--h-hale-k); stroke-linejoin: round; }
+.nokta { fill: var(--h-metin); }
+.olay-yazi { font-family: var(--f-harita); font-size: 14px; font-weight: 600; fill: var(--h-pers); }
+.adim { background: var(--kart-zemin); color: var(--metin); position: relative; z-index: 2; }
+.gosterge { color: var(--metin); }
+
+/* ── 3. Ayet anı ── */
+.ayet-an { text-align: center; }
+.ayet-an .ar-satir { font-size: clamp(1.6rem, 4vw, 2.5rem); line-height: 2; margin: 0; }
+.ayet-an .tr-satir { margin: 0 auto; max-width: 36em; }
+.ayet-an .kunye { display: block; margin-top: 18px; font-size: .875rem; color: var(--soluk); }
+/* ── 4. Özet ── */
+.ozet { display: grid; gap: 28px; }
+.ozet ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 18px; }
+.ozet .not-sut { font-size: .875rem; color: var(--soluk); }
+.ozet .not-sut p { margin: 0 0 10px; }
+.ozet sup { color: var(--vurgu); font-weight: 600; }
+
+/* ════════ YÖN 1: SATIR ARASI ════════ */
+[data-yon='satir'] {
+  --f-govde: 'Alegreya', Georgia, serif; --f-etiket: 'Alegreya Sans', sans-serif;
+  --f-harita: 'Alegreya Sans', sans-serif; --f-harita-imp: 'Alegreya', serif;
+  --h-imp-boy: 22px; --h-imp-iz: .02em; --h-imp-kal: 500; --h-imp-stil: italic; --h-hale-k: 4px; --h-op: .55;
+}
+[data-yon='satir'][data-tema='acik'] {
+  --zemin: #E8E4D3; --metin: #1C1A16; --soluk: #5F5A4C; --vurgu: #A3241A; --lacivert: #23407F; --cetvel: #A88A3E;
+  --kart-zemin: #F1EEE2; --ayirici: 1px solid #CFC8B0;
+  --h-deniz: #B9C4C3; --h-kiyi: #8E9C9C; --h-kara: #E1DCC7; --h-rum: #23407F; --h-pers: #A3241A; --h-metin: #1C1A16; --h-soluk: #5F5A4C; --h-hale: #E1DCC7;
+}
+[data-yon='satir'][data-tema='koyu'] {
+  --zemin: #131B30; --metin: #E7E1CF; --soluk: #A39E8E; --vurgu: #E0675A; --lacivert: #9DB3E6; --cetvel: #B99A4D;
+  --kart-zemin: #1A2440; --ayirici: 1px solid #2A3557;
+  --h-deniz: #0B1122; --h-kiyi: #33416A; --h-kara: #1F2A49; --h-rum: #7E9BDA; --h-pers: #D4584A; --h-metin: #E7E1CF; --h-soluk: #A39E8E; --h-hale: #1F2A49;
+}
+[data-yon='satir'] body { font-size: 1.125rem; line-height: 1.65; }
+[data-yon='satir'] .acilis { display: grid; gap: 8px; }
+[data-yon='satir'] .acilis .sure { font-family: var(--f-etiket); color: var(--vurgu); font-size: 1rem; }
+[data-yon='satir'] .acilis h1 { font-weight: 500; font-size: clamp(2.8rem, 8vw, 5.4rem); line-height: 1; letter-spacing: -.015em; color: var(--lacivert); }
+[data-yon='satir'] .acilis .ar-baslik { font-size: clamp(1.6rem, 4vw, 2.4rem); color: var(--vurgu); margin: 4px 0 18px; text-align: left; }
+[data-yon='satir'] .acilis .hook { font-size: 1.3rem; line-height: 1.55; }
+[data-yon='satir'] .harita-sahne { grid-template-columns: 1fr; }
+@media (min-width: 900px) { [data-yon='satir'] .harita-sahne { grid-template-columns: 300px 1fr; align-items: start; } }
+[data-yon='satir'] .harita-kutu { border: 1px solid var(--cetvel); padding: 6px; box-shadow: inset 0 0 0 4px var(--zemin), inset 0 0 0 5px var(--cetvel); }
+[data-yon='satir'] .levha-alt { font-style: italic; font-size: .95rem; color: var(--soluk); margin: 8px 2px 0; }
+[data-yon='satir'] .levha-alt b { font-style: normal; font-family: var(--f-etiket); font-weight: 700; color: var(--metin); margin-right: 6px; }
+[data-yon='satir'] .adim { background: none; padding: 0; }
+[data-yon='satir'] .adim .yil { font-family: var(--f-etiket); color: var(--vurgu); font-weight: 700; margin: 0; }
+[data-yon='satir'] .adim h3 { font-weight: 500; font-size: 1.75rem; line-height: 1.15; margin: 4px 0 10px; color: var(--lacivert); }
+[data-yon='satir'] .adim p { margin: 0 0 10px; }
+[data-yon='satir'] .gosterge { font-family: var(--f-etiket); margin-top: 18px; border-top: 1px solid var(--cetvel); padding-top: 12px; }
+[data-yon='satir'] .gosterge .bas { display: flex; justify-content: space-between; font-size: .9rem; color: var(--soluk); }
+[data-yon='satir'] .hucre { display: grid; grid-template-columns: repeat(9, 1fr); gap: 0; margin-top: 8px; border: 1px solid var(--metin); }
+[data-yon='satir'] .hucre span { height: 30px; display: grid; place-items: center; font-size: .8rem; border-right: 1px solid var(--metin); }
+[data-yon='satir'] .hucre span:last-child { border-right: 0; }
+[data-yon='satir'] .hucre .g { background: color-mix(in srgb, var(--vurgu) 22%, transparent); }
+[data-yon='satir'] .hucre .s { background: var(--vurgu); color: var(--zemin); font-weight: 700; }
+[data-yon='satir'] .hucre-alt { display: grid; grid-template-columns: 2fr 7fr; font-size: .8rem; color: var(--soluk); margin-top: 4px; }
+[data-yon='satir'] .hucre-alt span + span { color: var(--lacivert); text-align: center; border-top: 2px solid var(--lacivert); padding-top: 2px; }
+/* ayet: tezhip cetveli + satır altı meal */
+[data-yon='satir'] .ayet-cerceve { padding: 34px 20px; position: relative; max-width: 860px; margin: 0 auto;
+  border: 1px solid var(--cetvel); box-shadow: inset 0 0 0 5px var(--zemin), inset 0 0 0 7px var(--lacivert), inset 0 0 0 11px var(--zemin), inset 0 0 0 12px var(--vurgu); }
+[data-yon='satir'] .ayet-an .ar-satir { color: var(--metin); line-height: 1.9; }
+[data-yon='satir'] .ayet-an .tr-satir { color: var(--vurgu); font-style: italic; font-size: 1.05rem; margin-bottom: 22px; }
+[data-yon='satir'] .ayet-an .tr-satir mark { background: none; color: var(--lacivert); font-style: normal; font-weight: 700; }
+[data-yon='satir'] .ozet { grid-template-columns: 1fr; }
+@media (min-width: 900px) { [data-yon='satir'] .ozet { grid-template-columns: 1fr 260px; } [data-yon='satir'] .not-sut { border-left: 1px solid var(--cetvel); padding-left: 18px; } }
+[data-yon='satir'] .ozet h2 { font-weight: 500; font-size: 2.2rem; color: var(--lacivert); margin: 0 0 14px; line-height: 1.1; }
+[data-yon='satir'] .ozet li { display: grid; grid-template-columns: 40px 1fr; gap: 12px; }
+[data-yon='satir'] .ozet li i { font-style: normal; font-family: var(--f-etiket); font-weight: 700; color: var(--vurgu); font-size: 1.4rem; line-height: 1.2; }
+[data-yon='satir'] .ozet li b { display: block; font-weight: 500; font-size: 1.2rem; }
+
+/* ════════ YÖN 2: HARİTA LEVHASI ════════ */
+[data-yon='levha'] {
+  --f-govde: 'Spectral', Georgia, serif; --f-etiket: 'Barlow Semi Condensed', sans-serif;
+  --f-harita: 'Barlow Semi Condensed', sans-serif; --f-harita-imp: 'Barlow Semi Condensed', sans-serif;
+  --h-imp-boy: 17px; --h-imp-iz: .32em; --h-imp-kal: 500; --h-imp-stil: normal; --h-hale-k: 3px; --h-op: .72;
+}
+[data-yon='levha'][data-tema='acik'] {
+  --zemin: #E2E5DB; --metin: #1F241F; --soluk: #59605A; --vurgu: #B4472B; --mavi: #2C5872;
+  --kart-zemin: #F4F5EF; --ayirici: 2px solid #1F241F;
+  --h-deniz: #A9C0CB; --h-kiyi: #6E8C9B; --h-kara: #DCD3B4; --h-rum: #2C5872; --h-pers: #B4472B; --h-metin: #1F241F; --h-soluk: #59605A; --h-hale: #DCD3B4;
+}
+[data-yon='levha'][data-tema='koyu'] {
+  --zemin: #1A211E; --metin: #DCE2D8; --soluk: #95A097; --vurgu: #E07651; --mavi: #8FB7CC;
+  --kart-zemin: #232C28; --ayirici: 2px solid #DCE2D8;
+  --h-deniz: #0F1A1D; --h-kiyi: #3B5560; --h-kara: #2B3530; --h-rum: #7FAECB; --h-pers: #D96A48; --h-metin: #DCE2D8; --h-soluk: #95A097; --h-hale: #2B3530;
+}
+[data-yon='levha'] .acilis { display: grid; gap: 4px; border-left: 6px solid var(--vurgu); padding-left: 22px; }
+[data-yon='levha'] .acilis .sure { font-family: var(--f-etiket); font-size: 1.05rem; color: var(--soluk); letter-spacing: .02em; }
+[data-yon='levha'] .acilis h1 { font-family: var(--f-etiket); font-weight: 600; font-size: clamp(3rem, 10vw, 6.5rem); line-height: .92; letter-spacing: -.01em; }
+[data-yon='levha'] .acilis .ar-baslik { font-size: 1.6rem; text-align: left; color: var(--mavi); margin: 6px 0 14px; }
+[data-yon='levha'] .acilis .hook { font-size: 1.2rem; }
+[data-yon='levha'] .harita-sahne { grid-template-columns: 1fr; }
+[data-yon='levha'] .harita-kutu { border: 2px solid var(--metin); }
+[data-yon='levha'] .harita-kutu::after { /* koordinat çentikleri */
+  content: ''; position: absolute; inset: 0; pointer-events: none;
+  background: repeating-linear-gradient(90deg, var(--metin) 0 1px, transparent 1px 10%) top / 100% 8px no-repeat,
+              repeating-linear-gradient(90deg, var(--metin) 0 1px, transparent 1px 10%) bottom / 100% 8px no-repeat; }
+[data-yon='levha'] .levha-alt { font-family: var(--f-etiket); font-size: 1rem; margin: 10px 0 0; color: var(--soluk); }
+[data-yon='levha'] .levha-alt b { color: var(--metin); font-weight: 600; margin-right: 8px; }
+@media (min-width: 900px) { [data-yon='levha'] .adim { position: absolute; left: 24px; top: 24px; width: 330px; } }
+[data-yon='levha'] .adim { border: 2px solid var(--metin); padding: 18px 20px; }
+[data-yon='levha'] .adim .yil { font-family: var(--f-etiket); font-size: 1.05rem; font-weight: 600; color: var(--vurgu); margin: 0; }
+[data-yon='levha'] .adim h3 { font-family: var(--f-etiket); font-weight: 600; font-size: 1.6rem; line-height: 1.1; margin: 2px 0 10px; }
+[data-yon='levha'] .adim p { margin: 0 0 8px; font-size: 1rem; }
+[data-yon='levha'] .gosterge { font-family: var(--f-etiket); margin-top: 14px; }
+[data-yon='levha'] .gosterge .bas { display: flex; justify-content: space-between; font-size: .95rem; }
+/* sayaç = ölçek çubuğu */
+[data-yon='levha'] .hucre { display: grid; grid-template-columns: repeat(9, 1fr); margin-top: 6px; border: 1.5px solid var(--metin); height: 12px; }
+[data-yon='levha'] .hucre span { font-size: 0; }
+[data-yon='levha'] .hucre span:nth-child(odd) { background: var(--metin); }
+[data-yon='levha'] .hucre .g:nth-child(n), [data-yon='levha'] .hucre .s { background: var(--vurgu); }
+[data-yon='levha'] .hucre-alt { display: flex; justify-content: space-between; font-size: .85rem; margin-top: 3px; }
+[data-yon='levha'] .hucre-alt span + span { color: var(--vurgu); }
+[data-yon='levha'] .ayet-cerceve { padding: 48px 20px; border-top: 2px solid var(--metin); border-bottom: 2px solid var(--metin); }
+[data-yon='levha'] .ayet-an .tr-satir { font-size: 1.2rem; }
+[data-yon='levha'] .ayet-an mark { background: none; color: var(--vurgu); text-decoration: underline 2px; text-underline-offset: 4px; }
+[data-yon='levha'] .ozet { grid-template-columns: 1fr; }
+@media (min-width: 900px) { [data-yon='levha'] .ozet { grid-template-columns: 1fr 280px; } }
+[data-yon='levha'] .ozet h2 { font-family: var(--f-etiket); font-weight: 600; font-size: 2.4rem; margin: 0 0 14px; line-height: 1; }
+[data-yon='levha'] .ozet li { border-top: 2px solid var(--metin); padding-top: 10px; }
+[data-yon='levha'] .ozet li i { font-style: normal; font-family: var(--f-etiket); font-weight: 600; color: var(--vurgu); margin-right: 8px; }
+[data-yon='levha'] .ozet li b { font-family: var(--f-etiket); font-weight: 600; font-size: 1.25rem; }
+[data-yon='levha'] .ozet li span { display: block; }
+[data-yon='levha'] .not-sut { font-family: var(--f-etiket); font-size: .95rem; border: 2px solid var(--metin); padding: 14px; align-self: start; }
+
+/* ════════ YÖN 3: ÇİNİ ════════ */
+[data-yon='cini'] {
+  --f-govde: 'Piazzolla', Georgia, serif; --f-etiket: 'Commissioner', sans-serif;
+  --f-harita: 'Commissioner', sans-serif; --f-harita-imp: 'Piazzolla', serif;
+  --h-imp-boy: 21px; --h-imp-iz: .06em; --h-imp-kal: 800; --h-imp-stil: normal; --h-hale-k: 4px; --h-op: .6;
+}
+[data-yon='cini'][data-tema='acik'] {
+  --zemin: #F7F7F4; --metin: #16234A; --soluk: #56607A; --vurgu: #C63E2B; --kobalt: #1D3E91; --turkuaz: #1C8F8C; --yesil: #2E7D4F;
+  --kart-zemin: #FFFFFF; --ayirici: none;
+  --h-deniz: #BFE0DE; --h-kiyi: #1C8F8C; --h-kara: #F7F7F4; --h-rum: #1D3E91; --h-pers: #C63E2B; --h-metin: #16234A; --h-soluk: #56607A; --h-hale: #F7F7F4;
+}
+[data-yon='cini'][data-tema='koyu'] {
+  --zemin: #0F1D45; --metin: #EEF1F7; --soluk: #A9B3CC; --vurgu: #F07A62; --kobalt: #9FB6F0; --turkuaz: #4DC2BC; --yesil: #6DBB8C;
+  --kart-zemin: #152657; --ayirici: none;
+  --h-deniz: #0A1533; --h-kiyi: #2A6F7A; --h-kara: #1A2C63; --h-rum: #8EA9EE; --h-pers: #EE6A50; --h-metin: #EEF1F7; --h-soluk: #A9B3CC; --h-hale: #1A2C63;
+}
+[data-yon='cini'] .sahne + .sahne { border-top: 0; }
+[data-yon='cini'] .sahne + .sahne::before { /* tek motif: sekiz köşeli yıldız bordürü */
+  content: ''; display: block; height: 22px; margin: -72px 0 50px;
+  background:
+    radial-gradient(circle at 11px 11px, var(--turkuaz) 0 3px, transparent 3.5px) 0 0 / 44px 22px,
+    conic-gradient(from 45deg at 33px 11px, var(--kobalt) 0 25%, transparent 0 50%, var(--kobalt) 0 75%, transparent 0) 0 0 / 44px 22px;
+  opacity: .9; }
+[data-yon='cini'] .acilis { text-align: center; }
+[data-yon='cini'] .acilis .sure { font-family: var(--f-etiket); color: var(--turkuaz); font-weight: 600; }
+[data-yon='cini'] .acilis h1 { font-weight: 800; font-size: clamp(2.8rem, 9vw, 6rem); line-height: .98; color: var(--kobalt); letter-spacing: -.02em; }
+[data-yon='cini'] .acilis .ar-baslik { font-size: clamp(1.8rem, 5vw, 2.8rem); color: var(--vurgu); margin: 10px 0 18px; }
+[data-yon='cini'] .acilis .hook { margin: 0 auto; font-size: 1.25rem; }
+[data-yon='cini'] .harita-sahne { grid-template-columns: 1fr; }
+@media (min-width: 900px) { [data-yon='cini'] .harita-sahne { grid-template-columns: 1fr 340px; align-items: center; } }
+[data-yon='cini'] .harita-kutu { border: 6px solid var(--kobalt); outline: 2px solid var(--turkuaz); outline-offset: 3px; }
+[data-yon='cini'] .levha-alt { font-family: var(--f-etiket); font-size: .9rem; color: var(--soluk); margin: 12px 0 0; }
+[data-yon='cini'] .levha-alt b { color: var(--kobalt); }
+[data-yon='cini'] .adim { border-top: 6px solid var(--vurgu); padding: 18px 20px; order: 2; }
+[data-yon='cini'] .adim .yil { font-family: var(--f-etiket); font-weight: 600; color: var(--vurgu); margin: 0; }
+[data-yon='cini'] .adim h3 { font-weight: 800; font-size: 1.6rem; line-height: 1.12; color: var(--kobalt); margin: 4px 0 10px; }
+[data-yon='cini'] .adim p { margin: 0 0 8px; }
+[data-yon='cini'] .gosterge { font-family: var(--f-etiket); margin-top: 14px; }
+[data-yon='cini'] .gosterge .bas { display: flex; justify-content: space-between; font-size: .85rem; color: var(--soluk); }
+/* sayaç = karolar */
+[data-yon='cini'] .hucre { display: grid; grid-template-columns: repeat(9, 1fr); gap: 4px; margin-top: 8px; }
+[data-yon='cini'] .hucre span { aspect-ratio: 1; display: grid; place-items: center; font-size: .75rem; font-weight: 600; border: 1.5px solid var(--kobalt); color: var(--kobalt); }
+[data-yon='cini'] .hucre .g { background: var(--turkuaz); border-color: var(--turkuaz); color: #fff; }
+[data-yon='cini'] .hucre .s { background: var(--vurgu); border-color: var(--vurgu); color: #fff; }
+[data-yon='cini'] .hucre-alt { display: grid; grid-template-columns: 2fr 7fr; font-size: .75rem; color: var(--soluk); margin-top: 4px; text-align: center; }
+[data-yon='cini'] .hucre-alt span + span { color: var(--kobalt); font-weight: 600; }
+[data-yon='cini'] .ayet-cerceve { background: var(--kobalt); color: #fff; padding: 44px 24px; border: 6px solid var(--turkuaz); outline: 2px solid var(--kobalt); outline-offset: 4px; max-width: 900px; margin: 0 auto; }
+[data-yon='cini'] .ayet-an .tr-satir { font-size: 1.15rem; color: #E9EDF8; }
+[data-yon='cini'] .ayet-an mark { background: none; color: #FFD3C8; font-weight: 600; }
+[data-yon='cini'] .ayet-an .kunye { color: #B9C6EC; }
+[data-yon='cini'] .ozet { grid-template-columns: 1fr; }
+[data-yon='cini'] .ozet h2 { font-weight: 800; font-size: 2.3rem; color: var(--kobalt); margin: 0 0 16px; line-height: 1.05; text-align: center; }
+[data-yon='cini'] .ozet ol { grid-template-columns: 1fr; }
+@media (min-width: 760px) { [data-yon='cini'] .ozet ol { grid-template-columns: repeat(3, 1fr); } }
+[data-yon='cini'] .ozet li { background: var(--kart-zemin); border-top: 6px solid var(--turkuaz); padding: 16px; }
+[data-yon='cini'] .ozet li:nth-child(3) { border-top-color: var(--vurgu); }
+[data-yon='cini'] .ozet li i { font-style: normal; font-family: var(--f-etiket); font-weight: 600; color: var(--turkuaz); }
+[data-yon='cini'] .ozet li b { display: block; font-weight: 600; font-size: 1.15rem; color: var(--kobalt); margin: 4px 0; }
+[data-yon='cini'] .not-sut { font-family: var(--f-etiket); text-align: center; }
+
+/* ════════ YÖN 4: KAPAK ════════ */
+[data-yon='kapak'] {
+  --f-govde: 'Newsreader', Georgia, serif; --f-etiket: 'Archivo', sans-serif;
+  --f-harita: 'Archivo', sans-serif; --f-harita-imp: 'Archivo', sans-serif;
+  --h-imp-boy: 20px; --h-imp-iz: .01em; --h-imp-kal: 800; --h-imp-stil: normal; --h-hale-k: 0px; --h-op: .85;
+}
+[data-yon='kapak'][data-tema='acik'] {
+  --zemin: #EFEDE6; --metin: #141414; --soluk: #55524C; --vurgu: #E2622B; --yesil: #1E5A3E; --krem: #EFEDE6;
+  --kart-zemin: #FFFFFF; --ayirici: none;
+  --h-deniz: #9CC3D2; --h-kiyi: #9CC3D2; --h-kara: #EFEDE6; --h-rum: #1E5A3E; --h-pers: #E2622B; --h-metin: #141414; --h-soluk: #55524C; --h-hale: #EFEDE6;
+}
+[data-yon='kapak'][data-tema='koyu'] {
+  --zemin: #0F2B1E; --metin: #F1EEE4; --soluk: #B6BFB6; --vurgu: #F07A45; --yesil: #7FC39E; --krem: #F1EEE4;
+  --kart-zemin: #163A29; --ayirici: none;
+  --h-deniz: #0A1F16; --h-kiyi: #0A1F16; --h-kara: #1D4532; --h-rum: #8DD0AB; --h-pers: #F07A45; --h-metin: #F1EEE4; --h-soluk: #B6BFB6; --h-hale: #1D4532;
+}
+[data-yon='kapak'] .acilis { background: var(--yesil); color: var(--krem); padding: 48px 28px 40px; position: relative; overflow: hidden; }
+[data-yon='kapak'][data-tema='koyu'] .acilis { color: #0F2B1E; }
+[data-yon='kapak'] .acilis::after { content: ''; position: absolute; width: 46%; aspect-ratio: 1; right: -8%; top: -18%; border-radius: 50%; background: var(--vurgu); }
+[data-yon='kapak'] .acilis > * { position: relative; z-index: 1; }
+[data-yon='kapak'] .acilis .sure { font-family: var(--f-etiket); font-weight: 600; font-size: 1rem; }
+[data-yon='kapak'] .acilis h1 { font-family: var(--f-etiket); font-weight: 900; font-stretch: 118%; font-size: clamp(3rem, 11vw, 7.5rem); line-height: .86; letter-spacing: -.03em; margin: 10px 0 18px; max-width: 8ch; }
+[data-yon='kapak'] .acilis .ar-baslik { font-size: clamp(1.6rem, 4vw, 2.4rem); text-align: left; margin: 0 0 14px; }
+[data-yon='kapak'] .acilis .hook { font-size: 1.25rem; max-width: 30em; }
+[data-yon='kapak'] .harita-sahne { grid-template-columns: 1fr; }
+@media (min-width: 900px) { [data-yon='kapak'] .harita-sahne { grid-template-columns: 1fr; } [data-yon='kapak'] .adim { position: absolute; right: -10px; bottom: 54px; width: 360px; transform: rotate(-1.2deg); } }
+[data-yon='kapak'] .imp, [data-yon='kapak'] .olay-yazi { fill: var(--h-metin) !important; }
+[data-yon='kapak'] .levha-alt { font-family: var(--f-etiket); font-weight: 600; font-size: .95rem; margin: 10px 0 0; }
+[data-yon='kapak'] .adim { background: var(--vurgu); color: #141414; padding: 22px 22px 18px; }
+[data-yon='kapak'] .adim .yil { font-family: var(--f-etiket); font-weight: 800; font-stretch: 118%; font-size: 2.6rem; line-height: 1; margin: 0; }
+[data-yon='kapak'] .adim h3 { font-family: var(--f-etiket); font-weight: 800; font-size: 1.45rem; line-height: 1.1; margin: 6px 0 10px; }
+[data-yon='kapak'] .adim p { margin: 0 0 8px; font-size: 1rem; }
+[data-yon='kapak'] .gosterge { font-family: var(--f-etiket); margin-top: 12px; color: #141414; }
+[data-yon='kapak'] .gosterge .bas { display: flex; justify-content: space-between; font-weight: 600; font-size: .85rem; }
+[data-yon='kapak'] .hucre { display: grid; grid-template-columns: repeat(9, 1fr); gap: 3px; margin-top: 6px; }
+[data-yon='kapak'] .hucre span { height: 26px; background: rgba(0,0,0,.14); display: grid; place-items: center; font-size: .75rem; font-weight: 800; }
+[data-yon='kapak'] .hucre .g { background: #141414; color: var(--vurgu); }
+[data-yon='kapak'] .hucre .s { background: #fff; color: #141414; }
+[data-yon='kapak'] .hucre-alt { display: grid; grid-template-columns: 2fr 7fr; font-size: .75rem; font-weight: 600; margin-top: 4px; }
+[data-yon='kapak'] .ayet-cerceve { background: var(--metin); color: var(--zemin); padding: 56px 24px; }
+[data-yon='kapak'] .ayet-an .ar-satir { font-size: clamp(1.8rem, 5vw, 3rem); }
+[data-yon='kapak'] .ayet-an .tr-satir { font-size: 1.2rem; }
+[data-yon='kapak'] .ayet-an mark { background: var(--vurgu); color: #141414; padding: 0 4px; }
+[data-yon='kapak'] .ayet-an .kunye { color: inherit; opacity: .7; }
+[data-yon='kapak'] .ozet { grid-template-columns: 1fr; }
+[data-yon='kapak'] .ozet h2 { font-family: var(--f-etiket); font-weight: 900; font-stretch: 118%; font-size: clamp(2.2rem, 6vw, 3.6rem); line-height: .95; margin: 0 0 18px; letter-spacing: -.02em; }
+[data-yon='kapak'] .ozet ol { grid-template-columns: 1fr; gap: 10px; }
+@media (min-width: 760px) { [data-yon='kapak'] .ozet ol { grid-template-columns: repeat(3, 1fr); } }
+[data-yon='kapak'] .ozet li { padding: 18px; background: var(--yesil); color: var(--krem); }
+[data-yon='kapak'][data-tema='koyu'] .ozet li { color: #0F2B1E; }
+[data-yon='kapak'] .ozet li:nth-child(2) { background: var(--metin); color: var(--zemin); }
+[data-yon='kapak'] .ozet li:nth-child(3) { background: var(--vurgu); color: #141414; }
+[data-yon='kapak'] .ozet li i { font-style: normal; font-family: var(--f-etiket); font-weight: 900; font-size: 2rem; display: block; line-height: 1; }
+[data-yon='kapak'] .ozet li b { display: block; font-family: var(--f-etiket); font-weight: 800; font-size: 1.2rem; margin: 6px 0; }
+
+@media (max-width: 600px) { .sahne { padding: 48px 16px; } }
+</style>
+</head>
+<body>
+
+<nav class="secici" aria-label="Tasarım yönü">
+  <b>Yön</b>
+  <button type="button" data-y="satir">Satır Arası</button>
+  <button type="button" data-y="levha">Harita Levhası</button>
+  <button type="button" data-y="cini">Çini</button>
+  <button type="button" data-y="kapak">Kapak</button>
+  <span class="ayrac"></span>
+  <button type="button" id="tema">Koyu tema</button>
+</nav>
+<p class="yon-not" id="yon-not"></p>
+
+<section class="sahne acilis">
+  <p class="sahne-ad">Sahne 1 · Açılış</p>
+  <p class="sure">Rûm suresi, 2–5. ayetler</p>
+  <h1>Yenilen kazanacak</h1>
+  <p class="ar ar-baslik">غُلِبَتِ ٱلرُّومُ</p>
+  <p class="hook">Dünyanın en güçlü iki devletinden biri yıkılmanın eşiğindeydi. Tam o günlerde inen ayetler, bu yenik devletin birkaç yıl içinde galip geleceğini, üstelik süresini de vererek haber verdi.</p>
+</section>
+
+<section class="sahne">
+  <p class="sahne-ad">Sahne 2 · Harita adımı</p>
+  <div class="harita-sahne">
+    <article class="adim">
+      <p class="yil">613</p>
+      <h3>Pers orduları Rum topraklarına daldı.</h3>
+      <p>Antakya Perslerin eline geçti. Herakleios şehri geri almak istedi; ordusu Antakya önünde ağır bir yenilgiye uğradı. Aynı yıl Şam da düştü.</p>
+      <div class="gosterge">
+        <div class="bas"><span>Söz sayacı</span><span>Ayetten bu yana 4 yıl</span></div>
+        <div class="hucre"><span class="g">1</span><span class="g">2</span><span class="g">3</span><span class="s">4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+        <div class="hucre-alt"><span>erken</span><span>birkaç yıl (3–9)</span></div>
+      </div>
+    </article>
+    <figure class="harita-kutu" style="margin:0">
+      <svg id="harita" viewBox="0 0 800 560" role="img" aria-label="613 yılında Bizans ve Pers toprakları; Pers ordusunun Antakya ve Şam'a ilerleyişi">
+        <defs><pattern id="tarama" width="8" height="8" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><line x1="0" y1="0" x2="0" y2="8" style="stroke: var(--h-pers); stroke-width: 2.4; opacity: .5"/></pattern></defs>
+        <rect class="kara-zemin" width="800" height="560"/>
+        <g id="bolgeler"></g>
+        <path class="deniz" id="deniz" fill-rule="evenodd"/>
+        <g id="nehirler"></g>
+        <g id="ust"></g>
+      </svg>
+      <figcaption class="levha-alt"><b>Levha 2.</b> Pers ilerleyişi, 611–613. Mavi Rum, taralı kırmızı Pers toprakları; sınırlar yaklaşıktır.</figcaption>
+    </figure>
+  </div>
+</section>
+
+<section class="sahne ayet-an">
+  <p class="sahne-ad">Sahne 3 · Ayet anı</p>
+  <div class="ayet-cerceve">
+    <p class="ar ar-satir">غُلِبَتِ ٱلرُّومُ ﴿٢﴾ فِىٓ أَدْنَى ٱلْأَرْضِ وَهُم مِّنۢ بَعْدِ غَلَبِهِمْ سَيَغْلِبُونَ ﴿٣﴾</p>
+    <p class="tr-satir">Rumlar yenildi, size en yakın bir yerde. Ama onlar bu yenilgilerinin ardından <mark>galip gelecekler</mark>,</p>
+    <p class="ar ar-satir">فِى بِضْعِ سِنِينَ ۗ ... وَيَوْمَئِذٍ يَفْرَحُ ٱلْمُؤْمِنُونَ ﴿٤﴾</p>
+    <p class="tr-satir"><mark>birkaç yıl içinde</mark>. ... O gün müminler de sevinecekler.</p>
+    <span class="kunye">Rûm 30:2–4 · meal sadeleştirildi</span>
+  </div>
+</section>
+
+<section class="sahne">
+  <p class="sahne-ad">Sahne 4 · Bir bakışta ve kaynaklar</p>
+  <div class="ozet">
+    <div>
+      <h2>Üç haber, üçü de gerçekleşti.</h2>
+      <ol>
+        <li><i>1</i><span><b>Yenilen Rumlar galip geldi</b>622'de savaşın yönü döndü; 628'de Persler barış istedi.<sup>1</sup></span></li>
+        <li><i>2</i><span><b>Birkaç yıl içinde</b>İlk büyük zafer ayetten 7, Pers topraklarına giriş 9 yıl sonra.<sup>2</sup></span></li>
+        <li><i>3</i><span><b>O gün müminler de sevindi</b>Rivayete göre zafer haberi Bedir günü geldi.<sup>3</sup></span></li>
+      </ol>
+    </div>
+    <aside class="not-sut">
+      <p><sup>1</sup> Kaegi, <em>Heraclius</em>, 2003.</p>
+      <p><sup>2</sup> Tirmizî, Tefsîr (Rûm), 3191: "Bid', üçten dokuza kadardır."</p>
+      <p><sup>3</sup> Tirmizî, Tefsîr (Rûm), 3192.</p>
+    </aside>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
+<script>
+(() => {
+  const NOTLAR = {
+    satir: 'Satır Arası: eski Türkçe mushaflardaki satır altı meal geleneği. Arapça satırın altında kırmızı mürekkeple Türkçe; kaynaklar kenar notu; ayet tezhip cetvelinde. Alegreya + Alegreya Sans.',
+    levha: 'Harita Levhası: arazi ölçümü ve atlas levhası. Sayaç bir ölçek çubuğu, görseller numaralı levha, çerçevede koordinat çentikleri. Spectral + Barlow Semi Condensed.',
+    cini: 'Çini: İznik sırlı beyazı; kobalt, turkuaz, mercan. Sayaç sırlanan karolar, bölüm aralarında tek geometrik bordür. Piazzolla + Commissioner.',
+    kapak: 'Kapak: 60\'lar Türk yayınevi kapakları; büyük düz renk blokları, geniş kalın başlık, gençlere hitap. Archivo + Newsreader.'
+  };
+  const kok = document.documentElement, not = document.getElementById('yon-not'), temaBtn = document.getElementById('tema');
+  const yonKur = y => {
+    kok.dataset.yon = y; not.textContent = NOTLAR[y];
+    document.querySelectorAll('[data-y]').forEach(b => b.setAttribute('aria-pressed', b.dataset.y === y));
+    history.replaceState(null, '', '#' + y + (kok.dataset.tema === 'koyu' ? '-koyu' : ''));
+  };
+  const temaKur = t => { kok.dataset.tema = t; temaBtn.textContent = t === 'koyu' ? 'Açık tema' : 'Koyu tema'; yonKur(kok.dataset.yon); };
+  document.querySelectorAll('[data-y]').forEach(b => b.onclick = () => yonKur(b.dataset.y));
+  temaBtn.onclick = () => temaKur(kok.dataset.tema === 'koyu' ? 'acik' : 'koyu');
+  const [h, t] = location.hash.slice(1).split('-');
+  kok.dataset.tema = t === 'koyu' ? 'koyu' : 'acik';
+  temaKur(kok.dataset.tema); yonKur(NOTLAR[h] ? h : 'satir');
+
+  /* 613 sahnesi: aynı veri (rum.html), sabit bakış */
+  const NS = 'http://www.w3.org/2000/svg';
+  const el = (ad, oz, ana) => { const e = document.createElementNS(NS, ad); for (const k in oz) e.setAttribute(k, oz[k]); ana.appendChild(e); return e; };
+  const P = d3.geoMercator().fitExtent([[0, 0], [800, 560]], { type: 'MultiPoint', coordinates: [[29.5, 29.4], [46.5, 39.6]] }).clipExtent([[-200, -200], [1000, 760]]);
+  const duz = s => 'M' + s.map(p => P(p).map(v => v.toFixed(1)).join(' ')).join('L') + 'Z';
+  const BOLGE = [
+    ['B', [[26.5, 40.0], [29.0, 41.0], [29.6, 41.3], [33, 43], [40, 42.5], [41.6, 41.6], [42.5, 40.5], [41.5, 39.5], [40.5, 38.2], [40.9, 37.3], [40.0, 37.2], [37.0, 36.7], [36.1, 36.9], [34, 35], [27, 35], [26, 36]]],
+    ['P', [[41.6, 41.6], [46.5, 41.8], [46.5, 39.5], [44.5, 38.5], [42.5, 38.3], [40.9, 37.3], [40.5, 38.2], [41.5, 39.5], [42.5, 40.5]]],
+    ['P', [[34, 35], [36.1, 36.9], [37.0, 36.7], [40.0, 37.2], [40.9, 37.3], [41.3, 36.5], [40.5, 35.2], [40.0, 34.6], [34.5, 34.6]]],
+    ['P', [[34.5, 34.6], [40.0, 34.6], [39.5, 34.0], [38.0, 33.0], [36.8, 32.4], [35.6, 32.7], [35.1, 33.1], [34.5, 34]]],
+    ['B', [[35.1, 33.1], [35.6, 32.7], [36.8, 32.4], [38.0, 33.0], [37.5, 31.0], [36.5, 29.6], [35.0, 29.5], [34.2, 31.3], [33.5, 31.6]]],
+    ['B', [[25, 31.8], [33.5, 31.6], [34.2, 31.3], [35.0, 29.5], [34.6, 28], [34, 26], [33.5, 24], [30.3, 27], [29.5, 29.5], [25, 30.5]]],
+    ['P', [[40.9, 37.3], [42.5, 38.3], [44.5, 38.5], [46.5, 39.5], [46.5, 41.8], [50, 42], [62, 42], [62, 24], [51, 24.5], [48.5, 28.5], [46, 31], [44, 31.5], [41.5, 33.5], [40.5, 35.2], [41.3, 36.5]]]
+  ];
+  const bg = document.getElementById('bolgeler');
+  BOLGE.forEach(([o, s]) => { el('path', { d: duz(s), class: 'bolge ' + o }, bg); el('path', { d: duz(s), class: 'tarama ' + o }, bg); });
+  const ng = document.getElementById('nehirler');
+  [[[38.0, 37.0], [38.4, 36.0], [40.1, 35.3], [41.0, 34.4], [43.3, 32.5], [44.4, 31.6], [46.3, 31.0]], [[40.2, 37.9], [42.2, 37.2], [43.1, 36.4], [43.7, 35.0], [44.4, 33.3], [45.7, 32.3]]]
+    .forEach(n => el('path', { d: d3.line()(n.map(p => P(p))), class: 'nehir' }, ng));
+  const ust = document.getElementById('ust');
+  const ok = [[44.4, 33.3], [42.5, 35.6], [39.5, 36.6], [36.6, 36.4], [36.5, 34.9], [36.4, 33.8]].map(p => P(p));
+  el('path', { d: d3.line().curve(d3.curveCatmullRom.alpha(.5))(ok), class: 'ok' }, ust);
+  const [a, b] = ok.slice(-2), aci = Math.atan2(b[1] - a[1], b[0] - a[0]) * 180 / Math.PI;
+  el('path', { d: 'M-2 -7 L11 0 L-2 7 Z', class: 'ok-ucu', transform: `translate(${b[0]} ${b[1]}) rotate(${aci})` }, ust);
+  const yaz = (k, metin, sinif, ek = {}) => { const [x, y] = P(k); const t = el('text', { x, y, class: sinif + ' hale', ...ek }, ust); t.textContent = metin; return t; };
+  yaz([33.2, 38.6], 'Rumlar', 'imp').style.fill = 'var(--h-rum)';
+  yaz([33.2, 38.05], 'Bizans, Doğu Roma', 'bolge-ad');
+  yaz([44.3, 36.6], 'Persler', 'imp').style.fill = 'var(--h-pers)';
+  yaz([44.3, 36.05], 'Sasani İmparatorluğu', 'bolge-ad');
+  yaz([38.6, 35.5], 'Suriye', 'bolge-ad'); yaz([36.5, 30.7], 'Filistin', 'bolge-ad'); yaz([31.3, 30.0], 'Mısır', 'bolge-ad');
+  [[[36.16, 36.2], 'Antakya', 1], [[36.29, 33.51], 'Şam', 0], [[35.21, 31.77], 'Kudüs', 1], [[44.58, 33.09], 'Ktesifon', 0], [[29.92, 31.2], 'İskenderiye', 0]].forEach(([k, ad, sol]) => {
+    const [x, y] = P(k); el('circle', { cx: x, cy: y, r: 4.5, class: 'nokta' }, ust);
+    yaz(k, ad, 'sehir-ad', { dx: sol ? -9 : 9, dy: 5, 'text-anchor': sol ? 'end' : 'start' });
+  });
+  yaz([37.9, 37.15], '613, Rum ordusu bozguna uğradı', 'olay-yazi', { 'text-anchor': 'middle' });
+
+  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json').then(r => r.json()).then(topo => {
+    const d = d3.geoPath(P)(topojson.feature(topo, topo.objects.land));
+    document.getElementById('deniz').setAttribute('d', 'M-500 -500H1300V1100H-500Z' + d);
+  }).catch(() => {});
+})();
+</script>
+</body>
+</html>

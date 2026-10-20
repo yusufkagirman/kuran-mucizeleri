@@ -1,10 +1,10 @@
 ---
 baslik: Göğün genişlemesi
 hook: |
-  Evren yerinde durmuyor; gökadalar her an birbirinden uzaklaşıyor, gök genişliyor.
+  Evren yerinde durmuyor. Siz bu cümleyi okurken uzak gökadalar birbirinden biraz daha uzaklaştı.
 
-  Ayetin indiği dönemde gök, yerinde duran, hiç değişmeyen bir kubbe sanılıyordu. Ayet ise göğün kurulduğunu ve genişletilmekte olduğunu anlatır. Bilim, evrenin durağan olmadığını ancak 20. yüzyılda kabul etti.
-kart: Değişmez sanılan gök durmuyor; evren her an genişliyor.
+  Ayetin indiği dönemde gök, başın üstünde duran, hiç değişmeyen bir kubbe gibi görünürdü. Ayet ise göğün kurulduğunu ve genişletilmekte olduğunu anlatır. Bilim, evrenin durağan olmadığını ancak 20. yüzyılda kabul etti.
+kart: Evren yerinde durmuyor; gökadalar her an birbirinden uzaklaşıyor, gök genişliyor.
 konu: [gokyuzu]
 sureAdi: Zâriyât
 ayetler:
@@ -13,12 +13,13 @@ vurgu: "وَإِنَّا لَمُوسِعُونَ"
 nuzul: { donem: "Mekke dönemi", yil: 612 }
 kesif: { yil: 1929, olay: "Hubble, uzak gökadaların bizden uzaklaştığını ve uzaklaştıkça daha hızlı kaçtığını gösterdi; evrenin genişlediği anlaşıldı.", kaynak: hubble1929 }
 itirazlar:
-  - itiraz: "Bu ayet 1900'lere kadar \"genişletmeye gücümüz yeter\" diye çevriliyordu; \"genişletiyoruz\" anlamı Hubble'dan sonra verildi."
-    cevap: "\"Genişlettik\" anlamı Hubble'dan yaklaşık bin yıl önce de vardı. Taberî (ö. 923) tefsirinde İbn Zeyd'in bu ifadeyi \"onu genişletti\" diye açıkladığını aktarır; İbn Kesîr (ö. 1373) de \"göğün etrafını genişlettik\" diye açıklar."
+  - itiraz: "Bu ayete \"genişletiyoruz\" anlamı Hubble'dan sonra mı verildi?"
+    cevap: "Hayır. \"Onu genişletti\" açıklaması Hubble'dan yaklaşık bin yıl önce de vardı: Taberî (ö. 923) tefsirinde İbn Zeyd'in bu ifadeyi \"onu genişletti\" diye açıkladığını aktarır; İbn Kesîr (ö. 1373) de \"onu genişlettik\" diye açıklar."
     kaynak: taberi
   - itiraz: "\"Genişleticiyiz\" ifadesi mecazdır; Allah'ın gücünü ya da rızkı genişletmesini anlatır."
-    cevap: "Ayetin öncesi ve sonrası fiziksel bir konuyu anlatır: göğün kurulması, yerin döşenmesi. Bu bağlamda yalnız bu ifadeyi mecaz saymak akışla uyuşmaz."
-kaynaklar: [hubble1929, lemaitre1927, taberi, ibnkesir]
+    cevap: "Müfessirlerin bir kısmı ifadeyi gücün genişliği diye açıklamıştır. Ancak ayetin öncesi ve sonrası fiziksel bir konuyu anlatır: göğün kurulması, yerin döşenmesi. İbn Zeyd ve İbn Kesîr de ifadeyi göğün genişletilmesi olarak açıklar."
+    kaynak: ibnkesir5147
+kaynaklar: [hubble1929, lemaitre1927, taberi, ibnkesir5147, esa2004hudf, ibnkesir]
 durum: taslak
 ---
 
@@ -29,26 +30,76 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Gorsel from '../../components/Gorsel.astro';
 import Genisleme from '../../etkilesim/gogun-genislemesi/Genisleme.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda gök, başın üstünde duran ve hiç değişmeyen bir kubbe olarak bilinirdi. Kur'an göğün kuruluşunu anlatırken bir adım daha attı:
+<Hikaye veri={frontmatter}>
 
-<Gorsel duzen="karsilastir" baslik="Kubbe ve derinlik" resimler={[
-  { src: '/img/gogun-genislemesi/kubbe-gravur.jpg', alt: 'Gravür: yıldızlı gök, yeryüzünün üstüne kapanmış bir kubbe gibi çizilmiş; bir yolcu kubbenin kenarından başını dışarı uzatıyor.', baslik: 'Kubbe', not: "Göğü yeryüzüne kapanmış bir kubbe olarak çizen gravür (Flammarion'un kitabından, 1888).", kunye: "Flammarion, L'atmosphère (1888), sanatçısı bilinmiyor; kamu malı", url: 'https://commons.wikimedia.org/wiki/File:The_Flammarion_Engraving_(ca._1888).jpg' },
-  { src: '/img/gogun-genislemesi/ultra-derin-alan.jpg', alt: 'Kapkara gök zemininde sayısız küçük ışık lekesi; sarmal ve eliptik gökadalar.', baslik: 'Derinlik', not: "Hubble Uzay Teleskobu'nun Ultra Derin Alan görüntüsü: ışık lekelerinin neredeyse hepsi birer gökada.", kunye: 'NASA, ESA, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Hubble_ultra_deep_field.jpg' },
-]} />
+<Adim yil={612} etiket="612 civarı · Mekke">
+
+Ayetin indiği yıllarda gök, başın üstünde duran ve hiç değişmeyen bir kubbe gibi görünürdü. Yıldızlar her gece aynı yerden doğar, aynı yerde batardı.
+
+Zâriyât suresi göğün kuruluşunu anlatırken bir adım daha atar:
+
+</Adim>
+
+<Adim tur="genis" yil={612} etiket="Zâriyât suresi">
 
 <AyetParca sure={51} ayet={47} sureAdi="Zâriyât" ar="وَٱلسَّمَآءَ بَنَيْنَٰهَا بِأَيْي۟دٍۢ وَإِنَّا لَمُوسِعُونَ" meal="Göğü, gücümüzle Biz kurduk; şüphesiz biz onu genişleticiyiz." vurgu="biz onu genişleticiyiz" />
 
-Ayetteki *mûsiûn* kelimesi "genişleten, genişletmekte olan" demektir. Müfessirler bunu çoğunlukla Allah'ın gücünün genişliği diye anladı; bazıları ise göğün genişletilmesi olarak açıkladı.<Atif k="taberi" /> Göğün gerçekten büyüdüğünü gösterecek bir bilgi yoktu; bu yüzden ifade asırlarca bir güç beyanı olarak okundu.
+</Adim>
 
-Bilim de uzun süre evreni durağan sandı. 1927'de Lemaître evrenin genişleyebileceğini hesapladı;<Atif k="lemaitre1927" /> 1929'da Edwin Hubble, uzak gökadaların bizden uzaklaştığını ve uzaklaştıkça daha hızlı kaçtığını ölçtü.<Atif k="hubble1929" /> Evren genişliyordu.
+<Adim>
+
+Ayetteki *mûsiûn* kelimesi "genişleten, genişletmekte olan" demektir.
+
+Müfessirler bunu çoğunlukla "yaratmaya gücü geniş olan" diye açıkladı. Ama Taberî, İbn Zeyd'in "onu genişletti" dediğini de aktarır.<Atif k="taberi" /> İbn Kesîr de ifadeyi "onu genişlettik" diye açıklar.<Atif k="ibnkesir5147" /> Göğün gerçekten büyüdüğünü gösterecek bir bilgi ise yoktu.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Gorsel duzen="karsilastir" baslik="Kubbe ve derinlik" resimler={[
+  { src: '/img/gogun-genislemesi/kubbe-gravur.jpg', alt: 'Gravür: yıldızlı gök, yeryüzünün üstüne kapanmış bir kubbe gibi çizilmiş; bir yolcu kubbenin kenarından başını dışarı uzatıyor.', baslik: 'Kubbe', not: "Göğü yeryüzüne kapanmış bir kubbe olarak çizen gravür (Flammarion'un kitabından, 1888).", kunye: "Flammarion, L'atmosphère (1888), sanatçısı bilinmiyor; kamu malı", url: 'https://commons.wikimedia.org/wiki/File:The_Flammarion_Engraving_(ca._1888).jpg' },
+  { src: '/img/gogun-genislemesi/ultra-derin-alan.jpg', alt: 'Kapkara gök zemininde sayısız küçük ışık lekesi; sarmal ve eliptik gökadalar.', baslik: 'Derinlik', not: "Hubble'ın 2004'te yayımlanan Ultra Derin Alan görüntüsü: yaklaşık 10.000 gökada.", kunye: 'NASA, ESA, kamu malı', url: 'https://commons.wikimedia.org/wiki/File:Hubble_ultra_deep_field.jpg' },
+]} />
+
+</Adim>
+
+<Adim>
+
+Bilim de uzun süre evreni durağan sandı. Gökyüzü sonsuzdan beri aynıydı ve öyle kalacaktı.
+
+</Adim>
+
+<Adim yil={1927} etiket="1927 · Belçika">
+
+1927'de Belçikalı rahip ve fizikçi Georges Lemaître, denklemlerden yola çıkarak evrenin genişlediğini ve uzak gökadaların bizden kaçması gerektiğini hesapladı.<Atif k="lemaitre1927" />
+
+</Adim>
+
+<Adim yil={1929} etiket="1929">
+
+İki yıl sonra Edwin Hubble teleskobunu uzak gökadalara çevirdi ve ölçtü: gökadalar bizden uzaklaşıyordu, üstelik ne kadar uzaktaysalar o kadar hızlı kaçıyorlardı.<Atif k="hubble1929" /> Evren genişliyordu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Genisleme />
 
+</Adim>
+
+<Adim tur="genis" yil={1929}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki ama bu anlam ayete sonradan mı yüklendi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Herkesin göğü değişmez bir kubbe sandığı bir çağda, göğün genişletildiğini bir insan kendi bilgisiyle nasıl söyleyebilirdi?</MeydanOkuma>
+<MeydanOkuma>Herkesin göğü değişmez bir kubbe sandığı bir çağda, göğün genişletildiğini anlatan söz neye dayanıyordu?</MeydanOkuma>

@@ -3,7 +3,7 @@ baslik: Firavunun bedeni
 hook: |
   Denizde boğulan Firavun'un ruhu kurtulmadı, bedeni kurtarıldı: sonra gelenler görüp ibret alsın diye.
 
-  Yûnus suresi, Musa'nın peşinden denize girip boğulan Firavun'a bedeninin kurtarılacağını ve sonrakilere ibret olacağını söyler. Firavunların mumyalanmış bedenleri ise ancak 1881'de gizli bir mezarda bulundu ve bugün Kahire'de sergileniyor.
+  Yûnus suresi, Musa'nın peşinden denize girip boğulan Firavun'a bedeninin kurtarılacağını ve sonrakilere ibret olacağını söyler. Firavunların mumyalanmış bedenleri ise 1881'de gizli bir mezardan çıkarıldı. Bugün Kahire'de, herkesin gözü önünde duruyorlar.
 kart: Denizde boğulan Firavun'un ruhu kurtulmadı, bedeni kurtarıldı; sonra gelenler görüp ibret alsın diye.
 konu: [tarih]
 sureAdi: Yûnus
@@ -15,14 +15,14 @@ kesif: { yil: 1881, olay: "Deyrülbahri'deki gizli mezarda II. Ramses dahil fira
 itirazlar:
   - itiraz: "Eski müfessirler ayeti \"Firavun'un cesedi sahile atıldı ki İsrailoğulları onun öldüğünü görsün\" diye anladı. \"Bedeni bugüne kadar korunacak\" anlamı sonradan yüklenmiş olamaz mı?"
     cevap: "Ayet, bedenin \"senden sonrakilere\" ibret olacağını söyler; bu, yalnız o gün sahilde olanlarla sınırlı değildir. Cesedin sahile atılması da bedenin sonraki nesillere ibret olarak kalması da aynı sözün içindedir."
-    kaynak: bucaille1976
+    kaynak: taberiYunus
   - itiraz: "Kur'an Firavun'un adını vermez. Müzedeki mumyalardan hiçbirinin Musa'nın karşısındaki firavun olduğu kanıtlanmış değil."
-    cevap: "Ayet bir isim vermez; anlattığı, boğulan Firavun'un bedeninin kurtarılıp ibret olacağıdır. Musa'nın firavunu en çok II. Ramses ya da oğlu Merneptah olarak gösterilir ve ikisinin bedeni de bugün Kahire'de sergileniyor."
-    kaynak: bucaille1976
+    cevap: "Ayet bir isim vermez; anlattığı, boğulan Firavun'un bedeninin kurtarılıp ibret olacağıdır. Musa'nın firavunu en çok II. Ramses ya da oğlu Merneptah olarak gösterilir. II. Ramses'in mumyası 1881'de Deyrülbahri'de, Merneptah'ınki 1898'de Krallar Vadisi'ndeki bir mezarda bulundu; ikisi de bugün Kahire'de."
+    kaynak: kv35wiki
   - itiraz: "Bütün firavunlar zaten mumyalanırdı. Bir firavunun bedeninin korunmasında olağanüstü ne var?"
-    cevap: "Mumyalanmak bedeni korumaya yetmedi; firavun mezarlarının çoğu soyuldu, bedenlerin büyük kısmı kayboldu. Deyrülbahri'de bulunanlar, saklandıkları gizli mezar sayesinde bugüne ulaşıp herkesin gözü önüne çıktı."
-    kaynak: maspero1889
-kaynaklar: [maspero1889, smith1912, taberiYunus]
+    cevap: "Mumyalanmak bedeni korumaya yetmedi; firavun mezarlarının çoğu soyuldu, bedenlerin büyük kısmı kayboldu. Deyrülbahri'de bulunanlar, rahiplerin onları gizli bir mezara taşıması sayesinde bugüne ulaştı."
+    kaynak: royalcachewiki
+kaynaklar: [maspero1889, royalcachewiki, kv35wiki, taberiYunus, maarif, smith1912, bucaille1976]
 durum: taslak
 ---
 
@@ -32,16 +32,58 @@ import Gorsel from '../../components/Gorsel.astro';
 import Kazi from '../../components/firavunun-bedeni-Kazi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda Mekke'de Firavun, kitaplardan bilinen bir isimdi. Tevrat onun ordusunun denizde boğulduğunu ve kimsenin kurtulmadığını anlatıyordu; bedenine ne olduğundan söz etmiyordu. Yûnus suresi ise boğulan Firavun'a şöyle seslenir:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={620} etiket="620 civarı · Mekke">
+
+Ayetin indiği yıllarda Mekke'de Firavun, kitaplardan bilinen bir isimdi. Tevrat onun ordusunun denizde boğulduğunu ve tek birinin bile kurtulmadığını anlatıyordu (Çıkış 14:28); bedenine ne olduğundan ise söz etmiyordu.
+
+Yûnus suresi boğulan Firavun'a şöyle seslenir:
+
+</Adim>
+
+<Adim tur="genis" yil={620} etiket="Yûnus suresi">
 
 <AyetParca sure={10} ayet={92} sureAdi="Yûnus" ar="فَٱلْيَوْمَ نُنَجِّيكَ بِبَدَنِكَ لِتَكُونَ لِمَنْ خَلْفَكَ ءَايَةًۭ" meal="Senden sonrakilere bir ibret teşkil etmesi için bugün sadece senin cesedini çıkarıp (sahile) atacağız..." vurgu="senin cesedini çıkarıp (sahile) atacağız" />
 
-Ayet, ruhun değil bedenin kurtarılacağını ve bu bedenin "senden sonrakilere" bir ibret olacağını söylüyordu. Asırlar boyunca bu söz, cesedin sahile vurduğu ve İsrailoğullarının onu gördüğü şeklinde anlaşıldı.<Atif k="taberiYunus" /> Firavunların bedenleri ise kumların altında, kimsenin bilmediği mezarlarda duruyordu.
+</Adim>
+
+<Adim>
+
+Ayet, ruhun değil bedenin kurtarılacağını ve bu bedenin "senden sonrakilere" bir ibret olacağını söylüyordu.
+
+Asırlar boyunca bu söz, cesedin sahile vurduğu ve İsrailoğullarının onu görüp öldüğüne inandığı şeklinde anlaşıldı.<Atif k="taberiYunus" /> Firavunların bedenleri ise kumların altında, yeri bilinmeyen mezarlarda duruyordu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Kazi />
 
-1881'de Deyrülbahri'deki gizli bir mezarda, aralarında II. Ramses'in de bulunduğu firavunların mumyalanmış bedenleri ortaya çıkarıldı.<Atif k="maspero1889" /> Bu bedenler bugün Kahire'de sergileniyor.
+</Adim>
+
+<Adim>
+
+Bu mezarların çoğu daha antik çağda soyuldu. Firavunların bedenlerini kurtarmak için rahipler onları gizlice taşıyıp Deyrülbahri'deki dağın içine oyulmuş tek bir mezara sakladılar.<Atif k="royalcachewiki" />
+
+</Adim>
+
+<Adim yil={1881} etiket="1881 · Deyrülbahri">
+
+Mezarı önce bölgedeki bir aile bulup gizlice satmaya başladı. 1881'de yetkililer mezara girdiğinde içinden elliden fazla kral, kraliçe ve soylunun mumyası çıktı; II. Ramses de aralarındaydı.<Atif k="maspero1889" /><Atif k="royalcachewiki" />
+
+</Adim>
+
+<Adim>
+
+Bu bedenler 2021'de, büyük bir törenle Kahire'deki Ulusal Mısır Medeniyetleri Müzesi'ne taşındı.<Atif k="royalcachewiki" /> Bugün isteyen herkes onları görebiliyor.
+
+</Adim>
+
+</Hikaye>
 
 Peki ama bu bedenlerden biri gerçekten Musa'nın karşısındaki firavun mu?
 
@@ -52,4 +94,4 @@ Peki ama bu bedenlerden biri gerçekten Musa'nın karşısındaki firavun mu?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Firavunların mezarlarının yerini kimsenin bilmediği bir çağda, Mekke'de yaşayan bir insan, Firavun'un bedeninin sonraki nesillerin göreceği bir ibret olarak kalacağını nasıl söyleyebilirdi?</MeydanOkuma>
+<MeydanOkuma>Firavunların mezarlarının yerini kimsenin bilmediği bir çağda, Firavun'un bedeninin sonraki nesillerin göreceği bir ibret olarak kalacağını anlatan söz neye dayanıyordu?</MeydanOkuma>

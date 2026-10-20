@@ -67,7 +67,7 @@ const direkler = [70, 210, 390, 530].map((x) => ({ x, ust: egri(x, 132, 50) - 4 
 <style>
   .direkler { margin: var(--s6) 0; padding: var(--s4); background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); }
   .dugmeler { display: flex; flex-wrap: wrap; gap: var(--s2); margin-bottom: var(--s3); }
-  button { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s3); border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--murekkep); font: 500 var(--fs-sm) var(--font-arayuz); cursor: pointer; transition: background var(--t-mikro), border-color var(--t-mikro); }
+  button { display: inline-flex; align-items: center; gap: var(--s2); min-height: 44px; padding: 0 var(--s3); border-radius: var(--radius); border: 1px solid var(--cizgi-renk); background: var(--zemin); color: var(--murekkep); font: 500 var(--fs-sm) var(--font-arayuz); cursor: pointer; transition: background var(--t-mikro), border-color var(--t-mikro); }
   button[aria-pressed='true'] { border-color: var(--vurgu); background: var(--vurgu-zemin); }
   .no { display: inline-grid; place-items: center; width: 22px; height: 22px; border-radius: 50%; background: var(--yuzey-2); font-size: var(--fs-xs); }
   button[aria-pressed='true'] .no { background: var(--vurgu); color: var(--zemin); }

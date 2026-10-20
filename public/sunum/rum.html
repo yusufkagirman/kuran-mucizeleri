@@ -5,9 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yenilen Kazanacak · Rûm Suresi</title>
 <meta name="description" content="Rûm suresi 2-5. ayetler: yıkılmak üzere olan Bizans'ın birkaç yıl içinde galip geleceği haberi, yıl yıl etkileşimli bir haritayla.">
+<link rel="preload" href="/veri/kiyi.json" as="fetch" crossorigin>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=IBM+Plex+Sans:wght@400;500;600&family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,500;1,7..72,400&family=Playfair+Display:ital,wght@0,500;0,700;1,500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Amiri+Quran&family=Figtree:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
 <style>
 /* Deneme sayfası: değerler sitenin marka kitiyle (src/styles/tokens.css) aynı; siteye taşınınca oradan gelir. */
 @property --k { syntax: '<number>'; inherits: true; initial-value: 1; }
@@ -16,29 +17,31 @@
 
 :root {
   --font-ayet: 'Amiri Quran', 'Scheherazade New', serif;
-  --font-govde: 'Literata', Georgia, serif;
-  --font-baslik: 'Playfair Display', Georgia, serif;
-  --font-arayuz: 'IBM Plex Sans', system-ui, sans-serif;
-  --ease-giris: cubic-bezier(0.05, 0.7, 0.1, 1);
+  --font-govde: 'Figtree', system-ui, sans-serif;
+  --font-baslik: var(--font-govde);
+  --font-arayuz: var(--font-govde);
+  --radius: 8px;
+  --ease-giris: cubic-bezier(0.23, 1, 0.32, 1);
   --ease-kamera: cubic-bezier(0.65, 0, 0.35, 1);
 }
-[data-palet='gece'] {
-  --zemin: #0B1020; --yuzey: #131A33; --yuzey-2: #1B2445;
-  --murekkep: #F3EBDD; --soluk: #A9A9BC; --cizgi-renk: #2A3358;
-  --vurgu: #C9A24B; --fosfor: rgba(255, 200, 40, 0.38);
-  --deniz: #08101F; --kara: #222C4C; --kiyi: #3A4670;
-  --biz: #6FA8DC; --pers: #E0705A; --altin: #C9A24B;
-  --bolge-op: .5;
-  color-scheme: dark;
-}
+/* Marka kiti v2 (src/styles/tokens.css ile aynı değerler) */
 [data-palet='parsomen'] {
-  --zemin: #F4EDE0; --yuzey: #FBF7EF; --yuzey-2: #EDE3D1;
-  --murekkep: #14274E; --soluk: #5E6577; --cizgi-renk: #D9CDB6;
-  --vurgu: #A8452B; --fosfor: rgba(255, 214, 0, 0.55);
-  --deniz: #C9D8DA; --kara: #F3EADA; --kiyi: #9FAFB5;
-  --biz: #2F5597; --pers: #B4472C; --altin: #9A7A2E;
-  --bolge-op: .38;
+  --zemin: #FCFCFC; --yuzey: #F8F8F8; --yuzey-2: #F1F1F1; --cizgi-renk: rgba(0, 0, 0, .085);
+  --murekkep: #202020; --soluk: #646464; --vurgu: #1A8754; --vurgu-metin: #18794E; --vurgu-zemin: #E6F6EB; --fosfor: #FFE76B;
+  --deniz: #D5E3EB; --kara: #F1F1EF; --kiyi: #A9BBC6;
+  --biz: #3E63DD; --pers: #DC3E42; --altin: #1A8754;
+  --golge: 0 0 0 1px rgba(0, 0, 0, .06), 0 1px 2px rgba(0, 0, 0, .05), 0 8px 24px -10px rgba(0, 0, 0, .14);
+  --bolge-op: .36;
   color-scheme: light;
+}
+[data-palet='gece'] {
+  --zemin: #111111; --yuzey: #191919; --yuzey-2: #222222; --cizgi-renk: rgba(255, 255, 255, .09);
+  --murekkep: #EEEEEE; --soluk: #B4B4B4; --vurgu: #2F9E6A; --vurgu-metin: #4CC38A; --vurgu-zemin: #0F2E22; --fosfor: #6B5A00;
+  --deniz: #0F1A21; --kara: #1B1D1E; --kiyi: #2E3D47;
+  --biz: #7B9BF5; --pers: #FF7A72; --altin: #4CC38A;
+  --golge: 0 0 0 1px rgba(255, 255, 255, .08), 0 1px 2px rgba(0, 0, 0, .5), 0 10px 28px -12px rgba(0, 0, 0, .8);
+  --bolge-op: .42;
+  color-scheme: dark;
 }
 * { box-sizing: border-box; }
 body {
@@ -47,19 +50,20 @@ body {
 }
 button { font: inherit; color: inherit; }
 em { font-style: italic; }
-mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: inherit; padding: 0 2px; border-radius: 2px; }
+mark { background: linear-gradient(transparent 12%, var(--fosfor) 12%, var(--fosfor) 88%, transparent 88%); color: inherit; padding: 0 .12em; border-radius: 2px; }
+::selection { background: var(--fosfor); color: var(--murekkep); }
 .b { color: var(--biz); font-weight: 500; }
 .p { color: var(--pers); font-weight: 500; }
 .a { color: var(--altin); font-weight: 500; }
 
 .ust {
   position: fixed; inset: 0 0 auto 0; z-index: 30; display: flex; justify-content: space-between; align-items: center;
-  padding: 10px 16px; font: 500 .75rem/1 var(--font-arayuz); letter-spacing: .1em; text-transform: uppercase;
+  padding: 10px 16px; font: 500 .75rem/1 var(--font-arayuz); 
   pointer-events: none;
 }
 .ust > * { pointer-events: auto; }
 .ust a { color: var(--soluk); text-decoration: none; }
-.tema { background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: 99px; padding: 6px 12px; cursor: pointer; font: inherit; color: var(--soluk); }
+.tema { background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); padding: 6px 12px; cursor: pointer; font: inherit; color: var(--soluk); }
 
 /* ── Giriş ─────────────────────────────────── */
 .giris { min-height: 100svh; display: grid; place-items: center; text-align: center; padding: 96px 16px 64px; position: relative; overflow: hidden; }
@@ -67,12 +71,11 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
   position: absolute; inset: 0; display: grid; place-items: center; pointer-events: none;
   font: clamp(5rem, 22vw, 16rem)/1 var(--font-ayet); color: var(--murekkep); opacity: .05; direction: rtl; white-space: nowrap;
 }
-.giris .ust-yazi { font: 600 .75rem var(--font-arayuz); letter-spacing: .14em; text-transform: uppercase; color: var(--vurgu); }
-.giris h1 { font: 700 clamp(2.75rem, 9vw, 6rem)/1 var(--font-baslik); margin: .25em 0 .35em; letter-spacing: -.02em; }
-.giris h1 span { color: var(--biz); font-style: italic; font-weight: 500; }
+.giris .ust-yazi { font: 500 1rem var(--font-arayuz); color: var(--soluk); }
+.giris h1 { font: 700 clamp(2.75rem, 9vw, 5.5rem)/1.02 var(--font-baslik); margin: .25em 0 .35em; letter-spacing: -.035em; text-wrap: balance; }
 .giris p { max-width: 38ch; margin: 0 auto 1em; font-size: clamp(1.05rem, 2.6vw, 1.25rem); }
 .giris .soluk { color: var(--soluk); font-size: 1rem; }
-.asagi { margin-top: 36px; font: 500 .75rem var(--font-arayuz); letter-spacing: .12em; text-transform: uppercase; color: var(--soluk); display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
+.asagi { margin-top: 36px; font: 500 .75rem var(--font-arayuz); color: var(--soluk); display: inline-flex; flex-direction: column; align-items: center; gap: 8px; }
 .asagi::after { content: ''; width: 1px; height: 40px; background: linear-gradient(var(--soluk), transparent); animation: in 2.2s ease-in-out infinite; transform-origin: top; }
 @keyframes in { 0% { transform: scaleY(0); } 50% { transform: scaleY(1); } 100% { transform: scaleY(1); opacity: 0; } }
 
@@ -83,7 +86,7 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
   position: absolute; inset: 0; width: 100%; height: 100%; display: block; background: var(--kara);
 }
 /* Kamera: harita hedefte bir kez çizilir, geçiş bu katmanda GPU ile yapılır (svg'yi her karede yeniden çizmek çok pahalı) */
-.harita-kat { position: absolute; inset: 0; will-change: transform, opacity; }
+.harita-kat { position: absolute; inset: 0; }
 .dunya { transform: translate(calc(var(--tx) * 1px), calc(var(--ty) * 1px)) scale(var(--k)); transform-origin: 0 0; }
 /* Tek büyük yol: kara zemin svg'nin arka planı, deniz bölgelerin üstüne örtülür, kıyı çizgisi onun kenarı */
 .deniz-ortu { fill: var(--deniz); stroke: var(--kiyi); stroke-width: calc(1px / var(--k)); }
@@ -93,9 +96,9 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .tarama { fill: url(#tarama); opacity: 0; transition: opacity 1s ease; pointer-events: none; }
 .tarama.P { opacity: 1; }
 .yazi { font-family: var(--font-arayuz); paint-order: stroke; stroke: var(--kara); stroke-linejoin: round; }
-.imp-ad { font: 600 calc(19px / var(--k)) var(--font-baslik); letter-spacing: .14em; stroke-width: calc(4px / var(--k)); }
-.imp-alt { font-size: calc(11px / var(--k)); font-style: italic; fill: var(--soluk); stroke-width: calc(3px / var(--k)); font-family: var(--font-govde); }
-.bolge-ad { font: italic 400 calc(12px / var(--k)) var(--font-govde); fill: var(--soluk); stroke-width: calc(3px / var(--k)); }
+.imp-ad { font: 700 calc(20px / var(--k)) var(--font-baslik); letter-spacing: -.01em; stroke-width: calc(3px / var(--k)); }
+.imp-alt { font: 500 calc(12px / var(--k)) var(--font-govde); fill: var(--soluk); stroke-width: calc(3px / var(--k)); }
+.bolge-ad { font: 500 calc(12px / var(--k)) var(--font-govde); fill: var(--soluk); stroke-width: calc(3px / var(--k)); }
 .olcek { transform: scale(calc(1 / var(--k))); }
 .sehir { opacity: 0; transition: opacity .6s; }
 .sehir.gorunur { opacity: 1; }
@@ -108,7 +111,7 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .ok.bag.acik { transition: opacity .8s; }
 .ok-ucu { opacity: 0; transition: opacity .3s; }
 .ok-ucu.acik { opacity: 1; transition: opacity .3s 1.5s; }
-.bag-yazi { font: italic 500 12px var(--font-govde); stroke-width: 3px; opacity: 0; transition: opacity .6s .4s; }
+.bag-yazi { font: 600 12px var(--font-govde); stroke-width: 3px; opacity: 0; transition: opacity .6s .4s; }
 .bag-yazi.acik { opacity: 1; }
 .olay { opacity: 0; transition: opacity .5s; pointer-events: none; }
 .olay.acik { opacity: 1; transition: opacity .6s 1.2s; }
@@ -124,14 +127,15 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .hud {
   position: absolute; z-index: 5; left: 12px; right: 12px; top: 46px;
   background: color-mix(in srgb, var(--yuzey) 96%, transparent);
-  border: 1px solid var(--cizgi-renk); border-radius: 14px; padding: 10px 12px;
+  border: 1px solid var(--cizgi-renk); border-radius: var(--radius); padding: 10px 12px;
   display: grid; grid-template-columns: auto 1fr; gap: 4px 14px; align-items: center;
 }
 @media (min-width: 900px) {
-  .hud { left: 472px; right: 24px; top: 56px; padding: 14px 18px; gap: 10px 28px; max-width: 760px; }
+  /* Ortadaki ayet/geniş kartlarla aynı eksen ve genişlik */
+  .hud { left: 50%; right: auto; width: min(760px, 100% - 48px); transform: translateX(-50%); top: 56px; padding: 14px 18px; gap: 10px 28px; }
 }
-.hud-yil { font: 700 2rem/1 var(--font-baslik); font-variant-numeric: tabular-nums; display: flex; flex-direction: column; min-width: 3.2ch; }
-.hud-yil small { font: 500 .6875rem/1.2 var(--font-arayuz); letter-spacing: .06em; color: var(--soluk); margin-top: 4px; text-transform: uppercase; }
+.hud-yil { font: 700 2rem/1 var(--font-baslik); letter-spacing: -.03em; font-variant-numeric: tabular-nums; display: flex; flex-direction: column; min-width: 3.2ch; }
+.hud-yil small { font: 500 .75rem/1.3 var(--font-arayuz); letter-spacing: 0; color: var(--soluk); margin-top: 8px; white-space: nowrap; }
 @media (min-width: 900px) { .hud-yil { font-size: 2.75rem; } }
 .hud-soz { min-width: 0; transition: opacity .5s; }
 .hud-soz.gizli { display: none; }
@@ -150,9 +154,9 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .hucreler li.bedir { background: var(--altin); color: var(--zemin); border-color: var(--altin); }
 .hucreler li[data-ilk]::after {
   content: 'ilk bahis'; position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
-  font: 600 .5625rem var(--font-arayuz); letter-spacing: .04em; color: var(--pers); white-space: nowrap; text-transform: uppercase;
+  font: 600 .5625rem var(--font-arayuz); color: var(--pers); white-space: nowrap;
 }
-.pencere-yazi { display: grid; grid-template-columns: 2fr 7fr; gap: 3px; margin-top: 3px; font: 500 .625rem var(--font-arayuz); color: var(--soluk); text-transform: uppercase; letter-spacing: .05em; }
+.pencere-yazi { display: grid; grid-template-columns: 2fr 7fr; gap: 3px; margin-top: 3px; font: 500 .625rem var(--font-arayuz); color: var(--soluk); }
 .pencere-yazi span:last-child { color: var(--altin); border-top: 2px solid var(--altin); padding-top: 2px; text-align: center; }
 .pencere-yazi span:first-child { border-top: 2px solid var(--cizgi-renk); padding-top: 2px; text-align: center; }
 .hud-durum { font: 500 .75rem var(--font-arayuz); margin-top: 4px; min-height: 1.2em; }
@@ -179,7 +183,7 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
   .hud-soz { grid-column: 2; grid-row: 1 / span 2; }
   .hud-durum { font-size: .6875rem; }
   .hucreler li { height: 22px; }
-  .imp-ad { font-size: calc(13px / var(--k)); letter-spacing: .1em; }
+  .imp-ad { font-size: calc(15px / var(--k)); }
   .imp-alt, .sehir text.alt { display: none; }
   .sehir text { font-size: 10px; }
   .olay text { font-size: 11px; }
@@ -191,7 +195,7 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 }
 .lejant {
   position: absolute; z-index: 4; right: 16px; bottom: 16px; display: flex; gap: 14px; font: 500 .75rem var(--font-arayuz);
-  background: color-mix(in srgb, var(--yuzey) 88%, transparent); border: 1px solid var(--cizgi-renk); border-radius: 99px; padding: 6px 12px;
+  background: color-mix(in srgb, var(--yuzey) 88%, transparent); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); padding: 6px 12px;
 }
 .lejant span { display: inline-flex; align-items: center; gap: 6px; }
 .lejant i { width: 14px; height: 10px; border-radius: 2px; display: inline-block; }
@@ -202,14 +206,16 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .adim { min-height: 115svh; display: flex; align-items: center; padding: 0 0 0 40px; }
 .adim:first-child { padding-top: 20svh; }
 .adim:last-child { min-height: 100svh; }
+/* Masaüstünde ortalanan kart üst panelin altına girmesin: ortalama ekseni biraz aşağıda */
+@media (min-width: 900px) { .adim { padding-top: 140px; } .adim:first-child { padding-top: calc(20svh + 140px); } }
 .kart {
   pointer-events: auto; width: 400px; max-width: 100%;
   background: var(--yuzey);
-  border: 1px solid var(--cizgi-renk); border-radius: 16px; padding: 22px 24px;
-  box-shadow: 0 18px 50px -20px rgba(0, 0, 0, .45);
+  border-radius: var(--radius); padding: 22px 24px;
+  box-shadow: var(--golge);
 }
-.kart .ust-yazi { font: 600 .6875rem var(--font-arayuz); letter-spacing: .14em; text-transform: uppercase; color: var(--vurgu); display: block; margin-bottom: 6px; }
-.kart h3 { font: 500 1.5rem/1.2 var(--font-baslik); margin: 0 0 .5em; }
+.kart .ust-yazi { font: 600 .9375rem var(--font-arayuz); color: var(--vurgu-metin); display: block; margin-bottom: 4px; font-variant-numeric: tabular-nums; }
+.kart h3 { font: 600 1.5rem/1.2 var(--font-baslik); letter-spacing: -.02em; margin: 0 0 .5em; text-wrap: balance; }
 .kart p { margin: 0 0 .7em; }
 .kart p:last-child { margin-bottom: 0; }
 .kart .not { font-size: .875rem; color: var(--soluk); }
@@ -218,7 +224,8 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .taraf { display: grid; grid-template-columns: 6px 1fr; gap: 12px; margin: 12px 0; }
 .taraf::before { content: ''; border-radius: 3px; background: var(--c); }
 .ayet-ar { font: 1.9rem/2.1 var(--font-ayet); direction: rtl; text-align: center; margin: 8px 0 12px; }
-.ayet-tr { font-size: 1.125rem; text-align: center; max-width: 52ch; margin: 0 auto 8px; }
+.kart .ayet-tr { font-size: 1.1875rem; text-align: center; max-width: 34em; margin: 0 auto 8px; }
+.kart .ayet-ar { margin: 8px auto 12px; }
 .no { display: inline-grid; place-items: center; width: 1.25em; height: 1.25em; border-radius: 50%; background: var(--vurgu); color: var(--zemin); font: 700 .6875rem var(--font-arayuz); vertical-align: .2em; margin-left: 2px; }
 .kunye { display: block; text-align: center; font: .75rem var(--font-arayuz); color: var(--soluk); }
 .uc-liste { list-style: none; padding: 0; margin: 12px 0; display: grid; gap: 10px; }
@@ -226,7 +233,7 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .uc-liste li .no { width: 26px; height: 26px; font-size: .8125rem; margin: 2px 0 0; }
 .secim { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 14px 0 10px; }
 .secim button {
-  border: 1.5px solid var(--c); background: transparent; border-radius: 12px; padding: 12px 10px; cursor: pointer;
+  border: 1.5px solid var(--c); background: transparent; border-radius: var(--radius); padding: 12px 10px; cursor: pointer;
   font: 600 .9375rem var(--font-arayuz); color: var(--c); transition: background .2s, color .2s, transform .2s var(--ease-giris);
 }
 .secim button:hover { transform: translateY(-1px); }
@@ -240,34 +247,34 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .oyun-satir { display: flex; align-items: center; gap: 12px; }
 .oyun output { font: 700 1.75rem var(--font-baslik); font-variant-numeric: tabular-nums; min-width: 3ch; }
 .oyun input { flex: 1; accent-color: var(--vurgu); }
-.dugme { border: 1px solid var(--cizgi-renk); background: var(--zemin); border-radius: 99px; padding: 8px 14px; cursor: pointer; font: 500 .8125rem var(--font-arayuz); }
+.dugme { border: 1px solid var(--cizgi-renk); background: var(--zemin); border-radius: var(--radius); padding: 8px 14px; cursor: pointer; font: 500 .8125rem var(--font-arayuz); }
 .dugme:hover { border-color: var(--vurgu); }
 
 @media (max-width: 899px) {
   .adim { align-items: flex-end; padding: 0 10px 14px; min-height: 120svh; }
   .adim.genis { align-items: center; padding: 0 10px; }
-  .kart { width: 100%; padding: 16px; border-radius: 14px; }
+  .kart { width: 100%; padding: 16px; border-radius: var(--radius); }
   .kart h3 { font-size: 1.2rem; }
   .kart p, .uc-liste li { font-size: .9375rem; line-height: 1.55; }
-  .ayet-ar { font-size: 1.3rem; line-height: 2; }
-  .ayet-tr { font-size: .9375rem; }
+  .ayet-ar { font-size: 1.3rem; line-height: 2.3; }
+  .kart .ayet-tr { font-size: .9375rem; }
 }
 
 /* ── Hikâye sonrası ─────────────────────────── */
 .bolum { max-width: 760px; margin: 0 auto; padding: 120px 16px 40px; }
-.bolum h2 { font: 500 clamp(1.75rem, 4.5vw, 2.6rem)/1.15 var(--font-baslik); margin: 0 0 .5em; }
-.etiket { font: 600 .75rem var(--font-arayuz); letter-spacing: .14em; text-transform: uppercase; color: var(--vurgu); margin-bottom: 12px; display: block; }
+.bolum h2 { font: 700 clamp(1.75rem, 4.5vw, 2.4rem)/1.12 var(--font-baslik); letter-spacing: -.025em; margin: 0 0 .5em; }
+.etiket { font: 600 1rem var(--font-arayuz); color: var(--vurgu-metin); margin-bottom: 12px; display: block; }
 .ozet-kartlar { display: grid; gap: 12px; margin: 28px 0; }
 @media (min-width: 700px) { .ozet-kartlar { grid-template-columns: repeat(3, 1fr); } }
-.ozet-kartlar div { background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: 14px; padding: 18px; }
-.ozet-kartlar b { display: block; font: 500 1.125rem/1.3 var(--font-baslik); margin: 8px 0 6px; }
+.ozet-kartlar div { background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); padding: 18px; }
+.ozet-kartlar b { display: block; font: 600 1.125rem/1.3 var(--font-baslik); margin: 8px 0 6px; }
 .ozet-kartlar small { font: .8125rem/1.5 var(--font-arayuz); color: var(--soluk); display: block; }
 .ozet-kartlar .tik { width: 28px; height: 28px; border-radius: 50%; display: grid; place-items: center; background: var(--biz); color: var(--zemin); font: 700 .875rem var(--font-arayuz); }
 .ozet-kartlar div:nth-child(3) .tik { background: var(--altin); }
 .zaman { position: relative; height: 96px; margin: 40px 8px 8px; }
 .zaman .eksen { position: absolute; left: 0; right: 0; top: 46px; height: 2px; background: var(--cizgi-renk); }
 .zaman .pencere { position: absolute; top: 36px; height: 22px; left: 20%; width: 40%; border: 2px solid var(--altin); border-radius: 6px; background: color-mix(in srgb, var(--altin) 14%, transparent); }
-.zaman .pencere::after { content: 'birkaç yıl: 3–9'; position: absolute; left: 50%; top: -24px; transform: translateX(-50%); font: 600 .6875rem var(--font-arayuz); letter-spacing: .08em; text-transform: uppercase; color: var(--altin); white-space: nowrap; }
+.zaman .pencere::after { content: 'birkaç yıl: 3–9'; position: absolute; left: 50%; top: -24px; transform: translateX(-50%); font: 600 .6875rem var(--font-arayuz); color: var(--altin); white-space: nowrap; }
 .zaman .im { position: absolute; top: 66px; transform: translateX(-50%); font: 500 .75rem/1.3 var(--font-arayuz); color: var(--soluk); text-align: center; white-space: nowrap; }
 .zaman .im::before { content: ''; display: block; width: 2px; height: 12px; margin: -20px auto 8px; background: currentColor; }
 .zaman .im.b { color: var(--biz); font-weight: 600; }
@@ -276,12 +283,12 @@ mark { background: linear-gradient(transparent 35%, var(--fosfor) 35%); color: i
 .zaman .im.h::after { content: ''; display: block; width: 2px; height: 14px; margin: 4px auto 0; background: currentColor; }
 details { border-top: 1px solid var(--cizgi-renk); padding: 14px 0; }
 details:last-of-type { border-bottom: 1px solid var(--cizgi-renk); }
-summary { cursor: pointer; font: 500 1.125rem/1.4 var(--font-baslik); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
+summary { cursor: pointer; font: 600 1.125rem/1.4 var(--font-baslik); list-style: none; display: flex; justify-content: space-between; gap: 16px; }
 summary::after { content: '+'; font: 400 1.5rem/1 var(--font-arayuz); color: var(--vurgu); transition: transform .3s; }
 details[open] summary::after { transform: rotate(45deg); }
 details p { margin: 10px 0 0; color: var(--soluk); }
 .yorum-not { display: inline-block; font: 500 .75rem var(--font-arayuz); border: 1px dashed var(--soluk); color: var(--soluk); border-radius: 6px; padding: 3px 8px; margin-bottom: 12px; }
-.profil-kutu { margin-top: 24px; background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: 14px; padding: 16px; }
+.profil-kutu { margin-top: 24px; background: var(--yuzey); border: 1px solid var(--cizgi-renk); border-radius: var(--radius); padding: 16px; }
 #profil { width: 100%; height: auto; display: block; }
 #profil .yer { fill: var(--yuzey-2); stroke: var(--murekkep); stroke-width: 1.5; }
 #profil .deniz-cizgi { stroke: var(--biz); stroke-dasharray: 4 4; }
@@ -289,7 +296,7 @@ details p { margin: 10px 0 0; color: var(--soluk); }
 #profil .okuma { font: 700 15px var(--font-baslik); fill: var(--murekkep); }
 .profil-kutu input { width: 100%; accent-color: var(--vurgu); margin-top: 8px; }
 .meydan { min-height: 80svh; display: grid; place-items: center; text-align: center; padding: 96px 16px; }
-.meydan p { font: italic 500 clamp(1.5rem, 4vw, 2.4rem)/1.3 var(--font-baslik); max-width: 26ch; margin: 0 auto; }
+.meydan p { font: 600 clamp(1.5rem, 4vw, 2.25rem)/1.3 var(--font-baslik); letter-spacing: -.02em; text-wrap: balance; max-width: 26ch; margin: 0 auto; }
 .kaynak { max-width: 760px; margin: 0 auto; padding: 0 16px 96px; font: .875rem/1.6 var(--font-arayuz); color: var(--soluk); }
 .kaynak a { color: inherit; }
 .kaynak ol { padding-left: 20px; }
@@ -297,6 +304,10 @@ details p { margin: 10px 0 0; color: var(--soluk); }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
 }
+/* Basma geri bildirimi */
+.secim button, .dugme, .tema { transition: transform 160ms cubic-bezier(.23, 1, .32, 1); }
+.secim button:active, .dugme:active, .tema:active { transform: scale(.97); }
+.golcuk { fill: var(--deniz); stroke: var(--kiyi); stroke-width: calc(1px / var(--k)); }
 </style>
 </head>
 <body>
@@ -310,7 +321,7 @@ details p { margin: 10px 0 0; color: var(--soluk); }
   <div class="fon" aria-hidden="true">غُلِبَتِ ٱلرُّومُ</div>
   <div>
     <div class="ust-yazi">Rûm suresi · 2–5. ayetler</div>
-    <h1>Yenilen <span>kazanacak</span></h1>
+    <h1>Yenilen kazanacak</h1>
     <p>Dünyanın en güçlü iki devletinden biri yıkılmanın eşiğindeydi. Tam o günlerde inen ayetler, bu yenik devletin birkaç yıl içinde galip geleceğini, üstelik süresini de vererek haber verdi.</p>
     <p class="soluk">Hiçbir şey bilmeseniz de olur. O yılları haritada, yıl yıl birlikte yaşayalım.</p>
     <div class="asagi">Kaydırın</div>
@@ -322,8 +333,8 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     <div class="harita-kat" id="harita-kat">
     <svg id="harita" aria-hidden="true">
       <defs>
-        <pattern id="tarama" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
-          <line x1="0" y1="0" x2="0" y2="7" style="stroke: var(--pers); stroke-width: 2; opacity: .55"/>
+        <pattern id="tarama" width="7" height="7"  patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+          <line id="tarama-cizgi" x1="0" y1="0" x2="0" y2="7" style="stroke: var(--pers); stroke-width: 2; opacity: .55"/>
         </pattern>
       </defs>
       <g class="dunya" id="dunya">
@@ -420,6 +431,15 @@ details p { margin: 10px 0 0; color: var(--soluk); }
       <p class="not">Üçü de gelecekle ilgili ve üçü de sonradan kontrol edilebilir. Yukarıda bu üç haberi takip edeceğiz.</p>
     </div></article>
 
+    <article class="adim" data-adim="edna"><div class="kart">
+      <span class="ust-yazi">Ayetteki ikinci incelik</span>
+      <h3>"En yakın yer" ya da "en alçak yer".</h3>
+      <p>Ayetteki <em>edne'l-arz</em> iki anlama gelir. Klasik tefsirler "Arabistan'a en yakın yer" diye anladı. Kelimenin öbür anlamı ise "en alçak yer".</p>
+      <p>Rumların yenildiği bu bölgede Ölü Deniz çukuru var: <mark>karadaki en alçak nokta</mark>, deniz seviyesinin yaklaşık 440 m altında.</p>
+      <p>Bu ancak 1837'de kaynama noktası ölçümleriyle fark edildi ve 1848'de Lynch seferiyle ölçüldü. O gün yaşayan biri bunu bilemezdi.</p>
+      <p class="not">Çağdaş bir yorum; ekip onayı bekliyor. Yükseklik kesiti sayfanın sonunda.</p>
+    </div></article>
+
     <article class="adim" data-adim="birkac-yil"><div class="kart">
       <span class="ust-yazi">"Birkaç yıl" ne kadar?</span>
       <h3>En az üç, en çok dokuz yıl.</h3>
@@ -484,7 +504,13 @@ details p { margin: 10px 0 0; color: var(--soluk); }
       <h3>Ve beklenmeyen oldu.</h3>
       <p>Kilise, hazinesini savaş için imparatorun emrine verdi. Herakleios bununla yeni bir ordu kurdu ve 622'de Anadolu'da Pers ordusunu yendi. <b>Savaşın yönü döndü.</b></p>
       <p>Sayaca bakın: yedinci yıl, yani "birkaç yıl"ın tam içinde. <mark>İlk iki haber gerçekleşti.</mark></p>
-      <p class="not">Aynı yıl Müslümanlar Mekke'den Medine'ye hicret etti.</p>
+    </div></article>
+
+    <article class="adim" data-adim="hicret"><div class="kart">
+      <span class="ust-yazi">622, aynı yıl</span>
+      <h3>Aynı yıl Arabistan'da da her şey değişti.</h3>
+      <p>Mekke'deki baskı dayanılmaz hâle gelince Müslümanlar yaklaşık 400 km kuzeydeki Medine'ye göç etti. Buna <em>hicret</em> denir.</p>
+      <p class="not">Hicri takvim bu yıldan başlar. İki yıl sonra Medine'nin yakınındaki Bedir, ayetin üçüncü haberine sahne olacaktı.</p>
     </div></article>
 
     <article class="adim" data-adim="iran"><div class="kart">
@@ -584,7 +610,6 @@ details p { margin: 10px 0 0; color: var(--soluk); }
 </footer>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/topojson-client@3.1.0/dist/topojson-client.min.js"></script>
 <script>
 (() => {
   const NS = 'http://www.w3.org/2000/svg';
@@ -597,6 +622,8 @@ details p { margin: 10px 0 0; color: var(--soluk); }
   let kayitli = null; try { kayitli = localStorage.getItem('palet'); } catch (e) {}
   temaKur(kayitli || (matchMedia('(prefers-color-scheme: light)').matches ? 'parsomen' : 'gece'));
   temaBtn.onclick = () => { const p = kok.dataset.palet === 'gece' ? 'parsomen' : 'gece'; temaKur(p); try { localStorage.setItem('palet', p); } catch (e) {} };
+  // Ana sayfadaki "Okundu" işareti (sitenin mucize sayfalarıyla aynı anahtar)
+  try { const o = new Set(JSON.parse(localStorage.getItem('okunan') || '[]')); o.add('rum'); localStorage.setItem('okunan', JSON.stringify([...o])); } catch (e) {}
 
   /* ── Harita verisi (boylam, enlem). Sınırlar şematik; kıyıya göre kırpılır. ── */
   const P = d3.geoMercator().fitExtent([[0, 0], [1000, 1000]], { type: 'MultiPoint', coordinates: [[20, 12], [58, 46]] })
@@ -634,7 +661,7 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     ninova: { k: [43.15, 36.36], ad: 'Ninova' },
     ganzak: { k: [47.23, 36.6], ad: 'Ganzak' }
   };
-  const RENK = { B: 'var(--biz)', P: 'var(--pers)', H: 'var(--altin)' };
+  const RENK = { B: 'var(--biz)', P: 'var(--pers)', H: 'var(--altin)', N: 'var(--murekkep)' };
   const OKLAR = {
     bagRum: { tip: 'bag', r: 'B', s: [[39.83, 21.42], [28.98, 41.01]], etiket: 'Müslümanların gönlü', yk: [32.8, 33.0] },
     bagPers: { tip: 'bag', r: 'P', s: [[39.83, 21.42], [44.58, 33.09]], etiket: 'Müşriklerin gönlü', yk: [43.2, 27.0] },
@@ -648,6 +675,7 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     b627: { r: 'B', s: [[45.6, 38.3], [44.0, 37.2], [43.3, 36.5], [44.0, 35.0], [44.45, 33.4]] }
   };
   const KAMERA = {
+    hicaz: [[36.5, 20.4], [43, 25.6]], oludeniz: [[33.9, 30.6], [37.1, 32.9]],
     tum: [[23, 19], [56, 44]], arabistan: [[33, 19.5], [46, 30]], levant: [[31, 29.5], [45, 39]],
     kudus: [[32.5, 29.8], [38.5, 34.5]], anadolu: [[25, 35.5], [47, 43]], misir: [[26.5, 25], [38, 34]], iran: [[34, 31], [50, 42.5]]
   };
@@ -660,14 +688,17 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     b.tara = el('path', { d, class: 'tarama' }, bolgeG);
   });
   NEHIRLER.forEach(n => el('path', { d: d3.line()(n.map(xy)), class: 'nehir' }, $('nehirler')));
+  // Ölü Deniz ve Taberiye: kıyı verisinde göl yok, şematik çizilir
+  el('path', { d: duz([[35.39, 31.06], [35.41, 31.45], [35.48, 31.76], [35.57, 31.76], [35.58, 31.4], [35.5, 31.06]]), class: 'golcuk' }, $('nehirler'));
+  el('path', { d: duz([[35.53, 32.71], [35.5, 32.86], [35.6, 32.9], [35.65, 32.75]]), class: 'golcuk' }, $('nehirler'));
 
   const yazilar = $('yazilar');
   const yaz = (k, metin, sinif, dy = 0) => { const [x, y] = xy(k); const t = el('text', { x, y, dy, 'text-anchor': 'middle', class: 'yazi ' + sinif }, yazilar); t.textContent = metin; return t; };
-  yaz([31.8, 38.0], 'RUMLAR', 'imp-ad').style.fill = 'var(--biz)';
+  yaz([31.8, 38.0], 'Rumlar', 'imp-ad').style.fill = 'var(--biz)';
   yaz([31.8, 37.3], 'Bizans · Doğu Roma', 'imp-alt');
-  yaz([52.5, 34.0], 'PERSLER', 'imp-ad').style.fill = 'var(--pers)';
+  yaz([52.5, 34.0], 'Persler', 'imp-ad').style.fill = 'var(--pers)';
   yaz([52.5, 33.2], 'Sasani İmparatorluğu', 'imp-alt');
-  yaz([43.5, 25.2], 'ARABİSTAN', 'imp-ad').style.fill = 'var(--altin)';
+  yaz([43.5, 25.2], 'Arabistan', 'imp-ad').style.fill = 'var(--soluk)';
   BOLGELER.filter(b => b.ad).forEach(b => yaz(b.y, b.ad, 'bolge-ad'));
 
   const okG = $('oklar');
@@ -714,8 +745,9 @@ details p { margin: 10px 0 0; color: var(--soluk); }
   };
 
   /* Kıyı verisi: gelmezse bölgeler kırpılmadan çizilir */
-  fetch('https://cdn.jsdelivr.net/npm/world-atlas@2.0.2/land-50m.json').then(r => r.json()).then(topo => {
-    const kara = topojson.feature(topo, topo.objects.land), d = d3.geoPath(P)(kara);
+  fetch('/veri/kiyi.json').then(r => r.json()).then(kara => {
+    // Düz (planar) çizim: geniş kırpımda küresel yaylar deniz örtüsünü ters çeviriyordu
+    const d = kara.coordinates.flatMap(poly => poly.map(duz)).join('');
     $('deniz-ortu').setAttribute('d', 'M-3000 -3000H4000V4000H-3000Z' + d); // denizi bölgelerin üstüne ört: kırpmadan ucuz
   }).catch(() => {});
 
@@ -729,14 +761,16 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     'sevinc': { yil: 614, kamera: 'arabistan', sehir: ['medine'] },
     'ayet': { yil: 615, kamera: 'tum', karart: true },
     'uc-haber': { yil: 615, kamera: 'tum', karart: true, parla: true },
+    'edna': { yil: 615, kamera: 'oludeniz', sehir: ['kudus'], olay: [[35.5, 31.45], 'Ölü Deniz, −440 m', 'N', true] },
     'birkac-yil': { yil: 615, kamera: 'tum' },
     'bahis': { yil: 615, kamera: 'arabistan' },
     'ebubekir': { yil: 615, kamera: 'arabistan' },
-    'kadikoy': { yil: 615, kamera: 'anadolu', oklar: ['p615'], olay: [[29.5, 40.8], 'Kadıköy', 'P'] },
+    'kadikoy': { yil: 615, kamera: 'anadolu', oklar: ['p615'], olay: [[29.5, 40.8], 'Kadıköy', 'P', true] },
     'ilk-bahis': { yil: 618, kamera: 'tum' },
     'misir': { yil: 619, kamera: 'misir', oklar: ['p619'], sehir: ['iskenderiye', 'kudus'], olay: [[29.92, 31.2], '619 · Mısır düştü', 'P'] },
     'durum': { yil: 620, kamera: 'tum' },
-    'donus': { yil: 622, kamera: 'tum', oklar: ['b622', 'hicret'], sehir: ['medine'], olay: [[35.0, 39.2], '622 · İlk büyük zafer', 'B', true] },
+    'donus': { yil: 622, kamera: 'anadolu', oklar: ['b622'], olay: [[35.0, 39.2], '622 · İlk büyük zafer', 'B', true] },
+    'hicret': { yil: 622, kamera: 'hicaz', oklar: ['hicret'], sehir: ['medine'], olay: [[39.61, 24.47], '622 · Hicret', 'H'] },
     'iran': { yil: 624, kamera: 'iran', oklar: ['b624'], sehir: ['ganzak', 'ninova'], olay: [[47.23, 36.6], '624 · Ateş tapınağı yıkıldı', 'B'] },
     'bedir': { yil: 624, kamera: 'arabistan', sehir: ['medine', 'bedir'], olay: [[38.78, 23.73], '624 · Bedir zaferi', 'H', true], bedir: true },
     'son': { yil: 630, kamera: 'tum', oklar: ['b627'], sehir: ['ninova', 'kudus'], olay: [[43.15, 36.36], '627 · Ninova', 'B'] },
@@ -797,7 +831,13 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     const [[a, b], [c, d]] = KAMERA[ad], [x0, y0] = xy([a, d]), [x1, y1] = xy([c, b]);
     const s = guvenli(), k = Math.min(s.w / (x1 - x0), s.h / (y1 - y0));
     const yeni = { k, tx: s.x + (s.w - (x1 - x0) * k) / 2 - x0 * k, ty: s.y + (s.h - (y1 - y0) * k) / 2 - y0 * k };
-    const kur = () => { for (const p in yeni) harita.style.setProperty('--' + p, yeni[p]); };
+    const kur = () => {
+      for (const p in yeni) harita.style.setProperty('--' + p, yeni[p]);
+      // tarama ekranda hep aynı sıklıkta kalsın: desen yakınlaşmayla büyümesin
+      const t = (7 / Math.max(1, yeni.k / 0.9)).toFixed(2), ti = document.getElementById('tarama');
+      ti.setAttribute('width', t); ti.setAttribute('height', t);
+      const c = document.getElementById('tarama-cizgi'); c.setAttribute('y2', t); c.style.strokeWidth = (2 * t / 7).toFixed(2);
+    };
     const eski = simdi; simdi = yeni;
     if (eski && Math.abs(eski.k - k) < 1e-3 && Math.abs(eski.tx - yeni.tx) < 1 && Math.abs(eski.ty - yeni.ty) < 1) return;
     clearTimeout(bekle);
@@ -806,13 +846,15 @@ details p { margin: 10px 0 0; color: var(--soluk); }
     kat.style.transition = 'opacity 170ms ease'; kat.style.opacity = 0;
     bekle = setTimeout(() => {
       kur();
-      const m = Math.min(1.25, Math.max(0.8, eski.k / k));
+      const m = Math.min(1, Math.max(0.86, eski.k / k)); // 1'in üstü büyütülmüş bitmap demek: bulanıklık
       kat.style.transition = 'none';
       kat.style.transformOrigin = `${s.x + s.w / 2}px ${s.y + s.h / 2}px`;
       kat.style.transform = `scale(${m})`;
       void kat.offsetWidth;
-      kat.style.transition = 'transform 900ms var(--ease-giris), opacity 500ms ease';
+      kat.style.willChange = 'transform, opacity';
+      kat.style.transition = 'transform 700ms var(--ease-giris), opacity 400ms ease';
       kat.style.transform = 'none'; kat.style.opacity = 1;
+      kat.addEventListener('transitionend', () => { kat.style.willChange = 'auto'; }, { once: true });
     }, 170);
   }
 

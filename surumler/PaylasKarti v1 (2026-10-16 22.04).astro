@@ -1,0 +1,90 @@
+---
+// Story boyutunda (1080×1920) paylaşım kartı: marka renkleri, yıldız motifi, vurgulu kelime, soru, "X yıl", site adı.
+// Tarayıcıda canvas ile çizilir; Web Share API varsa paylaşılır, yoksa PNG indirilir.
+interface Props { baslik: string; soru: string; vurgu?: string; fark: number; farkMetni: string; konu: string; slug: string }
+const p = Astro.props;
+---
+<div class="paylas" data-kart={JSON.stringify(p)}>
+  <canvas width="1080" height="1920" class="onizleme" aria-label="Paylaşım kartı önizlemesi"></canvas>
+  <div class="eylem">
+    <p class="etiket">Paylaş</p>
+    <p>Bu mucizeyi bir kartla arkadaşlarına gönder.</p>
+    <button type="button" class="paylas-dugme arayuz">Kartı paylaş</button>
+  </div>
+</div>
+
+<script>
+  const css = (n: string) => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+
+  function yildiz(c: CanvasRenderingContext2D, x: number, y: number, r: number) {
+    for (const a of [0, Math.PI / 4]) {
+      c.save(); c.translate(x, y); c.rotate(a); c.strokeRect(-r, -r, r * 2, r * 2); c.restore();
+    }
+  }
+
+  function sar(c: CanvasRenderingContext2D, metin: string, x: number, y: number, genislik: number, satir: number) {
+    let s = '', yy = y;
+    for (const k of metin.split(' ')) {
+      if (c.measureText(s + k).width > genislik && s) { c.fillText(s.trim(), x, yy); s = ''; yy += satir; }
+      s += k + ' ';
+    }
+    c.fillText(s.trim(), x, yy);
+    return yy;
+  }
+
+  async function ciz(el: HTMLElement) {
+    const d = JSON.parse(el.dataset.kart!);
+    const cv = el.querySelector('canvas')!;
+    const c = cv.getContext('2d')!;
+    await Promise.all(['700 120px "Playfair Display"', '64px "Literata"', '150px "Amiri Quran"', '40px "IBM Plex Sans"'].map((f) => document.fonts.load(f)));
+    const zemin = css('--zemin'), murekkep = css('--murekkep'), vurgu = css('--vurgu'), soluk = css('--soluk'), konu = css(`--konu-${d.konu}`) || vurgu;
+
+    c.fillStyle = zemin; c.fillRect(0, 0, 1080, 1920);
+    const g = c.createRadialGradient(780, 520, 0, 780, 520, 700);
+    g.addColorStop(0, konu + '55'); g.addColorStop(1, konu + '00');
+    c.fillStyle = g; c.fillRect(0, 0, 1080, 1920);
+    c.strokeStyle = vurgu; c.globalAlpha = 0.18; c.lineWidth = 6; yildiz(c, 860, 360, 300); c.globalAlpha = 1;
+
+    c.fillStyle = vurgu; c.font = '500 40px "IBM Plex Sans"'; c.textAlign = 'left';
+    c.fillText(d.baslik.toLocaleUpperCase('tr'), 96, 200);
+
+    if (d.vurgu) { c.font = '150px "Amiri Quran"'; c.textAlign = 'right'; c.direction = 'rtl'; c.fillText(d.vurgu, 984, 620); c.direction = 'ltr'; }
+
+    c.textAlign = 'left'; c.fillStyle = murekkep; c.font = 'italic 64px "Literata"';
+    const son = sar(c, d.soru, 96, 860, 888, 92);
+
+    c.fillStyle = vurgu; c.font = '700 260px "Playfair Display"';
+    c.fillText(d.fark.toLocaleString('tr-TR'), 96, son + 380);
+    c.fillStyle = soluk; c.font = '48px "IBM Plex Sans"';
+    sar(c, d.farkMetni, 96, son + 470, 888, 64);
+
+    c.strokeStyle = vurgu; c.lineWidth = 4; yildiz(c, 126, 1770, 26);
+    c.fillStyle = murekkep; c.font = '600 46px "Playfair Display"'; c.fillText("Kur'an Mucizeleri", 186, 1786);
+  }
+
+  document.querySelectorAll<HTMLElement>('.paylas').forEach((el) => {
+    const io = new IntersectionObserver((es) => { if (es[0].isIntersecting) { ciz(el); io.disconnect(); } });
+    io.observe(el);
+    document.addEventListener('palet', () => ciz(el));
+    el.querySelector('.paylas-dugme')!.addEventListener('click', async () => {
+      await ciz(el);
+      const d = JSON.parse(el.dataset.kart!);
+      const blob: Blob = await new Promise((r) => el.querySelector('canvas')!.toBlob((b) => r(b!), 'image/png'));
+      const dosya = new File([blob], `${d.slug}.png`, { type: 'image/png' });
+      if (navigator.canShare?.({ files: [dosya] })) {
+        try { await navigator.share({ files: [dosya], title: d.baslik, url: location.href }); return; } catch { return; }
+      }
+      const a = document.createElement('a'); a.href = URL.createObjectURL(blob); a.download = dosya.name; a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 2000);
+    });
+  });
+</script>
+
+<style>
+  .paylas { display: grid; grid-template-columns: 220px 1fr; gap: var(--s5); align-items: center; }
+  .onizleme { width: 220px; height: auto; border-radius: 14px; border: 1px solid var(--cizgi-renk); box-shadow: 0 20px 50px rgb(0 0 0 / 0.25); }
+  .eylem p { margin: 0 0 var(--s3); }
+  .paylas-dugme { font: inherit; font-weight: 600; padding: 12px 24px; border-radius: var(--radius); border: 0; background: var(--vurgu); color: var(--zemin); cursor: pointer; transition: transform var(--t-mikro) var(--ease-giris); }
+  .paylas-dugme:hover { transform: translateY(-2px); }
+  @media (max-width: 560px) { .paylas { grid-template-columns: 1fr; justify-items: center; text-align: center; } }
+</style>

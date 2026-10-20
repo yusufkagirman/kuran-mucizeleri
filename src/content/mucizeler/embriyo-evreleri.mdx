@@ -1,10 +1,10 @@
 ---
 baslik: Ana rahmindeki evreler
 hook: |
-  Bebek ana rahminde bir anda oluşmaz; evre evre şekillenir: önce rahme tutunan bir damla, sonra çiğnenmiş bir lokma, sonra kemik ve onu saran et.
+  Siz de bir zamanlar ana rahmine tutunmuş, bir mercimekten küçük bir canlıydınız.
 
-  Bu sıra, rahmin içini kimsenin göremediği bir çağda Mü'minûn suresinde adım adım anlatıldı. Embriyonun evreleri ancak 19. yüzyılda mikroskopla sistemli olarak incelenebildi.
-kart: Bebek ana rahminde evre evre şekillenir; önce tutunan bir damla, sonra çiğnenmiş bir lokma, sonra kemik ve onu saran et.
+  Bebek rahimde bir anda oluşmaz; evre evre şekillenir: önce rahme tutunan küçük bir varlık, sonra çiğnenmiş bir lokmaya benzeyen bir beden, sonra kemik ve onu saran et. Bu sıra, rahmin içini kimsenin göremediği bir çağda Mü'minûn suresinde adım adım anlatıldı.
+kart: "Bebek rahimde evre evre şekillenir: önce rahme tutunan bir varlık, sonra çiğnenmiş bir lokma, sonra kemik ve onu saran et."
 konu: [insan]
 sureAdi: Mü'minûn
 ayetler:
@@ -15,12 +15,13 @@ vurgu: "فَكَسَوْنَا ٱلْعِظَٰمَ لَحْمًۭا"
 nuzul: { donem: "Mekke dönemi", yil: 617 }
 kesif: { yil: 1828, olay: "Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini mikroskop gözlemleriyle sistemli olarak tarif etti.", kaynak: vonbaer1828 }
 itirazlar:
-  - itiraz: "Galenos (2. yüzyıl) ve Hipokrat yazıları da embriyonun meni ve kandan, sonra et ve kemikten oluştuğunu anlatıyordu. Bu sıra o gün zaten bilinmiyor muydu?"
-    cevap: "Galenos'un anlatımı, embriyonun meni ile adet kanının karışmasından oluştuğu fikrine dayanır ve bu fikir yanlıştır. Ayetteki rahme tutunan şey ve çiğnenmiş lokma evreleri o tıpta yoktur; ayet o çağın tıbbının hatalarını da taşımaz."
-  - itiraz: "Ayet önce kemik, sonra et der. Modern embriyolojide kas ve kemik öncülleri aynı dokudan neredeyse aynı anda oluşur; kemikleşme ise kaslar belirdikten sonra başlar."
-    cevap: "Yedinci haftada iskeletin kıkırdak taslağı belirginleşir, kaslar da onun çevresinde toplanıp iskeleti sarar. Ayetin anlattığı da kemiklerin şekillenmesi ve etin onları giydirmesidir."
-    kaynak: moore1983
-kaynaklar: [vonbaer1828, orahilly1987, moore1983, golden2002]
+  - itiraz: "Galenos (2. yüzyıl) da embriyonun meni ve kandan oluştuğunu, sonra organlarının ayrıştığını anlatıyordu. Bu sıra o gün zaten bilinmiyor muydu?"
+    cevap: "Galenos'un anlatımı, embriyonun iki tohumun ve adet kanının karışmasından oluştuğu fikrine dayanır; ardından beyin, kalp ve karaciğer ayrışır. Rahme tutunan varlık, çiğnenmiş lokma ve kemiğin etle giydirilmesi sırası bu anlatımda yoktur."
+    kaynak: galenwiki
+  - itiraz: "Ayet önce kemik, sonra et der. Modern embriyolojide kas ve kemik öncülleri aynı dokudan, somitlerden çıkar; bu sıra gerçekten önce kemik mi?"
+    cevap: "Kemik önce kıkırdaktan bir kalıp olarak şekillenir; uyluk kemiği yedinci haftanın sonunda kemikleşmeye başlar. Ayetin anlattığı da kemiklerin şekillenmesi ve etin onları giydirmesidir; bu konuda yazanlar bu evreyi yedinci ve sekizinci haftaya denk getirir."
+    kaynak: libretextsiskelet
+kaynaklar: [vonbaer1828, isik1989alak, kuranokuyanmuminun, unswimplant, unswsomite, unswcarnegie, libretextsiskelet, galenwiki, moore1983, orahilly1987, golden2002]
 durum: taslak
 ---
 
@@ -30,42 +31,96 @@ import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
 import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Evreler from '../../components/embriyo-evreleri-Evreler.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
 export const evreler = [
   {
     ar: 'عَلَقَة', ad: 'Alaka',
-    anlam: 'Asılı duran, tutunan şey; pıhtılaşmış kan. Embriyo önce rahim duvarına tutunur.',
+    anlam: 'Genellikle "kan pıhtısı" diye açıklanır; döllenmiş hücrenin rahme tutunduğu evreyi de anlatır. Embriyo ilk haftanın sonunda rahim duvarına tutunur.',
     resimler: [{ src: '/img/embriyo-evreleri/embriyo-3-4-hafta.jpg', alt: 'Açılmış bir kesenin içinde, kıvrık duran beyaz, yarı saydam küçük bir embriyo; çevresinde beyaz saçaklı doku.', not: 'Döllenmeden yaklaşık 3-4 hafta sonra, 0,5 cm boyunda bir insan embriyosu, kesesinin içinde (dış gebelikten alınmış örnek).', kunye: 'lunar caustic, CC BY 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Embryo_3_to_4_weeks.jpg' }],
   },
   {
     ar: 'مُضْغَة', ad: 'Mudğa',
-    anlam: 'Çiğnenmiş lokma. Embriyonun üzerinde diş izlerini andıran kabarıklıklar belirir.',
+    anlam: 'Bir çiğnemlik et: henüz biçim almamış bir lokma. Bu evrede embriyonun sırtında sıra sıra kabarıklıklar (somitler) belirir; ilk çift yaklaşık 20. günde görünür.',
     resimler: [
-      { src: '/img/embriyo-evreleri/embriyo-7-hafta.jpg', alt: 'Kıvrık duran, pembe-beyaz bir insan embriyosu; sırtı boyunca sıra sıra küçük kabarıklıklar, başta koyu bir göz lekesi.', not: 'Gebeliğin 7. haftasında, yaklaşık 1 cm boyunda bir insan embriyosu. Sırtı boyunca sıra sıra kabarıklıklar görülüyor.', kunye: 'Ed Uthman, CC BY 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Human_Embryo_(7th_week_of_pregnancy)_(304334264).jpg' },
+      { src: '/img/embriyo-evreleri/embriyo-7-hafta.jpg', alt: 'Kıvrık duran, pembe-beyaz bir insan embriyosu; sırtı boyunca sıra sıra küçük kabarıklıklar, başta koyu bir göz lekesi.', not: 'Gebelik yaşına göre 7. hafta (döllenmeden yaklaşık 5 hafta sonra), yaklaşık 1 cm boyunda. Sırtı boyunca sıra sıra kabarıklıklar görülüyor.', kunye: 'Ed Uthman, CC BY 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Human_Embryo_(7th_week_of_pregnancy)_(304334264).jpg' },
       { src: '/img/embriyo-evreleri/cignenmis-sakiz.jpg', alt: 'Yeşil zemin üzerinde, girintili çıkıntılı, beyaz bir parça çiğnenmiş sakız.', not: 'Karşılaştırma için: bir parça çiğnenmiş sakız.', kunye: 'Kulmalukko, CC BY-SA 3.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:Chewed_gums.jpg' },
     ],
   },
   {
     ar: 'عِظَٰمًا · لَحْمًا', ad: 'Kemik ve et',
-    anlam: 'Kemikler yaratılır, sonra et onları giydirir. Yedinci haftada iskelet şekillenir ve kaslar onu sarar.',
-    resimler: [{ src: '/img/embriyo-evreleri/embriyo-9-hafta.jpg', alt: 'Kesesi açılmış, pembe tenli bir insan embriyosu; kolları, parmakları, bacakları ve gözü belirgin.', not: 'Gebeliğin 9. haftası (döllenmeden yaklaşık 7 hafta sonra): kollar, bacaklar ve parmaklar belirmiş.', kunye: 'Ed Uthman, CC BY 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:9-Week_Human_Embryo_from_Ectopic_Pregnancy.jpg' }],
+    anlam: 'Somitlerden hem kas hem kemik dokusu çıkar. Uyluk kemiği, gebeliğin yedinci haftasının sonunda kemikleşmeye başlar.',
+    resimler: [{ src: '/img/embriyo-evreleri/embriyo-9-hafta.jpg', alt: 'Kesesi açılmış, pembe tenli bir insan embriyosu; kolları, parmakları, bacakları ve gözü belirgin.', not: 'Dış gebelikten alınmış bir embriyo: ovulasyondan sonra 7. hafta, adet dönemine göre 9. hafta. Kollar, bacaklar ve parmaklar belirmiş.', kunye: 'Ed Uthman, CC BY 2.0, Wikimedia Commons', url: 'https://commons.wikimedia.org/wiki/File:9-Week_Human_Embryo_from_Ectopic_Pregnancy.jpg' }],
   },
 ];
 
-Ayetin indiği yıllarda ana rahmi kapalı bir kutuydu. Düşükler dışında kimse bebeğin ilk haftalarını göremez, insanın nasıl şekillendiğini bilemezdi. Mü'minûn suresi ise bu gelişimi sırasıyla anlatır:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={617} etiket="617 civarı · Mekke">
+
+Ayetin indiği yıllarda ana rahmi kapalı bir kutuydu. Kimse bebeğin ilk haftalarını göremez, bir insanın nasıl şekillendiğini bilemezdi.
+
+Mü'minûn suresi ise bu gelişimi sırasıyla anlatır:
+
+</Adim>
+
+<Adim tur="genis" yil={617} etiket="Mü'minûn suresi">
 
 <AyetParca sure={23} ayet={14} sureAdi="Mü'minûn" ar="ثُمَّ خَلَقْنَا ٱلنُّطْفَةَ عَلَقَةًۭ فَخَلَقْنَا ٱلْعَلَقَةَ مُضْغَةًۭ فَخَلَقْنَا ٱلْمُضْغَةَ عِظَٰمًۭا فَكَسَوْنَا ٱلْعِظَٰمَ لَحْمًۭا" meal="Sonra nutfeyi kan pıhtısına çevirdik, kan pıhtısını bir çiğnemlik et yaptık, bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik..." vurgu="bir çiğnemlik etten kemikler yarattık, kemiklere de et giydirdik" />
 
-Ayetteki *alaka* kelimesi hem "asılı duran, tutunan şey" hem "pıhtılaşmış kan" demektir; *mudğa* ise "çiğnenmiş lokma" anlamına gelir. Asırlar boyunca bu kelimeler, gözle görülemeyen bir sürecin genel bir tarifi olarak okundu.
+</Adim>
 
-O süreç ancak mikroskopla görülebildi. 1828'de Karl Ernst von Baer, embriyonun belirli evrelerden geçerek geliştiğini gözlemleriyle sistemli olarak ortaya koydu.<Atif k="vonbaer1828" /> Bugün insan embriyosunun ilk haftaları evre evre sınıflandırılıyor.<Atif k="orahilly1987" /> Embriyo önce rahim duvarına tutunur, ardından üzerinde diş izlerini andıran kabarıklıklar belirir; yedinci haftada iskelet şekillenir ve kaslar onu sarar.<Atif k="moore1983" />
+<Adim>
+
+Ayetteki *alaka* kelimesi genellikle "kan pıhtısı" diye açıklanır; ama kelime, döllenmiş hücrenin ana rahmine tutunduğu evreyi de anlatır.<Atif k="isik1989alak" /> *Mudğa* ise "bir çiğnemlik et", henüz biçim almamış bir lokmadır.<Atif k="kuranokuyanmuminun" />
+
+Asırlar boyunca bu kelimeler, gözle görülemeyen bir sürecin genel bir tarifi olarak okundu.
+
+</Adim>
+
+<Adim yil={1828} etiket="1828">
+
+O süreç ancak mikroskopla görülebildi. 1827'de Karl Ernst von Baer memeli yumurtasını ilk kez gözledi; ertesi yıl yayımladığı kitapta embriyonun belirli evrelerden geçerek geliştiğini anlattı ve karşılaştırmalı embriyolojinin temelini attı.<Atif k="vonbaer1828" />
+
+</Adim>
+
+<Adim>
+
+Bugün insan embriyosunun ilk sekiz haftası 23 evreye ayrılıyor.<Atif k="unswcarnegie" /> Hikâye, ayetin saydığı sırayla ilerler.
+
+İlk adım tutunmaktır: döllenmiş yumurta birinci haftanın sonunda rahim duvarına yerleşmeye başlar ve yaklaşık dokuzuncu günde içine gömülür.<Atif k="unswimplant" />
+
+</Adim>
+
+<Adim>
+
+Üçüncü haftanın sonunda embriyonun sırtında sıra sıra küçük kabarıklıklar, somitler belirir.<Atif k="unswsomite" /> Bu evredeki embriyo, üzerinde diş izleri kalmış çiğnenmiş bir lokmaya benzetilir.<Atif k="moore1983" />
+
+</Adim>
+
+<Adim>
+
+Somitlerden hem kemik hem kas doğar.<Atif k="unswsomite" /> Kemik önce kıkırdaktan bir kalıp olarak şekillenir; uyluk kemiği yedinci haftanın sonunda kemikleşmeye başlar.<Atif k="libretextsiskelet" /> Kemiklerin çevresini saran et de bu haftalarda biçimlenir.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Evreler evreler={evreler} />
 
+</Adim>
+
+<Adim tur="genis" yil={1828}>
+
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki bu sıra, o çağın tıbbından alınmış olabilir mi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Rahmin içini görmenin hiçbir yolu yokken, bir insan bebeğin gelişimini sırasıyla anlatmaya nereden cesaret edebilirdi?</MeydanOkuma>
+<MeydanOkuma>Rahmin içini görmenin hiçbir yolu yokken, bebeğin gelişimini sırasıyla anlatan bu söz neye dayanıyordu?</MeydanOkuma>

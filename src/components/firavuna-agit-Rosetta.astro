@@ -51,12 +51,12 @@ const bantlar = [
   img { display: block; width: 100%; height: auto; background: var(--yuzey-2); }
   .mektup img { border-radius: var(--radius); border: 1px solid var(--cizgi-renk); }
   .bant { position: absolute; left: 0; right: 0; transition: background var(--t-bilesen) var(--ease-giris); }
-  .bant b { position: absolute; right: var(--s2); top: var(--s2); font: 600 var(--fs-xs) var(--font-arayuz); padding: 2px 10px; border-radius: 999px; background: var(--zemin); color: var(--murekkep); opacity: 0; transition: opacity var(--t-bilesen); }
+  .bant b { position: absolute; right: var(--s2); top: var(--s2); font: 600 var(--fs-xs) var(--font-arayuz); padding: 2px 10px; border-radius: var(--radius); background: var(--zemin); color: var(--murekkep); opacity: 0; transition: opacity var(--t-bilesen); }
   .secili .bant { background: rgb(0 0 0 / 0.6); }
   .secili .bant.aktif { background: transparent; box-shadow: inset 0 0 0 2px var(--vurgu); }
   .bant.aktif b { opacity: 1; }
   .dugmeler { display: flex; gap: var(--s2); flex-wrap: wrap; margin-top: var(--s3); }
-  button { font: inherit; font-size: var(--fs-sm); padding: 6px 14px; border-radius: 999px; border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--murekkep); cursor: pointer; }
+  button { font: inherit; font-size: var(--fs-sm); padding: 6px 14px; border-radius: var(--radius); border: 1px solid var(--cizgi-renk); background: var(--yuzey); color: var(--murekkep); cursor: pointer; }
   button[aria-pressed='true'] { border-color: var(--vurgu); background: var(--vurgu); color: var(--zemin); }
   figcaption { margin-top: var(--s2); font-size: var(--fs-sm); line-height: 1.5; }
   small { display: block; margin-top: 4px; font-size: 0.7rem; color: var(--soluk); }

@@ -1,10 +1,10 @@
 ---
 baslik: Firavuna ağıt
 hook: |
-  Mısırlılar ölen firavunlarını "gök ve yer senin için ağlar" diye uğurlardı. Denizde boğulan Firavun için ise ne gök ağladı ne yer.
+  Mısırlılar ölen firavunlarını "Gök senin için ağlar, yer senin için titrer" diye uğurlardı. Denizde boğulan Firavun için ise ne gök ağladı ne yer.
 
-  Bu ağıt hiyeroglif ve onun el yazısı biçimleriyle yazılmıştı ve Duhân suresinin indiği gün bu yazıyı okuyabilen tek bir insan yoktu. Mısır yazısı ancak 1822'de yeniden okunabildi; Firavun'un ölümünü anlatan sözün, firavunların cenaze ağıtını tersine çevirdiği o zaman görüldü.
-kart: Mısırlılar ölen firavuna "gök ve yer senin için ağlar" derdi. Boğulan Firavun için ise ne gök ağladı ne yer.
+  Bu ağıt piramitlerin duvarlarına hiyerogliflerle kazınmıştı ve Duhân suresinin indiği gün bu yazıyı okuyabilen tek bir insan yoktu. Mısır yazısı ancak 1822'de yeniden okunabildi; Firavun'un ölümünü anlatan sözün, firavunların ağıtını tersine çevirdiği o zaman görüldü.
+kart: Mısırlılar ölen firavunu "gök senin için ağlar" diye uğurlardı. Boğulan Firavun için ise ne gök ağladı ne yer.
 konu: [tarih, dil]
 sureAdi: Duhân
 ayetler:
@@ -15,12 +15,12 @@ kesif: { yil: 1822, olay: "Champollion, Rosetta Taşı'ndan yola çıkarak Mıs�
 itirazlar:
   - itiraz: "\"Gök ve yer ona ağladı\" Arapçada büyük birinin ölümünü anlatan bilinen bir deyimdir. Kur'an bu sözü Mısır'dan değil, Arapların kendi dilinden almış olamaz mı?"
     cevap: "Deyim Araplarda da vardı. Hayret verici olan, sözün tam da firavunların cenaze ağıtındaki sözün karşısına konmasıdır; Araplar bu ağıtı bilmiyordu, ayet onu Firavun için tersine çevirdi."
-  - itiraz: "Bu ağıtın elimizdeki metni Bremner-Rhind papirüsünde ve MÖ 4. yüzyıla aittir. Musa'nın firavunu döneminde aynı sözler okunuyor muydu?"
-    cevap: "Bremner-Rhind papirüsü geç döneme ait bir kopyadır. İsis ve Neftis'in Osiris için ağıtları ise Mısır'ın çok daha eski cenaze geleneğinin parçasıdır ve kökleri Piramit Metinleri'ne kadar uzanır."
-    kaynak: faulkner1936
+  - itiraz: "Bu ağıt hangi döneme ait? Musa'nın firavunu döneminde de biliniyor muydu?"
+    cevap: "Söz, Mısır'ın en eski dinî metinleri olan Piramit Metinleri'nde geçer. Bu metinler piramitlerin iç duvarlarına Musa'dan yüzyıllar önce kazınmıştır; ölen kralın göğe yükselişine dair inanç Mısır'da binlerce yıl sürdü."
+    kaynak: breasted1912
   - itiraz: "Göğün ve yerin bir ölünün ardından yas tutması pek çok kültürde ortak bir imgedir. Bu, özel bir Mısır bağlantısını gösterir mi?"
     cevap: "İmge yaygın olabilir; ama ayette genel bir ölüm için değil, tam da denizde boğulan bir firavun için ve onun ağıtındaki sözün tersiyle geçer."
-kaynaklar: [champollion1822, parkinson1999, faulkner1936]
+kaynaklar: [breasted1912, parkinson1999, champollion1822, hieroglyphswiki, faulkner1936]
 durum: taslak
 ---
 
@@ -31,27 +31,85 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import Rosetta from '../../components/firavuna-agit-Rosetta.astro';
 import Ayna from '../../components/firavuna-agit-Ayna.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda Mısır'ın eski yazısı çoktan ölmüştü. Tapınak duvarlarındaki ve papirüslerdeki işaretleri okuyabilen kimse kalmamıştı; firavunların inançları da onlarla birlikte susmuştu. Duhân suresi, Firavun'un ve ordusunun denizde boğulmasını anlattıktan sonra şöyle der:
+<Hikaye veri={frontmatter}>
+
+<Adim yil={616} etiket="616 civarı · Mekke">
+
+Ayetin indiği yıllarda Mısır'ın eski yazısı çoktan ölmüştü. Bilinen son hiyeroglif yazıt, ayetten iki yüz yıldan fazla önce, MS 394'te Philae Tapınağı'nın duvarına kazınmıştı.<Atif k="hieroglyphswiki" />
+
+Tapınak duvarlarındaki işaretleri okuyabilen kimse kalmamıştı; firavunların inançları da onlarla birlikte susmuştu.
+
+</Adim>
+
+<Adim>
+
+Duhân suresi, Firavun'un ve ordusunun denizde boğulmasını anlattıktan sonra şöyle der:
+
+</Adim>
+
+<Adim tur="genis" yil={616} etiket="Duhân suresi">
 
 <AyetParca sure={44} ayet={29} sureAdi="Duhân" ar="فَمَا بَكَتْ عَلَيْهِمُ ٱلسَّمَآءُ وَٱلْأَرْضُ" meal="Gök ve yer, onlar için gözyaşı dökmedi..." vurgu="Gök ve yer, onlar için gözyaşı dökmedi" />
 
-Asırlar boyunca bu ifade, Arapların büyük bir insanın ölümünü anlatırken kullandığı sözle açıklandı: değerli biri ölünce gök ve yer ona ağlar, Firavun ise bu değeri hak etmedi. Mısırlıların firavunlarına ne dediğini bilmenin bir yolu yoktu.
+</Adim>
 
-1799'da Mısır'da Rosetta Taşı bulundu.<Atif k="parkinson1999" /> Aynı metni hiyeroglif, demotik ve Yunanca olarak taşıyan bu taştan yola çıkan Champollion, 1822'de hiyeroglifleri çözdü.<Atif k="champollion1822" />
+<Adim>
+
+Asırlar boyunca bu ifade, Arapların büyük bir insanın ölümünü anlatırken kullandığı sözle açıklandı: değerli biri ölünce gök ve yer ona ağlar; Firavun bu değeri hak etmedi.
+
+Mısırlıların kendi firavunlarına ne dediğini bilmenin bir yolu yoktu.
+
+</Adim>
+
+<Adim yil={1799} etiket="1799 · Mısır">
+
+1799'da, Nil deltasındaki Reşit (Rosetta) kasabası yakınında Fransız askerleri bir taş buldu. Taşın üzerinde aynı metin üç yazıyla yazılmıştı: hiyeroglif, demotik ve Yunanca.<Atif k="parkinson1999" />
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Rosetta />
 
-<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+</Adim>
 
-Mısır yazısı okunabilir olunca firavunların cenaze ağıtları da okundu. Mısırlılar ölen firavunu tanrı Osiris'le bir sayar, onun ardından İsis ve Neftis'in ağıtlarını okurdu. Bu ağıtlardan birinde geçen söz,<Atif k="faulkner1936" /> ayetteki sözle aynı kartın iki yüzü gibidir:
+<Adim yil={1822} etiket="1822 · Paris">
+
+Yunancayı okuyabilen bilginler, öbür iki yazının şifresini çözmek için yarıştı. 1822'de Jean-François Champollion hiyeroglifleri çözdüğünü duyurdu.<Atif k="champollion1822" /> On dört asırlık sessizlik bozulmuştu.
+
+</Adim>
+
+<Adim>
+
+Mısır yazısı okununca firavunların cenaze metinleri de okundu. Piramitlerin iç duvarlarına kazınmış bu metinlerde, ölen kralın ardından ağlayanlar ona şöyle seslenir:<Atif k="breasted1912" />
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Ayna />
 
-Ayet, Firavun için bu sözün tam tersini söylüyordu.
+</Adim>
+
+<Adim>
+
+Ayet, denizde boğulan Firavun için bu sözün tam tersini söyler: ne gök ağladı ne yer.
+
+</Adim>
+
+<Adim tur="genis" yil={1822}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki ama bu benzerlik bir tesadüf olabilir mi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Mısır yazısını okuyabilen tek bir insanın kalmadığı bir çağda, Mekke'de yaşayan biri, firavunların cenaze ağıtındaki sözü nasıl bilip Firavun'un yüzüne çevirebilirdi?</MeydanOkuma>
+<MeydanOkuma>Mısır yazısını okuyabilen tek bir insanın kalmadığı bir çağda, firavunların ağıtındaki sözü Firavun'un yüzüne çeviren bu söz neye dayanıyordu?</MeydanOkuma>

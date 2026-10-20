@@ -1,0 +1,86 @@
+---
+baslik: Bel ile göğüs kemikleri arası
+hook: |
+  Erkeğin üreme bezleri doğduğu yerde oluşmaz: anne karnında bel ile kaburgalar arasında, böbreklerin hizasında şekillenir, sonra aşağı iner.
+
+  Târık suresi, insanın yaratıldığı atılan suyun bel ile göğüs kemikleri arasından çıktığını söyler. Testislerin bu yolculuğu 1786'da tarif edildi; onları besleyen atardamarlar ve sinirler bugün de o bölgeden gelir.
+kart: Erkeğin üreme bezleri anne karnında bel ile kaburgalar arasında şekillenir, sonra aşağı iner.
+konu: [insan]
+sureAdi: Târık
+ayetler:
+  - { sure: 86, ayet: 6 }
+  - { sure: 86, ayet: 7 }
+vurgu: "بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ"
+nuzul: { donem: "Mekke dönemi", yil: 613 }
+kesif: { yil: 1786, olay: "John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.", kaynak: hunter1786 }
+itirazlar:
+  - itiraz: "Meni testislerde, prostatta ve seminal keseciklerde üretilir. Bunların hiçbiri bel ile kaburgalar arasında değildir."
+    cevap: "Ayet suyun bugün nerede biriktiğini değil, nereden çıktığını söyler. Testisler bel ile kaburgalar arasında oluşur ve onları besleyen atardamarlar ile sinirler hâlâ bu bölgeden gelir."
+    kaynak: hunter1786
+  - itiraz: "Hipokrat ve antik tıp, meninin beyinden ve omurilikten gelip omurga boyunca aktığını düşünüyordu. Ayet o dönemin inancına benzemiyor mu?"
+    cevap: "Antik tıpta meni beyinde doğup omurilik boyunca akar; ayette ne beyin ne de omurilikten akış vardır. Ayet bir bölge gösterir; o bölge de üreme bezlerinin oluştuğu yerdir."
+kaynaklar: [hunter1786, leeuwenhoek1677]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gorsel from '../../components/Gorsel.astro';
+import Inis from '../../components/sulb-teraib-Inis.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
+
+<Hikaye veri={frontmatter}>
+
+<Adim yil={613} etiket="613 civarı · Mekke">
+
+Ayetin indiği yıllarda insanın bir damla sudan yaratıldığı biliniyordu, ama o suyun içinde ne olduğu ve nerede hazırlandığı bilinmiyordu. Târık suresi insanı bu suya bakmaya çağırır:
+
+</Adim>
+
+<Adim tur="genis" yil={613} etiket="Târık suresi">
+
+<AyetParca sure={86} ayet={7} sureAdi="Târık" ar="خُلِقَ مِن مَّآءٍۢ دَافِقٍۢ ۝ يَخْرُجُ مِنۢ بَيْنِ ٱلصُّلْبِ وَٱلتَّرَآئِبِ" meal="O, erkek ve kadının beli ile kaburga kemikleri arasından atılagelen bir sudan yaratılmıştır." vurgu="beli ile kaburga kemikleri arasından" />
+
+</Adim>
+
+<Adim>
+
+Ayetteki *sulb* bel ve omurga, *terâib* ise göğüs kemikleri demektir. Asırlar boyunca bu ifade erkeğin beli ve kadının göğsü diye açıklandı.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Inis />
+
+</Adim>
+
+<Adim yil={1677} etiket="1677">
+
+Suyun içindeki canlı hücreler 1677'de mikroskopla ilk kez görüldü.<Atif k="leeuwenhoek1677" /> Bir asır sonra John Hunter, testislerin anne karnında böbrek hizasında geliştiğini ve doğuma doğru aşağı indiğini tarif etti.<Atif k="hunter1786" /> Testisleri besleyen atardamarlar ve sinirler bugün de geldikleri yerden, bel ile kaburgalar arasından çıkar.
+
+</Adim>
+
+<Adim tur="sahne">
+
+<Gorsel baslik="1918 tarihli bir anatomi atlasından" resimler={[{ src: '/img/sulb-teraib/testis-inisi-gray.png', alt: 'Yan yana üç siyah-beyaz çizim. Soldakinde testis (t.) karın boşluğunda (a.c.), aşağıyı gösteren bir okla; ortadakinde testis torbaya (s.) inmiş; sağdakinde torbanın içinde, çevresi zarla sarılı.', baslik: 'Testisin inişi, üç adımda', not: 'Soldan sağa: karın boşluğundaki testis (t.) aşağı iner ve torbaya (s.) yerleşir.', kunye: "Henry Gray, Anatomy of the Human Body (1918), Şekil 1015, kamu malı, Wikimedia Commons", url: 'https://commons.wikimedia.org/wiki/File:Diagram_to_illustrate_the_descent_of_the_testis_and_the_manner_in_which_the_tunica_vaginalis_is_derived.png' }]} />
+
+</Adim>
+
+<Adim tur="genis" yil={1786}>
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
+
+Peki ama bu yorum ayete sonradan mı yüklendi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>İnsanın yaratıldığı suyun nereden geldiğini kimse bilmezken, bir insan ona bel ile göğüs kemikleri arasında bir yer göstermeye nereden cesaret edebilirdi?</MeydanOkuma>

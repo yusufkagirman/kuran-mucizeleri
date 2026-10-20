@@ -1,0 +1,54 @@
+---
+baslik: Yalancı alın
+hook: |
+  Doğruyu mu yalanı mı seçeceğimize karar veren yer, alnın hemen arkasındadır.
+
+  Alak suresi, Peygamber'i namazdan alıkoymaya çalışan adamı "yalancı, günahkâr nâsiye"sinden, yani başının ön kısmından yakalanmakla uyarır. Planlamayı ve karar vermeyi yürüten beyin bölgesinin, prefrontal korteksin, tam burada olduğu ancak 19. yüzyılda anlaşılmaya başladı.
+kart: Doğruyu mu yalanı mı seçeceğimize karar veren yer, alnın hemen arkasındadır.
+konu: [insan]
+sureAdi: Alak
+ayetler:
+  - { sure: 96, ayet: 15 }
+  - { sure: 96, ayet: 16 }
+vurgu: "نَاصِيَةٍۢ كَٰذِبَةٍ خَاطِئَةٍۢ"
+nuzul: { donem: "Mekke dönemi", yil: 612 }
+kesif: { yil: 1868, olay: "John Harlow, alın bölgesi demir çubukla parçalanan Phineas Gage'in kişiliğinin ve karar verme davranışının değiştiğini rapor etti.", kaynak: harlow1868 }
+itirazlar:
+  - itiraz: "\"Perçeminden tutmak\" Arapçada birini boyun eğdirmek anlamında bir deyimdir. Kur'an aynı ifadeyi Hûd 56'da bütün canlılar için kullanır."
+    cevap: "Deyim, perçeminden tutulanın boyun eğdirildiğini anlatır; Hûd 56'da da bu anlamdadır. Alak suresi ise nâsiyeyi ayrıca \"yalancı ve günahkâr\" diye niteler; yalanı ve günahı başın ön kısmına yükleyen bu nitelik deyimde yoktur."
+  - itiraz: "Yalan söylemek ve karar vermek yalnız alın lobunda değil, beynin geniş ağlarında işlenir. Ayette yalancı olan kişidir; alın bir mecaz olamaz mı?"
+    cevap: "Davranış beynin geniş ağlarında işlenir, ama neyin yapılıp neyin yapılmayacağının seçimi alnın arkasındaki prefrontal bölgede yürütülür. Bu bölgesi zarar gören Phineas Gage'in kişiliği ve kararları bu yüzden değişti."
+    kaynak: damasio1994
+kaynaklar: [harlow1868, damasio1994]
+durum: taslak
+---
+
+import AyetParca from '../../components/AyetParca.astro';
+import Atif from '../../components/Atif.astro';
+import ZamanCizelgesi from '../../components/ZamanCizelgesi.astro';
+import Itirazlar from '../../components/Itirazlar.astro';
+import MeydanOkuma from '../../components/MeydanOkuma.astro';
+import Gage from '../../components/nasiye-Gage.astro';
+import Bas from '../../components/nasiye-Bas.astro';
+
+Ayetin indiği yıllarda düşüncenin ve niyetin yeri kalp sayılırdı; başın ön kısmı yalnızca saçın başladığı, insanın onurunu taşıyan yerdi. Peygamberimizi namazdan alıkoymaya çalışan bir adam için ayet şöyle uyarır:
+
+<AyetParca sure={96} ayet={16} sureAdi="Alak" ar="نَاصِيَةٍۢ كَٰذِبَةٍ خَاطِئَةٍۢ" meal="Yalancı ve günahkar perçeminden cehenneme sürükleriz." vurgu="Yalancı ve günahkar perçeminden" />
+
+Ayet yalanı ve günahı kişinin kendisine değil, başının ön kısmına yükler. Asırlar boyunca bu ifade, Arapçadaki "perçeminden tutup sürüklemek" deyimiyle, yani aşağılanma ve boyun eğdirilmeyle açıklandı.
+
+Başın ön kısmının davranışla ilgisi 1868'de anlaşılmaya başladı. Hekim John Harlow, alın bölgesi demir bir çubukla parçalanan Phineas Gage'in hayatta kaldığını ama kişiliğinin ve karar verme biçiminin değiştiğini rapor etti.<Atif k="harlow1868" />
+
+<Gage />
+
+Bugün planlama ve karar vermenin önemli bir kısmının alın lobunun ön bölümünde yürütüldüğü biliniyor.<Atif k="damasio1994" />
+
+<Bas />
+
+<ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+Peki bu, sadece bir Arap deyimi olabilir mi?
+
+<Itirazlar liste={frontmatter.itirazlar} />
+
+<MeydanOkuma>Düşüncenin yeri kalp sanılırken, bir insan yalanı ve günahı başın tam ön kısmına bağlamayı nereden düşünebilirdi?</MeydanOkuma>

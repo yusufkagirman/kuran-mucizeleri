@@ -1,10 +1,10 @@
 ---
 baslik: Dişi bal arısı
 hook: |
-  Kovanda balı yapan, petekleri ören ve çiçekten çiçeğe uçan arıların hepsi dişidir.
+  Kovanda balı yapan, peteği ören ve çiçekten çiçeğe uçan arıların hepsi dişidir.
 
-  Nahl suresinde arıya verilen emirler Arapçada dişil kipte gelir: yuva edin, ye, yürü. Kovanın başında bir kral olduğu sanılırken yönetenin dişi olduğu ancak 1609'da yazıldı; bal yapan işçilerin de dişi olduğu daha sonra anlaşıldı.
-kart: Kovanda balı yapan, petekleri ören ve çiçekten çiçeğe uçan arıların hepsi dişidir.
+  Nahl suresi arıya seslenirken bütün emirleri dişil kipte verir: yuva edin, ye, yürü. Oysa insanlar asırlar boyunca kovanı bir kral arının yönettiğine inandı. Yönetenin bir kraliçe olduğu ancak 16. yüzyılın sonunda yazıldı.
+kart: Kovanda balı yapan, peteği ören ve çiçekten çiçeğe uçan arıların hepsi dişidir.
 konu: [canlilar]
 sureAdi: Nahl
 ayetler:
@@ -17,10 +17,12 @@ itirazlar:
   - itiraz: "Arapçada topluluk adları dilbilgisi gereği dişil fiil alır. \"En-nahl\" için dişil fiil arıların cinsiyetinden değil bu kuraldan gelir; Kur'an \"bedeviler dedi\" (Hucurât 14) derken de dişil fiil kullanır."
     cevap: "Topluluk adları Arapçada hem eril hem dişil fiil alabilir; seçim konuşana kalmıştır. Arıya verilen emirlerin hepsinin dişil gelmesi, bu işleri yapan arıların gerçekten dişi olmasıyla örtüşür."
   - itiraz: "Kovanda erkek arılar da vardır; ayet bütün arılara hitap ediyorsa onları neden dışarıda bıraksın?"
-    cevap: "Ayetteki emirler yuva kurmak, her üründen yemek ve yollarda dolaşmaktır. Erkek arılar petek örmez, çiçeğe konmaz, bal yapmaz; emir bu işleri yapanlara yöneliktir."
-  - itiraz: "Kraliçenin dişi olduğu 1609'da yazıldı ama işçilerin dişi olduğu çok sonra gösterildi. Sayfa hangi keşfi esas alıyor?"
-    cevap: "İkisini birlikte: kovanı yönetenin dişi olduğu 1609'da, balı yapan işçilerin de dişi olduğu sonraki asırda gösterildi. İkisi de ayetin indiği gün bilinmiyordu."
-kaynaklar: [butler1609]
+    cevap: "Ayetteki emirler yuva kurmak, her üründen yemek ve yollarda dolaşmaktır. Bu işleri dişi işçiler yapar: peteği örer, çiçekten nektar ve polen taşır, balı yapar. Erkek arının tek görevi bir kraliçeyle çiftleşmektir."
+    kaynak: ufl2024ari
+  - itiraz: "Kraliçenin dişi olduğu 16-17. yüzyılda yazıldı ama işçilerin dişi olduğu daha sonra gösterildi. Sayfa hangi keşfi esas alıyor?"
+    cevap: "İkisini birlikte: kovanı yönetenin dişi olduğu 1586 ve 1609'da yazıldı, balı yapan işçilerin de dişi olduğu sonraki asırlarda gösterildi. İkisi de ayetin indiği gün bilinmiyordu."
+    kaynak: pdr2025ari
+kaynaklar: [butler1609, sarton1943, pdr2025ari, ufl2024ari]
 durum: taslak
 ---
 
@@ -31,25 +33,83 @@ import Itirazlar from '../../components/Itirazlar.astro';
 import MeydanOkuma from '../../components/MeydanOkuma.astro';
 import KovanTahmin from '../../etkilesim/bal-arisi/KovanTahmin.astro';
 import Fiiller from '../../etkilesim/bal-arisi/Fiiller.astro';
+import Hikaye from '../../components/Hikaye.astro';
+import Adim from '../../components/Adim.astro';
 
-Ayetin indiği yıllarda insanlar balı biliyor, arıyı besliyordu; ama kovanın içindeki düzeni ve arıların cinsiyetini kimse bilmiyordu.
+<Hikaye veri={frontmatter}>
+
+<Adim yil={619} etiket="619 civarı · Mekke">
+
+Ayetin indiği yıllarda insanlar balı biliyor, arıyı besliyordu. Kovanın içindeki düzen ise bir sırdı: binlerce arıdan hangisi ne iş yapıyor, kim kimi yönetiyor, kimse göremiyordu.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <KovanTahmin />
 
+</Adim>
+
+<Adim>
+
 Nahl suresi arıya verilen emri şöyle anlatır:
+
+</Adim>
+
+<Adim tur="genis" yil={619} etiket="Nahl suresi">
 
 <AyetParca sure={16} ayet={68} sureAdi="Nahl" ar="وَأَوْحَىٰ رَبُّكَ إِلَى ٱلنَّحْلِ أَنِ ٱتَّخِذِى مِنَ ٱلْجِبَالِ بُيُوتًۭا ... ثُمَّ كُلِى مِن كُلِّ ٱلثَّمَرَٰتِ فَٱسْلُكِى سُبُلَ رَبِّكِ ذُلُلًۭا" meal='Rabbin bal arısına: "Dağlarda, ağaçlarda ve hazırlanmış kovanlarda yuva edin; sonra her çeşit üründen ye; sonra da Rabbinin işlemen için gösterdiği yollardan yürü" diye öğretti...' vurgu="sonra her çeşit üründen ye; sonra da Rabbinin işlemen için gösterdiği yollardan yürü" />
 
-Türkçede görünmeyen ayrıntı Arapçada açıktır: *ittehızî*, *kulî*, *fesülükî* fiilleri dişil kiptedir. Asırlar boyunca bu, yalnızca bir dil kuralı olarak okundu; çünkü arının kendisi de kovanın başındaki "kral" sanılıyordu.
+</Adim>
+
+<Adim>
+
+Türkçede görünmeyen ayrıntı Arapçada açıktır: ayetteki *ittehızî* (edin), *kulî* (ye) ve *fesülükî* (yürü) fiillerinin üçü de dişil kiptedir. Arıya, dişi birine seslenir gibi seslenilir.
+
+</Adim>
+
+<Adim tur="sahne">
 
 <Fiiller />
 
-Kovanı yönetenin dişi olduğunu 1609'da İngiliz arıcı Charles Butler yazdı.<Atif k="butler1609" /> Sonraki çalışmalar, balı yapan, kovanı kuran ve çiçekten çiçeğe uçan işçi arıların da dişi olduğunu gösterdi; erkek arılar bal yapmaz.
+</Adim>
+
+<Adim>
+
+Asırlar boyunca bu, yalnızca bir dil inceliği olarak okundu. Çünkü kovanın başında bir kral olduğu sanılıyordu.
+
+</Adim>
+
+<Adim yil={1586} etiket="1586 · İspanya">
+
+Kralın aslında bir kraliçe olduğunu ilk olarak 1586'da İspanyol Luis Méndez de Torres fark etti.<Atif k="pdr2025ari" /> Ama bu bilgi yavaş yayıldı: 1599'da Shakespeare bile arılar için "bir kralları ve türlü görevlileri var" diye yazıyordu.<Atif k="pdr2025ari" />
+
+</Adim>
+
+<Adim yil={1609} etiket="1609 · İngiltere">
+
+1609'da İngiliz arıcı Charles Butler bunu herkesin okuyacağı bir kitapla duyurdu: kovanı bir kral değil, bir kraliçe yönetiyordu. Kitabına da bu yüzden *Dişi Monarşi* adını verdi.<Atif k="butler1609" /><Atif k="sarton1943" />
+
+</Adim>
+
+<Adim>
+
+Sonraki çalışmalar daha şaşırtıcı bir şey gösterdi: peteği ören, çiçekten nektar ve polen taşıyan, balı yapan işçi arıların hepsi de dişidir. Erkek arının tek görevi bir kraliçeyle çiftleşmektir.<Atif k="ufl2024ari" />
+
+Ayetin emir verdiği işleri, yani yuva kurmayı, her üründen yemeyi ve yollarda dolaşmayı, kovanda yalnız dişiler yapar.
+
+</Adim>
+
+<Adim tur="genis" yil={1609}>
 
 <ZamanCizelgesi nuzul={frontmatter.nuzul} kesif={frontmatter.kesif} />
+
+</Adim>
+
+</Hikaye>
 
 Peki bu sadece Arapçanın bir kuralı olabilir mi?
 
 <Itirazlar liste={frontmatter.itirazlar} />
 
-<MeydanOkuma>Arının başında bir kral olduğu sanılırken, bir insan bal yapan arıya dişi diye nasıl seslenebilirdi?</MeydanOkuma>
+<MeydanOkuma>Arıların başında bir kral olduğu sanılırken, bal yapan arıya dişi diye seslenen bu söz neye dayanıyordu?</MeydanOkuma>
